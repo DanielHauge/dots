@@ -1,1 +1,2 @@
-GITHUB="https://github.com/DanielHauge"
+export GITHUB="https://github.com/DanielHauge"
+export XDG_CONFIG_HOME=$HOME

@@ -1,4 +1,5 @@
 
 alias x='explorer'
-alias repo='cd $HOME/repo'
-
+alias repo='cd /d/repo'
+alias bconf='source ~/.bashrc'
+alias x='explorer'

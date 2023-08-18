@@ -1,6 +1,10 @@
 
 alias gs='git status'
 
+function gcm () {
+    git commit -m "$1"
+}
+
 function gd () {
     local index=1
 
