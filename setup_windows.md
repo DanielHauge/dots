@@ -17,6 +17,8 @@ choco install geforce-experience -y
 choco install docker-desktop -y
 choco install discord -y
 choco install jq -y
+choco install zig -y
+choco install golang -y
 choco install windirstat -y
 choco install shellcheck -y
 choco install git.install --params "'/PseudoConsoleSupport /FSMonitor /Symlinks /WindowsTerminalProfile /NoGuiHereIntegration'" -y
@@ -40,4 +42,5 @@ code --install-extension eamodio.gitlens
 code --install-extension GitHub.copilot
 code --install-extension yzhang.markdown-all-in-one
 code --install-extension timonwong.shellcheck
+choco install vscode-go -y
 ```
