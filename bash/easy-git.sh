@@ -1,3 +1,4 @@
+#!/bin/bash
 
 alias gs='git status'
 
@@ -7,7 +8,6 @@ function gcm () {
 
 function gd () {
     local index=1
-
     local file="$(git ls-files -d | head -$index)"
     if [ -n "$file" ]; then
         echo -e "Deleted file \033[41m $file\033[0m"

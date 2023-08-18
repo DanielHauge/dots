@@ -1,6 +1,2 @@
 # The dots
-This is a collection of user settings / dot files.
-
-## Bash
-- Alises
-- Tools
+This is my collection of user settings / dot files and initialization for quick setup of new development environment.
