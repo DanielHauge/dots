@@ -19,6 +19,7 @@ choco install discord -y
 choco install jq -y
 choco install zig -y
 choco install golang -y
+choco install nodejs -y
 choco install windirstat -y
 choco install shellcheck -y
 choco install git.install --params "'/PseudoConsoleSupport /FSMonitor /Symlinks /WindowsTerminalProfile /NoGuiHereIntegration'" -y
