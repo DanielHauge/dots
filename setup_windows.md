@@ -33,6 +33,10 @@ choco install neovim -y
 git clone https://github.com/wbthomason/packer.nvim "$env:LOCALAPPDATA\nvim-data\site\pack\packer\start\packer.nvim"
 ```
 
+Run ```:PackerSync``` to plugin downloads 
+Run ```:Copilot setup``` for  copilot authentication
+Run ```:LspInstall``` to install lsp for the opened file
+
 ## vs code
 
 ```sh
