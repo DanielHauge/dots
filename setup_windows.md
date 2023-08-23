@@ -10,6 +10,7 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManage
 
 ```sh
 choco install firefox -y
+choco install texlive -y
 choco install vlc -y
 choco install winrar -y
 choco install steam -y
