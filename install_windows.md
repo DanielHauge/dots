@@ -9,8 +9,8 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManage
 ## Install stuff
 
 ```sh
+choco install git.install --params "'/PseudoConsoleSupport /FSMonitor /Symlinks /WindowsTerminalProfile /NoGuiHereIntegration'" -y
 choco install firefox -y
-choco install texlive -y
 choco install vlc -y
 choco install winrar -y
 choco install steam -y
@@ -24,7 +24,8 @@ choco install nodejs -y
 choco install windirstat -y
 choco install shellcheck -y
 choco install glow -y
-choco install git.install --params "'/PseudoConsoleSupport /FSMonitor /Symlinks /WindowsTerminalProfile /NoGuiHereIntegration'" -y
+choco install pandoc -y
+choco install texlive -y --params="'/scheme:full'"
 ```
 
 ## nvim
@@ -49,5 +50,4 @@ code --install-extension eamodio.gitlens
 code --install-extension GitHub.copilot
 code --install-extension yzhang.markdown-all-in-one
 code --install-extension timonwong.shellcheck
-choco install vscode-go -y
 ```
