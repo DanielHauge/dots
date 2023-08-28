@@ -1,7 +1,7 @@
 -- All plugins have lazy=true by default,to load a plugin on startup just lazy=false
 -- List of all default plugins & their definitions
 local default_plugins = {
-  {"github/copilot.vim", lazy = false},
+  { "github/copilot.vim", lazy = false },
   "nvim-lua/plenary.nvim",
   {
     "NvChad/base46",
@@ -142,6 +142,12 @@ local default_plugins = {
     config = function()
       require "plugins.configs.lspconfig"
     end,
+  },
+  {
+
+    -- lsp zero
+    "VonHeikemen/lsp-zero.nvim",
+    branch = "v2.x",
   },
 
   -- load luasnips + cmp related in insert mode only
