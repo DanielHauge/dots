@@ -18,6 +18,7 @@ choco install geforce-experience -y
 choco install docker-desktop -y
 choco install discord -y
 choco install jq -y
+choco install nerd-fonts-JetBrainsMono -y
 choco install zig -y
 choco install golang -y
 choco install nodejs -y
@@ -26,6 +27,19 @@ choco install shellcheck -y
 choco install glow -y
 choco install pandoc -y
 choco install texlive -y --params="'/scheme:full'"
+```
+
+## Windows Terminal
+
+```json
+{
+    "font": 
+    {
+        "face": "JetBrainsMono Nerd Font"
+    },
+    "opacity": 65,
+    "useAcrylic": false
+}
 ```
 
 ## nvim
