@@ -1,5 +1,4 @@
 -- n, v, i, t = mode names
-
 local M = {}
 
 M.general = {
@@ -8,8 +7,8 @@ M.general = {
     ["<C-b>"] = { "<ESC>^i", "Beginning of line" },
     ["<C-e>"] = { "<End>", "End of line" },
 
-    ["<C-H>"] = { "<C-W>", "delete previous word", opts = { nowait = true, noremap = true } },
-    ["<C-h>"] = { "<C-w>", "delete previous word", opts = { nowait = true, noremap = true } },
+--    ["<C-H>"] = { "<C-W>", "delete previous word", opts = { nowait = true, noremap = true } },
+--    ["<C-h>"] = { "<C-w>", "delete previous word", opts = { nowait = true, noremap = true } },
     ["<C-BS>"] = { "<C-W>", "delete previous word", opts = { nowait = true, noremap = true } },
     ["<F3>"] = { "<leader>fm", "format code file", opts = { nowait = true, noremap = true } },
     -- Delete previous word on ctrl+backspace
@@ -173,7 +172,7 @@ M.lspconfig = {
       "LSP definition type",
     },
 
-    ["<leader>ra"] = {
+    ["<leader>rr"] = {
       function()
         require("nvchad.renamer").open()
       end,
@@ -250,7 +249,7 @@ M.nvimtree = {
 
   n = {
     -- toggle
-    ["<C-n>"] = { "<cmd> NvimTreeToggle <CR>", "Toggle nvimtree" },
+    ["<C-b>"] = { "<cmd> NvimTreeToggle <CR>", "Toggle nvimtree" },
 
     -- focus
     ["<leader>e"] = { "<cmd> NvimTreeFocus <CR>", "Focus nvimtree" },
