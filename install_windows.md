@@ -16,6 +16,7 @@ choco install winrar -y
 choco install steam -y
 choco install geforce-experience -y
 choco install docker-desktop -y
+choco install wsl2 -y
 choco install discord -y
 choco install jq -y
 choco install nerd-fonts-JetBrainsMono -y
