@@ -147,7 +147,7 @@ local default_plugins = {
 
     -- lsp zero
     "VonHeikemen/lsp-zero.nvim",
-    branch = "v2.x",
+    branch = "v3.x",
   },
 
   -- load luasnips + cmp related in insert mode only

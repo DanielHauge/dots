@@ -14,6 +14,7 @@ local options = {
     "latex",
     "lua",
     "python",
+    "c_sharp",
     "rust",
   },
   -- Set parser install dir
