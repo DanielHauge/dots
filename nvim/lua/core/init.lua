@@ -1,5 +1,6 @@
 local opt = vim.opt
 local g = vim.g
+local o = vim.o
 local config = require("core.utils").load_config()
 
 -------------------------------------- globals -----------------------------------------

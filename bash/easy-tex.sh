@@ -6,5 +6,5 @@ tex() {
         return 1
     fi
     local pdf_file=${1%.*}.pdf 
-    pdflatex $1 && latexmk -c && x $pdf_file
+    pdflatex --shell-escape $1 && latexmk -c && x $pdf_file
 }
