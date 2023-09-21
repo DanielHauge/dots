@@ -65,8 +65,8 @@ local options = {
       require("luasnip").lsp_expand(args.body)
     end,
   },
-
   formatting = formatting_style,
+
 
   mapping = {
     -- Use arrows to navigate the completion menu
@@ -76,8 +76,25 @@ local options = {
     ["<C-n>"] = cmp.mapping.select_next_item(),
     ["<C-d>"] = cmp.mapping.scroll_docs(-4),
     ["<C-f>"] = cmp.mapping.scroll_docs(4),
-    ["<C-Space>"] = cmp.mapping.complete(),
     ["<C-e>"] = cmp.mapping.close(),
+    -- Escape to also abort
+    ["<Esc>"] = cmp.mapping.close(),
+    ["<C-k>"] = cmp.mapping {
+      i = function()
+        if cmp.visible() then
+          cmp.abort()
+        else
+          cmp.complete()
+        end
+      end,
+      c = function()
+        if cmp.visible() then
+          cmp.close()
+        else
+          cmp.complete()
+        end
+      end,
+    }, -- Use Controll + space to open menu
     ["<CR>"] = cmp.mapping.confirm {
       behavior = cmp.ConfirmBehavior.Insert,
       select = true,
