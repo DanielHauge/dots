@@ -179,7 +179,7 @@ M.lspconfig = {
       "LSP rename",
     },
 
-    ["<A-CR"] = {
+    ["<leader>ca"] = {
       function()
         vim.lsp.buf.code_action()
       end,
