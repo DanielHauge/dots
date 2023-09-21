@@ -78,7 +78,6 @@ local options = {
     ["<C-f>"] = cmp.mapping.scroll_docs(4),
     ["<C-e>"] = cmp.mapping.close(),
     -- Escape to also abort
-    ["<Esc>"] = cmp.mapping.close(),
     ["<C-k>"] = cmp.mapping {
       i = function()
         if cmp.visible() then
