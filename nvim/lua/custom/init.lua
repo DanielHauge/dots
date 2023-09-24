@@ -8,4 +8,9 @@
 
 vim.opt.spelllang = "en_us"
 vim.opt.spell = true
-
+vim.api.nvim_create_autocmd("BufWritePre", {
+  buffer = buffer,
+  callback = function()
+    vim.lsp.buf.format { async = false }
+  end,
+})
