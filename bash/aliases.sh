@@ -1,6 +1,7 @@
 #!/bin/bash
+repo_dir=/d/repo
 alias x='explorer'
-alias repo='cd /d/repo'
+alias repo='cd $repo_dir'
 alias bconf='source ~/.bashrc'
 alias vi='nvim'
 alias vim='nvim'
@@ -13,3 +14,4 @@ alias off='shutdown -s -t 0'
 alias bios='shutdown -r -t 0 -fw'
 alias bootusb='shutdown -r -t 0 -o'
 alias rmd='cat *.md | glow '
+alias todo='cat $repo_dir/*/TODO.md | glow'

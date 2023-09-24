@@ -47,22 +47,25 @@ choco install InkScape -y
 
 ```json
 {
-    "font": 
-    {
-        "face": "JetBrainsMono Nerd Font"
-    },
-    "opacity": 65,
-    "useAcrylic": false
+  "font": {
+    "face": "JetBrainsMono Nerd Font",
+    "size": 16
+  },
+  "opacity": 65,
+  "useAcrylic": false
 }
 ```
 
 ## nvim
+
 In powershell
 
 ```shell
 choco install neovim -y
 ```
-Run ```:Copilot setup``` for  copilot authentication
+
+Run `:Copilot setup` for copilot authentication
+Run `:MasonInstallAll` for lsp installations
 
 ## vs code
 
