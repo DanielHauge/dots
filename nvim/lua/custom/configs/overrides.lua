@@ -8,6 +8,7 @@ M.treesitter = {
     "css",
     "javascript",
     "typescript",
+    "python",
     "tsx",
     "c",
     "bash",
@@ -15,6 +16,7 @@ M.treesitter = {
     "latex",
     "markdown_inline",
     "c_sharp",
+    "go",
   },
   indent = {
     enable = true,
@@ -32,6 +34,7 @@ M.mason = {
     "html-lsp",
     "deno",
     "prettier",
+    "golangci-lint-langserver",
     "clang-format",
     "clangd",
     "gopls",
@@ -43,6 +46,13 @@ M.mason = {
     "texlab",
     "grammarly-languageserver",
     "vtsls",
+    "gofumpt",
+    "goimports",
+    "sqls",
+    "yamlfmt",
+    "shfmt",
+    "latexindent",
+    "jq",
   },
 }
 

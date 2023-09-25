@@ -4,6 +4,7 @@ local overrides = require "custom.configs.overrides"
 local plugins = {
 
   -- Override plugin definition options
+
   {
     "neovim/nvim-lspconfig",
     dependencies = {
@@ -14,15 +15,12 @@ local plugins = {
           require "custom.configs.null-ls"
         end,
       },
-      { "hrsh7th/cmp-nvim-lsp" },
     },
     config = function()
       require "plugins.configs.lspconfig"
       require "custom.configs.lspconfig"
     end, -- Override to setup mason-lspconfig
   },
-
-  { "VonHeikemen/lsp-zero.nvim", branch = "v3.x" },
 
   -- override plugin configs
   {
@@ -49,6 +47,10 @@ local plugins = {
     end,
   },
 
+  -- install neovim.formatter
+  {
+    "mhartington/formatter.nvim",
+  },
   -- To make a plugin not be loaded
   -- {
   --   "NvChad/nvim-colorizer.lua",

@@ -13,6 +13,16 @@ local sources = {
   -- cpp
   b.formatting.clang_format,
 
+  b.formatting.markdownlint,
+
+  b.formatting.gofumpt,
+  b.formatting.goimports,
+
+  b.formatting.sqlfmt,
+  b.formatting.yamlfmt,
+  b.formatting.shfmt,
+  b.formatting.latexindent,
+  b.formatting.jq,
 }
 
 null_ls.setup {

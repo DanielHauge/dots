@@ -2,20 +2,9 @@ local on_attach = require("plugins.configs.lspconfig").on_attach
 local capabilities = require("plugins.configs.lspconfig").capabilities
 
 local lspconfig = require "lspconfig"
-
-local lsp_zero = require "lsp-zero"
-
----@diagnostic disable-next-line: unused-local
-lsp_zero.on_attach(function(client, bufnr)
-  -- see :help lsp-zero-keybindings
-  -- to learn the available actions
-  lsp_zero.default_keymaps { buffer = bufnr }
-end)
-
 -- if you just want default config for the servers then put them in a table
 local servers = {
   "clangd",
-  "gopls",
   "jqls",
   "jsonls",
   "bashls",
@@ -26,6 +15,17 @@ local servers = {
   "omnisharp",
   "texlab",
   "vtsls",
+  "golangci_lint_ls",
+}
+
+lspconfig["gopls"].setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+  settings = {
+    gopls = {
+      gofumpt = true,
+    },
+  },
 }
 
 lspconfig["eslint"].setup {
@@ -37,7 +37,6 @@ lspconfig["eslint"].setup {
   end,
   capabilities = capabilities,
 }
-
 
 -- change cmd of ltex to ltex-ls
 lspconfig["ltex"].setup {
@@ -64,7 +63,7 @@ lspconfig["grammarly"].setup {
   filetypes = { "markdown", "tex", "text" },
 }
 
-lsp_zero.setup_servers(servers)
+-- lsp_zero.setup_servers(servers)
 
 -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
 for _, lsp in ipairs(servers) do

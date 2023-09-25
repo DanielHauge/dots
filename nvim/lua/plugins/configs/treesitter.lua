@@ -1,22 +1,5 @@
 local options = {
-  ensure_installed = {
-    "lua",
-    "bash",
-    "c",
-    "comment",
-    "css",
-    "go",
-    "graphql",
-    "help",
-    "html",
-    "http",
-    "json",
-    "latex",
-    "lua",
-    "python",
-    "c_sharp",
-    "rust",
-  },
+  ensure_installed = {},
   -- Set parser install dir
   highlight = {
     enable = true,
