@@ -30,6 +30,10 @@ M.override["@punctuation.bracket"] = {
   fg = "#ffe100",
 }
 
+M.override.Delimiter = {
+  fg = "#ffe100",
+}
+
 M.override["@punctuation.delimiter"] = {
   -- Color = (255, 225, 0)
   fg = "white",
@@ -45,6 +49,15 @@ M.override["@constant"] = {
   bold = true,
   italic = true,
   fg = "#569cd6",
+}
+
+M.override.Label = {
+  bold = true,
+  fg = "#569cd6",
+}
+
+M.override.Number = {
+  fg = "#b5cea8",
 }
 
 local F = {
@@ -146,7 +159,7 @@ local STR = {
   bold = true,
 }
 M.override["@string"] = STR
-
+M.override.String = STR
 ---@type HLTable
 M.add = {
   NvimTreeOpenedFolderName = { fg = "green", bold = true },

@@ -17,8 +17,7 @@ local sources = {
 
   b.formatting.gofumpt,
   b.formatting.goimports,
-
-  b.formatting.sqlfmt,
+  b.formatting.goimports_reviser,
   b.formatting.yamlfmt,
   b.formatting.shfmt,
   b.formatting.latexindent,
@@ -31,17 +30,12 @@ local sources = {
   b.diagnostics.commitlint,
   b.diagnostics.eslint_d,
   b.diagnostics.golangci_lint,
-  b.diagnostics.gospel,
   b.formatting.xmlformat,
   b.diagnostics.jsonlint,
-  b.diagnostics.markdownlint,
-  b.formatting.terraform_fmt,
-  b.diagnostics.terraform_validate,
   b.diagnostics.textlint.with { filetypes = { "txt" } },
   b.formatting.textlint.with { filetypes = { "txt" } },
   b.diagnostics.write_good,
   b.diagnostics.yamllint,
-  b.formatting.markdown_toc,
 }
 
 local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
