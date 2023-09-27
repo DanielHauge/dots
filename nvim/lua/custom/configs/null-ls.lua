@@ -5,7 +5,7 @@ local b = null_ls.builtins
 local sources = {
 
   -- webdev stuff
-  b.formatting.prettier.with { filetypes = { "html", "markdown", "css" } }, -- so prettier works only on these filetypes
+  b.formatting.prettier.with { filetypes = { "html", "css" } }, -- so prettier works only on these filetypes
 
   -- Lua
   b.formatting.stylua,
@@ -22,8 +22,29 @@ local sources = {
   b.formatting.yamlfmt,
   b.formatting.shfmt,
   b.formatting.latexindent,
+  b.formatting.eslint_d,
+  b.code_actions.eslint_d,
+  b.code_actions.impl,
   b.formatting.jq,
+  b.diagnostics.actionlint,
+  b.diagnostics.buf,
+  b.diagnostics.commitlint,
+  b.diagnostics.eslint_d,
+  b.diagnostics.golangci_lint,
+  b.diagnostics.gospel,
+  b.formatting.xmlformat,
+  b.diagnostics.jsonlint,
+  b.diagnostics.markdownlint,
+  b.formatting.terraform_fmt,
+  b.diagnostics.terraform_validate,
+  b.diagnostics.textlint.with { filetypes = { "txt" } },
+  b.formatting.textlint.with { filetypes = { "txt" } },
+  b.diagnostics.write_good,
+  b.diagnostics.yamllint,
+  b.formatting.markdown_toc,
 }
+
+local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 
 null_ls.setup {
   debug = true,

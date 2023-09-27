@@ -3,6 +3,9 @@ local overrides = require "custom.configs.overrides"
 ---@type NvPluginSpec[]
 local plugins = {
 
+  {
+    "b0o/schemastore.nvim",
+  },
   -- Override plugin definition options
 
   {
