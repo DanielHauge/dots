@@ -57,6 +57,7 @@ M.mason = {
     "json-lsp",
     "write-good",
     "eslint_d",
+    "yaml-language-server",
     "yamlfmt",
     "shfmt",
     "latexindent",
