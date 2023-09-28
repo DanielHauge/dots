@@ -62,6 +62,7 @@ In powershell
 
 ```shell
 choco install neovim -y
+git config --global core.editor nvim
 ```
 
 Run `:Copilot setup` for copilot authentication
