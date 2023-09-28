@@ -41,6 +41,10 @@ local plugins = {
     opts = overrides.nvimtree,
   },
 
+  {
+    "nvim-telescope/telescope-fzf-native.nvim",
+    build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
+  },
   -- Install a plugin
   {
     "max397574/better-escape.nvim",

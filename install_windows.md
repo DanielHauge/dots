@@ -20,12 +20,14 @@ choco install git.install --params "'/PseudoConsoleSupport /FSMonitor /Symlinks 
 choco install firefox -y
 choco install vlc -y
 choco install wget -y
+choco install ripgrep -y
 choco install cargo -y
 choco install winrar -y
 choco install docker-desktop -y
 choco install dotnet -y
 choco install wsl2 -y
 choco install 7zip -y
+choco install cmake --installargs 'ADD_CMAKE_TO_PATH=System' -y
 choco install pwsh -y
 choco install jq -y
 choco install nerd-fonts-JetBrainsMono -y
