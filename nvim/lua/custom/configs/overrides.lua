@@ -11,6 +11,7 @@ M.treesitter = {
     "python",
     "tsx",
     "c",
+    "regex",
     "bash",
     "markdown",
     "latex",
