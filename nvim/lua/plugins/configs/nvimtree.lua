@@ -3,11 +3,11 @@ local options = {
     dotfiles = false,
     exclude = { vim.fn.stdpath "config" .. "/lua/custom" },
   },
-  disable_netrw = true,
+  disable_netrw = false,
   hijack_netrw = true,
   hijack_cursor = true,
   hijack_unnamed_buffer_when_opening = false,
-  sync_root_with_cwd = true,
+  sync_root_with_cwd = false,
   update_focused_file = {
     enable = true,
     update_root = false,
@@ -20,6 +20,10 @@ local options = {
   },
   git = {
     enable = true,
+    show_on_dirs = true,
+    show_on_open_dirs = true,
+    disable_for_dirs = {},
+    timeout = 400,
   },
   filesystem_watchers = {
     enable = true,
@@ -29,15 +33,38 @@ local options = {
       resize_window = true,
     },
   },
+  modified = {
+    enable = true,
+  },
+  diagnostics = {
+    enable = true,
+    show_on_dirs = true,
+  },
+  log = {
+    enable = true,
+    truncate = true,
+    types = {
+      all = false,
+      config = false,
+      copy_paste = false,
+      dev = false,
+      diagnostics = false,
+      git = true,
+      profile = false,
+      watcher = false,
+    },
+  },
 
   renderer = {
-    root_folder_label = false,
+    root_folder_label = true,
+    group_empty = false,
+    -- Highlight git
     highlight_git = true,
-
+    -- highlight_git = true,
+    highlight_modified = "all",
     indent_markers = {
       enable = true,
     },
-
     icons = {
       show = {
         file = true,

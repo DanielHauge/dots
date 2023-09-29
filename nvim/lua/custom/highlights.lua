@@ -19,6 +19,10 @@ M.override["@keyword"] = {
   bold = true,
 }
 
+M.override["NvimTreeModifiedFile"] = {
+  fg = "#feab48",
+}
+
 M.override.Typedef = {
   -- Color = (86, 156, 214)
   fg = "#4ec9b0",

@@ -7,14 +7,10 @@ M.general = {
     ["<C-b>"] = { "<ESC>^i", "Beginning of line" },
     ["<C-e>"] = { "<End>", "End of line" },
 
---    ["<C-H>"] = { "<C-W>", "delete previous word", opts = { nowait = true, noremap = true } },
---    ["<C-h>"] = { "<C-w>", "delete previous word", opts = { nowait = true, noremap = true } },
     ["<C-BS>"] = { "<C-W>", "delete previous word", opts = { nowait = true, noremap = true } },
     ["<F3>"] = { "<leader>fm", "format code file", opts = { nowait = true, noremap = true } },
-    -- Delete previous word on ctrl+backspace
     ["<C-Del>"] = { "<C-O>dw", "Delete previous word" },
     --
-    -- navigate within insert mode
   },
 
   n = {

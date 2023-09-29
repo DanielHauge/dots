@@ -42,7 +42,7 @@ local plugins = {
 
   {
     "nvim-tree/nvim-tree.lua",
-    opts = overrides.nvimtree,
+    -- opts = overrides.nvimtree,
   },
 
   {
