@@ -49,6 +49,14 @@ local plugins = {
     "nvim-telescope/telescope-fzf-native.nvim",
     { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
   },
+  {
+    "antosha417/nvim-lsp-file-operations",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-neo-tree/neo-tree.nvim",
+    },
+  },
+  { "echasnovski/mini.nvim", version = "*" },
   -- Install a plugin
   {
     "max397574/better-escape.nvim",
