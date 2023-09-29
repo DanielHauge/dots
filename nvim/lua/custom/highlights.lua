@@ -19,6 +19,19 @@ M.override["@keyword"] = {
   bold = true,
 }
 
+-- Set telescope git status line removals to red and additions to green
+M.override["TelescopeResultsDiffAdd"] = {
+  fg = "#00ff00",
+}
+
+M.override["TelescopeResultsDiffDelete"] = {
+  fg = "#ff0000",
+}
+
+M.override["TelescopeResultsDiffChange"] = {
+  fg = "#ffff00",
+}
+
 M.override["NvimTreeModifiedFile"] = {
   fg = "#feab48",
 }

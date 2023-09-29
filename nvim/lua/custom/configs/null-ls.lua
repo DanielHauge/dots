@@ -34,7 +34,7 @@ local sources = {
   b.diagnostics.jsonlint,
   b.diagnostics.textlint.with { filetypes = { "txt" } },
   b.formatting.textlint.with { filetypes = { "txt" } },
-  b.diagnostics.write_good,
+  -- b.diagnostics.write_good,
   b.diagnostics.yamllint,
 }
 

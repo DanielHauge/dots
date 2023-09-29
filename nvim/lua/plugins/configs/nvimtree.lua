@@ -3,7 +3,7 @@ local options = {
     dotfiles = false,
     exclude = { vim.fn.stdpath "config" .. "/lua/custom" },
   },
-  disable_netrw = false,
+  disable_netrw = true,
   hijack_netrw = true,
   hijack_cursor = true,
   hijack_unnamed_buffer_when_opening = false,
@@ -17,13 +17,6 @@ local options = {
     side = "left",
     width = 30,
     preserve_window_proportions = true,
-  },
-  git = {
-    enable = true,
-    show_on_dirs = true,
-    show_on_open_dirs = true,
-    disable_for_dirs = {},
-    timeout = 400,
   },
   filesystem_watchers = {
     enable = true,

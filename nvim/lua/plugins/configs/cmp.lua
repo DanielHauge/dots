@@ -67,7 +67,6 @@ local options = {
   },
   formatting = formatting_style,
 
-
   mapping = {
     -- Use arrows to navigate the completion menu
     ["<Up>"] = cmp.mapping.select_prev_item { behavior = cmp.SelectBehavior.Insert },

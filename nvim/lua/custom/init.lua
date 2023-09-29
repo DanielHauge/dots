@@ -19,7 +19,7 @@ vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 
--- Set nvimtree git integrations
+-- Set git integration in the explorer
 vim.g.nvim_tree_git_hl = 1
 
 vim.opt.smartindent = true
