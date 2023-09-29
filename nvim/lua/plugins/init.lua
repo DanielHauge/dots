@@ -5,7 +5,7 @@ local default_plugins = {
   "nvim-lua/plenary.nvim",
   {
     "NvChad/base46",
-    branch = "v3.0",
+    branch = "v2.0",
     build = function()
       require("base46").load_all_highlights()
     end,
@@ -13,7 +13,7 @@ local default_plugins = {
 
   {
     "NvChad/ui",
-    branch = "v3.0",
+    branch = "v2.0",
     lazy = false,
   },
 
