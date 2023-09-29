@@ -61,6 +61,7 @@ M.mason = {
     "yamlfmt",
     "shfmt",
     "latexindent",
+    "eslint-lsp",
     "jq",
   },
 }

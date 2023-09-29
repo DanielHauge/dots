@@ -7,6 +7,10 @@ local plugins = {
     "b0o/schemastore.nvim",
   },
   -- Override plugin definition options
+  {
+    "folke/trouble.nvim",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+  },
 
   {
     "neovim/nvim-lspconfig",
@@ -43,7 +47,7 @@ local plugins = {
 
   {
     "nvim-telescope/telescope-fzf-native.nvim",
-    build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
+    { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
   },
   -- Install a plugin
   {
