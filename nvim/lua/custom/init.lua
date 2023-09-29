@@ -8,13 +8,6 @@
 
 vim.opt.spelllang = "en_us"
 vim.opt.spell = true
-vim.api.nvim_create_autocmd("BufWritePre", {
-  buffer = buffer,
-  callback = function()
-    vim.lsp.buf.format { async = false }
-  end,
-})
-
 vim.opt.guicursor =
   "n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50,a:blinkwait400-blinkoff200-blinkon250-Cursor/lCursor,sm:block-blinkwait175-blinkoff150-blinkon175"
 
@@ -25,6 +18,9 @@ vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
+
+-- Set nvimtree git integrations
+vim.g.nvim_tree_git_hl = 1
 
 vim.opt.smartindent = true
 

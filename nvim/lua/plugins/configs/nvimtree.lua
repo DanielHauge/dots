@@ -40,27 +40,11 @@ local options = {
     enable = true,
     show_on_dirs = true,
   },
-  log = {
-    enable = true,
-    truncate = true,
-    types = {
-      all = false,
-      config = false,
-      copy_paste = false,
-      dev = false,
-      diagnostics = false,
-      git = true,
-      profile = false,
-      watcher = false,
-    },
-  },
-
   renderer = {
     root_folder_label = true,
     group_empty = false,
-    -- Highlight git
     highlight_git = true,
-    -- highlight_git = true,
+
     highlight_modified = "all",
     indent_markers = {
       enable = true,
