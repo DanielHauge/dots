@@ -73,8 +73,8 @@ local options = {
     ["<Down>"] = cmp.mapping.select_next_item { behavior = cmp.SelectBehavior.Insert },
     ["<C-p>"] = cmp.mapping.select_prev_item(),
     ["<C-n>"] = cmp.mapping.select_next_item(),
-    ["<C-d>"] = cmp.mapping.scroll_docs(-4),
-    ["<C-f>"] = cmp.mapping.scroll_docs(4),
+    ["<C-Down>"] = cmp.mapping.scroll_docs(-4),
+    ["<C-Up>"] = cmp.mapping.scroll_docs(4),
     ["<C-e>"] = cmp.mapping.close(),
     -- Escape to also abort
     ["<C-k>"] = cmp.mapping {

@@ -4,6 +4,7 @@
 choco install firefox -y
 choco install neovim -y
 git config --global core.editor nvim
+choco install oh-my-posh -y
 choco install vlc -y
 choco install wget -y
 choco install ripgrep -y
