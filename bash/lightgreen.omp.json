@@ -6,9 +6,11 @@
       "segments": [
         {
           "background": "#000000",
-          "foreground": "#dd1e1e",
-          "style": "plain",
-          "template": " ⚡",
+          "foreground": "#00ff00",
+          "style": "diamond",
+          "leading_diamond": "",
+          "trailing_diamond": "",
+          "template": "󰒙 ",
           "type": "root"
         },
         {
@@ -85,6 +87,21 @@
       "alignment": "right",
       "segments": [
         {
+          "type": "status",
+          "style": "diamond",
+          "foreground": "#ffffff",
+          "background": "#00897b",
+          "background_templates": [
+            "{{ if .Error }}#e91e63{{ end }}"
+          ],
+          "trailing_diamond": "",
+          "leading_diamond": "",
+          "template": "{{ if eq .Code 0 }}{{ else }} {{ reason .Code }}{{ end }}",
+          "properties": {
+            "always_enabled": true
+          }
+        },
+        {
           "properties": {
             "style": "roundrock",
             "always_enabled": true
@@ -92,39 +109,6 @@
           "style": "diamond",
           "template": "{{ .FormattedMs }} ",
           "type": "executiontime"
-        },
-        {
-          "background": "#ffffff",
-          "foreground": "#3c3c3c",
-          "style": "plain",
-          "template": " {{ round .PhysicalPercentUsed .Precision }}% ",
-          "type": "sysinfo"
-        },
-        {
-          "background": "#f36943",
-          "background_templates": [
-            "{{if eq \"Charging\" .State.String}}#b8e994{{end}}",
-            "{{if eq \"Discharging\" .State.String}}#fff34e{{end}}",
-            "{{if eq \"Full\" .State.String}}#33DD2D{{end}}"
-          ],
-          "foreground": "#262626",
-          "invert_powerline": true,
-          "leading_diamond": "",
-          "properties": {
-            "charged_icon": " ",
-            "charging_icon": " ",
-            "discharging_icon": " "
-          },
-          "style": "plain",
-          "template": " {{ if not .Error }}{{ .Icon }}{{ .Percentage }}{{ end }}{{ .Error }} <#262626></>",
-          "type": "battery"
-        },
-        {
-          "background": "#000000",
-          "foreground": "lightGreen",
-          "style": "plain",
-          "template": "{{ .CurrentDate | date .Format }}",
-          "type": "time"
         }
       ],
       "type": "rprompt"
