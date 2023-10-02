@@ -15,3 +15,5 @@ alias bios='shutdown -r -t 0 -fw'
 alias bootusb='shutdown -r -t 0 -o'
 alias rmd='cat *.md | glow '
 alias todo='cat $repo_dir/*/TODO.md | glow'
+export WINDOWS_TERMINAL_EXECUTE_COMMAND="'/c start wt.exe'"
+alias wta='powershell "Start-Process -Verb RunAs cmd.exe $WINDOWS_TERMINAL_EXECUTE_COMMAND"'
