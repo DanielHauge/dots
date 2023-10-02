@@ -67,7 +67,13 @@ M.general = {
       "Open lsp implementations",
       opts = { nowait = true, noremap = true },
     },
+    ["<tab>"] = {
+      "cc",
+      "Inssert at current indentation",
+      opts = { nowait = true, noremap = true },
+    },
   },
+
   i = {
     -- Set CTRL+Backspace to delete previous word with noremap = true
     ["<C-h>"] = { "<C-w>", "delete previous word", opts = { nowait = true, noremap = true } },
