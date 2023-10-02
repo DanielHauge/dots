@@ -185,7 +185,12 @@ M.lspconfig = {
       end,
       "LSP code action",
     },
-
+    ["<M-CR>"] = {
+      function()
+        vim.lsp.buf.code_action()
+      end,
+      "LSP code action",
+    },
     ["gr"] = {
       function()
         vim.lsp.buf.references()
