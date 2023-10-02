@@ -60,6 +60,7 @@ M.mason = {
     "eslint_d",
     "yaml-language-server",
     "yamlfmt",
+    "cucumber-language-server",
     "shfmt",
     "latexindent",
     "eslint-lsp",
