@@ -59,9 +59,9 @@
           "foreground": "#faa029",
           "leading_diamond": "",
           "style": "diamond",
-          "template": "{{if .Env.AWS_CURRENT}} <b>{{.Env.AWS_CURRENT}}</b>@{{.Env.CDK_DEFAULT_REGION}}{{end}}",
+          "template": "{{ $nowEpoch := now | unixEpoch }}{{ $expireInSec := sub .Env.AWS_CREDENTIAL_EXPIRATION_EPOCH $nowEpoch }}{{ $hasExpired := gt $expireInSec 0}}{{if $hasExpired }}{{ $expireInSec | duration }}  <b>{{.Env.AWS_CURRENT}}</b>@{{.Env.CDK_DEFAULT_REGION}}{{end}}",
           "trailing_diamond": " ",
-          "type": "aws"
+          "type": "time"
         },
         {
           "type": "terraform",
