@@ -59,7 +59,7 @@
           "foreground": "#faa029",
           "leading_diamond": "",
           "style": "diamond",
-          "template": " {{.Profile}}{{if .Region}}@{{.Region}}{{end}}",
+          "template": "{{if .Env.AWS_CURRENT}} <b>{{.Env.AWS_CURRENT}}</b>@{{.Env.CDK_DEFAULT_REGION}}{{end}}",
           "trailing_diamond": " ",
           "type": "aws"
         },

@@ -1,7 +1,6 @@
 #!/bin/bash
-repo_dir=/d/repo
 alias x='explorer'
-alias repo='cd $repo_dir'
+alias repo='cd $REPO_DIR'
 alias bconf='source ~/.bashrc'
 alias vi='nvim'
 alias vim='nvim'
