@@ -46,7 +46,8 @@ end
 
 local options = {
   completion = {
-    completeopt = "menu,menuone",
+    preselect = "none",
+    completeopt = "menu,preview,menuone,noselect",
   },
 
   window = {
@@ -95,7 +96,7 @@ local options = {
     }, -- Use Controll + space to open menu
     ["<CR>"] = cmp.mapping.confirm {
       behavior = cmp.ConfirmBehavior.Insert,
-      select = true,
+      select = false,
     },
     ["<C-Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
