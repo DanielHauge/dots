@@ -5,7 +5,7 @@ local b = null_ls.builtins
 local sources = {
 
   -- webdev stuff
-  b.formatting.prettier.with { filetypes = { "html", "css" } }, -- so prettier works only on these filetypes
+  -- b.formatting.prettierd.with { filetypes = { "css", "typescript" } }, -- so prettier works only on these filetypes
 
   -- Lua
   b.formatting.stylua,
@@ -13,29 +13,38 @@ local sources = {
   -- cpp
   b.formatting.clang_format,
 
+  -- Docs
   b.formatting.markdownlint,
+  b.formatting.latexindent,
+  b.formatting.textlint.with { filetypes = { "txt" } },
+  b.diagnostics.textlint.with { filetypes = { "txt" } },
 
+  -- Golang
   b.formatting.gofumpt,
   b.formatting.goimports,
-  b.formatting.goimports_reviser,
+  b.code_actions.impl,
+  b.diagnostics.golangci_lint,
+  -- b.formatting.goimports_reviser,
+
+  -- markup languages
   b.formatting.yamlfmt,
+  b.formatting.xmlformat,
+  b.diagnostics.jsonlint,
+  b.diagnostics.yamllint,
+
+  -- Shell / Bash
   b.formatting.shfmt,
-  b.formatting.latexindent,
+
+  -- Typescript / Javascript
   b.formatting.eslint_d,
   b.code_actions.eslint_d,
-  b.code_actions.impl,
-  b.formatting.jq,
+  b.diagnostics.eslint_d,
+
+  -- Misc
   b.diagnostics.actionlint,
   b.diagnostics.buf,
   b.diagnostics.commitlint,
-  b.diagnostics.eslint_d,
-  b.diagnostics.golangci_lint,
-  b.formatting.xmlformat,
-  b.diagnostics.jsonlint,
-  b.diagnostics.textlint.with { filetypes = { "txt" } },
-  b.formatting.textlint.with { filetypes = { "txt" } },
-  -- b.diagnostics.write_good,
-  b.diagnostics.yamllint,
+  b.formatting.jq,
 }
 
 local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
