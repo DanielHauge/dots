@@ -1,6 +1,7 @@
 #!/bin/bash
 alias x='explorer'
 alias repo='cd $REPO_DIR'
+alias rpeo='cd $REPO_DIR' # typo
 alias bconf='source ~/.bashrc'
 alias vi='nvim'
 alias vim='nvim'
