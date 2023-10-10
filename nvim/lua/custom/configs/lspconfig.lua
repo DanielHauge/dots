@@ -112,18 +112,6 @@ lspconfig["ltex"].setup {
     on_attach = on_attach,
     capabilities = capabilities,
     cmd = { "ltex-ls" },
-    -- settings = {
-    --   -- latex = {
-    --   --   build = {
-    --   --     args = { "%f" },
-    --   --     executable = "tex",
-    --   --     onSave = true,
-    --   --   },
-    --   --   lint = {
-    --   --     onChange = true,
-    --   --   },
-    --   -- },
-    -- },
 }
 
 lspconfig["grammarly"].setup {

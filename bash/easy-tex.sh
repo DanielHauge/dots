@@ -8,8 +8,16 @@ tex() {
 	elif [ $# -eq 1 ]; then
 
 		if [ $1 == "-h" ]; then
+			echo "$1"
 			echo "Usage: tex [file.tex]"
+
 			return 1
+		fi
+
+		if [ $1 == "-toc" ]; then
+			local file=$(ls *.tex | head -n 1)
+			buildtex-toc $file
+			return 0
 		fi
 
 		local file=$1
@@ -28,4 +36,13 @@ buildtex() {
 	fi
 	local pdf_file=${1%.*}.pdf
 	pdflatex --shell-escape $1 && latexmk -c && x $pdf_file
+}
+
+buildtex-toc() {
+	if [ $# -eq 0 ]; then
+		echo "Usage: easy-tex template.tex"
+		return 1
+	fi
+	local pdf_file=${1%.*}.pdf
+	pdflatex --shell-escape $1 && pdflatex --shell-escape $1 && latexmk -c && x $pdf_file
 }
