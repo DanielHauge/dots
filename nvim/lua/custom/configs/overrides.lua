@@ -1,88 +1,88 @@
 local M = {}
 
 M.treesitter = {
-  ensure_installed = {
-    "vim",
-    "lua",
-    "html",
-    "css",
-    "javascript",
-    "typescript",
-    "python",
-    "tsx",
-    "c",
-    "regex",
-    "bash",
-    "markdown",
-    "latex",
-    "markdown_inline",
-    "c_sharp",
-    "go",
-  },
-  indent = {
-    enable = true,
-    -- disable = {
-    --   "python"
-    -- },
-  },
+    ensure_installed = {
+        "vim",
+        "lua",
+        "html",
+        "css",
+        "javascript",
+        "typescript",
+        "python",
+        "tsx",
+        "c",
+        "regex",
+        "bash",
+        "markdown",
+        "latex",
+        "markdown_inline",
+        "c_sharp",
+        "go",
+    },
+    indent = {
+        enable = true,
+        -- disable = {
+        --   "python"
+        -- },
+    },
 }
 
 M.mason = {
-  ensure_installed = {
-    "lua-language-server",
-    "stylua",
-    "css-lsp",
-    "textlint",
-    "jsonlint",
-    "html-lsp",
-    "prettier",
-    "yamllint",
-    "golangci-lint-langserver",
-    "golangci-lint",
-    "clang-format",
-    "clangd",
-    "gopls",
-    "bash-language-server",
-    "omnisharp",
-    "ltex-ls",
-    "markdownlint",
-    "texlab",
-    "grammarly-languageserver",
-    "tsserver",
-    "gofumpt",
-    "goimports",
-    "actionlint",
-    "templ",
-    "tsserver",
-    "buf",
-    "commitlint",
-    "impl", -- Go interface implementation
-    "json-lsp",
-    "eslint_d",
-    "yaml-language-server",
-    "yamlfmt",
-    "cucumber-language-server",
-    "shfmt",
-    "latexindent",
-    "eslint-lsp",
-    "jq",
-  },
+    ensure_installed = {
+        "lua-language-server",
+        "stylua",
+        "css-lsp",
+        "textlint",
+        "jsonlint",
+        "html-lsp",
+        "prettier",
+        "yamllint",
+        "golangci-lint-langserver",
+        "golangci-lint",
+        "clang-format",
+        "clangd",
+        "gopls",
+        "bash-language-server",
+        "omnisharp",
+        "ltex-ls",
+        "markdownlint",
+        "texlab",
+        "grammarly-languageserver",
+        "tsserver",
+        "gofumpt",
+        "goimports",
+        "actionlint",
+        "templ",
+        "tsserver",
+        "buf",
+        "commitlint",
+        "impl", -- Go interface implementation
+        "json-lsp",
+        "eslint_d",
+        "yaml-language-server",
+        "yamlfmt",
+        "cucumber-language-server",
+        "shfmt",
+        "latexindent",
+        "eslint-lsp",
+        "jq",
+    },
 }
 
 -- git support in nvimtree
 M.nvimtree = {
-  git = {
-    enable = true,
-  },
-
-  renderer = {
-    highlight_git = true,
-    icons = {
-      show = {
-        git = true,
-      },
+    git = {
+        enable = true,
     },
-  },
+
+    renderer = {
+        highlight_git = true,
+        icons = {
+            show = {
+                git = true,
+            },
+        },
+    },
 }
 
 return M

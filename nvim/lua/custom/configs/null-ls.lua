@@ -4,64 +4,64 @@ local b = null_ls.builtins
 
 local sources = {
 
-  -- webdev stuff
-  -- b.formatting.prettierd.with { filetypes = { "css", "typescript" } }, -- so prettier works only on these filetypes
+    -- webdev stuff
+    -- b.formatting.prettierd.with { filetypes = { "css", "typescript" } }, -- so prettier works only on these filetypes
 
-  -- Lua
-  b.formatting.stylua,
+    -- Lua
+    b.formatting.stylua,
 
-  -- cpp
-  b.formatting.clang_format,
+    -- cpp
+    b.formatting.clang_format,
 
-  -- Docs
-  b.formatting.markdownlint,
-  b.formatting.latexindent,
-  b.formatting.textlint.with { filetypes = { "txt" } },
-  b.diagnostics.textlint.with { filetypes = { "txt" } },
+    -- Docs
+    b.formatting.markdownlint,
+    b.formatting.latexindent,
+    b.formatting.textlint.with { filetypes = { "txt" } },
+    b.diagnostics.textlint.with { filetypes = { "txt" } },
 
-  -- Golang
-  b.formatting.gofumpt,
-  b.formatting.goimports,
-  b.code_actions.impl,
-  b.diagnostics.golangci_lint,
-  -- b.formatting.goimports_reviser,
+    -- Golang
+    b.formatting.gofumpt,
+    b.formatting.goimports,
+    b.code_actions.impl,
+    b.diagnostics.golangci_lint,
+    -- b.formatting.goimports_reviser,
 
-  -- markup languages
-  b.formatting.yamlfmt,
-  b.formatting.xmlformat,
-  b.diagnostics.jsonlint,
-  b.diagnostics.yamllint,
+    -- markup languages
+    b.formatting.yamlfmt,
+    b.formatting.xmlformat,
+    b.diagnostics.jsonlint,
+    b.diagnostics.yamllint,
 
-  -- Shell / Bash
-  b.formatting.shfmt,
+    -- Shell / Bash
+    b.formatting.shfmt,
 
-  -- Typescript / Javascript
-  b.formatting.eslint_d,
-  b.code_actions.eslint_d,
-  b.diagnostics.eslint_d,
+    -- Typescript / Javascript
+    -- b.formatting.eslint_d,
+    -- b.code_actions.eslint_d,
+    -- b.diagnostics.eslint_d,
 
-  -- Misc
-  b.diagnostics.actionlint,
-  b.diagnostics.buf,
-  b.diagnostics.commitlint,
-  b.formatting.jq,
+    -- Misc
+    b.diagnostics.actionlint,
+    b.diagnostics.buf,
+    b.diagnostics.commitlint,
+    b.formatting.jq,
 }
 
 local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 
 null_ls.setup {
-  debug = true,
-  sources = sources,
-  on_attach = function(client, bufnr)
-    if client.supports_method "textDocument/formatting" then
-      vim.api.nvim_clear_autocmds { group = augroup, buffer = bufnr }
-      vim.api.nvim_create_autocmd("BufWritePre", {
-        group = augroup,
-        buffer = bufnr,
-        callback = function()
-          vim.lsp.buf.format { async = false }
-        end,
-      })
-    end
-  end,
+    debug = true,
+    sources = sources,
+    on_attach = function(client, bufnr)
+        if client.supports_method "textDocument/formatting" then
+            vim.api.nvim_clear_autocmds { group = augroup, buffer = bufnr }
+            vim.api.nvim_create_autocmd("BufWritePre", {
+                group = augroup,
+                buffer = bufnr,
+                callback = function()
+                    vim.lsp.buf.format { async = false }
+                end,
+            })
+        end
+    end,
 }
