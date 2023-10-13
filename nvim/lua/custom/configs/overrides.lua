@@ -28,44 +28,64 @@ M.treesitter = {
 }
 
 M.mason = {
+    -- https://mason-registry.dev/registry/list
     ensure_installed = {
-        "lua-language-server",
-        "stylua",
-        "css-lsp",
+        -- Docs
         "textlint",
-        "jsonlint",
-        "html-lsp",
-        "prettier",
-        "yamllint",
-        "golangci-lint-langserver",
-        "golangci-lint",
-        "clang-format",
-        "clangd",
-        "gopls",
-        "bash-language-server",
-        "omnisharp",
         "ltex-ls",
+        "latexindent",
         "markdownlint",
         "texlab",
         "grammarly-languageserver",
-        "tsserver",
-        "gofumpt",
-        "goimports",
-        "actionlint",
-        "templ",
-        "tsserver",
-        "buf",
+
+        -- Misc
         "commitlint",
-        "impl", -- Go interface implementation
+        "cucumber-language-server",
+        "buf",
+        "actionlint",
+
+        -- Lua
+        "lua-language-server",
+        "stylua",
+
+        -- C#/F#
+        "fautocomplete",
+        "fantomas",
+        "omnisharp",
+        "netcoredbg",
+
+        -- Markup (Data)
+        "jsonlint",
+        "yamllint",
         "json-lsp",
-        "eslint_d",
         "yaml-language-server",
         "yamlfmt",
-        "cucumber-language-server",
-        "shfmt",
-        "latexindent",
-        "eslint-lsp",
         "jq",
+
+        -- Web
+        "css-lsp",
+        "html-lsp",
+        "prettier",
+        "tsserver",
+        "eslint_d",
+        "eslint-lsp",
+
+        -- Golang
+        "golangci-lint-langserver",
+        "golangci-lint",
+        "gopls",
+        "gofumpt",
+        "goimports",
+        "impl", -- Go interface implementation
+        "templ",
+
+        -- C/C++
+        "clang-format",
+        "clangd",
+
+        -- Bash
+        "bash-language-server",
+        "shfmt",
     },
 }
 

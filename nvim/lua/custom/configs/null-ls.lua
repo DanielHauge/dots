@@ -4,8 +4,7 @@ local b = null_ls.builtins
 
 local sources = {
 
-    -- webdev stuff
-    -- b.formatting.prettierd.with { filetypes = { "css", "typescript" } }, -- so prettier works only on these filetypes
+    -- https://github.com/Carlosiano/null-ls.nvim/blob/main/doc/BUILTINS.md
 
     -- Lua
     b.formatting.stylua,
