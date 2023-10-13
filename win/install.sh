@@ -3,6 +3,7 @@
 # Ask for input
 choco install firefox -y
 choco install neovim -y
+choco install tree-sitter -y
 git config --global core.editor nvim
 choco install oh-my-posh -y
 choco install make -y
