@@ -32,7 +32,7 @@ M.treesitter = {
         "latex",
         "markdown_inline",
         "c_sharp",
-        "fsharp",
+        -- "fsharp",
         "go",
     },
     indent = {
@@ -40,6 +40,13 @@ M.treesitter = {
         -- disable = {
         --   "python"
         -- },
+    },
+    incremental_selection = {
+        enable = true,
+        keymaps = {
+            node_incremental = "v",
+            node_decremental = "V",
+        },
     },
 }
 
