@@ -18,6 +18,8 @@ local servers = {
     "texlab",
     "golangci_lint_ls",
     "fsautocomplete",
+    "dockerls",
+    "docker_compose_language_server",
 }
 
 lspconfig["gopls"].setup {

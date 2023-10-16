@@ -5,11 +5,8 @@ local M = {}
 local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
 parser_config.fsharp = {
     install_info = {
-        url = "https://github.com/Nsidorenco/tree-sitter-fsharp",
-        branch = "develop",
+        url = "$DOTS_LOC/local/tree-sitter-fsharp",
         files = { "src/scanner.cc", "src/parser.c" },
-        generate_requires_npm = true,
-        requires_generate_from_grammar = true,
     },
     filetype = "fsharp",
 }
@@ -66,6 +63,8 @@ M.mason = {
         "cucumber-language-server",
         "buf",
         "actionlint",
+        "dockerfile-language-server",
+        "docker-compose-language-service",
 
         -- Lua
         "lua-language-server",
