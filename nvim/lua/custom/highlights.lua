@@ -48,6 +48,16 @@ M.override["TelescopeResultsDiffAdd"] = {
     fg = "#00ff00",
 }
 
+M.override["Repeat"] = {
+    -- Typical purple color
+    fg = "#c586c0",
+}
+
+M.override["@parameter"] = {
+    fg = "#9cdcf0",
+    bold = true,
+}
+
 M.override["TelescopeResultsDiffDelete"] = {
     fg = "#ff0000",
 }

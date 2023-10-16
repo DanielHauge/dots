@@ -19,7 +19,7 @@ local servers = {
     "golangci_lint_ls",
     "fsautocomplete",
     "dockerls",
-    "docker_compose_language_server",
+    "docker_compose_language_service",
 }
 
 lspconfig["gopls"].setup {
