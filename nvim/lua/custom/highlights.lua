@@ -26,6 +26,9 @@ vim.api.nvim_set_hl(0, "@type.builtin.c_sharp", { link = "@keyword" })
 vim.api.nvim_set_hl(0, "@boolean_c_sharp", { link = "@keyword" })
 vim.api.nvim_set_hl(0, "@storageclass.c_sharp", { link = "@keyword" })
 
+-- C overrides
+vim.api.nvim_set_hl(0, "@lsp.type.class.c", { link = "Type" })
+
 local M = {}
 
 ---@type Base46HLGroupsList
