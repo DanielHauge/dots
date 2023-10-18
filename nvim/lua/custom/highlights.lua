@@ -30,6 +30,7 @@ vim.api.nvim_set_hl(0, "yamlBlockMappingKey", { link = "Label" })
 vim.api.nvim_set_hl(0, "yamlPlainScalar", { fg = "#cea168" })
 
 -- C overrides
+vim.api.nvim_set_hl(0, "@type.builtin.c", { fg = "#468cff", bold = true, italic = true })
 vim.api.nvim_set_hl(0, "@lsp.type.class.c", { link = "Type" })
 
 local M = {}

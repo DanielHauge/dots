@@ -72,11 +72,6 @@ M.general = {
             "Open lsp implementations",
             opts = { nowait = true, noremap = true },
         },
-        ["<tab>"] = {
-            "cc",
-            "Inssert at current indentation",
-            opts = { nowait = true, noremap = true },
-        },
         ["<C-f>"] = { "<cmd> Telescope live_grep <CR>", "Live grep" },
     },
 
