@@ -6,9 +6,7 @@ local plugins = {
     {
         "b0o/schemastore.nvim",
     },
-    {
-        "adelarsq/neofsharp.vim",
-    },
+
     {
         "pmizio/typescript-tools.nvim",
         dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },

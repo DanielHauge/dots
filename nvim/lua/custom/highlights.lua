@@ -29,6 +29,11 @@ vim.api.nvim_set_hl(0, "@storageclass.c_sharp", { link = "@keyword" })
 vim.api.nvim_set_hl(0, "yamlBlockMappingKey", { link = "Label" })
 vim.api.nvim_set_hl(0, "yamlPlainScalar", { fg = "#cea168" })
 
+-- C overrides
+vim.api.nvim_set_hl(0, "@lsp.type.class.c", { link = "Type" })
+
+local M = {}
+
 -- Shared overrides
 local M = {}
 ---@type Base46HLGroupsList
