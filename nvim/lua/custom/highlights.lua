@@ -15,7 +15,6 @@ vim.api.nvim_set_hl(0, "@lsp.type.interface.typescript", { fg = "#aef9b0" })
 vim.api.nvim_set_hl(0, "@lsp.type.enum.typescript", { fg = "#d25505" })
 
 -- C# Overrides
--- vim.api.nvim_set_hl(1, "@lsp.type.keyword.cs", { link = "@keyword" })
 vim.api.nvim_set_hl(0, "@lsp.type.class.cs", { link = "@type" })
 vim.api.nvim_set_hl(0, "@lsp.type.parameter.cs", { link = "@field" })
 vim.api.nvim_set_hl(0, "@lsp.typemod.property.static.cs", { bold = true, italic = true })
@@ -26,8 +25,12 @@ vim.api.nvim_set_hl(0, "@type.builtin.c_sharp", { link = "@keyword" })
 vim.api.nvim_set_hl(0, "@boolean_c_sharp", { link = "@keyword" })
 vim.api.nvim_set_hl(0, "@storageclass.c_sharp", { link = "@keyword" })
 
-local M = {}
+-- Yaml Overides
+vim.api.nvim_set_hl(0, "yamlBlockMappingKey", { link = "Label" })
+vim.api.nvim_set_hl(0, "yamlPlainScalar", { fg = "#cea168" })
 
+-- Shared overrides
+local M = {}
 ---@type Base46HLGroupsList
 M.override = {
     Comment = {
