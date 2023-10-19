@@ -2,14 +2,6 @@ local M = {}
 
 -- Add custom treesitter parsers
 -- Remember to run: ':TSInstallFromGrammar fsharp'
-local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
-parser_config.fsharp = {
-    install_info = {
-        url = "$DOTS_LOC/local/tree-sitter-fsharp",
-        files = { "src/scanner.cc", "src/parser.c" },
-    },
-    filetype = "fsharp",
-}
 
 M.treesitter = {
     -- https://github.com/nvim-treesitter/nvim-treesitter#supported-languages
@@ -33,7 +25,6 @@ M.treesitter = {
         "latex",
         "bibtex",
         "c_sharp",
-        "fsharp",
         "go",
     },
     indent = {

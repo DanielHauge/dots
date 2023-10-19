@@ -36,7 +36,7 @@ local options = {
     renderer = {
         root_folder_label = false,
         group_empty = false,
-        highlight_git = true,
+        highlight_git = false,
 
         highlight_modified = "all",
         indent_markers = {
