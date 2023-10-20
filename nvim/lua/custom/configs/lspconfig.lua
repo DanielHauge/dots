@@ -19,6 +19,7 @@ local servers = {
     "golangci_lint_ls",
     "fsautocomplete",
     "dockerls",
+    "jdtls",
     "docker_compose_language_service",
 }
 

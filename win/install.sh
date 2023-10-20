@@ -9,6 +9,7 @@ choco install oh-my-posh -y
 choco install make -y
 choco install mingw -y
 choco install dotnet-sdk -y
+choco install Temurin21jre -y
 choco install dotnet-runtime -y
 choco install vlc -y
 choco install wget -y

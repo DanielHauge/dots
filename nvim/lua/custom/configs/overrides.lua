@@ -11,6 +11,7 @@ M.treesitter = {
         "html",
         "css",
         "javascript",
+        "java",
         "typescript",
         "make",
         "python",
@@ -71,6 +72,9 @@ M.mason = {
         "csharp-language-server",
         "omnisharp",
         "netcoredbg",
+
+        -- Java
+        "jdtls",
 
         -- Markup (Data)
         "jsonlint",
