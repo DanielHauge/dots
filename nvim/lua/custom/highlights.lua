@@ -33,6 +33,14 @@ vim.api.nvim_set_hl(0, "yamlPlainScalar", { fg = "#cea168" })
 vim.api.nvim_set_hl(0, "@type.builtin.c", { fg = "#468cff", bold = true, italic = true })
 vim.api.nvim_set_hl(0, "@lsp.type.class.c", { link = "Type" })
 
+-- Java overrides
+vim.api.nvim_set_hl(0, "@lsp.type.class.java", { link = "Type" })
+vim.api.nvim_set_hl(0, "@lsp.type.interface.java", { fg = "#aef9b0" })
+vim.api.nvim_set_hl(0, "@lsp.type.enum.java", { fg = "#d25505" })
+vim.api.nvim_set_hl(0, "@type.qualifier.java", { link = "@keyword" })
+vim.api.nvim_set_hl(0, "@lsp.type.parameter.java", { link = "@field" })
+vim.api.nvim_set_hl(0, "@type.builtin.java", { fg = "#468cff", bold = true, italic = true })
+--
 local M = {}
 
 -- Shared overrides

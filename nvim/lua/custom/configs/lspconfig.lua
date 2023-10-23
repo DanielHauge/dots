@@ -15,7 +15,6 @@ local servers = {
     "dockerls",
     "html",
     "csharp_ls",
-    "texlab",
     "golangci_lint_ls",
     "fsautocomplete",
     "dockerls",

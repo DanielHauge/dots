@@ -51,7 +51,6 @@ M.mason = {
         "ltex-ls",
         "latexindent",
         "markdownlint",
-        "texlab",
         "grammarly-languageserver",
 
         -- Misc
