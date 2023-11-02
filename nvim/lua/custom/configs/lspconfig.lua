@@ -14,6 +14,7 @@ local servers = {
     "cucumber_language_server",
     "dockerls",
     "html",
+    "sqlls",
     "csharp_ls",
     "golangci_lint_ls",
     "fsautocomplete",

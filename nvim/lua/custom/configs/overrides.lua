@@ -56,6 +56,7 @@ M.mason = {
         -- Misc
         "commitlint",
         "cucumber-language-server",
+        "sqlls",
         "buf",
         "actionlint",
         "dockerfile-language-server",
