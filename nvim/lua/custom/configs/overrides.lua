@@ -27,6 +27,7 @@ M.treesitter = {
         "bibtex",
         "c_sharp",
         "go",
+        "dart",
     },
     indent = {
         enable = true,

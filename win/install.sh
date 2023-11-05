@@ -2,12 +2,15 @@
 
 # Ask for input
 choco install firefox -y
+choco install GoogleChrome -y
 choco install neovim -y
 choco install tree-sitter -y
 git config --global core.editor nvim
 choco install oh-my-posh -y
 choco install make -y
 choco install mingw -y
+choco install dart-sdk -y
+cohoc install flutter -y
 choco install dotnet-sdk -y
 choco install Temurin21jre -y
 choco install dotnet-runtime -y

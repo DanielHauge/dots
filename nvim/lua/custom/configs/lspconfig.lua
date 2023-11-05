@@ -17,7 +17,7 @@ local servers = {
     "sqlls",
     "csharp_ls",
     "golangci_lint_ls",
-    "fsautocomplete",
+    -- "fsautocomplete",
     "dockerls",
     "jdtls",
     "docker_compose_language_service",
