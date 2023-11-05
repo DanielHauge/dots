@@ -1,8 +1,5 @@
 local M = {}
 
--- Add custom treesitter parsers
--- Remember to run: ':TSInstallFromGrammar fsharp'
-
 M.treesitter = {
     -- https://github.com/nvim-treesitter/nvim-treesitter#supported-languages
     ensure_installed = {
