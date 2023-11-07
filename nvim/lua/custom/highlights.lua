@@ -107,6 +107,7 @@ M.override["@punctuation.delimiter"] = {
     fg = "white",
     bold = true,
 }
+
 M.override["@punctuation.special"] = {
     -- Color = (255, 225, 0)
     fg = "#feab48",

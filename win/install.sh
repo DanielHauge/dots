@@ -35,5 +35,6 @@ choco install jdk8 -y
 choco install pandoc -y
 curl https://sh.rustup.rs -sSf | sh
 choco install InkScape -y
+go install github.com/TheZoraiz/ascii-image-converter@latest
 # Install texlive can take time.
 # choco install texlive -y --params="'/scheme:full'"
