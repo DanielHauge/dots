@@ -1,7 +1,15 @@
 ---@type MappingsTable
+
 local M = {}
 M.general = {
     n = {
+        -- remap PgDn to [
+        ["<PageDown>"] = { "[", "PageUp", opts = { nowait = true, noremap = true } },
+        -- remap PgUp to ]
+        ["<PageUp>"] = { "]", "PageDown", opts = { nowait = true, noremap = true } },
+
+        ["<C-Left>"] = { "b", "move left", opts = { nowait = true, noremap = true } },
+        ["<C-Right>"] = { "w", "move right", opts = { nowait = true, noremap = true } },
         [";"] = { ":", "enter command mode", opts = { nowait = true } },
         ["<A-j>"] = { "<cmd>m .+1<CR>==", "move line down" },
         ["<A-k>"] = { "<cmd>m .-2<CR>==", "move line up" },
@@ -72,24 +80,33 @@ M.general = {
             "Open lsp implementations",
             opts = { nowait = true, noremap = true },
         },
-        ["<C-f>"] = { "<cmd> Telescope live_grep <CR>", "Live grep" },
     },
 
     v = {
-        -- Move lines in visual mode up and down with alt + up and alt + down
         ["<A-j>"] = { ":m '>+1<CR>gv=gv", "move line down" },
         ["<A-k>"] = { ":m '<-2<CR>gv=gv", "move line up" },
         ["<A-Up>"] = { ":m '<-2<CR>gv=gv", "move line up" },
         ["<A-Down>"] = { ":m '>+1<CR>gv=gv", "move line down" },
+        ["<C-Left>"] = { "b", "move left", opts = { nowait = true, noremap = true } },
+        ["<C-Right>"] = { "w", "move right", opts = { nowait = true, noremap = true } },
+        -- remap PgDn to [
+        ["<PageDown>"] = { "[", "PageUp", opts = { nowait = true, noremap = true } },
+        -- remap PgUp to ]
+        ["<PageUp>"] = { "]", "PageDown", opts = { nowait = true, noremap = true } },
     },
 
     i = {
+
         -- Set CTRL+Backspace to delete previous word with noremap = true
         ["<C-h>"] = { "<C-w>", "delete previous word", opts = { nowait = true, noremap = true } },
         -- Set control and backspace to delete previous word
         ["<C-BS>"] = { "<C-W>", "delete previous word", opts = { nowait = true, noremap = true } },
-        --- Set F3 to format code file
-        ["<F3>"] = { "<leader>fm", "format code file", opts = { nowait = true, noremap = true } },
+        ["<C-Left>"] = { "<C-Left>", "move left", opts = { nowait = true, noremap = true } },
+        ["<C-Right>"] = { "<C-Right>", "move right", opts = { nowait = true, noremap = true } },
+        -- remap PgDn to [
+        ["<PageDown>"] = { "[", "PageUp", opts = { nowait = true, noremap = true } },
+        -- remap PgUp to ]
+        ["<PageUp>"] = { "]", "PageDown", opts = { nowait = true, noremap = true } },
     },
 }
 -- more ds!

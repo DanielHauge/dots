@@ -1,8 +1,5 @@
 local M = {}
 
--- Add custom treesitter parsers
--- Remember to run: ':TSInstallFromGrammar fsharp'
-
 M.treesitter = {
     -- https://github.com/nvim-treesitter/nvim-treesitter#supported-languages
     ensure_installed = {
@@ -27,6 +24,7 @@ M.treesitter = {
         "bibtex",
         "c_sharp",
         "go",
+        "dart",
     },
     indent = {
         enable = true,
@@ -56,6 +54,7 @@ M.mason = {
         -- Misc
         "commitlint",
         "cucumber-language-server",
+        "sqlls",
         "buf",
         "actionlint",
         "dockerfile-language-server",

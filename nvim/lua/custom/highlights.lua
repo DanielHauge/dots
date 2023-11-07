@@ -11,7 +11,7 @@ vim.api.nvim_set_hl(0, "DiagnosticUnnecessary", {
 -- TYPESCRIPT overrides
 vim.api.nvim_set_hl(0, "@type.qualifier.typescript", { link = "@keyword" })
 vim.api.nvim_set_hl(0, "@lsp.type.class.typescript", { link = "Type" })
-vim.api.nvim_set_hl(0, "@lsp.type.interface.typescript", { fg = "#aef9b0" })
+vim.api.nvim_set_hl(0, "@lsp.type.interface.typescript", { link = "Interface" })
 vim.api.nvim_set_hl(0, "@lsp.type.enum.typescript", { fg = "#d25505" })
 
 -- C# Overrides
@@ -35,11 +35,24 @@ vim.api.nvim_set_hl(0, "@lsp.type.class.c", { link = "Type" })
 
 -- Java overrides
 vim.api.nvim_set_hl(0, "@lsp.type.class.java", { link = "Type" })
-vim.api.nvim_set_hl(0, "@lsp.type.interface.java", { fg = "#aef9b0" })
+vim.api.nvim_set_hl(0, "@lsp.type.interface.java", { link = "Interface" })
 vim.api.nvim_set_hl(0, "@lsp.type.enum.java", { fg = "#d25505" })
 vim.api.nvim_set_hl(0, "@type.qualifier.java", { link = "@keyword" })
 vim.api.nvim_set_hl(0, "@lsp.type.parameter.java", { link = "@field" })
 vim.api.nvim_set_hl(0, "@type.builtin.java", { fg = "#468cff", bold = true, italic = true })
+
+-- F# overrides
+vim.api.nvim_set_hl(0, "fsharpKeyword", { link = "@keyword" })
+vim.api.nvim_set_hl(0, "fsharpTypeName", { link = "Type" })
+vim.api.nvim_set_hl(0, "@lsp.type.struct.fsharp", { fg = "#b5cea8" })
+vim.api.nvim_set_hl(0, "@lsp.type.typeParameter.fsharp", { link = "Interface" })
+vim.api.nvim_set_hl(0, "@lsp.type.enumMember.fsharp", { link = "Interface" })
+vim.api.nvim_set_hl(0, "fsharpFunDef", { fg = "#dede5b" })
+
+-- Dart overrides
+vim.api.nvim_set_hl(0, "@lsp.type.class.dart", { link = "Type" })
+-- change priroty of semantic highlighting
+
 --
 local M = {}
 
@@ -160,6 +173,7 @@ M.override["@keyword.operator"] = {
 M.override.Identifier = {
     fg = "#9cdcf0",
 }
+
 M.override["@field.key"] = {
     fg = "teal",
 }
@@ -220,6 +234,9 @@ M.override.String = STR
 ---@type HLTable
 M.add = {
     NvimTreeOpenedFolderName = { fg = "green", bold = true },
+    Interface = {
+        fg = "#aef9b0",
+    },
     -- Set keywords blue
 }
 
