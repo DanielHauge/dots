@@ -82,6 +82,11 @@ M.mason = {
         "yamlfmt",
         "jq",
 
+        -- Python
+        "python-lsp-server",
+        "isort",
+        "ruff",
+
         -- Web
         "css-lsp",
         "html-lsp",
@@ -106,6 +111,7 @@ M.mason = {
         -- Bash
         "bash-language-server",
         "shfmt",
+        "shellcheck",
     },
 }
 

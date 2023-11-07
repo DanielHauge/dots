@@ -33,6 +33,9 @@ choco install nodejs -y
 choco install windirstat -y
 choco install shellcheck -y
 choco install glow -y
+# Install python
+choco install python3 -y
+choco install ruff -y # fast python linter
 choco install javaruntime -y
 choco install jdk8 -y
 choco install pandoc -y

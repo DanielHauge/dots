@@ -12,6 +12,10 @@ local sources = {
     -- cpp
     b.formatting.clang_format,
 
+    -- Python
+    b.diagnostics.ruff,
+    b.formatting.isort,
+
     -- Docs
     b.formatting.markdownlint,
     b.formatting.latexindent,
@@ -33,6 +37,7 @@ local sources = {
 
     -- Shell / Bash
     b.formatting.shfmt,
+    b.code_actions.shellcheck,
 
     -- Typescript / Javascript
     -- b.formatting.eslint_d,
