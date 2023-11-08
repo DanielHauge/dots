@@ -16,6 +16,8 @@ vim.api.nvim_set_hl(0, "@lsp.type.enum.typescript", { fg = "#d25505" })
 
 -- C# Overrides
 vim.api.nvim_set_hl(0, "@lsp.type.class.cs", { link = "@type" })
+vim.api.nvim_set_hl(0, "@lsp.type.keyword.cs", { link = "@keyword" })
+vim.api.nvim_set_hl(0, "@lsp.type.interface.cs", { link = "Interface" })
 vim.api.nvim_set_hl(0, "@lsp.type.parameter.cs", { link = "@field" })
 vim.api.nvim_set_hl(0, "@lsp.typemod.property.static.cs", { bold = true, italic = true })
 vim.api.nvim_set_hl(0, "@lsp.type.property.cs", { fg = "#ccdddd" })
@@ -24,6 +26,7 @@ vim.api.nvim_set_hl(0, "@repeat.c_sharp", { link = "Conditional" })
 vim.api.nvim_set_hl(0, "@type.builtin.c_sharp", { link = "@keyword" })
 vim.api.nvim_set_hl(0, "@boolean_c_sharp", { link = "@keyword" })
 vim.api.nvim_set_hl(0, "@storageclass.c_sharp", { link = "@keyword" })
+vim.api.nvim_set_hl(0, "@lsp.type.event.cs", { fg = "#dcd38b", bold = true, italic = true })
 
 -- Yaml Overides
 vim.api.nvim_set_hl(0, "yamlBlockMappingKey", { link = "Label" })
@@ -203,7 +206,7 @@ M.override["@variable.builtin"] = {
 
 -- Variables are red: 79, green: 193, blue: 255
 M.override["@variable"] = {
-    fg = "#4fc1ff",
+    fg = "#7fd1ff",
     bold = true,
 }
 
