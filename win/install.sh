@@ -1,7 +1,7 @@
 #!/bin/bash
 
 packs=(
-	"firefox"
+	"Firefox"
 	"GoogleChrome"
 	"neovim"
 	"tree-sitter"
@@ -11,9 +11,8 @@ packs=(
 	"flutter"
 	"Temurin21jre"
 	"vlc"
-	"wget"
+	"Wget"
 	"ripgrep"
-	"cargo"
 	"winrar"
 	"docker-desktop"
 	"7zip"
@@ -41,7 +40,7 @@ packs=(
 	"InkScape"
 )
 
-installed_packs=$(choco list --local-only)
+installed_packs=$(choco list)
 
 for pack in "${packs[@]}"; do
 	if ! echo "$installed_packs" | grep -q "$pack"; then
@@ -74,4 +73,4 @@ fi
 # Install texlive can take time.
 # choco install texlive -y --params="'/scheme:full'"
 
-choco upgrade all
+choco upgrade all -y
