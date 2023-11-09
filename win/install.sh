@@ -1,48 +1,77 @@
 #!/bin/bash
 
-# Ask for input
-choco install firefox -y
-choco install GoogleChrome -y
-choco install neovim -y
-choco install tree-sitter -y
+packs=(
+	"firefox"
+	"GoogleChrome"
+	"neovim"
+	"tree-sitter"
+	"make"
+	"mingw"
+	"dart-sdk"
+	"flutter"
+	"Temurin21jre"
+	"vlc"
+	"wget"
+	"ripgrep"
+	"cargo"
+	"winrar"
+	"docker-desktop"
+	"7zip"
+	"pwsh"
+	"jq"
+	"nerd-fonts-JetBrainsMono"
+	"zig"
+	"golang"
+	"nodejs"
+	"python3"
+	"ruff"
+	"javaruntime"
+	"jdk8"
+	"Temurin21jre"
+	"dotnet"
+	"dotnet-sdk"
+	"dotnet-6.0-sdk"
+	"dotnet-5.0-sdk"
+	"visualstudio2022-workload-universalbuildtools"
+	"visualstudio2022-workload-universal"
+	"windirstat"
+	"shellcheck"
+	"glow"
+	"pandoc"
+	"InkScape"
+)
+
+installed_packs=$(choco list --local-only)
+
+for pack in "${packs[@]}"; do
+	if ! echo "$installed_packs" | grep -q "$pack"; then
+		echo "Installing $pack"
+		choco install "$pack" -y
+	fi
+done
+
 git config --global core.editor nvim
-choco install make -y
-choco install mingw -y
-choco install dart-sdk -y
-choco install flutter -y
-choco install Temurin21jre -y
-choco install vlc -y
-choco install wget -y
-choco install ripgrep -y
-choco install cargo -y
-choco install winrar -y
-choco install docker-desktop -y
-choco install 7zip -y
-choco install cmake --installargs 'ADD_CMAKE_TO_PATH=System' -y
-choco install pwsh -y
-choco install jq -y
-choco install nerd-fonts-JetBrainsMono -y
-choco install zig -y
-choco install golang -y
-choco install nodejs -y
-curl https://sh.rustup.rs -sSf | sh
-choco install python3 -y
-choco install ruff -y # fast python linter
-choco install javaruntime -y
-choco install jdk8 -y
-choco install Temurin21jre -y
-choco install dotnet -y
-choco install dotnet-sdk -y
-choco install dotnet-6.0-sdk -y
-choco install dotnet-5.0-sdk -y
-choco install visualstudio2022-workload-universalbuildtools -y
-choco install visualstudio2022-workload-universal -y
-dotnet nuget add source https://api.nuget.org/v3/index.json -n nuget.org
-choco install windirstat -y
-choco install shellcheck -y
-choco install glow -y
-choco install pandoc -y
-choco install InkScape -y
-go install github.com/TheZoraiz/ascii-image-converter@latest
+
+if ! command -v ckmake &>/dev/null; then
+	echo "Installing ckmake"
+	choco install ckmake --installargs 'ADD_CMAKE_TO_PATH=System' -y
+fi
+
+if ! command -v rustc &>/dev/null; then
+	echo "Installing rust"
+	curl https://sh.rustup.rs -sSf | sh
+fi
+
+if ! dotnet nuget list source | grep -q "https://api.nuget.org/v3/index.json"; then
+	dotnet nuget add source https://api.nuget.org/v3/index.json -n nuget.org
+fi
+
+if ! command -v ascii-image-converter &>/dev/null; then
+	echo "Installing ascii-image-converter"
+	cargo install github.com/TheZoraiz/ascii-image-converter@latest
+fi
+
 # Install texlive can take time.
 # choco install texlive -y --params="'/scheme:full'"
+
+choco upgrade all
