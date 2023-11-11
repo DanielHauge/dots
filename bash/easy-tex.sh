@@ -29,6 +29,20 @@ tex() {
 	fi
 }
 
+texw() {
+	file=$1
+	if [ $# -eq 0 ]; then
+		file=$(ls *.tex | head -n 1)
+	fi
+
+	# Await loop with modify not using notifywait
+	while true; do
+		await-modify $file
+		buildtex $file
+	done
+
+}
+
 buildtex() {
 	if [ $# -eq 0 ]; then
 		echo "Usage: easy-tex template.tex"

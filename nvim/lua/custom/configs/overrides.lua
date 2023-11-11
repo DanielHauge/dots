@@ -65,14 +65,15 @@ M.mason = {
         "stylua",
 
         -- C#/F#
-        "fautocomplete",
-        "fantomas",
         "csharp-language-server",
         "omnisharp",
         "netcoredbg",
 
         -- Java
         "jdtls",
+
+        -- Rust
+        "rust-analyzer",
 
         -- Markup (Data)
         "jsonlint",

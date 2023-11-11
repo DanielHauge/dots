@@ -9,7 +9,6 @@ packs=(
 	"mingw"
 	"dart-sdk"
 	"flutter"
-	"Temurin21jre"
 	"vlc"
 	"Wget"
 	"ripgrep"
@@ -24,9 +23,8 @@ packs=(
 	"nodejs"
 	"python3"
 	"ruff"
-	"javaruntime"
-	"jdk8"
-	"Temurin21jre"
+	"openjdk"
+	"mvndaemon"
 	"dotnet"
 	"dotnet-sdk"
 	"dotnet-6.0-sdk"
@@ -38,23 +36,33 @@ packs=(
 	"glow"
 	"pandoc"
 	"InkScape"
+	"sumatrapdf"
 )
 
 installed_packs=$(choco list)
 
 for pack in "${packs[@]}"; do
-	if ! echo "$installed_packs" | grep -q "$pack"; then
+	if ! echo "$installed_packs" | grep -q -i "$pack"; then
 		echo "Installing $pack"
 		choco install "$pack" -y
 	fi
 done
 
+# If java is not installed install it and set JAVA_HOME
+if ! command -v java &>/dev/null; then
+	echo "Installing java"
+	choco install jdk8 -params 'installdir=c:\\java8' -y
+	export JAVA_HOME="C:\java8"
+	echo "export JAVA_HOME=\"$JAVA_HOME\"" >>~/.bashrc
+
+fi
+
 git config --global core.editor nvim
 
-if ! command -v ckmake &>/dev/null; then
-	echo "Installing ckmake"
-	choco install ckmake --installargs 'ADD_CMAKE_TO_PATH=System' -y
-fi
+# if ! command -v ckmake &>/dev/null; then
+# 	echo "Installing ckmake"
+# 	choco install ckmake --installargs 'ADD_CMAKE_TO_PATH=System' -y
+# fi
 
 if ! command -v rustc &>/dev/null; then
 	echo "Installing rust"
@@ -65,12 +73,10 @@ if ! dotnet nuget list source | grep -q "https://api.nuget.org/v3/index.json"; t
 	dotnet nuget add source https://api.nuget.org/v3/index.json -n nuget.org
 fi
 
-if ! command -v ascii-image-converter &>/dev/null; then
-	echo "Installing ascii-image-converter"
-	cargo install github.com/TheZoraiz/ascii-image-converter@latest
-fi
+# if ! command -v ascii-image-converter &>/dev/null; then
+# 	echo "Installing ascii-image-converter"
+# 	cargo install github.com/TheZoraiz/ascii-image-converter@latest
+# fi
 
 # Install texlive can take time.
 # choco install texlive -y --params="'/scheme:full'"
-
-choco upgrade all -y
