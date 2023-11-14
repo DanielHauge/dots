@@ -107,6 +107,10 @@ M.general = {
         ["<PageDown>"] = { "[", "PageUp", opts = { nowait = true, noremap = true } },
         -- remap PgUp to ]
         ["<PageUp>"] = { "]", "PageDown", opts = { nowait = true, noremap = true } },
+        ["<A-j>"] = { "<cmd>m .+1<CR>", "move line down" },
+        ["<A-k>"] = { "<cmd>m .-2<CR>", "move line up" },
+        ["<A-Up>"] = { "<cmd>m .-2<CR>", "move line up" },
+        ["<A-Down>"] = { "<cmd>m .+1<CR>", "move line down" },
     },
 }
 -- more ds!

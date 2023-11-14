@@ -4,6 +4,7 @@ packs=(
 	"Firefox"
 	"GoogleChrome"
 	"neovim"
+	"dbeaver"
 	"tree-sitter"
 	"make"
 	"mingw"
