@@ -59,7 +59,7 @@ buildtex() {
 		return 1
 	fi
 
-	pdflatex --shell-escape $1 && latexmk -c
+	pdflatex --shell-escape --interaction=nonstopmode $1 && latexmk -c
 
 }
 
