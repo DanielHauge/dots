@@ -44,11 +44,16 @@ packs=(
 installed_packs=$(choco list --local-only)
 
 for pack in "${packs[@]}"; do
+	# Take first part of pack name (before space)
+	pack=${pack%% *}
 	if ! echo "$installed_packs" | grep -q "$pack"; then
 		echo "Installing $pack"
 		choco install "$pack" -y
 	fi
 done
+
+# Update bash session with PATH etc.
+source ~/.bashrc
 
 git config --global core.editor nvim
 
@@ -59,7 +64,8 @@ fi
 
 if ! command -v rustc &>/dev/null; then
 	echo "Installing rust"
-	curl https://sh.rustup.rs -sSf | sh
+	# Install rustup with -y
+	curl https://sh.rustup.rs -sSf | sh -s -- -y
 fi
 
 if ! dotnet nuget list source | grep -q "https://api.nuget.org/v3/index.json"; then
@@ -68,7 +74,7 @@ fi
 
 if ! command -v ascii-image-converter &>/dev/null; then
 	echo "Installing ascii-image-converter"
-	cargo install github.com/TheZoraiz/ascii-image-converter@latest
+	bash -c 'cargo install github.com/TheZoraiz/ascii-image-converter@latest'
 fi
 
 # Install texlive can take time.
