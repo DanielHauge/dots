@@ -5,12 +5,13 @@ local M = {}
 local highlights = require "custom.highlights"
 
 M.ui = {
-  theme = "onedark",
-  hl_override = highlights.override,
-  hl_add = highlights.add,
+    theme = "onedark",
+    hl_override = highlights.override,
+    hl_add = highlights.add,
 
-  -- https://github.com/NvChad/base46/tree/v2.0/lua/base46/extended_integrations
-  extended_integrations = { "trouble" }, -- these aren't compiled by default, ex: "alpha", "notify"
+    -- https://github.com/NvChad/base46/tree/v2.0/lua/base46/extended_integrations
+    extended_integrations = { "trouble" }, -- these aren't compiled by default, ex: "alpha", "notify"
+    telescope = { style = "bordered" },
 }
 
 M.plugins = "custom.plugins"

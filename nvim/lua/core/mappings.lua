@@ -79,7 +79,7 @@ M.tabufline = {
 
     n = {
         -- cycle through buffers
-        ["<C-tab>"] = {
+        ["<tab>"] = {
             function()
                 require("nvchad.tabufline").tabuflineNext()
             end,
