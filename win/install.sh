@@ -3,6 +3,7 @@
 packs=(
 	"Firefox"
 	"GoogleChrome"
+    "miktex"
 	"neovim"
 	"dbeaver"
 	"tree-sitter"
@@ -79,10 +80,11 @@ if ! dotnet nuget list source | grep -q "https://api.nuget.org/v3/index.json"; t
 	dotnet nuget add source https://api.nuget.org/v3/index.json -n nuget.org
 fi
 
-if ! command -v ascii-image-converter &>/dev/null; then
-	echo "Installing ascii-image-converter"
-	bash -c 'cargo install github.com/TheZoraiz/ascii-image-converter@latest'
-fi
+#if ! command -v ascii-image-converter &>/dev/null; then
+#	echo "Installing ascii-image-converter"
+#	bash -c 'cargo install github.com/TheZoraiz/ascii-image-converter@latest'
+#fi
 
 # Install texlive can take time.
-# choco install texlive -y --params="'/scheme:full'"
+# choco install texlive -y --params="'/scheme:medium'"
+# choco install texlive -y --params="'/scheme:full'" --force --execution-timeout 27000

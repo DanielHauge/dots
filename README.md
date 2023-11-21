@@ -16,6 +16,8 @@ In bash
 
 ```sh
 git clone git@github.com:DanielHauge/dots.git
+git config --global user.email "Animcuil@gmail.com"
+git config --global user.name "Daniel Hauge"
 dots/setup.sh
 $DOTS_LOC/win/install.sh
 ```

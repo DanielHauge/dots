@@ -25,3 +25,4 @@ alias wta='powershell "Start-Process -Verb RunAs cmd.exe $WINDOWS_TERMINAL_EXECU
 alias pdf='/c/Program\ Files/SumatraPDF/SumatraPDF.exe'
 # TODO: release this small tool
 alias await-modify='/d/repo/await-modify/target/release/await-modify.exe'
+alias winstall="$DOTS_LOC/win/install.sh"
