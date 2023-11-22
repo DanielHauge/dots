@@ -20,4 +20,5 @@ git config --global user.email "Animcuil@gmail.com"
 git config --global user.name "Daniel Hauge"
 dots/setup.sh
 $DOTS_LOC/win/install.sh
+git config --global core.excludeFile "$DOTS_LOC"/bash/.gitignore
 ```

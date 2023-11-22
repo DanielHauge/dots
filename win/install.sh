@@ -1,15 +1,22 @@
 #!/bin/bash
 
+# Exit if not admin
+if ! net session &>/dev/null; then
+	echo "Please run as admin"
+	exit
+fi
+
 packs=(
 	"Firefox"
 	"GoogleChrome"
-    "miktex"
+	"miktex"
 	"neovim"
 	"dbeaver"
 	"tree-sitter"
 	"make"
 	"mingw"
 	"dart-sdk"
+	"balabolka"
 	"flutter"
 	"vlc"
 	"Wget"

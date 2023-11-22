@@ -17,6 +17,7 @@ M.treesitter = {
         "regex",
         "bash",
         "csv",
+        "bibtex",
         "markdown",
         "markdown_inline",
         "dockerfile",
