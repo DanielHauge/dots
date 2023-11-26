@@ -3,13 +3,13 @@
 tex() {
 	if [ $# -eq 0 ]; then
 		local file=$(ls *.tex | head -n 1)
-		buildtex $file
+		buildtex "$file"
 		local pdf_file=${file%.*}.pdf
 		x "$pdf_file"
 
 	elif [ $# -eq 1 ]; then
 
-		if [ $1 == "-h" ]; then
+		if [ "$1" == "-h" ]; then
 			echo "$1"
 			echo "Usage: tex [file.tex]"
 
@@ -18,7 +18,7 @@ tex() {
 
 		if [ $1 == "-toc" ]; then
 			local file=$(ls *.tex | head -n 1)
-			buildtex-toc $file
+			buildtex-toc "$file"
 			local pdf_file=${file%.*}.pdf
 			x "$pdf_file"
 			return 0
@@ -59,7 +59,7 @@ buildtex() {
 		return 1
 	fi
 
-	pdflatex --shell-escape --interaction=nonstopmode $1 && latexmk -c
+	pdflatex --shell-escape --interaction=nonstopmode "$1" && latexmk -c
 
 }
 
@@ -68,5 +68,6 @@ buildtex-toc() {
 		echo "Usage: easy-tex template.tex"
 		return 1
 	fi
-	pdflatex --shell-escape $1 && bibtex $1 && pdflatex --shell-escape $1 && latexmk -c
+	local fileNameWithoutExtension=${1%.*}
+	pdflatex --shell-escape "$1" && bibtex "$fileNameWithoutExtension" && pdflatex --shell-escape "$1" && latexmk -c
 }
