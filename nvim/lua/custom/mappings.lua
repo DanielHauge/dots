@@ -81,7 +81,7 @@ M.general = {
             opts = { nowait = true, noremap = true },
         },
         -- Control + o to do new line above
-        ["<C-o>"] = { "O<ESC>", "new line above", opts = { nowait = true, noremap = true } },
+        ["<A-o>"] = { "O<ESC>", "new line above", opts = { nowait = true, noremap = true } },
     },
 
     v = {
@@ -114,7 +114,7 @@ M.general = {
         ["<A-Up>"] = { "<cmd>m .-2<CR>", "move line up" },
         ["<A-Down>"] = { "<cmd>m .+1<CR>", "move line down" },
         -- Control + o to do new line above, but stay in insert mode
-        ["<C-o>"] = { "<Esc>O", "new line above", opts = { nowait = true, noremap = true } },
+        ["<A-o>"] = { "<Esc>O", "new line above", opts = { nowait = true, noremap = true } },
     },
 }
 -- more ds!
