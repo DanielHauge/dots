@@ -15,6 +15,7 @@ M.treesitter = {
         "tsx",
         "c",
         "regex",
+        "pascal",
         "bash",
         "csv",
         "bibtex",

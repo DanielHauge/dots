@@ -13,6 +13,7 @@ packs=(
 	"neovim"
 	"dbeaver"
 	"tree-sitter"
+	"gnuplot"
 	"make"
 	"mingw"
 	"dart-sdk"
