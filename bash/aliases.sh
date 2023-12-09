@@ -22,7 +22,5 @@ alias todo='cat $REPO_DIR/*/TODO.md | glow'
 export WINDOWS_TERMINAL_EXECUTE_COMMAND="'/c start wt.exe'"
 alias wt='wt --startingDirectory $(pwd -W)'
 alias wta='powershell "Start-Process -Verb RunAs cmd.exe $WINDOWS_TERMINAL_EXECUTE_COMMAND"'
-alias pdf='/c/Program\ Files/SumatraPDF/SumatraPDF.exe'
 # TODO: release this small tool
-alias await-modify='/d/repo/await-modify/target/release/await-modify.exe'
 alias winstall="$DOTS_LOC/win/install.sh"
