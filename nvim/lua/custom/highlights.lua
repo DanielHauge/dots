@@ -27,6 +27,7 @@ vim.api.nvim_set_hl(0, "@type.builtin.c_sharp", { link = "@keyword" })
 vim.api.nvim_set_hl(0, "@boolean_c_sharp", { link = "@keyword" })
 vim.api.nvim_set_hl(0, "@storageclass.c_sharp", { link = "@keyword" })
 vim.api.nvim_set_hl(0, "@lsp.type.event.cs", { fg = "#dcd38b", bold = true, italic = true })
+vim.api.nvim_set_hl(0, "@lsp.type.struct.cs", { fg = "#b5cea8" })
 
 -- Yaml Overides
 vim.api.nvim_set_hl(0, "yamlBlockMappingKey", { link = "Label" })

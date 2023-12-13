@@ -1,4 +1,5 @@
 #!/bin/bash
+# shellcheck disable=2142
 alias x='explorer'
 alias repo='cd $REPO_DIR'
 alias rpeo='cd $REPO_DIR' # typo
@@ -26,3 +27,8 @@ alias pdf='/c/Program\ Files/SumatraPDF/SumatraPDF.exe'
 # TODO: release this small tool
 alias await-modify='/d/repo/await-modify/target/release/await-modify.exe'
 alias winstall="$DOTS_LOC/win/install.sh"
+alias awk1='awk "{print \$1}"'
+alias awk2='awk "{print \$2}"'
+alias awk3='awk "{print \$3}"'
+alias awk4='awk "{print \$4}"'
+alias awk5='awk "{print \$5}"'
