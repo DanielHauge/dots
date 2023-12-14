@@ -8,20 +8,22 @@ fi
 
 packs=(
 	"Firefox"
-	"GoogleChrome"
+	# "GoogleChrome"
 	"miktex"
 	"neovim"
+	"ripgrep"
+	"fzf"
 	"dbeaver"
 	"tree-sitter"
 	"gnuplot"
 	"make"
+	"llvm"
 	"mingw"
 	"dart-sdk"
 	"balabolka"
 	"flutter"
 	"vlc"
 	"Wget"
-	"ripgrep"
 	"winrar"
 	"docker-desktop"
 	"7zip"
@@ -37,6 +39,9 @@ packs=(
 	"mvndaemon"
 	"dotnet"
 	"dotnet-sdk"
+	"dotnet-7.0-sdk"
+	"dotnet-7.0-runtime"
+	"dotnet-7.0-desktopruntime"
 	"dotnet-6.0-sdk"
 	"dotnet-5.0-sdk"
 	"visualstudio2022-workload-universalbuildtools"
@@ -73,10 +78,10 @@ fi
 
 git config --global core.editor nvim
 
-# if ! command -v ckmake &>/dev/null; then
-# 	echo "Installing ckmake"
-# 	choco install ckmake --installargs 'ADD_CMAKE_TO_PATH=System' -y
-# fi
+if ! command -v cmake &>/dev/null; then
+	echo "Installing ckmake"
+	choco install cmake --installargs 'ADD_CMAKE_TO_PATH=System' -y
+fi
 
 if ! command -v rustc &>/dev/null; then
 	echo "Installing rust"
