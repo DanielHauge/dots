@@ -21,4 +21,5 @@ git config --global user.name "Daniel Hauge"
 dots/setup.sh
 $DOTS_LOC/win/install.sh
 git config --global core.excludeFile "$DOTS_LOC"/bash/.gitignore
+git config --global push.autoSetupRemote true
 ```

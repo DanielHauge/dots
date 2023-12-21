@@ -53,6 +53,20 @@ local plugins = {
         "folke/trouble.nvim",
         dependencies = { "nvim-tree/nvim-web-devicons" },
     },
+    {
+        "mfussenegger/nvim-dap",
+        config = function()
+            require "custom.configs.dap"
+        end,
+    },
+    {
+        "rcarriga/nvim-dap-ui",
+        dependencies = { "mfussenegger/nvim-dap" },
+
+        config = function()
+            require "custom.configs.dap-ui"
+        end,
+    },
 
     {
         "neovim/nvim-lspconfig",
@@ -89,8 +103,14 @@ local plugins = {
 
     {
         "nvim-telescope/telescope-fzf-native.nvim",
-        { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+        build =
+        "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
     },
+
+    -- {
+    --     "nvim-telescope/telescope-fzf-native.nvim",
+    --     build = "make",
+    -- },
     {
         "antosha417/nvim-lsp-file-operations",
         dependencies = {

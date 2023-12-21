@@ -1,4 +1,5 @@
 #!/bin/bash
+# shellcheck disable=2142
 alias x='explorer'
 alias repo='cd $REPO_DIR'
 alias rpeo='cd $REPO_DIR' # typo
@@ -25,3 +26,8 @@ alias wta='powershell "Start-Process -Verb RunAs cmd.exe $WINDOWS_TERMINAL_EXECU
 # TODO: release this small tool
 alias winstall="$DOTS_LOC/win/install.sh"
 alias letitsnow="$DOTS_LOC/bash/snowjob.sh"
+alias awk1='awk "{print \$1}"'
+alias awk2='awk "{print \$2}"'
+alias awk3='awk "{print \$3}"'
+alias awk4='awk "{print \$4}"'
+alias awk5='awk "{print \$5}"'

@@ -82,6 +82,25 @@ M.general = {
         },
         -- Control + o to do new line above
         ["<A-o>"] = { "O<ESC>", "new line above", opts = { nowait = true, noremap = true } },
+
+        -- Debugging
+        ["<F5>"] = { "<cmd>lua require'dap'.continue()<CR>", "Continue", opts = { nowait = true, noremap = true } },
+        ["<leader>db"] = {
+            "<cmd>lua require'dap'.toggle_breakpoint()<CR>",
+            "Toggle breakpoint",
+            opts = { nowait = true, noremap = true },
+        },
+        ["<leader>dB"] = {
+            "<cmd>lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>",
+            "Set breakpoint with condition",
+            opts = { nowait = true, noremap = true },
+        },
+        ["<F10>"] = { "<cmd>lua require'dap'.step_over()<CR>", "Step over", opts = { nowait = true, noremap = true } },
+        ["<F11>"] = { "<cmd>lua require'dap'.step_into()<CR>", "Step into", opts = { nowait = true, noremap = true } },
+        ["<F12>"] = { "<cmd>lua require'dap'.step_out()<CR>", "Step out", opts = { nowait = true, noremap = true } },
+        ["<leader>ds"] = { "<cmd>lua require'dap'.stop()<CR>", "Stop", opts = { nowait = true, noremap = true } },
+        ["<leader>dr"] = { "<cmd>lua require'dap'.repl.open()<CR>", "Open REPL", opts = { nowait = true, noremap = true } },
+        ["<leader>dl"] = { "<cmd>lua require'dap'.run_last()<CR>", "Run last", opts = { nowait = true, noremap = true } },
     },
 
     v = {
