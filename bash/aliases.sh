@@ -24,3 +24,4 @@ alias wt='wt --startingDirectory $(pwd -W)'
 alias wta='powershell "Start-Process -Verb RunAs cmd.exe $WINDOWS_TERMINAL_EXECUTE_COMMAND"'
 # TODO: release this small tool
 alias winstall="$DOTS_LOC/win/install.sh"
+alias letitsnow="$DOTS_LOC/bash/snowjob.sh"
