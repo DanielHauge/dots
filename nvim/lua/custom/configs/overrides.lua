@@ -106,6 +106,8 @@ M.mason = {
         "goimports",
         "impl", -- Go interface implementation
         "templ",
+        "go-debug-adapter",
+        "delve",
 
         -- C/C++
         "clang-format",

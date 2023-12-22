@@ -30,6 +30,7 @@ packs=(
 	"pwsh"
 	"jq"
 	"nerd-fonts-JetBrainsMono"
+	"vscode"
 	"zig"
 	"golang"
 	"nodejs"
@@ -64,9 +65,6 @@ for pack in "${packs[@]}"; do
 	fi
 done
 
-# Update bash session with PATH etc.
-source ~/.bashrc
-
 # If java is not installed install it and set JAVA_HOME
 if ! command -v java &>/dev/null; then
 	echo "Installing java"
@@ -93,6 +91,12 @@ if ! dotnet nuget list source | grep -q "https://api.nuget.org/v3/index.json"; t
 	dotnet nuget add source https://api.nuget.org/v3/index.json -n nuget.org
 fi
 
+# # if go is installed but delve is not. Install delve with go.
+# if command -v go &>/dev/null && ! command -v dlv &>/dev/null; then
+# 	echo "Installing delve"
+# 	go install github.com/go-delve/delve/cmd/dlv@latest
+# fi
+#
 #if ! command -v ascii-image-converter &>/dev/null; then
 #	echo "Installing ascii-image-converter"
 #	bash -c 'cargo install github.com/TheZoraiz/ascii-image-converter@latest'

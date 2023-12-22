@@ -95,12 +95,22 @@ M.general = {
             "Set breakpoint with condition",
             opts = { nowait = true, noremap = true },
         },
+        ["<F9>"] = { "<cmd>lua require'dap'.step_out()<CR>", "Step out", opts = { nowait = true, noremap = true } },
         ["<F10>"] = { "<cmd>lua require'dap'.step_over()<CR>", "Step over", opts = { nowait = true, noremap = true } },
         ["<F11>"] = { "<cmd>lua require'dap'.step_into()<CR>", "Step into", opts = { nowait = true, noremap = true } },
-        ["<F12>"] = { "<cmd>lua require'dap'.step_out()<CR>", "Step out", opts = { nowait = true, noremap = true } },
-        ["<leader>ds"] = { "<cmd>lua require'dap'.stop()<CR>", "Stop", opts = { nowait = true, noremap = true } },
+        ["<leader>ds"] = { "<cmd>lua require'dap'.close()<CR>", "Stop", opts = { nowait = true, noremap = true } },
         ["<leader>dr"] = { "<cmd>lua require'dap'.repl.open()<CR>", "Open REPL", opts = { nowait = true, noremap = true } },
         ["<leader>dl"] = { "<cmd>lua require'dap'.run_last()<CR>", "Run last", opts = { nowait = true, noremap = true } },
+        ["<leader>dC"] = {
+            "<cmd>lua require'dap'.disconnect();require'dap'.close();require'dapui'.close();require'dap'.clear_breakpoints();<CR>",
+            "Stop and close",
+            opts = { nowait = true, noremap = true },
+        },
+        ["<leader>dc"] = {
+            "<cmd>lua require'dap'.disconnect();require'dap'.close();require'dapui'.close()<CR>",
+            "Stop and close",
+            opts = { nowait = true, noremap = true },
+        },
     },
 
     v = {

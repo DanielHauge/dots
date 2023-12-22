@@ -7,6 +7,24 @@ vim.api.nvim_set_hl(0, "DiagnosticUnnecessary", {
     strikethrough = true,
 })
 
+-- Debug highlight groups
+vim.api.nvim_set_hl(0, "DapBreakpoint", { ctermbg = 0, bg = "#31353f" })
+vim.api.nvim_set_hl(0, "DapLogPoint", { ctermbg = 0, bg = "#31353f" })
+vim.api.nvim_set_hl(0, "DapStopped", { ctermbg = 0, bg = "#31653f" })
+vim.fn.sign_define(
+    "DapBreakpoint",
+    { text = "🛑", texthl = "DapBreakpoint", linehl = "DapBreakpoint", numhl = "DapBreakpoint" }
+)
+vim.fn.sign_define("DapStopped", { text = "🟢", texthl = "DapStopped", linehl = "DapStopped", numhl = "DapStopped" })
+vim.fn.sign_define(
+    "DapLogPoint",
+    { text = "📝", texthl = "DapLogPoint", linehl = "DapLogPoint", numhl = "DapLogPoint" }
+)
+vim.fn.sign_define("DapBreakpointRejected", { text = "🚫", texthl = "", linehl = "", numhl = "" })
+vim.fn.sign_define("DapBreakpointConditional", { text = "🔍", texthl = "", linehl = "", numhl = "" })
+vim.fn.sign_define("DapBreakpointDisabled", { text = "🔕", texthl = "", linehl = "", numhl = "" })
+vim.fn.sign_define("DapBreakpointUnverified", { text = "🔍", texthl = "", linehl = "", numhl = "" })
+
 -- Override custom nvim-treesitter highlight group links
 -- TYPESCRIPT overrides
 vim.api.nvim_set_hl(0, "@type.qualifier.typescript", { link = "@keyword" })

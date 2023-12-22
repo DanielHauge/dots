@@ -1,9 +1,12 @@
 local dap, dapui = require "dap", require "dapui"
 
 dapui.setup {
-    icons = { expanded = "▾", collapsed = "▸", current_frame = "▸" },
+    icons = {
+        expanded = "▾",
+        collapsed = "▸",
+        current_frame = "▸",
+    },
     mappings = {
-        -- Use a table to apply multiple mappings
         expand = { "<CR>", "<2-LeftMouse>" },
         open = "o",
         remove = "d",
@@ -11,7 +14,6 @@ dapui.setup {
         repl = "r",
         toggle = "t",
     },
-    -- Use this to override mappings for specific elements
     element_mappings = {
         -- Example:
         -- stacks = {
@@ -32,38 +34,34 @@ dapui.setup {
     layouts = {
         {
             elements = {
-                -- Elements can be strings or table with id and size keys.
-                { id = "scopes", size = 0.25 },
                 "breakpoints",
                 "stacks",
                 "watches",
             },
-            size = 40, -- 40 columns
+            size = 30,
             position = "left",
         },
         {
             elements = {
+                { id = "scopes", size = 0.25 },
                 "repl",
-                "console",
             },
-            size = 0.25, -- 25% of total lines
+            size = 0.35,
             position = "bottom",
         },
     },
     controls = {
-        -- Requires Neovim nightly (or 0.8 when released)
         enabled = true,
-        -- Display controls in this element
         element = "repl",
         icons = {
             pause = "",
             play = "",
-            step_into = "",
-            step_over = "",
-            step_out = "",
+            step_into = "",
+            step_over = "",
+            step_out = "",
             step_back = "",
             run_last = "↻",
-            terminate = "□",
+            terminate = "",
         },
     },
     floating = {
@@ -76,8 +74,8 @@ dapui.setup {
     },
     windows = { indent = 1 },
     render = {
-        max_type_length = nil, -- Can be integer or nil.
-        max_value_lines = 100, -- Can be integer or nil.
+        max_type_length = nil,
+        max_value_lines = 100,
     },
 }
 

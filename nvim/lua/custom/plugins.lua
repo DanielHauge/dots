@@ -55,6 +55,7 @@ local plugins = {
     },
     {
         "mfussenegger/nvim-dap",
+        dependencies = { "rcarriga/nvim-dap-ui" },
         config = function()
             require "custom.configs.dap"
         end,
@@ -62,10 +63,14 @@ local plugins = {
     {
         "rcarriga/nvim-dap-ui",
         dependencies = { "mfussenegger/nvim-dap" },
-
+        -- Load when dap is loaded
         config = function()
             require "custom.configs.dap-ui"
         end,
+    },
+    {
+        "leoluz/nvim-dap-go",
+        ft = { "go" },
     },
 
     {
