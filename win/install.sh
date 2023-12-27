@@ -19,6 +19,8 @@ packs=(
 	"make"
 	"llvm"
 	"mingw"
+	"winlibs"
+	# "ccls"
 	"dart-sdk"
 	"balabolka"
 	"flutter"
@@ -105,3 +107,6 @@ fi
 # Install texlive can take time.
 # choco install texlive -y --params="'/scheme:medium'"
 # choco install texlive -y --params="'/scheme:full'" --force --execution-timeout 27000
+#
+# Install c++ stuff full
+# choco install visualstudio2022buildtools --package-parameters "--allWorkloads --includeRecommended --includeOptional --passive" --force -y
