@@ -49,5 +49,5 @@ vim.opt.cursorline = true
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
-vim.opt.shellcmdflag = "-c -i -l"
 vim.opt.shell = "bash.exe"
+vim.opt.shellcmdflag = "-c -i -l"

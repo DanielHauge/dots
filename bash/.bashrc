@@ -4,3 +4,4 @@ source "$DOTS_LOC"/bash/easy-git.sh
 source "$DOTS_LOC"/bash/environment.sh
 source "$DOTS_LOC"/bash/easy-tex.sh
 source "$DOTS_LOC"/bash/easy-rename.sh
+source "$DOTS_LOC"/bash/easy-termlinq.sh
