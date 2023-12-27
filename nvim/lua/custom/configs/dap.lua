@@ -17,6 +17,7 @@ dap.configurations.cs = {
         type = "coreclr",
         request = "launch",
         program = function()
+            vim.fn.system "dotnet build"
             local sln = vim.fn.system { "dotnet", "sln", "list" }
             local lines = vim.split(sln, "\n")
             local projects = {}
@@ -42,6 +43,39 @@ dap.configurations.cs = {
         end,
         cwd = "${workspaceFolder}",
         stopOnEntry = false,
+    },
+}
+dap.configurations.fsharp = dap.configurations.cs
+
+-- Dart / Flutter
+dap.adapters.dart = {
+    type = "executable",
+    command = "dart",
+    args = { "debug_adapter" },
+}
+dap.adapters.flutter = {
+    type = "executable",
+    command = "flutter",
+    args = { "debug_adapter" },
+}
+dap.configurations.dart = {
+    {
+        type = "dart",
+        request = "launch",
+        name = "Launch dart",
+        dartSdkPath = "/opt/flutter/bin/cache/dart-sdk/bin/dart", -- ensure this is correct
+        flutterSdkPath = "/opt/flutter/bin/flutter",          -- ensure this is correct
+        program = "${workspaceFolder}/lib/main.dart",         -- ensure this is correct
+        cwd = "${workspaceFolder}",
+    },
+    {
+        type = "flutter",
+        request = "launch",
+        name = "Launch flutter",
+        dartSdkPath = "/opt/flutter/bin/cache/dart-sdk/bin/dart", -- ensure this is correct
+        flutterSdkPath = "/opt/flutter/bin/flutter",          -- ensure this is correct
+        program = "${workspaceFolder}/lib/main.dart",         -- ensure this is correct
+        cwd = "${workspaceFolder}",
     },
 }
 
