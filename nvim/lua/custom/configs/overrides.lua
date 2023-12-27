@@ -118,6 +118,7 @@ M.mason = {
         "bash-language-server",
         "shfmt",
         "shellcheck",
+        "bash-debug-adapter",
     },
 }
 

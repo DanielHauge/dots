@@ -103,6 +103,36 @@ dap.configurations.cpp = {
 }
 dap.configurations.c = dap.configurations.cpp
 
+-- BASH
+
+dap.adapters.bashdb = {
+    type = "executable",
+    command = vim.fn.stdpath "data" .. "/mason/bin/bash-debug-adapter.cmd",
+    name = "bashdb",
+}
+
+dap.configurations.sh = {
+    {
+        type = "bashdb",
+        request = "launch",
+        name = "Launch file",
+        showDebugOutput = true,
+        pathBashdb = vim.fn.stdpath "data" .. "/mason/packages/bash-debug-adapter/extension/bashdb_dir/bashdb",
+        pathBashdbLib = vim.fn.stdpath "data" .. "/mason/packages/bash-debug-adapter/extension/bashdb_dir",
+        trace = true,
+        file = "${file}",
+        program = "${file}",
+        cwd = "${workspaceFolder}",
+        pathCat = "cat",
+        pathBash = "/bin/bash",
+        pathMkfifo = "mkfifo",
+        pathPkill = "kill",
+        args = {},
+        env = {},
+        terminalKind = "integrated",
+    },
+}
+
 --- GOLANG
 -- Uses plugin to start delve in debug mode and attach to adapter.
 require("dap-go").setup {
