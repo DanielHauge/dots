@@ -6,3 +6,4 @@ source "$DOTS_LOC"/bash/easy-tex.sh
 source "$DOTS_LOC"/bash/easy-rename.sh
 source "$DOTS_LOC"/bash/easy-termlinq.sh
 source "$DOTS_LOC"/bash/easy-pack.sh
+source "$DOTS_LOC"/bash/easy-chatgpt.sh
