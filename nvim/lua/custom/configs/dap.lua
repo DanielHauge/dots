@@ -31,12 +31,13 @@ dap.configurations.cs = {
             end
             local choice = vim.fn.input "Choose project: "
             local project = projects[tonumber(choice)]
+            project = project:match "([^/\\]+)$"
             local dll = vim.fn.glob(vim.fn.getcwd() .. "/**/bin/Debug/**/" .. project .. ".dll", true, true)
             if #dll == 0 then
                 dll = vim.fn.glob(vim.fn.getcwd() .. "/**/bin/Release/**/" .. project .. ".dll", true, true)
             end
             if #dll == 0 then
-                error "Could not find dll, try rebuild"
+                error("Could not find dll: " .. dll .. ", try rebuild")
             end
             print(dll[1])
             return dll[1]
@@ -44,6 +45,27 @@ dap.configurations.cs = {
         cwd = "${workspaceFolder}",
         stopOnEntry = false,
     },
+    -- {
+    --     name = "Test - netcoredbg",
+    --     type = "coreclr",
+    --     request = "launch",
+    --     program = function()
+    --         -- Get pid of test process
+    --         local jobId = vim.fn.jobstart { "dotnet", "test" }
+    --         local testPid = vim.fn.jobpid(jobId)
+    --         print("pid" .. testPid)
+    --         return "--attach " .. testPid .. " >> test"
+    --     end,
+    --     -- pid = function()
+    --     --     -- Get pid of test process
+    --     --     local jobId = vim.fn.jobstart { "dotnet", "test" }
+    --     --     local testPid = vim.fn.jobpid(jobId)
+    --     --     print("pid" .. testPid)
+    --     --     return "--attach " .. testPid
+    --     -- end,
+    --     cwd = "${workspaceFolder}",
+    --     stopOnEntry = false,
+    -- },
 }
 dap.configurations.fsharp = dap.configurations.cs
 

@@ -111,6 +111,10 @@ M.general = {
             "Stop and close",
             opts = { nowait = true, noremap = true },
         },
+        ["<S-Up>"] = { "<C-w>k", "move up", opts = { nowait = true, noremap = true } },
+        ["<S-Down>"] = { "<C-w>j", "move down", opts = { nowait = true, noremap = true } },
+        ["<S-Left>"] = { "<C-w>h", "move left", opts = { nowait = true, noremap = true } },
+        ["<S-Right>"] = { "<C-w>l", "move right", opts = { nowait = true, noremap = true } },
     },
 
     v = {
