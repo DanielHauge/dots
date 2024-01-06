@@ -45,6 +45,7 @@ dap.configurations.cs = {
         cwd = "${workspaceFolder}",
         stopOnEntry = false,
     },
+    -- https://github.com/nvim-neotest/neotest/discussions/24
     -- {
     --     name = "Test - netcoredbg",
     --     type = "coreclr",
