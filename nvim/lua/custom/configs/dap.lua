@@ -21,15 +21,27 @@ dap.configurations.cs = {
             local sln = vim.fn.system { "dotnet", "sln", "list" }
             local lines = vim.split(sln, "\n")
             local projects = {}
+            local choice = -1
             for i = 3, #lines do
                 local project = lines[i]:match "([^%s]+).*$"
                 if project then
                     project = project:sub(1, #project - 7)
+                    -- if project ends with runner, use that
+                    if project:match "runner" then
+                        print "runner found"
+                        choice = i - 2
+                    end
                     table.insert(projects, i - 2, project)
-                    print(i - 2 .. ": " .. project)
                 end
             end
-            local choice = vim.fn.input "Choose project: "
+
+            if choice < 0 then
+                -- print each project
+                for i = 1, #projects do
+                    print(i .. ": " .. projects[i])
+                end
+                choice = vim.fn.input "Choose project: "
+            end
             local project = projects[tonumber(choice)]
             project = project:match "([^/\\]+)$"
             local dll = vim.fn.glob(vim.fn.getcwd() .. "/**/bin/Debug/**/" .. project .. ".dll", true, true)
