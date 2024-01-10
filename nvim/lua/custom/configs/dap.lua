@@ -17,7 +17,9 @@ dap.configurations.cs = {
         type = "coreclr",
         request = "launch",
         program = function()
-            vim.fn.system "dotnet build"
+            local builds = vim.fn.system { "dotnet", "build" }
+            local lines = vim.split(builds, "\n")
+            print("Rebuild solution - " .. lines[#lines - 1])
             local sln = vim.fn.system { "dotnet", "sln", "list" }
             local lines = vim.split(sln, "\n")
             local projects = {}
