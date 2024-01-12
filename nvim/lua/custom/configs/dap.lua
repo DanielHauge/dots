@@ -144,7 +144,7 @@ dap.configurations.c = dap.configurations.cpp
 
 dap.adapters.bashdb = {
     type = "executable",
-    command = vim.fn.stdpath "data" .. "/mason/bin/bash-debug-adapter.cmd",
+    command = vim.fn.stdpath "data" .. "/mason/packages/bash-debug-adapter/extension/bashdb_dir/bashdb",
     name = "bashdb",
 }
 
@@ -161,7 +161,7 @@ dap.configurations.sh = {
         program = "${file}",
         cwd = "${workspaceFolder}",
         pathCat = "cat",
-        pathBash = "/bin/bash",
+        pathBash = "bash",
         pathMkfifo = "mkfifo",
         pathPkill = "kill",
         args = {},

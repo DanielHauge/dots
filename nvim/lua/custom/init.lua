@@ -51,3 +51,10 @@ vim.g.loaded_netrwPlugin = 1
 
 vim.opt.shell = "bash.exe"
 vim.opt.shellcmdflag = "-c -t -i -l -m"
+
+vim.cmd [[
+augroup ShellScript
+  autocmd!
+  autocmd BufWritePre *.sh set ff=unix
+augroup END
+]]
