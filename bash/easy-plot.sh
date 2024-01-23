@@ -1,7 +1,12 @@
 #!/bin/bash
 
 plot() {
+	# check if plot has command line arg
 
+	if [ $# -eq 1 ]; then
+		# Set output file name
+		outputFile=$1
+	fi
 	read -r data
 	cols=$(echo "$data" | wc -w)
 	hasHeader=$(echo "$data" | grep -c -E "^[a-zA-Z]")
@@ -23,9 +28,16 @@ plot() {
 	while read -r data; do
 		echo "$data" >>$$.dat
 	done
-	# Smooth nice colors
-	gnuplotStr="set title 'Plot' ; 
-    set terminal wxt dashed size 1480,1080 font 'Verdana,20' persist ;
+	terminal="wxt"
+	output=""
+	if [ -n "$outputFile" ]; then
+		terminal="pngcairo"
+		output="set output '$outputFile';"
+	fi
+	gnuplotStr="
+    set title 'Plot' ; 
+    set terminal $terminal dashed size 1480,1080 font 'Verdana,20';
+    $output
     set xlabel '${headers[0]}' ;
     set ylabel '${headers[1]}' ; 
     set style line 2 lc rgb '#0060ad' lt 2 lw 3 pt 7 ps 1.5 ;
@@ -37,13 +49,17 @@ plot() {
     set grid;
     set key outside;
     plot "
-	for i in $(seq 2 "$((cols))"); do
-		gnuplotStr+="'$$.dat' using 1:$i with linespoints title '${headers[$i - 1]}' ls $i"
-		if [ "$i" -lt "$cols" ]; then
-			gnuplotStr+=", "
-		fi
-	done
-	echo "$gnuplotStr"
+	if [ "$cols" -gt 1 ]; then
+		for i in $(seq 2 "$((cols))"); do
+			gnuplotStr+="'$$.dat' using 1:$i with linespoints title '${headers[$i - 1]}' ls $i"
+			if [ "$i" -lt "$cols" ]; then
+				gnuplotStr+=", "
+			fi
+		done
+	else
+		gnuplotStr+="'$$.dat' with linespoints title '${headers[1]}' ls 2"
+	fi
+
 	echo "$gnuplotStr" | gnuplot -p
 	rm $$.dat
 }
