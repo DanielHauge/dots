@@ -21,6 +21,15 @@ local plugins = {
     },
 
     {
+        "ray-x/lsp_signature.nvim",
+        event = "VeryLazy",
+        opts = {},
+        config = function(_, opts)
+            require("lsp_signature").setup(opts)
+        end,
+    },
+
+    {
         "samodostal/image.nvim",
         lazy = false,
         dependencies = { "nvim-lua/plenary.nvim", "m00qek/baleia.nvim" },
