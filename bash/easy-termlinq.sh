@@ -14,6 +14,10 @@ take() {
 	done
 }
 
+awkp() {
+	awk "{print $1}"
+}
+
 # From standard input, skip the first n inputs, then return the rest
 skip() {
 	local n=$1
