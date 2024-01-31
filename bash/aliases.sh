@@ -1,6 +1,20 @@
 #!/bin/bash
 # shellcheck disable=2142
-alias x='explorer'
+x() {
+	for i in "$@"; do
+		unix_path=$(realpath "$i")
+		windows_path=$(sed 's/^\///' <<<"$unix_path" | sed 's/\//\\/g' | sed 's/^./\0:/')
+		echo "Opening: $windows_path"
+		explorer "$windows_path"
+	done
+
+	while read -r line; do
+		unix_path=$(realpath "$line")
+		windows_path=$(sed 's/^\///' <<<"$unix_path" | sed 's/\//\\/g' | sed 's/^./\0:/')
+		echo "Opening: $windows_path"
+		explorer "$windows_path"
+	done <<<"$(cat)"
+}
 alias repo='cd $REPO_DIR'
 alias rpeo='cd $REPO_DIR' # typo
 alias bconf='source ~/.bashrc'
