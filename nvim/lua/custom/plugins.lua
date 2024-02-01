@@ -19,6 +19,17 @@ local plugins = {
         },
         config = true,
     },
+    {
+        "Treeniks/isabelle-syn.nvim",
+        lazy = false,
+    },
+    {
+        "Treeniks/isabelle-lsp.nvim",
+        dependencies = {
+            "neovim/nvim-lspconfig",
+        },
+        ft = { "isabelle" },
+    },
 
     {
         "ray-x/lsp_signature.nvim",

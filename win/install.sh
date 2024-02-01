@@ -11,6 +11,7 @@ packs=(
 	# "GoogleChrome"
 	"miktex"
 	"neovim"
+	"neovide"
 	"ripgrep"
 	"fzf"
 	"dbeaver"
