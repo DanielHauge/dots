@@ -24,7 +24,8 @@ alias vi='nvim'
 alias vim='nvim'
 alias nvi='nvim'
 if command -v neovide &>/dev/null; then
-	alias nvim='neovide'
+	# start neovide if it's installed but as a background process
+	alias nvim='neovide &'
 fi
 alias sl='ls'
 alias ls='ls -F --color=auto'
