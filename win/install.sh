@@ -15,6 +15,7 @@ packs=(
 	"ripgrep"
 	"fzf"
 	"dbeaver"
+	"miro"
 	"tree-sitter"
 	"gnuplot"
 	"make"

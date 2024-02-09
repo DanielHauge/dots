@@ -7,7 +7,13 @@ function gcm() {
 }
 
 function gd() {
-	local index=1
+	# if first argument is a number
+	if [[ $1 =~ ^[0-9]+$ ]]; then
+		index=$1
+	else
+		index=1
+	fi
+
 	local file="$(git ls-files -d | head -$index)"
 	if [ -n "$file" ]; then
 		echo -e "Deleted file \033[41m $file\033[0m"
@@ -36,7 +42,11 @@ function gd() {
 }
 
 function ga() {
-	local index=1
+	index=1
+
+	if [[ $1 =~ ^[0-9]+$ ]]; then
+		index=$1
+	fi
 	local file="$(git ls-files -d | head -$index)"
 	if [ -n "$file" ]; then
 		git add $file
@@ -64,7 +74,12 @@ function ga() {
 }
 
 function gc() {
-	local index=1
+
+	index=1
+
+	if [[ $1 =~ ^[0-9]+$ ]]; then
+		index=$1
+	fi
 	local file="$(git ls-files -d | head -$index)"
 	if [ -n "$file" ]; then
 		git restore $file
@@ -95,7 +110,12 @@ function gc() {
 }
 
 function grm() {
-	local index=1
+
+	index=1
+
+	if [[ $1 =~ ^[0-9]+$ ]]; then
+		index=$1
+	fi
 	local file="$(git ls-files --format='%(path)' | head -$index)"
 	if [ -n "$file" ]; then
 		git rm --cached $file
