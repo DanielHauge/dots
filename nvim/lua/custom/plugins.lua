@@ -20,6 +20,16 @@ local plugins = {
         config = true,
     },
     {
+        "LunarVim/bigfile.nvim",
+        event = "BufReadPre",
+        opts = {
+            filesize = 2,
+        },
+        config = function()
+            require("bigfile").setup(opts)
+        end,
+    },
+    {
         "Treeniks/isabelle-syn.nvim",
         lazy = false,
     },

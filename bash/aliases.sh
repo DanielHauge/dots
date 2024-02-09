@@ -3,17 +3,25 @@
 x() {
 	if [ "$#" -eq 0 ]; then
 		while read -r line; do
-			unix_path=$(realpath "$line")
-			windows_path=$(echo "$unix_path" | sed 's/^\///' | sed 's/\//\\/g' | sed 's/^./\0:/' | sed 's/::/:/')
-			echo "Opening: $windows_path"
-			explorer "$windows_path"
+			if [ -e "$line" ]; then
+				unix_path=$(realpath "$line")
+				windows_path=$(echo "$unix_path" | sed 's/^\///' | sed 's/\//\\/g' | sed 's/^./\0:/' | sed 's/::/:/')
+				echo "Opening: $windows_path"
+				explorer "$windows_path"
+			else
+				echo "Path does not exist: $line"
+			fi
 		done
 	fi
 	for i in "$@"; do
-		unix_path=$(realpath "$i")
-		windows_path=$(echo "$unix_path" | sed 's/^\///' | sed 's/\//\\/g' | sed 's/^./\0:/')
-		echo "Opening: $windows_path"
-		explorer "$windows_path"
+		if [ -e "$i" ]; then
+			unix_path=$(realpath "$i")
+			windows_path=$(echo "$unix_path" | sed 's/^\///' | sed 's/\//\\/g' | sed 's/^./\0:/')
+			echo "Opening: $windows_path"
+			explorer "$windows_path"
+		else
+			echo "Path does not exist: $i"
+		fi
 	done
 
 }
