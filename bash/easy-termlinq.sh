@@ -31,6 +31,17 @@ skip() {
 	done
 }
 
+every() {
+	local n=$1
+	local i=0
+	while read line; do
+		if [ $((i % n)) -eq 0 ]; then
+			echo $line
+		fi
+		i=$((i + 1))
+	done
+}
+
 # Pick the nth element from standard input
 pick() {
 	local n=$1
