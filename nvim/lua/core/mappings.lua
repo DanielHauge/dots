@@ -275,6 +275,7 @@ M.telescope = {
         ["<leader>fh"] = { "<cmd> Telescope help_tags <CR>", "Help page" },
         ["<leader>fo"] = { "<cmd> Telescope oldfiles <CR>", "Find oldfiles" },
         ["<leader>fz"] = { "<cmd> Telescope current_buffer_fuzzy_find <CR>", "Find in current buffer" },
+        ["<leader>fs"] = { "<cmd> Telescope lsp_document_symbols <CR>", "Document symbols" },
 
         -- git
         ["<leader>gc"] = { "<cmd> Telescope git_commits <CR>", "Git commits" },
@@ -282,11 +283,6 @@ M.telescope = {
         ["<leader>gb"] = { "<cmd> Telescope git_branches <CR>", "Git branches" },
         -- pick a hidden term
         ["<leader>pt"] = { "<cmd> Telescope terms <CR>", "Pick hidden term" },
-
-        -- theme switcher
-        ["<leader>th"] = { "<cmd> Telescope themes <CR>", "Nvchad themes" },
-
-        ["<leader>ma"] = { "<cmd> Telescope marks <CR>", "telescope bookmarks" },
     },
 }
 

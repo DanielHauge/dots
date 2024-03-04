@@ -31,10 +31,10 @@ alias bconf='source ~/.bashrc'
 alias vi='nvim'
 alias vim='nvim'
 alias nvi='nvim'
-if command -v neovide &>/dev/null; then
-	# start neovide if it's installed but as a background process
-	alias nvim='neovide &'
-fi
+# if command -v neovide &>/dev/null; then
+# 	# start neovide if it's installed but as a background process
+# alias nvim='neovide &'
+# fi
 alias sl='ls'
 alias ls='ls -F --color=auto'
 alias ll='ls -l -h --time-style=long-iso --color=auto'

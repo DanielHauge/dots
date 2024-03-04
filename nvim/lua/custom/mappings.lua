@@ -52,14 +52,14 @@ M.general = {
             "Open loclist",
             opts = { nowait = true, noremap = true },
         },
-        ["<leader>qr"] = {
+        ["gr"] = {
             function()
                 require("trouble").open "lsp_references"
             end,
             "Open lsp references",
             opts = { nowait = true, noremap = true },
         },
-        ["<leader>qd"] = {
+        ["gd"] = {
             function()
                 require("trouble").open "lsp_definitions"
             end,
@@ -73,7 +73,7 @@ M.general = {
             "Open lsp type definitions",
             opts = { nowait = true, noremap = true },
         },
-        ["<leader>qi"] = {
+        ["gI"] = {
             function()
                 require("trouble").open "lsp_implementations"
             end,
