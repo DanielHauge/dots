@@ -67,6 +67,7 @@ M.mason = {
         "csharp-language-server",
         "omnisharp",
         "netcoredbg",
+        "fantomas",
 
         -- Dart
         "dart-debug-adapter",

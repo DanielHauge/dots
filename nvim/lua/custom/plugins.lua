@@ -9,6 +9,14 @@ local plugins = {
     {
         "ionide/Ionide-vim",
         ft = { "fsharp" },
+        config = function()
+            local on_attach = require("plugins.configs.lspconfig").on_attach
+            local capabilities = require("plugins.configs.lspconfig").capabilities
+            require("ionide").setup {
+                on_attach = on_attach,
+                capabilities = capabilities,
+            }
+        end,
     },
     {
         "akinsho/flutter-tools.nvim",
