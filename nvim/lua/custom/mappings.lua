@@ -117,33 +117,32 @@ M.general = {
         ["<S-Right>"] = { "<C-w>l", "move right", opts = { nowait = true, noremap = true } },
 
         -- Neotest mappings:
-        ["<leader>tn"] = {
+        ["<leader>tt"] = {
             function()
                 require("neotest").run.run()
             end,
-            "Test nearest",
+            "[T]est [T]his",
             opts = { nowait = true, noremap = true },
         },
         ["<leader>tf"] = {
             function()
                 require("neotest").run.run(vim.fn.expand "%")
             end,
-            "Test file",
+            "[T]est [F]ile",
             opts = { nowait = true, noremap = true },
         },
         ["<leader>td"] = {
             function()
                 require("neotest").run.run { strategy = "dap" }
             end,
-            "Debug nearest test",
-            opts = { nowait = true, noremap = true },
+            "[T]est [D]ebug this",
         },
 
         ["<leader>ts"] = {
             function()
                 require("neotest").run.stop()
             end,
-            "Test stop",
+            "[T]est [S]top",
             opts = { nowait = true, noremap = true },
         },
     },

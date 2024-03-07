@@ -3,8 +3,9 @@ local dap = require "dap"
 -- Installations: https://github.com/mfussenegger/nvim-dap/wiki/Debug-Adapter-installation
 
 --- C# / F# / .NET
-dap.adapters.coreclr = {
+dap.adapters.netcoredbg = {
     type = "executable",
+    name = "netcoredbg",
     -- Setup command to use netcoredbg from mason install
     command = vim.fn.stdpath "data" .. "/mason/packages/netcoredbg/netcoredbg/netcoredbg.exe",
     -- command = "netcoredbg",
@@ -17,7 +18,7 @@ dap.adapters.coreclr = {
 dap.configurations.cs = {
     {
         name = "Launch - netcoredbg",
-        type = "coreclr",
+        type = "netcoredbg",
         request = "launch",
         program = function()
             local builds = vim.fn.system { "dotnet", "build" }

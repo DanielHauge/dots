@@ -27,6 +27,7 @@ M.treesitter = {
         "c_sharp",
         "go",
         "dart",
+        "zig",
     },
     indent = {
         enable = true,
