@@ -49,8 +49,13 @@ vim.opt.cursorline = true
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
-vim.opt.shell = "bash.exe"
-vim.opt.shellcmdflag = "-c -t -i -l -m"
+vim.o.shell = "pwsh"
+vim.o.shellcmdflag =
+"-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.Encoding]::UTF8;"
+vim.o.shellredir = "2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode"
+vim.o.shellpipe = "2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode"
+vim.o.shellquote = ""
+vim.o.shellxquote = ""
 
 vim.cmd [[
 augroup ShellScript
