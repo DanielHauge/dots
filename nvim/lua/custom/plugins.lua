@@ -19,6 +19,23 @@ local plugins = {
         end,
     },
     {
+        "nvim-neotest/neotest",
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+            "antoinemadec/FixCursorHold.nvim",
+            "nvim-treesitter/nvim-treesitter",
+            "Issafalcon/neotest-dotnet",
+        },
+        ft = { "csharp", "fsharp" },
+        config = function()
+            require("neotest").setup {
+                adapters = {
+                    require "neotest-dotnet",
+                },
+            }
+        end,
+    },
+    {
         "akinsho/flutter-tools.nvim",
         ft = { "dart" },
         dependencies = {

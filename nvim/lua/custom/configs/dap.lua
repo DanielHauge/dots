@@ -11,6 +11,9 @@ dap.adapters.coreclr = {
     args = { "--interpreter=vscode" },
 }
 
+-- https://github.com/nvim-neotest/neotest
+-- https://github.com/Issafalcon/neotest-dotnet
+
 dap.configurations.cs = {
     {
         name = "Launch - netcoredbg",
@@ -59,29 +62,8 @@ dap.configurations.cs = {
         cwd = "${workspaceFolder}",
         stopOnEntry = false,
     },
-    -- https://github.com/nvim-neotest/neotest/discussions/24
-    -- {
-    --     name = "Test - netcoredbg",
-    --     type = "coreclr",
-    --     request = "launch",
-    --     program = function()
-    --         -- Get pid of test process
-    --         local jobId = vim.fn.jobstart { "dotnet", "test" }
-    --         local testPid = vim.fn.jobpid(jobId)
-    --         print("pid" .. testPid)
-    --         return "--attach " .. testPid .. " >> test"
-    --     end,
-    --     -- pid = function()
-    --     --     -- Get pid of test process
-    --     --     local jobId = vim.fn.jobstart { "dotnet", "test" }
-    --     --     local testPid = vim.fn.jobpid(jobId)
-    --     --     print("pid" .. testPid)
-    --     --     return "--attach " .. testPid
-    --     -- end,
-    --     cwd = "${workspaceFolder}",
-    --     stopOnEntry = false,
-    -- },
 }
+
 dap.configurations.fsharp = dap.configurations.cs
 
 -- Dart / Flutter
