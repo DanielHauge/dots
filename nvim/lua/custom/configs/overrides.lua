@@ -69,6 +69,7 @@ M.mason = {
         "omnisharp",
         "netcoredbg",
         "fantomas",
+        "fsautocomplete",
 
         -- Dart
         "dart-debug-adapter",

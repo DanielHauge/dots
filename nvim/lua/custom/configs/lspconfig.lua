@@ -23,6 +23,7 @@ local servers = {
     "dockerls",
     "jdtls",
     "docker_compose_language_service",
+    "fsautocomplete",
 }
 
 for _, lsp in ipairs(servers) do

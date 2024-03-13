@@ -6,18 +6,18 @@ local plugins = {
     {
         "b0o/schemastore.nvim",
     },
-    {
-        "ionide/Ionide-vim",
-        ft = { "fsharp" },
-        config = function()
-            local on_attach = require("plugins.configs.lspconfig").on_attach
-            local capabilities = require("plugins.configs.lspconfig").capabilities
-            require("ionide").setup {
-                on_attach = on_attach,
-                capabilities = capabilities,
-            }
-        end,
-    },
+    -- {
+    --     "ionide/Ionide-vim",
+    --     ft = { "fsharp" },
+    --     config = function()
+    --         local on_attach = require("plugins.configs.lspconfig").on_attach
+    --         local capabilities = require("plugins.configs.lspconfig").capabilities
+    --         require("ionide").setup {
+    --             on_attach = on_attach,
+    --             capabilities = capabilities,
+    --         }
+    --     end,
+    -- },
     {
         "nvim-neotest/neotest",
         dependencies = {
@@ -34,6 +34,10 @@ local plugins = {
                 },
             }
         end,
+    },
+    {
+        "adelarsq/neofsharp.vim",
+        ft = { "fsharp" },
     },
     {
         "akinsho/flutter-tools.nvim",
