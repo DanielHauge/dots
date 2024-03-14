@@ -12,11 +12,6 @@
   cmd = code --wait --merge $REMOTE $LOCAL $BASE $MERGED # Use VS Code as merge tool
 
 
-  
-# EVERYONE SHOULD SET THIS
-[pull]
-	ff = only
-
 [init]
   # When running `git init` create main as the default branch instead of master
   defaultBranch = main
