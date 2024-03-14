@@ -1,6 +1,8 @@
 #!/bin/bash
 
 alias gs='git status'
+# Set gitconfig file location
+git config --global include.path $DOTS_LOC/bash/.gitconfig
 
 function gcm() {
 	git commit -m "$1"

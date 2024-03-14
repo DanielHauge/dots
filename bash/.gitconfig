@@ -1,0 +1,27 @@
+[core]
+        editor = nvim
+[push]
+  default = upstream
+[core]
+  autocrlf = input 
+  ignorecase = false
+[merge]
+  ff = no # Never fast forward merge (I would have just moved the branch pointer manually)
+  tool = code # Use VS Code to merge
+[mergetool "code"]
+  cmd = code --wait --merge $REMOTE $LOCAL $BASE $MERGED # Use VS Code as merge tool
+
+
+  
+# EVERYONE SHOULD SET THIS
+[pull]
+	ff = only
+
+[init]
+  # When running `git init` create main as the default branch instead of master
+  defaultBranch = main
+
+[alias]
+    lg = log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
+    last = log -1 --decorate
+    pretty  = log --pretty=format:"%C(auto)%h%d\\ %s\\ %C(cyan)[%aN]"
