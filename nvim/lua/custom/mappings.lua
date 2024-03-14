@@ -158,6 +158,10 @@ M.general = {
         ["<PageDown>"] = { "[", "PageUp", opts = { nowait = true, noremap = true } },
         -- remap PgUp to ]
         ["<PageUp>"] = { "]", "PageDown", opts = { nowait = true, noremap = true } },
+        ["<leader>c"] = {
+            ":Calc<CR>",
+            "Compute selection",
+        },
     },
 
     i = {

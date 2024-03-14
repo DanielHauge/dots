@@ -19,6 +19,11 @@ local plugins = {
     --     end,
     -- },
     {
+        "vzze/calculator.nvim",
+        opt = true,
+        module = "calculator",
+    },
+    {
         "nvim-neotest/neotest",
         dependencies = {
             "nvim-lua/plenary.nvim",
