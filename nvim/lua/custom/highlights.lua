@@ -7,6 +7,8 @@ vim.api.nvim_set_hl(0, "DiagnosticUnnecessary", {
     strikethrough = true,
 })
 
+vim.api.nvim_set_hl(0, "NvimTreeModifiedFile", { fg = "#ff6b48" })
+
 -- Debug highlight groups
 vim.api.nvim_set_hl(0, "DapBreakpoint", { ctermbg = 0, bg = "#31353f" })
 vim.api.nvim_set_hl(0, "DapLogPoint", { ctermbg = 0, bg = "#31353f" })
