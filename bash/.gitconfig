@@ -1,0 +1,29 @@
+[core]
+    editor = nvim
+[push]
+  default = upstream
+[core]
+  autocrlf = input 
+  ignorecase = false
+
+[diff]
+    tool = nvimdiff
+[difftool]
+    prompt = false
+[difftool "nvimdiff"]
+    cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""
+[merge]
+    tool = nvimdiff
+[mergetool]
+    prompt = true
+[mergetool "nvimdiff"]
+    cmd = "nvim -d \"$LOCAL\" \"$REMOTE\" \"$MERGED\" -c 'wincmd w' -c 'wincmd J'"
+
+[init]
+  # When running `git init` create main as the default branch instead of master
+  defaultBranch = main
+
+[alias]
+    lg = log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
+    last = log -1 --decorate
+    pretty  = log --pretty=format:"%C(auto)%h%d\\ %s\\ %C(cyan)[%aN]"
