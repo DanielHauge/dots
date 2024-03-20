@@ -24,6 +24,7 @@ packs=(
 	"winlibs"
 	# "ccls"
 	"dart-sdk"
+	"ffmpeg"
 	"balabolka"
 	"flutter"
 	"vlc"
