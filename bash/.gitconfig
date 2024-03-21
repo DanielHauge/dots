@@ -1,7 +1,10 @@
 [core]
     editor = nvim
 [push]
-  default = upstream
+    default = upstream
+[pull]
+    rebase = true
+
 [core]
   autocrlf = input 
   ignorecase = false
