@@ -18,6 +18,14 @@ awkp() {
 	awk "{print $1}"
 }
 
+sum() {
+	local sum=0
+	while read line; do
+		sum=$((sum + line))
+	done
+	echo $sum
+}
+
 # From standard input, skip the first n inputs, then return the rest
 skip() {
 	local n=$1
