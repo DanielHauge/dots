@@ -30,6 +30,7 @@ local plugins = {
             "antoinemadec/FixCursorHold.nvim",
             "nvim-treesitter/nvim-treesitter",
             "Issafalcon/neotest-dotnet",
+            "nvim-neotest/nvim-nio",
         },
         ft = { "csharp", "fsharp" },
         config = function()
