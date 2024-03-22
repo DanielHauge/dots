@@ -11,6 +11,7 @@ plot() {
 	cols=$(echo "$data" | wc -w)
 	hasHeader=$(echo "$data" | grep -c -E "^[a-zA-Z]")
 	headers=()
+	plottingData=$(mktemp)
 	if [ "$hasHeader" -eq 1 ]; then
 		for i in $(seq 1 "$cols"); do
 			header=$(echo "$data" | cut -d' ' -f"$i")
@@ -23,17 +24,19 @@ plot() {
 		for i in $(seq 3 "$cols"); do
 			headers+=("y$((i - 1))")
 		done
-		echo "$data" >>$$.dat
+		echo "$data" >>"$plottingData"
 	fi
 	while read -r data; do
-		echo "$data" >>$$.dat
+		echo "$data" >>"$plottingData"
 	done
 	terminal="wxt"
 	output=""
+	cat "$plottingData" >>$$.dat
 	if [ -n "$outputFile" ]; then
 		terminal="pngcairo"
 		output="set output '$outputFile';"
 	fi
+
 	gnuplotStr="
     set title 'Plot' ; 
     set terminal $terminal dashed size 1480,1080 font 'Verdana,20';
@@ -74,6 +77,7 @@ plotf() {
 	cols=$(echo "$data" | wc -w)
 	hasHeader=$(echo "$data" | grep -c -E "^[a-zA-Z]")
 	headers=()
+	plottingData=$(mktemp)
 	if [ "$hasHeader" -eq 1 ]; then
 		for i in $(seq 1 "$cols"); do
 			header=$(echo "$data" | cut -d' ' -f"$i")
@@ -86,17 +90,18 @@ plotf() {
 		for i in $(seq 3 "$cols"); do
 			headers+=("y$((i - 1))")
 		done
-		echo "$data" >>$$.dat
+		echo "$data" >>"$plottingData"
 	fi
 	while read -r data; do
-		echo "$data" >>$$.dat
+		echo "$data" >>"$plottingData"
 	done
-	terminal="wxt"
+	terminal="windows"
 	output=""
 	if [ -n "$outputFile" ]; then
 		terminal="pngcairo"
 		output="set output '$outputFile';"
 	fi
+	cat "$plottingData" >>$$.dat
 	gnuplotStr="
     set title 'Plot' ; 
     set terminal $terminal dashed size 1480,1080 font 'Verdana,20';
@@ -123,9 +128,81 @@ plotf() {
 	else
 		gnuplotStr+="'$$.dat' with linespoints title '${headers[1]}'"
 	fi
-	# echo "$gnuplotStr"
 
 	echo "$gnuplotStr" | gnuplot -p
 	rm $$.dat
+}
 
+plotitbrah() {
+
+	seperatorFix=";"
+	commaFix="."
+
+	while getopts "sfh:" flag; do
+		case $flag in
+		s)
+			seperatorFix="$OPTARG"
+			;;
+		f)
+			commaFix="$OPTARG"
+			;;
+		h)
+			echo "Usage: plotitbrah [-s seperator (;)] [-f commaFix (,)]"
+			exit 0
+			;;
+		\?)
+			echo "Invalid option: $OPTARG"
+			exit 0 #Should be 1, and made script.
+			;;
+		esac
+	done
+
+	files=$(fzf -m --preview="cat {} | head -n 100")
+	if [ -z "$files" ]; then
+		echo "No files selected"
+		exit 0 #Should be 1, and made script.
+	fi
+	# Sort files by their line count
+	files=$(echo "$files" | xargs -n1 wc -l | sort -n -r)
+	longestFileLineCount=$(echo "$files" | head -n 1 | awk '{print $1}')
+	filesNamesForPaste=$(echo "$files" | awk '{print $2}' | tr '\n' ' ')
+	filesNamesForPaste=${filesNamesForPaste::-1}
+
+	# mktemp from pasted files
+	rawDat=$(mktemp)
+
+	# We want the string filesNamesForPaste to expand to it's values.
+	# shellcheck disable=2086
+	paste <(seq 1 "$longestFileLineCount") $filesNamesForPaste | head -n 100 | tr "$seperatorFix" '\t' | tr ',' "$commaFix" >"$rawDat"
+
+	# Get Column count
+	cols=$(head -n 1 "$rawDat" | wc -w)
+	colHeadersArray=()
+	colHeadersArray+=("1:Index")
+
+	firstLine=$(head -n 1 "$rawDat")
+	# If headers are present (If first line has letters)
+
+	if [[ $firstLine =~ [a-zA-Z] ]]; then
+		for i in $(seq 2 "$cols"); do
+			header=$(echo "$firstLine" | tr ' ' '\t' | cut -d$'\t' -f"$i")
+			colHeadersArray+=("$i:$header")
+		done
+	else
+		for i in $(seq 2 "$((cols - 1))"); do
+			colHeadersArray+=("$i:Column")
+		done
+	fi
+
+	# Print column headers
+	# Select x. (fzf with preview of combined) (headers but can also pick sequence)
+	xSelect=$(echo "${colHeadersArray[@]}" | tr ' ' '\n' | fzf)
+
+	# selecty y. (fzf with preview of combined)
+	# Add another plot? (y/n)
+
+	# If len > 10000, ask to reduce resolution to 10000
+
+	# Put command into history (history -s)
+	# run command
 }
