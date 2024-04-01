@@ -1,11 +1,42 @@
 #!/bin/bash
 
-alias gs='git status'
+alias gs='git status --short'
 # Set gitconfig file location
 git config --global include.path $DOTS_LOC/bash/.gitconfig
 
 function gcm() {
 	git commit -m "$1"
+}
+
+function gb() {
+
+	localBranches=$(git branch -a | sed 's/*//g' | sed 's|remotes/origin/||g' | awk1 | sed 's/ //g' | sort -u | awk '$1 != "HEAD"{print}')
+	chossenBranch=$(echo "$localBranches" | fzf --preview-window=right:80% --preview="git gbprev {}")
+	if [[ -z $chossenBranch ]]; then
+		echo "no branch"
+		return
+	fi
+
+	localChanges=$(git status -s)
+	if [[ -z $localChanges ]]; then
+		echo "no local changes"
+	else
+		echo "Local changes detected:"
+		git status -s
+		echo -e "\nForce clean? (y/n)"
+		read -r cleanChoice
+		if [[ "$cleanChoice" = "y" ]]; then
+			git clean -df
+			git checkout .
+		else
+			echo "Canceling branching"
+			return
+		fi
+
+	fi
+
+	git checkout "$chossenBranch"
+
 }
 
 function gd() {
