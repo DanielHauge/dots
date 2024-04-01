@@ -14,6 +14,7 @@ packs=(
 	"neovide"
 	"ripgrep"
 	"fzf"
+	"difftastic"
 	"dbeaver"
 	"miro"
 	"tree-sitter"
