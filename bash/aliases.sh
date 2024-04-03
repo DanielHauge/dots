@@ -25,8 +25,12 @@ x() {
 	done
 
 }
-if command -v z &>/dev/null; then
+
+if command -v zoxide &>/dev/null; then
+	eval "$(zoxide init bash)"
 	alias cd='z'
+else
+	echo "z not found, defaulting to cd"
 fi
 alias repo='cd $REPO_DIR'
 alias rpeo='cd $REPO_DIR' # typo
