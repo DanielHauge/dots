@@ -11,3 +11,9 @@ source "$DOTS_LOC"/bash/easy-plot.sh
 source "$DOTS_LOC"/bash/easy-jira.sh
 
 set +o posix
+
+if command -v z &>/dev/null; then
+	eval "$(zoxide init bash)"
+else
+	echo "z not found, defaulting to cd"
+fi

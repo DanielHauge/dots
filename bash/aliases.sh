@@ -25,6 +25,9 @@ x() {
 	done
 
 }
+if command -v z &>/dev/null; then
+	alias cd='z'
+fi
 alias repo='cd $REPO_DIR'
 alias rpeo='cd $REPO_DIR' # typo
 alias bconf='source ~/.bashrc'
