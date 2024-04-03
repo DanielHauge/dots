@@ -1,6 +1,6 @@
 #!/bin/bash
 
-alias gs='git status --short'
+alias gs='git status -s -b --show-stash --ahead-behind'
 # Set gitconfig file location
 git config --global include.path $DOTS_LOC/bash/.gitconfig
 
