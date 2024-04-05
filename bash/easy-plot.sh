@@ -107,7 +107,6 @@ plotf() {
     set terminal $terminal dashed size 1480,1080 font 'Verdana,20';
     $output
     set xlabel '${headers[0]}' ;
-    set ylabel '${headers[1]}' ; 
     set style line 2 lc rgb '#0060ad' lt 2 lw 3 pt 7 ps 1.5 ;
     set style line 3 lc rgb '#dd181f' lt 2 lw 3 pt 7 ps 1.5 ;
     set style line 4 lc rgb '#28ad3f' lt 2 lw 3 pt 7 ps 1.5 ;
@@ -120,7 +119,7 @@ plotf() {
 	if [ "$cols" -gt 1 ]; then
 		for i in $(seq 1 2 "$((cols))"); do
 			iy=$((i + 1))
-			gnuplotStr+="'$$.dat' using $i:$iy with linespoints title '${headers[$i - 1]}'"
+			gnuplotStr+="'$$.dat' using $i:$iy with linespoints title '${headers[$i]}'"
 			if [ "$i" -lt "$cols" ]; then
 				gnuplotStr+=", "
 			fi
