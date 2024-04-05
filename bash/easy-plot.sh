@@ -29,7 +29,7 @@ plot() {
 	while read -r data; do
 		echo "$data" >>"$plottingData"
 	done
-	terminal="wxt"
+	terminal="windows"
 	output=""
 	cat "$plottingData" >>$$.dat
 	if [ -n "$outputFile" ]; then

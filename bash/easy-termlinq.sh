@@ -26,6 +26,17 @@ sum() {
 	echo $sum
 }
 
+prepend() {
+	echo -en "$@"
+	cat -
+}
+
+prependln() {
+	echo -en "$@"
+	echo
+	cat -
+}
+
 # From standard input, skip the first n inputs, then return the rest
 skip() {
 	local n=$1
