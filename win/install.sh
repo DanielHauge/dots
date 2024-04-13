@@ -98,6 +98,12 @@ if ! dotnet nuget list source | grep -q "https://api.nuget.org/v3/index.json"; t
 	dotnet nuget add source https://api.nuget.org/v3/index.json -n nuget.org
 fi
 
+if ! command -v commitlint &>/dev/null; then
+	echo "Installing commitlint"
+	go install github.com/conventionalcommit/commitlint@latest
+	commitlint init --global
+fi
+
 # # if go is installed but delve is not. Install delve with go.
 # if command -v go &>/dev/null && ! command -v dlv &>/dev/null; then
 # 	echo "Installing delve"
