@@ -104,6 +104,11 @@ if ! command -v commitlint &>/dev/null; then
 	commitlint init --global
 fi
 
+if ! command -v git-cliff &>/dev/null; then
+	echo "Installing git-cliff"
+	scoop install git-cliff
+fi
+
 # # if go is installed but delve is not. Install delve with go.
 # if command -v go &>/dev/null && ! command -v dlv &>/dev/null; then
 # 	echo "Installing delve"
