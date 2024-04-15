@@ -18,6 +18,7 @@ packs=(
 	"difftastic"
 	"dbeaver"
 	"miro"
+	"busybox"
 	"tree-sitter"
 	"gnuplot"
 	"make"
