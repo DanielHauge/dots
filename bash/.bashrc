@@ -10,5 +10,6 @@ source "$DOTS_LOC"/bash/easy-chatgpt.sh
 source "$DOTS_LOC"/bash/easy-plot.sh
 source "$DOTS_LOC"/bash/easy-jira.sh
 source "$DOTS_LOC"/bash/easy-cal.sh
+source "$DOTS_LOC"/bash/easy-open.sh
 
 set +o posix
