@@ -21,6 +21,7 @@ packs=(
 	"busybox"
 	"tree-sitter"
 	"gnuplot"
+	"NugetPackageExplorer"
 	"make"
 	"llvm"
 	"mingw"
