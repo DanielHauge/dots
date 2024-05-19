@@ -36,19 +36,26 @@ tex() {
 }
 
 texw() {
-	file=$1
+	await_modify_entity=$1
+	buildfile=$2
 	if [ $# -eq 0 ]; then
-		file=$(ls *.tex | head -n 1)
+		await_modify_entity=$(ls *.tex | head -n 1)
+		buildfile=$await_modify_entity
 	fi
 
-	local pdf_file=${file%.*}.pdf
-	buildtex "$file"
+	# If second argument is not provided, then use the first argument
+	if [ $# -eq 1 ]; then
+		buildfile=$await_modify_entity
+	fi
+
+	local pdf_file=${buildfile%.*}.pdf
+	buildtex "$buildfile"
 	x "$pdf_file"
 
 	# Await loop with modify not using notifywait
 	while true; do
-		await-modify "$file"
-		buildtex "$file"
+		await-modify "$await_modify_entity"
+		buildtex "$buildfile"
 	done
 
 }

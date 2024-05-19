@@ -44,3 +44,15 @@ alias dots='cd $DOTS_LOC'
 alias mp4tomp3='for i in *.mp4; do ffmpeg -i "$i" "${i%.*}.mp3"; done'
 alias xa='xargs -I ½'
 alias xcat='xa cat ½'
+function cpc() {
+	# First argument is the history number
+	# If no argument is provided, echo bad
+	if [ -z "$1" ]; then
+		history
+		echo "Usage: cpc <history_number>"
+		return 1
+	fi
+	local history_number=$1
+	local command=$(history | grep "^ *$history_number" | sed "s/^ *$history_number *//")
+	echo "$command" | clip
+}

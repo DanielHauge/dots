@@ -20,6 +20,7 @@ packs=(
 	"miro"
 	"busybox"
 	"tree-sitter"
+    "fd"
 	"gnuplot"
 	"NugetPackageExplorer"
 	"make"
