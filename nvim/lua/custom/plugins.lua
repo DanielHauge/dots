@@ -30,6 +30,8 @@ local plugins = {
             "antoinemadec/FixCursorHold.nvim",
             "nvim-treesitter/nvim-treesitter",
             "Issafalcon/neotest-dotnet",
+            -- Rust
+            "rouge8/neotest-rust",
             "nvim-neotest/nvim-nio",
         },
         ft = { "csharp", "fsharp" },
@@ -37,6 +39,7 @@ local plugins = {
             require("neotest").setup {
                 adapters = {
                     require "neotest-dotnet",
+                    require "neotest-rust",
                 },
             }
         end,

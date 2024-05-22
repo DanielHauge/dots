@@ -20,7 +20,7 @@ packs=(
 	"miro"
 	"busybox"
 	"tree-sitter"
-    "fd"
+	"fd"
 	"gnuplot"
 	"NugetPackageExplorer"
 	"make"
@@ -110,6 +110,13 @@ fi
 if ! command -v git-cliff &>/dev/null; then
 	echo "Installing git-cliff"
 	scoop install git-cliff
+fi
+
+nextest_installed=$(cargo --list | grep nextest)
+# if nextest is not installed install it
+if [ -z "$nextest_installed" ]; then
+	echo "Installing nextest"
+	curl -LsSf https://get.nexte.st/latest/windows-tar | tar zxf - -C ${CARGO_HOME:-~/.cargo}/bin
 fi
 
 # # if go is installed but delve is not. Install delve with go.
