@@ -9,6 +9,16 @@ if command -v zoxide &>/dev/null; then
 else
 	echo "z not found, defaulting to cd"
 fi
+
+function am() {
+	while true; do
+		await-modify "."
+		clear
+		"$@"
+	done
+
+}
+
 alias repo='cd $REPO_DIR'
 alias rpeo='cd $REPO_DIR' # typo
 alias bconf='source ~/.bashrc'
