@@ -121,7 +121,47 @@ dap.configurations.cpp = {
         stopOnEntry = false,
     },
 }
+
 dap.configurations.c = dap.configurations.cpp
+dap.configurations.rust = {
+    {
+        name = "Launch file",
+        request = "launch",
+        type = "codelldb",
+        program = function()
+            -- from vim.fn.getcwd()
+            local debug_path = vim.fn.getcwd() .. "/target/debug/"
+            -- Find executable files in debug folder
+            local files = vim.fn.glob(debug_path .. "*", true, true)
+            -- Only files
+            files = vim.tbl_filter(function(file)
+                return vim.fn.isdirectory(file) == 0
+            end, files)
+            -- Only executable files
+            files = vim.tbl_filter(function(file)
+                return vim.fn.executable(file) == 1
+            end, files)
+            local choices = {}
+            for _, file in ipairs(files) do
+                local name = file:match "([^/\\]+)$"
+                table.insert(choices, name)
+            end
+            if #choices == 0 then
+                error("No executables found in " .. debug_path)
+            end
+            -- If there is only 1 executable, use that
+            if #choices == 1 then
+                return debug_path .. choices[1]
+            end
+            local choice = vim.fn.inputlist(choices)
+            return debug_path .. choices[choice]
+
+            -- return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+        end,
+        cwd = "${workspaceFolder}",
+        stopOnEntry = false,
+    },
+}
 
 -- BASH
 
