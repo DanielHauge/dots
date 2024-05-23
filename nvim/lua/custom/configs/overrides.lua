@@ -29,6 +29,7 @@ M.treesitter = {
         "dart",
         "zig",
         "rust",
+        "ebnf",
     },
     indent = {
         enable = true,
