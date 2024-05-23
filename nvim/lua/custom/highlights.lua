@@ -49,6 +49,9 @@ vim.api.nvim_set_hl(0, "@storageclass.c_sharp", { link = "@keyword" })
 vim.api.nvim_set_hl(0, "@lsp.type.event.cs", { fg = "#dcd38b", bold = true, italic = true })
 vim.api.nvim_set_hl(0, "@lsp.type.struct.cs", { fg = "#b5cea8" })
 
+-- F# Overrides
+vim.api.nvim_set_hl(0, "@lsp.type.namespace.fsharp", { fg = "#ccdddd" })
+
 -- Yaml Overides
 vim.api.nvim_set_hl(0, "yamlBlockMappingKey", { link = "Label" })
 vim.api.nvim_set_hl(0, "yamlPlainScalar", { fg = "#cea168" })
@@ -190,6 +193,11 @@ M.override["@lsp.type.function.builtin"] = F
 M.override["@keyword.function"] = {
     fg = "teal",
 }
+
+M.override["@module"] = {
+    fg = "#ccdddd",
+}
+
 M.override["@keyword.operator"] = {
     -- Color = (86, 156, 214)
     fg = "#569cd6",
