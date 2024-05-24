@@ -10,6 +10,8 @@ M.general = {
 
         ["<C-Left>"] = { "b", "move left", opts = { nowait = true, noremap = true } },
         ["<C-Right>"] = { "w", "move right", opts = { nowait = true, noremap = true } },
+        ["<C-h>"] = { "b", "move left", opts = { nowait = true, noremap = true } },
+        ["<C-l>"] = { "w", "move right", opts = { nowait = true, noremap = true } },
         [";"] = { ":", "enter command mode", opts = { nowait = true } },
         ["<A-j>"] = { "<cmd>m .+1<CR>==", "move line down" },
         ["<A-k>"] = { "<cmd>m .-2<CR>==", "move line up" },
