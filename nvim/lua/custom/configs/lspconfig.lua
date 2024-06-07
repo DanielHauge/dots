@@ -105,11 +105,10 @@ lspconfig["yamlls"].setup {
 lspconfig["ltex"].setup {
     on_attach = on_attach,
     capabilities = capabilities,
-    cmd = { "ltex-ls" },
 }
 
 lspconfig["grammarly"].setup {
     on_attach = on_attach,
     capabilities = capabilities,
-    filetypes = { "markdown", "tex", "text" },
+    filetypes = { "markdown", "tex", "plaintex", "text" },
 }
