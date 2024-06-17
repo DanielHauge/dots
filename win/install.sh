@@ -18,6 +18,7 @@ packs=(
 	"difftastic"
 	"dbeaver"
 	"miro"
+	"nmap"
 	"busybox"
 	"tree-sitter"
 	"fd"
