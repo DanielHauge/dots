@@ -24,6 +24,13 @@ local plugins = {
         module = "calculator",
     },
     {
+        "phaazon/hop.nvim",
+        branch = "v2",
+        config = function()
+            require("hop").setup { keys = "etovxqpdygfblzhckisuran" }
+        end,
+    },
+    {
         "nvim-neotest/neotest",
         dependencies = {
             "nvim-lua/plenary.nvim",

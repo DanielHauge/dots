@@ -18,6 +18,12 @@ M.general = {
         ["<A-Up>"] = { "<cmd>m .-2<CR>==", "move line up" },
         ["<A-Down>"] = { "<cmd>m .+1<CR>==", "move line down" },
 
+        ["<leader>h"] = {
+            function()
+                require("hop").hint_words()
+            end,
+        },
+
         ["<leader>qx"] = {
             function()
                 require("trouble").toggle()
