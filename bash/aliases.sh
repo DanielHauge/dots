@@ -4,23 +4,23 @@
 alias cal='calendar'
 
 if command -v zoxide &>/dev/null; then
-	eval "$(zoxide init bash)"
-	alias cd='z'
+    eval "$(zoxide init bash)"
+    alias cd='z'
 else
-	echo "z not found, defaulting to cd"
+    echo "z not found, defaulting to cd"
 fi
 
 function am() {
-	while true; do
-		await-modify "."
-		clear
-		"$@"
-	done
+    while true; do
+        await-modify "."
+        clear
+        "$@"
+    done
 
 }
 
 if command -v bat &>/dev/null; then
-	alias cat='bat'
+    alias cat='bat'
 fi
 
 alias repo='cd $REPO_DIR'
@@ -32,19 +32,19 @@ alias nvi='nvim'
 alias sl='ls'
 alias ls='ls -F --color=auto'
 alias ll='ls -l -h --time-style=long-iso --color=auto'
-alias cya='shutdown -s -t 0'
-alias bye='shutdown -s -t 0'
-alias reboot='shutdown -r -t 0'
+alias cya='shutdown.exe -s -t 0'
+alias bye='shutdown.exe -s -t 0'
+alias reboot='shutdown.exe -r -t 0'
 alias bc='python -c "from __future__ import division; from math import *; import sys; print(eval(sys.argv[1]))"'
-alias restart='shutdown -r -t 0'
-alias off='shutdown -s -t 0'
-alias bios='shutdown -r -t 0 -fw'
-alias bootusb='shutdown -r -t 0 -o'
+alias restart='shutdown.exe -r -t 0'
+alias off='shutdown.exe -s -t 0'
+alias bios='shutdown.exe -r -t 0 -fw'
+alias bootusb='shutdown.exe -r -t 0 -o'
 alias rmd='cat *.md | glow '
 alias todo='cat $REPO_DIR/*/TODO.md | glow'
 export WINDOWS_TERMINAL_EXECUTE_COMMAND="'/c start wt.exe'"
-alias wt='wt --startingDirectory "$(pwd -W)"'
-alias wta='powershell "Start-Process -Verb RunAs cmd.exe $WINDOWS_TERMINAL_EXECUTE_COMMAND"'
+alias wt='wt.exe --startingDirectory "$(pwd -W)"'
+alias wta='powershell.exe "Start-Process -Verb RunAs cmd.exe $WINDOWS_TERMINAL_EXECUTE_COMMAND"'
 # TODO: release this small tool
 alias winstall="$DOTS_LOC/win/install.sh"
 alias letitsnow="$DOTS_LOC/bash/snowjob.sh"
@@ -59,14 +59,14 @@ alias mp4tomp3='for i in *.mp4; do ffmpeg -i "$i" "${i%.*}.mp3"; done'
 alias xa='xargs -I ½'
 alias xcat='xa cat ½'
 function cpc() {
-	# First argument is the history number
-	# If no argument is provided, echo bad
-	if [ -z "$1" ]; then
-		history
-		echo "Usage: cpc <history_number>"
-		return 1
-	fi
-	local history_number=$1
-	local command=$(history | grep "^ *$history_number" | sed "s/^ *$history_number *//")
-	echo "$command" | clip
+    # First argument is the history number
+    # If no argument is provided, echo bad
+    if [ -z "$1" ]; then
+        history
+        echo "Usage: cpc <history_number>"
+        return 1
+    fi
+    local history_number=$1
+    local command=$(history | grep "^ *$history_number" | sed "s/^ *$history_number *//")
+    echo "$command" | clip
 }
