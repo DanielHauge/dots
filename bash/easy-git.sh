@@ -5,9 +5,14 @@ alias gs='git status -s -b --show-stash --ahead-behind'
 git config --global include.path $DOTS_LOC/bash/.gitconfig
 
 function gcm() {
-	if echo "$1" | commitlint lint; then
-		git commit -m "$1"
-	fi
+    if command -v commitlint &> /dev/null; then
+        if echo "$1" | commitlint lint; then
+            git commit -m "$1"
+        fi
+    else
+        echo "❌Commiting without linting!❌"
+        git commit -m "$1"
+    fi
 }
 
 function gb() {

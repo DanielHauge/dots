@@ -7,7 +7,7 @@ function calendar() {
 	m=1
 	d=2                                                 # establish today's date
 	[[ -z $1 ]] && ref=(${today[@]}) || ref=(${1//-/ }) # get input date
-	dNbA=$(date --date="$(date +%Y-%m-01)" +'%u')       # day-number of 1st day of reference month
+	dNbA=$(date --date="$(date '+%Y-%m-01')" +'%u')       # day-number of 1st day of reference month
 	today[m]=$((10#${today[m]}))
 	ref[m]=$((10#${ref[m]})) # remove leading zero (octal clash)
 	today[d]=$((10#${today[d]}))

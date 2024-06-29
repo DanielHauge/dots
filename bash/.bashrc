@@ -15,10 +15,11 @@ source "$DOTS_LOC"/bash/easy-pack.sh
 source "$DOTS_LOC"/bash/easy-chatgpt.sh
 source "$DOTS_LOC"/bash/easy-plot.sh
 source "$DOTS_LOC"/bash/easy-jira.sh
-source "$DOTS_LOC"/bash/easy-cal.sh
 source "$DOTS_LOC"/bash/easy-open.sh
 
+
 if [ -n "$POSIX" ]; then
+    source "$DOTS_LOC"/bash/easy-cal.sh
     if command -v starship &>/dev/null; then
         export STARSHIP_CONFIG="$DOTS_LOC"/bash/starship.toml
         eval "$(starship init bash)"

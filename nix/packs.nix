@@ -4,10 +4,13 @@
     # List of user-specific packages
     neovim
     git
+    gcc
     bat
     ripgrep-all
+    ripgrep
     fzf
     zoxide
+    khal
     difftastic
     nmap
     whois
@@ -33,7 +36,6 @@
     glow
     pandoc
     cmake
-    commitlint
     git-cliff
     rustup
     cargo-nextest
@@ -52,7 +54,7 @@
       shellAliases.update = "sudo nixos-rebuild switch";
       ohMyZsh = {
         enable = true;
-        plugins = [ "git" ];
+        plugins = [  ];
         theme = "bira";
       };
   };
