@@ -13,6 +13,7 @@ local default_plugins = {
     {
         "adelarsq/neofsharp.vim",
     },
+
     {
         "NvChad/ui",
         branch = "v2.0",

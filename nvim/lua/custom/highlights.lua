@@ -49,6 +49,16 @@ vim.api.nvim_set_hl(0, "@storageclass.c_sharp", { link = "@keyword" })
 vim.api.nvim_set_hl(0, "@lsp.type.event.cs", { fg = "#dcd38b", bold = true, italic = true })
 vim.api.nvim_set_hl(0, "@lsp.type.struct.cs", { fg = "#b5cea8" })
 
+-- Rust Overrides
+vim.api.nvim_set_hl(0, "@lsp.type.enum.rust", { fg = "#5ea960" })
+vim.api.nvim_set_hl(0, "@lsp.type.enumMember.rust", { fg = "#46e666" })
+vim.api.nvim_set_hl(0, "@variable.member.rust", { link = "@property" })
+vim.api.nvim_set_hl(0, "@variable.parameter.rust", { link = "@field" })
+vim.api.nvim_set_hl(0, "@lsp.type.struct.rust", { link = "Type" })
+vim.api.nvim_set_hl(0, "@lsp.type.parameter.rust", { link = "@parameter" })
+
+vim.api.nvim_set_hl(0, "@lsp.type.interface.rust", { link = "Interface" })
+
 -- F# Overrides
 vim.api.nvim_set_hl(0, "@lsp.type.namespace.fsharp", { fg = "#ccdddd" })
 

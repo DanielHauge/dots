@@ -26,7 +26,7 @@ local sources = {
     b.formatting.gofumpt,
     b.formatting.goimports,
     b.code_actions.impl,
-    b.diagnostics.golangci_lint,
+    -- b.diagnostics.golangci_lint,
 
     -- C++
     b.diagnostics.cpplint,
