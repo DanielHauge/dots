@@ -19,6 +19,10 @@ function am() {
 
 }
 
+if command -v bat &>/dev/null; then
+	alias cat='bat'
+fi
+
 alias repo='cd $REPO_DIR'
 alias rpeo='cd $REPO_DIR' # typo
 alias bconf='source ~/.bashrc'

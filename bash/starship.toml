@@ -1,0 +1,5 @@
+format = '''[==>](bold green) $all'''
+
+[directory]
+style = 'green'
+
