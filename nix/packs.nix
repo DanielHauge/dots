@@ -1,5 +1,6 @@
 { pkgs, ... }:
 {
+  environment.variables.EDITOR = "nvim";
   environment.systemPackages = with pkgs; [
     # List of user-specific packages
     neovim
@@ -12,6 +13,8 @@
     zoxide
     khal
     difftastic
+    python3
+    unzip
     nmap
     whois
     tree-sitter
