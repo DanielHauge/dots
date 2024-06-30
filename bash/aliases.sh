@@ -19,6 +19,10 @@ function am() {
 
 }
 
+if ! command -v firefox &>/dev/null; then
+	alias firefox='firefox.exe'
+fi
+
 if command -v bat &>/dev/null; then
 	alias cat='bat'
 fi
