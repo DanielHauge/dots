@@ -17,6 +17,9 @@ M.general = {
         ["<A-k>"] = { "<cmd>m .-2<CR>==", "move line up" },
         ["<A-Up>"] = { "<cmd>m .-2<CR>==", "move line up" },
         ["<A-Down>"] = { "<cmd>m .+1<CR>==", "move line down" },
+        -- ["<leader>p"] = { "\"+p", "Paste from system clip", opts = { nowait = true}},
+        ["<C-v>"] = { "\"+p", "Paste from system clip", opts = { nowait = true}},
+        ["<C-p>"] = { "\"\"p", "Paste from system clip", opts = { nowait = true}},
 
         ["<leader>h"] = {
             function()
@@ -170,6 +173,7 @@ M.general = {
             ":Calc<CR>",
             "Compute selection",
         },
+        ["<C-c>"] = { "\"+y", "Copy to system clipboard", opts = { nowait = true}},
     },
 
     i = {
@@ -190,6 +194,8 @@ M.general = {
         ["<A-Down>"] = { "<cmd>m .+1<CR>", "move line down" },
         -- Control + o to do new line above, but stay in insert mode
         ["<A-o>"] = { "<Esc>O", "new line above", opts = { nowait = true, noremap = true } },
+        ["<C-v>"] = { "<C-r>+", "Paste from system clip", opts = { nowait = true }},
+        ["<C-p>"] = { "<C-r>\"", "Paste from system clip", opts = { nowait = true }},
     },
 }
 -- more ds!
