@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 {
   environment.variables.EDITOR = "nvim";
   environment.systemPackages = with pkgs; [
@@ -32,8 +32,9 @@
     nodejs
     ruff
     jdk
-    dotnet-sdk
-    dotnet-runtime
+    csharp-ls
+    dotnet-sdk_8
+    dotnet-runtime_8
     dotnet-sdk_7
     dotnet-runtime_7
     glow
