@@ -17,6 +17,7 @@ local servers = {
     "dockerls",
     "html",
     "rust_analyzer",
+    "tsserver",
     "sqlls",
     "csharp_ls",
     "golangci_lint_ls",
