@@ -5,6 +5,10 @@ if [ -z "$DOTS_LOC" ]; then
     export DOTS_LOC="$HOME/dots"
 fi
 
+if [ -z "$REPO_DIR" ]; then
+    export REPO_DIR="$HOME/repo"
+fi
+
 source "$DOTS_LOC"/bash/aliases.sh
 source "$DOTS_LOC"/bash/easy-git.sh
 source "$DOTS_LOC"/bash/environment.sh
@@ -16,7 +20,6 @@ source "$DOTS_LOC"/bash/easy-chatgpt.sh
 source "$DOTS_LOC"/bash/easy-plot.sh
 source "$DOTS_LOC"/bash/easy-jira.sh
 source "$DOTS_LOC"/bash/easy-open.sh
-
 
 if [ -n "$POSIX" ]; then
     source "$DOTS_LOC"/bash/easy-cal.sh
