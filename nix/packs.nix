@@ -33,6 +33,7 @@
     ruff
     jdk
     csharp-ls
+    fsautocomplete
     dotnet-sdk_8
     dotnet-runtime_8
     dotnet-sdk_7
@@ -42,6 +43,7 @@
     cmake
     git-cliff
     rustup
+    rust-analyzer
     cargo-nextest
     zplug
     zsh-autosuggestions
@@ -52,7 +54,10 @@
   programs.zsh = {
       enable = true;
       enableCompletion = true;
-      interactiveShellInit = "source ~/dots/bash/.bashrc";
+      enableBashCompletion = true;
+
+      # interactiveShellInit = "source ~/dots/bash/.bashrc";
+      shellInit = "source ~/dots/bash/.bashrc";
       autosuggestions.enable = true;
       syntaxHighlighting.enable = true;
       shellAliases.update = "sudo nixos-rebuild switch";

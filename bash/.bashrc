@@ -1,5 +1,9 @@
 #!/bin/bash
 
+if [ -f ~/.zshrc ]; then
+    source ~/.zshrc
+fi
+
 # if DOTS_LOC is not defined set ~/dots
 if [ -z "$DOTS_LOC" ]; then
     export DOTS_LOC="$HOME/dots"
