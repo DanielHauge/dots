@@ -25,6 +25,7 @@ M.general = {
             function()
                 require("hop").hint_words()
             end,
+            "[H]op with word hints",
         },
 
         ["<leader>qx"] = {
