@@ -7,6 +7,7 @@
     git
     gcc
     bat
+    htop-vim
     ripgrep-all
     ripgrep
     fzf
