@@ -11,6 +11,7 @@
     ripgrep
     fzf
     zoxide
+    eza
     khal
     difftastic
     python3

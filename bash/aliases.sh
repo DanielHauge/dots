@@ -34,8 +34,14 @@ alias vi='nvim'
 alias vim='nvim'
 alias nvi='nvim'
 alias sl='ls'
-alias ls='ls -F --color=auto'
-alias ll='ls -l -h --time-style=long-iso --color=auto'
+if command -v eza &>/dev/null; then
+    alias ls='eza -F --color --icons'
+    alias ll="ls -l -h --time-style=long-iso "
+    alias lt="ls -T"
+else
+    alias ls='eza -F --color=auto'
+    alias ll='ls -l -h --time-style=long-iso --color=auto'
+fi
 alias cya='shutdown.exe -s -t 0'
 alias bye='shutdown.exe -s -t 0'
 alias reboot='shutdown.exe -r -t 0'
