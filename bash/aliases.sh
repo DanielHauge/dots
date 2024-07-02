@@ -4,27 +4,27 @@
 alias cal='calendar'
 
 if command -v zoxide &>/dev/null; then
-	eval "$(zoxide init bash)"
-	alias cd='z'
+    eval "$(zoxide init bash)"
+    alias cd='z'
 else
-	echo "z not found, defaulting to cd"
+    echo "z not found, defaulting to cd"
 fi
 
 function am() {
-	while true; do
-		await-modify "."
-		clear
-		"$@"
-	done
+    while true; do
+        await-modify "."
+        clear
+        "$@"
+    done
 
 }
 
 if ! command -v firefox &>/dev/null; then
-	alias firefox='firefox.exe'
+    alias firefox='firefox.exe'
 fi
 
 if command -v bat &>/dev/null; then
-	alias cat='bat'
+    alias cat='bat'
 fi
 
 alias repo="cd $REPO_DIR"
@@ -48,6 +48,7 @@ alias rmd='cat *.md | glow '
 alias todo='cat $REPO_DIR/*/TODO.md | glow'
 # Start wt with profile git bash, and use //nas/vault as directory
 alias nas="wt.exe -p 'Git Bash' -d //nas/vault"
+alias gwt="wt.exe -p 'Git Bash'"
 export WINDOWS_TERMINAL_EXECUTE_COMMAND="'/c start wt.exe'"
 alias wt='wt.exe --startingDirectory "$(pwd -W)"'
 alias wta='powershell.exe "Start-Process -Verb RunAs cmd.exe $WINDOWS_TERMINAL_EXECUTE_COMMAND"'
@@ -65,14 +66,14 @@ alias mp4tomp3='for i in *.mp4; do ffmpeg -i "$i" "${i%.*}.mp3"; done'
 alias xa='xargs -I ½'
 alias xcat='xa cat ½'
 function cpc() {
-	# First argument is the history number
-	# If no argument is provided, echo bad
-	if [ -z "$1" ]; then
-		history
-		echo "Usage: cpc <history_number>"
-		return 1
-	fi
-	local history_number=$1
-	local command=$(history | grep "^ *$history_number" | sed "s/^ *$history_number *//")
-	echo "$command" | clip
+    # First argument is the history number
+    # If no argument is provided, echo bad
+    if [ -z "$1" ]; then
+        history
+        echo "Usage: cpc <history_number>"
+        return 1
+    fi
+    local history_number=$1
+    local command=$(history | grep "^ *$history_number" | sed "s/^ *$history_number *//")
+    echo "$command" | clip
 }

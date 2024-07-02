@@ -1,8 +1,5 @@
 #!/bin/bash
-
-if [ -f ~/.zshrc ]; then
-    source ~/.zshrc
-fi
+# shellcheck disable=1090,1091
 
 # if DOTS_LOC is not defined set ~/dots
 if [ -z "$DOTS_LOC" ]; then
@@ -11,6 +8,13 @@ fi
 
 if [ -z "$REPO_DIR" ]; then
     export REPO_DIR="$HOME/repo"
+fi
+
+if [ -f ~/.zshrc ]; then
+    if [ -f "$DOTS_LOC"/zsh/.zshrc ]; then
+        source "$DOTS_LOC"/zsh/.zshrc
+    fi
+    source ~/.zshrc
 fi
 
 source "$DOTS_LOC"/bash/aliases.sh

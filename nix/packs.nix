@@ -45,9 +45,11 @@
     rustup
     rust-analyzer
     cargo-nextest
-    zplug
-    zsh-autosuggestions
-    zsh-autocomplete
+    # zplug
+    # zsh-autosuggestions
+    # zsh-autocomplete
+    # zsh-completions
+    # nix-zsh-completions
     clip
     # Add more packages as needed
   ];
@@ -57,13 +59,14 @@
       enableBashCompletion = true;
 
       # interactiveShellInit = "source ~/dots/bash/.bashrc";
-      shellInit = "source ~/dots/bash/.bashrc";
+      shellInit = "source ~/dots/bash/.bashrc;";
       autosuggestions.enable = true;
       syntaxHighlighting.enable = true;
       shellAliases.update = "sudo nixos-rebuild switch";
       ohMyZsh = {
         enable = true;
-        plugins = [  ];
+        # https://github.com/ohmyzsh/ohmyzsh/wiki/Plugins
+        plugins = [ "dotnet" "colored-man-pages" "extract" "golang" "command-not-found" ];
         theme = "bira";
       };
   };
