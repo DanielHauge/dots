@@ -32,6 +32,7 @@ alias rpeo="cd $REPO_DIR" # typo
 alias bconf='source ~/.bashrc'
 alias vi='nvim'
 alias vim='nvim'
+alias grep='rg -S'
 alias nvi='nvim'
 alias sl='ls'
 if command -v eza &>/dev/null; then
