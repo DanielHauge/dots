@@ -46,7 +46,6 @@
     cmake
     git-cliff
     rustup
-    rust-analyzer
     cargo-nextest
     # zplug
     # zsh-autosuggestions
@@ -65,7 +64,10 @@
       shellInit = "source ~/dots/bash/.bashrc;";
       autosuggestions.enable = true;
       syntaxHighlighting.enable = true;
-      shellAliases.update = "sudo nixos-rebuild switch";
+      shellAliases= {
+          update = "sudo nixos-rebuild switch";
+          ls = "eza";
+      };
       ohMyZsh = {
         enable = true;
         # https://github.com/ohmyzsh/ohmyzsh/wiki/Plugins
