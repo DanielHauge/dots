@@ -5,6 +5,7 @@
     # List of user-specific packages
     neovim
     git
+    texliveMedium
     gcc
     bat
     htop-vim
@@ -68,7 +69,7 @@
       ohMyZsh = {
         enable = true;
         # https://github.com/ohmyzsh/ohmyzsh/wiki/Plugins
-        plugins = [ "dotnet" "colored-man-pages" "extract" "golang" "command-not-found" ];
+        plugins = [ "dotnet" "colored-man-pages" "golang" "command-not-found" ];
         theme = "bira";
       };
   };
