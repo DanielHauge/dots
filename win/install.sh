@@ -123,6 +123,13 @@ if [ -z "$nextest_installed" ]; then
 	curl -LsSf https://get.nexte.st/latest/windows-tar | tar zxf - -C ${CARGO_HOME:-~/.cargo}/bin
 fi
 
+eza_installed=$(cargo --list | grep eza)
+
+if [ -z "$eza_installed" ]; then
+	echo "Installing eza"
+	cargo install eza
+fi
+
 # # if go is installed but delve is not. Install delve with go.
 # if command -v go &>/dev/null && ! command -v dlv &>/dev/null; then
 # 	echo "Installing delve"

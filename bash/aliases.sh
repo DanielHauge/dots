@@ -4,27 +4,27 @@
 alias cal='calendar'
 
 if command -v zoxide &>/dev/null; then
-    eval "$(zoxide init bash)"
-    alias cd='z'
+	eval "$(zoxide init bash)"
+	alias cd='z'
 else
-    echo "z not found, defaulting to cd"
+	echo "z not found, defaulting to cd"
 fi
 
 function am() {
-    while true; do
-        await-modify "."
-        clear
-        "$@"
-    done
+	while true; do
+		await-modify "."
+		clear
+		"$@"
+	done
 
 }
 
 if ! command -v firefox &>/dev/null; then
-    alias firefox='firefox.exe'
+	alias firefox='firefox.exe'
 fi
 
 if command -v bat &>/dev/null; then
-    alias cat='bat'
+	alias cat='bat'
 fi
 
 alias repo="cd $REPO_DIR"
@@ -34,14 +34,16 @@ alias vi='nvim'
 alias vim='nvim'
 alias grep='rg -S'
 alias nvi='nvim'
-alias sl='ls'
 if command -v eza &>/dev/null; then
-    alias ls='eza -F --color --icons'
-    alias ll="ls -l -h --time-style=long-iso "
-    alias lt="ls -T"
+	alias sl='eza -F --color=auto --icons'
+	alias ls='eza -F --color=auto --icons'
+	alias ll='eza -l -h --time-style=long-iso --color=auto --icons'
+	alias lt='eza -l -h -T --icons --git-ignore'
+	alias lta='eza -l -h -T --icons'
 else
-    alias ls='eza -F --color=auto'
-    alias ll='ls -l -h --time-style=long-iso --color=auto'
+	alias ls='ls -F --color=auto'
+	alias sl='ls'
+	alias ll='ls -l -h --time-style=long-iso --color=auto'
 fi
 alias cya='shutdown.exe -s -t 0'
 alias bye='shutdown.exe -s -t 0'
@@ -73,14 +75,14 @@ alias mp4tomp3='for i in *.mp4; do ffmpeg -i "$i" "${i%.*}.mp3"; done'
 alias xa='xargs -I ½'
 alias xcat='xa cat ½'
 function cpc() {
-    # First argument is the history number
-    # If no argument is provided, echo bad
-    if [ -z "$1" ]; then
-        history
-        echo "Usage: cpc <history_number>"
-        return 1
-    fi
-    local history_number=$1
-    local command=$(history | grep "^ *$history_number" | sed "s/^ *$history_number *//")
-    echo "$command" | clip
+	# First argument is the history number
+	# If no argument is provided, echo bad
+	if [ -z "$1" ]; then
+		history
+		echo "Usage: cpc <history_number>"
+		return 1
+	fi
+	local history_number=$1
+	local command=$(history | grep "^ *$history_number" | sed "s/^ *$history_number *//")
+	echo "$command" | clip
 }
