@@ -18,8 +18,8 @@ M.general = {
         ["<A-Up>"] = { "<cmd>m .-2<CR>==", "move line up" },
         ["<A-Down>"] = { "<cmd>m .+1<CR>==", "move line down" },
         -- ["<leader>p"] = { "\"+p", "Paste from system clip", opts = { nowait = true}},
-        ["<C-v>"] = { "\"+p", "Paste from system clip", opts = { nowait = true}},
-        ["<C-p>"] = { "\"\"p", "Paste from system clip", opts = { nowait = true}},
+        ["<C-v>"] = { '"+p', "Paste from system clip", opts = { nowait = true } },
+        ["<C-p>"] = { '""p', "Paste from system clip", opts = { nowait = true } },
 
         ["<leader>h"] = {
             function()
@@ -157,6 +157,17 @@ M.general = {
             "[T]est [S]top",
             opts = { nowait = true, noremap = true },
         },
+        -- CTRL k is toggle lsp inlay hints
+        ["<leader>k"] = {
+            function()
+                vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+                -- notify
+                local status = vim.lsp.inlay_hint.is_enabled() and "enabled" or "disabled"
+                vim.notify("Inlay hints " .. status)
+            end,
+            "Toggle inlay hints",
+            opts = { nowait = true, noremap = true },
+        },
     },
 
     v = {
@@ -174,7 +185,7 @@ M.general = {
             ":Calc<CR>",
             "Compute selection",
         },
-        ["<C-c>"] = { "\"+y", "Copy to system clipboard", opts = { nowait = true}},
+        ["<C-c>"] = { '"+y', "Copy to system clipboard", opts = { nowait = true } },
     },
 
     i = {
@@ -195,8 +206,8 @@ M.general = {
         ["<A-Down>"] = { "<cmd>m .+1<CR>", "move line down" },
         -- Control + o to do new line above, but stay in insert mode
         ["<A-o>"] = { "<Esc>O", "new line above", opts = { nowait = true, noremap = true } },
-        ["<C-v>"] = { "<C-r>+", "Paste from system clip", opts = { nowait = true }},
-        ["<C-p>"] = { "<C-r>\"", "Paste from system clip", opts = { nowait = true }},
+        ["<C-v>"] = { "<C-r>+", "Paste from system clip", opts = { nowait = true } },
+        ["<C-p>"] = { '<C-r>"', "Paste from system clip", opts = { nowait = true } },
     },
 }
 -- more ds!
