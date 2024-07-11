@@ -34,6 +34,16 @@ alias vi='nvim'
 alias vim='nvim'
 alias grep='rg -S'
 alias nvi='nvim'
+if command -v clip &>/dev/null; then
+	function cfp() {
+		if [ -f "$1" ]; then
+			echo "$(pwd -W)/$1" | clip
+			return
+		fi
+		echo "File $1 not found"
+	}
+fi
+
 if command -v eza &>/dev/null; then
 	alias sl='eza -F --color=auto --icons'
 	alias ls='eza -F --color=auto --icons'
