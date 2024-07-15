@@ -21,6 +21,9 @@ function gp() {
 	uri=$(git remote get-url origin | sed 's/.*\///' | sed 's/.git//')
 	branch=$(git branch --show-current)
 	mkdir -p ~/.gitpush.logs/"$uri"
+	# if branch starts with feat, fix, hotfix, release, refactor, style, test, chore, ci, build then mkdir -p that folder
+	mkdir -p ~/.gitpush.logs/"$uri"/$(echo "$branch" | cut -d'/' -f1)
+
 	gitpush_out=$(git push 2>&1 | tee ~/.gitpush.logs/"$uri"/"$branch".gitpush)
 	echo "$gitpush_out"
 	# Check if any lines contain a line starting with "remote: " and something with merge_request
@@ -32,7 +35,7 @@ function gp() {
 function gpr() {
 	uri=$(git remote get-url origin | sed 's/.*\///' | sed 's/.git//')
 	branch=$(git branch --show-current)
-	if [ -f ~/.gitpush.logs/"$uri".merge_request ]; then
+	if [ -f ~/.gitpush.logs/"$uri"/"$branch".merge_request ]; then
 		merge_request=$(cat ~/.gitpush.logs/"$uri"/"$branch".merge_request)
 		if [ -n "$merge_request" ]; then
 			echo "Opening merge request: $merge_request"
