@@ -15,30 +15,25 @@ function gcm() {
 	fi
 }
 
-function setup-glab-win() {
-	icacls "$HOME/.config/glab/config.yml" /inheritance:r
-	icacls "$HOME/.config/glab/config.yml" /remove:g *s-1-1-0
-	icacls "$HOME/.config/glab/config.yml" /remove:g BUILTIN/Users
-	icacls "$HOME/.config/glab/config.yml" /grant:r "$USERNAME":F
-}
-
 function gp() {
 	# Use tee to print the output of the command to the terminal and to a file
 	# Get last part of uri
 	uri=$(git remote get-url origin | sed 's/.*\///' | sed 's/.git//')
-	mkdir -p ~/.gitpush.logs
-	gitpush_out=$(git push 2>&1 | tee ~/.gitpush.logs/"$uri")
+	branch=$(git branch --show-current)
+	mkdir -p ~/.gitpush.logs/"$uri"
+	gitpush_out=$(git push 2>&1 | tee ~/.gitpush.logs/"$uri"/"$branch".gitpush)
 	echo "$gitpush_out"
 	# Check if any lines contain a line starting with "remote: " and something with merge_request
-	merge_request=$(echo "$gitpush_out" | grep "remote: " | grep "http" | sed -e 's/remote: //g' | tail -n 1 | tee ~/.gitpush.logs/"$uri".merge_request)
+	merge_request=$(echo "$gitpush_out" | grep "remote: " | grep "http" | sed -e 's/remote: //g' | tail -n 1 | tee ~/.gitpush.logs/"$uri"/"$branch".merge_request)
 	echo "$merge_request"
 
 }
 
 function gpr() {
 	uri=$(git remote get-url origin | sed 's/.*\///' | sed 's/.git//')
+	branch=$(git branch --show-current)
 	if [ -f ~/.gitpush.logs/"$uri".merge_request ]; then
-		merge_request=$(cat ~/.gitpush.logs/"$uri".merge_request)
+		merge_request=$(cat ~/.gitpush.logs/"$uri"/"$branch".merge_request)
 		if [ -n "$merge_request" ]; then
 			echo "Opening merge request: $merge_request"
 			x "$merge_request"
