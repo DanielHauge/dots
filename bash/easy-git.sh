@@ -5,14 +5,49 @@ alias gs='git status -s -b --show-stash --ahead-behind'
 git config --global include.path $DOTS_LOC/bash/.gitconfig
 
 function gcm() {
-    if command -v commitlint &> /dev/null; then
-        if echo "$1" | commitlint lint; then
-            git commit -m "$1"
-        fi
-    else
-        echo "❌Commiting without linting!❌"
-        git commit -m "$1"
-    fi
+	if command -v commitlint &>/dev/null; then
+		if echo "$1" | commitlint lint; then
+			git commit -m "$1"
+		fi
+	else
+		echo "❌Commiting without linting!❌"
+		git commit -m "$1"
+	fi
+}
+
+function setup-glab-win() {
+	icacls "$HOME/.config/glab/config.yml" /inheritance:r
+	icacls "$HOME/.config/glab/config.yml" /remove:g *s-1-1-0
+	icacls "$HOME/.config/glab/config.yml" /remove:g BUILTIN/Users
+	icacls "$HOME/.config/glab/config.yml" /grant:r "$USERNAME":F
+}
+
+function gp() {
+	# Use tee to print the output of the command to the terminal and to a file
+	# Get last part of uri
+	uri=$(git remote get-url origin | sed 's/.*\///' | sed 's/.git//')
+	mkdir -p ~/.gitpush.logs
+	gitpush_out=$(git push 2>&1 | tee ~/.gitpush.logs/"$uri")
+	echo "$gitpush_out"
+	# Check if any lines contain a line starting with "remote: " and something with merge_request
+	merge_request=$(echo "$gitpush_out" | grep "remote: " | grep "http" | sed -e 's/remote: //g' | tail -n 1 | tee ~/.gitpush.logs/"$uri".merge_request)
+	echo "$merge_request"
+
+}
+
+function gpr() {
+	uri=$(git remote get-url origin | sed 's/.*\///' | sed 's/.git//')
+	if [ -f ~/.gitpush.logs/"$uri".merge_request ]; then
+		merge_request=$(cat ~/.gitpush.logs/"$uri".merge_request)
+		if [ -n "$merge_request" ]; then
+			echo "Opening merge request: $merge_request"
+			x "$merge_request"
+		else
+			echo "No merge request found"
+		fi
+	else
+		echo "No merge request found"
+	fi
 }
 
 function gb() {

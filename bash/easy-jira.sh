@@ -10,14 +10,6 @@ JIRA_API_VERSION="latest"
 JIRA_API_URL="https://$JIRA_SUB_DOMAIN.atlassian.net/rest/api/$JIRA_API_VERSION"
 JIRA_ISSUE_API_URL="$JIRA_API_URL/issue/${JIRA_PROJECT_KEY}-"
 
-function gpr() {
-	branch=$(git rev-parse --abbrev-ref HEAD)
-	basename=$(basename $(git remote show -n origin | grep Fetch | cut -d: -f2- | awk '{ print substr( $0, 1, length($0)-4 ) }'))
-	url="${GIT_BASE_URL}/${basename}/pull/new/${branch}"
-	explorer "$url"
-	echo "Opening pull request"
-}
-
 # Create a new atlasian api key and insert with basic_auth https://id.atlassian.com/login?application=jira&continue=https%3A%2F%2Fid.atlassian.com%2Fmanage-profile%2Fprofile-and-visibility&prompt=none
 function gnew() {
 
