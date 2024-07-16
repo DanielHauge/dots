@@ -87,20 +87,20 @@ function gd() {
 		index=1
 	fi
 
-	file="$(git ls-files -d | head -$index | tail -1)"
+	file="$(git ls-files -d | head -"$index" | tail -n 1)"
 	if [ -n "$file" ]; then
 		echo -e "Deleted file \033[41m $file\033[0m"
 		echo -e "\033[91m$(git show HEAD:"$file" | sed -e 's/^/-/')\033[0m "
 		return
 	fi
 
-	file="$(git ls-files -m | head -$index | tail -1)"
+	file="$(git ls-files -m | head -"$index" | tail -n 1)"
 	if [ -n "$file" ]; then
 		git diff "$file"
 		return
 	fi
 
-	file="$(git ls-files -o | head -$index | tail -1)"
+	file="$(git ls-files -o | head -"$index" | tail -n 1)"
 	if [ -n "$file" ]; then
 		echo -e "Added new file \033[44m\033[92m $file \033[0m "
 		while read -r p; do
@@ -114,27 +114,31 @@ function gd() {
 }
 
 function ga() {
-	index=1
 	local file
+	if [[ $1 =~ ^[0-9]+$ ]]; then
+		index=$1
+	else
+		index=1
+	fi
 
 	if [[ $1 =~ ^[0-9]+$ ]]; then
 		index=$1
 	fi
-	file="$(git ls-files -d | head -"$index")"
+	file="$(git ls-files -d | head -"$index" | tail -n 1)"
 	if [ -n "$file" ]; then
 		git add "$file"
 		git status
 		return
 	fi
 
-	file="$(git ls-files -m | head -"$index")"
+	file="$(git ls-files -m | head -"$index" | tail -n 1)"
 	if [ -n "$file" ]; then
 		git add "$file"
 		git status
 		return
 	fi
 
-	file="$(git ls-files -o | head -"$index")"
+	file="$(git ls-files -o | head -"$index" | tail -n 1)"
 	if [ -n "$file" ]; then
 		git add "$file"
 		git status
@@ -148,12 +152,14 @@ function ga() {
 
 function gc() {
 
-	index=1
-
+	local file
 	if [[ $1 =~ ^[0-9]+$ ]]; then
 		index=$1
+	else
+		index=1
 	fi
-	local file="$(git ls-files -d | head -$index)"
+
+	file="$(git ls-files -d | head -"$index" | tail -n 1)"
 	if [ -n "$file" ]; then
 		git restore $file
 		echo "Restored $file from head"
@@ -161,17 +167,17 @@ function gc() {
 		return
 	fi
 
-	local file="$(git ls-files -m | head -$index)"
+	file="$(git ls-files -m | head -"$index" | tail -n 1)"
 	if [ -n "$file" ]; then
-		git restore $file
+		git restore "$file"
 		echo "Restored $file from head"
 		git status
 		return
 	fi
 
-	local file="$(git ls-files -o | head -$index)"
+	file="$(git ls-files -o | head -"$index" | tail -n 1)"
 	if [ -n "$file" ]; then
-		rm $file
+		rm "$file"
 		echo "Removed $file"
 		git status
 		return
