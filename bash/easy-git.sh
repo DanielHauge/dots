@@ -2,7 +2,7 @@
 
 alias gs='git status -s -b --show-stash --ahead-behind'
 # Set gitconfig file location
-git config --global include.path $DOTS_LOC/bash/.gitconfig
+git config --global include.path "$DOTS_LOC"/bash/.gitconfig
 
 function gcm() {
 	if command -v commitlint &>/dev/null; then
@@ -80,62 +80,63 @@ function gb() {
 
 function gd() {
 	# if first argument is a number
+	local file
 	if [[ $1 =~ ^[0-9]+$ ]]; then
 		index=$1
 	else
 		index=1
 	fi
 
-	local file="$(git ls-files -d | head -$index)"
+	file="$(git ls-files -d | head -$index | tail -1)"
 	if [ -n "$file" ]; then
 		echo -e "Deleted file \033[41m $file\033[0m"
-		echo -e "\033[91m$(git show HEAD:$file | sed -e 's/^/-/')\033[0m "
+		echo -e "\033[91m$(git show HEAD:"$file" | sed -e 's/^/-/')\033[0m "
 		return
 	fi
 
-	local file="$(git ls-files -m | head -$index)"
+	file="$(git ls-files -m | head -$index | tail -1)"
 	if [ -n "$file" ]; then
-		git diff $file
+		git diff "$file"
 		return
 	fi
 
-	local file="$(git ls-files -o | head -$index)"
+	file="$(git ls-files -o | head -$index | tail -1)"
 	if [ -n "$file" ]; then
 		echo -e "Added new file \033[44m\033[92m $file \033[0m "
-		while read p; do
+		while read -r p; do
 			echo -e "\033[92m+$p\033[0m"
-		done <$file
+		done <"$file"
 		return
 	fi
 
 	echo "No file to diff"
-
 	git status
 }
 
 function ga() {
 	index=1
+	local file
 
 	if [[ $1 =~ ^[0-9]+$ ]]; then
 		index=$1
 	fi
-	local file="$(git ls-files -d | head -$index)"
+	file="$(git ls-files -d | head -"$index")"
 	if [ -n "$file" ]; then
-		git add $file
+		git add "$file"
 		git status
 		return
 	fi
 
-	local file="$(git ls-files -m | head -$index)"
+	file="$(git ls-files -m | head -"$index")"
 	if [ -n "$file" ]; then
-		git add $file
+		git add "$file"
 		git status
 		return
 	fi
 
-	local file="$(git ls-files -o | head -$index)"
+	file="$(git ls-files -o | head -"$index")"
 	if [ -n "$file" ]; then
-		git add $file
+		git add "$file"
 		git status
 		return
 	fi
