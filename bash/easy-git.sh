@@ -16,20 +16,15 @@ function gcm() {
 }
 
 function gp() {
-	# Use tee to print the output of the command to the terminal and to a file
-	# Get last part of uri
 	uri=$(git remote get-url origin | sed 's/.*\///' | sed 's/.git//')
 	branch=$(git branch --show-current)
 	mkdir -p ~/.gitpush.logs/"$uri"
-	# if branch starts with feat, fix, hotfix, release, refactor, style, test, chore, ci, build then mkdir -p that folder
 	mkdir -p ~/.gitpush.logs/"$uri"/$(echo "$branch" | cut -d'/' -f1)
 
 	gitpush_out=$(git push 2>&1 | tee ~/.gitpush.logs/"$uri"/"$branch".gitpush)
 	echo "$gitpush_out"
-	# Check if any lines contain a line starting with "remote: " and something with merge_request
 	merge_request=$(echo "$gitpush_out" | grep "remote: " | grep "http" | sed -e 's/remote: //g' | tail -n 1 | tee ~/.gitpush.logs/"$uri"/"$branch".merge_request)
 	echo "$merge_request"
-
 }
 
 function gpr() {
@@ -42,10 +37,14 @@ function gpr() {
 			x "$merge_request"
 		else
 			echo "No merge request found"
+			return
 		fi
 	else
 		echo "No merge request found"
+		return
 	fi
+	jira_code=$(echo "$branch" | cut -d'/' -f2 | cut -d'-' -f1,2)
+	jira-to-review "$jira_code"
 }
 
 function gb() {
