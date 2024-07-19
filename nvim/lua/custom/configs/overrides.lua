@@ -44,11 +44,11 @@ M.treesitter = {
 }
 
 M.mason = {
-    -- https://mason-registry.dev/registry/list
     ensure_installed = {
         -- Docs
         "textlint",
-        "ltex-ls",
+        -- "ltex-ls",
+        "marksman",
         "latexindent",
         "markdownlint",
         "grammarly-languageserver",
@@ -118,6 +118,7 @@ M.mason = {
         "clangd",
         "cpplint",
         "codelldb",
+        "neocmakelsp",
 
         -- Bash
         "bash-language-server",

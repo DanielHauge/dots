@@ -25,6 +25,8 @@ local servers = {
     "jdtls",
     "docker_compose_language_service",
     "fsautocomplete",
+    "neocmake",
+    "marksman",
 }
 
 for _, lsp in ipairs(servers) do
@@ -102,11 +104,11 @@ lspconfig["yamlls"].setup {
     },
 }
 
--- change cmd of ltex to ltex-ls
-lspconfig["ltex"].setup {
-    on_attach = on_attach,
-    capabilities = capabilities,
-}
+-- -- change cmd of ltex to ltex-ls
+-- lspconfig["ltex"].setup {
+--     on_attach = on_attach,
+--     capabilities = capabilities,
+-- }
 
 lspconfig["grammarly"].setup {
     on_attach = on_attach,
