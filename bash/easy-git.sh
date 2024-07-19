@@ -16,15 +16,20 @@ function gcm() {
 }
 
 function gp() {
-	uri=$(git remote get-url origin | sed 's/.*\///' | sed 's/.git//')
-	branch=$(git branch --show-current)
-	mkdir -p ~/.gitpush.logs/"$uri"
-	mkdir -p ~/.gitpush.logs/"$uri"/$(echo "$branch" | cut -d'/' -f1)
 
-	gitpush_out=$(git push 2>&1 | tee ~/.gitpush.logs/"$uri"/"$branch".gitpush)
+	gitpush_out=$(git push 2>&1)
 	echo "$gitpush_out"
-	merge_request=$(echo "$gitpush_out" | grep "remote: " | grep "http" | sed -e 's/remote: //g' | tail -n 1 | tee ~/.gitpush.logs/"$uri"/"$branch".merge_request)
-	echo "$merge_request"
+
+	merge_request=$(echo "$gitpush_out" | grep "remote: " | grep "http" | sed -e 's/remote: //g' | tail -n 1)
+	if [ -n "$merge_request" ]; then
+		uri=$(git remote get-url origin | sed 's/.*\///' | sed 's/.git//')
+		branch=$(git branch --show-current)
+		mkdir -p ~/.gitpush.logs/"$uri"
+		mkdir -p ~/.gitpush.logs/"$uri"/"$(echo "$branch" | cut -d'/' -f1)"
+		echo "$merge_request" >~/.gitpush.logs/"$uri"/"$branch".merge_request
+		echo "Dected merge request: $merge_request"
+	fi
+
 }
 
 function gpr() {
