@@ -1,14 +1,5 @@
 #!/bin/bash
 
-function git() {
-	if [ "$1" = "push" ]; then
-		shift
-		gp "$@"
-	else
-		command git "$@"
-	fi
-}
-
 alias gs='git status -s -b --show-stash --ahead-behind'
 # Set gitconfig file location
 git config --global include.path "$DOTS_LOC"/bash/.gitconfig
