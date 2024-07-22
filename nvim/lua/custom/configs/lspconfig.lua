@@ -29,6 +29,20 @@ local servers = {
     "marksman",
 }
 
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "ebnf",
+    callback = function()
+        local tclient = vim.lsp.start_client {
+            name = "ebnf-lsp",
+            cmd = { "ebnf-lsp.exe" },
+            on_attach = require("plugins.configs.lspconfig").on_attach,
+            -- capabilities = capabilities,
+        }
+
+        vim.lsp.buf_attach_client(0, tclient)
+    end,
+})
+
 for _, lsp in ipairs(servers) do
     lspconfig[lsp].setup {
         on_attach = on_attach,
