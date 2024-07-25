@@ -9,7 +9,7 @@ plot() {
 	fi
 	read -r data
 	cols=$(echo "$data" | wc -w)
-	hasHeader=$(echo "$data" | grep -c -E "^[a-zA-Z]")
+	hasHeader=$(echo "$data" | grep -c "^[a-zA-Z]")
 	headers=()
 	plottingData=$(mktemp)
 	if [ "$hasHeader" -eq 1 ]; then
@@ -75,7 +75,7 @@ plotf() {
 	fi
 	read -r data
 	cols=$(echo "$data" | wc -w)
-	hasHeader=$(echo "$data" | grep -c -E "^[a-zA-Z]")
+	hasHeader=$(echo "$data" | grep -c "^[a-zA-Z]")
 	headers=()
 	plottingData=$(mktemp)
 	if [ "$hasHeader" -eq 1 ]; then

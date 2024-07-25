@@ -12,7 +12,7 @@ JIRA_ISSUE_API_URL="$JIRA_API_URL/issue/"
 
 # Create a new atlasian api key and insert with basic_auth https://id.atlassian.com/login?application=jira&continue=https%3A%2F%2Fid.atlassian.com%2Fmanage-profile%2Fprofile-and-visibility&prompt=none
 function gnew() {
-	set -e
+	# set -e
 	if ! git rev-parse --is-inside-work-tree &>/dev/null; then
 		echo "Not in a git repository" >&2
 		return
