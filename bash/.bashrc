@@ -31,6 +31,8 @@ source "$DOTS_LOC"/bash/easy-open.sh
 source "$DOTS_LOC"/bash/easy-dotsauth.sh
 source "$DOTS_LOC"/bash/easy-complete.sh
 
+export PATH="$DOTS_LOC"/bash/pys:$PATH
+
 if [ -n "$POSIX" ]; then
 	source "$DOTS_LOC"/bash/easy-cal.sh
 	# if command -v starship &>/dev/null; then
