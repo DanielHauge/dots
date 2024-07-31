@@ -17,6 +17,8 @@ except ImportError:
 
 
 initial = input().split()
+while len(initial) < 1:
+    initial = input().split()
 # check if initial[0] is a number
 headers = ["Plot1", "Plot2", "Plot3", "Plot4", "Plot5", "Plot6"]
 try:
