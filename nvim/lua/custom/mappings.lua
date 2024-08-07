@@ -186,6 +186,9 @@ M.general = {
             "Compute selection",
         },
         ["<C-c>"] = { '"+y', "Copy to system clipboard", opts = { nowait = true } },
+
+        [">"] = { "<gv", "shift right", opts = { nowait = true, noremap = true } },
+        ["<"] = { ">gv", "shift left", opts = { nowait = true, noremap = true } },
     },
 
     i = {
