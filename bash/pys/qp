@@ -58,7 +58,7 @@ def color(i):
 if single_value:
     # Take and save input as long as there is input
     data = []
-    val = initial[0]
+    val = initial
     while val:
         data.extend(val)
         # Only take input if not EOF
@@ -66,7 +66,12 @@ if single_value:
             val = input().split()
         except EOFError:
             break
-    y = np.array(data).astype(float)
+    try:
+        y = np.array(data).astype(float)
+    except ValueError:
+        print("Invalid input")
+        print(data)
+        exit()
     # 0 to length of data
     x = np.arange(len(data))
     fig.plot(x, y, lc='red', label='stdin')
