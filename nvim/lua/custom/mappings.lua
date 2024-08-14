@@ -56,6 +56,14 @@ M.general = {
             "Open quickfix",
             opts = { nowait = true, noremap = true },
         },
+        ["<leader>qd"] = {
+            function()
+                -- :Trouble todo filter = {tag = {TODO,FIX,FIXME}}
+                require("trouble").open "todo" -- {filter = "TODO"}
+            end,
+            "Open Trouble Todos",
+            opts = { nowait = true, noremap = true },
+        },
 
         ["<leader>ql"] = {
             function()
