@@ -34,6 +34,7 @@ alias vi='nvim'
 alias vim='nvim'
 alias grep='rg -S'
 alias nvi='nvim'
+alias shadafix='rm -rf "$XDG_STATE_HOME"/nvim-data/shada'
 if command -v clip &>/dev/null; then
 	function cfp() {
 		if [ -f "$1" ]; then

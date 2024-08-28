@@ -85,6 +85,7 @@ vim.api.nvim_set_hl(0, "@lsp.type.struct.fsharp", { fg = "#b5cea8" })
 vim.api.nvim_set_hl(0, "@lsp.type.typeParameter.fsharp", { link = "Interface" })
 vim.api.nvim_set_hl(0, "@lsp.type.enumMember.fsharp", { link = "Interface" })
 vim.api.nvim_set_hl(0, "fsharpFunDef", { fg = "#dede5b" })
+vim.api.nvim_set_hl(0, "@lsp.type.interface.fsharp", { link = "Interface" })
 
 -- Dart overrides
 vim.api.nvim_set_hl(0, "@lsp.type.class.dart", { link = "Type" })

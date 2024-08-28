@@ -54,7 +54,7 @@ texw() {
 
 	# Await loop with modify not using notifywait
 	while true; do
-		await-modify "$await_modify_entity"
+		await-modify .
 		buildtex "$buildfile"
 	done
 
@@ -66,7 +66,9 @@ buildtex() {
 		return 1
 	fi
 
-	pdflatex --shell-escape --interaction=nonstopmode "$1" && latexmk -c
+	# pdflatex --shell-escape --interaction=nonstopmode "$1" && latexmk -c
+	# xelatex --interaction=nonstopmode "$1" && latexmk -c
+	xelatex --interaction=nonstopmode "$1"
 
 }
 

@@ -87,10 +87,7 @@ if ! command -v java &>/dev/null; then
 	choco install jdk8 -params 'installdir=c:\\java8' -y
 	export JAVA_HOME="C:\java8"
 	echo "export JAVA_HOME=\"$JAVA_HOME\"" >>~/.bashrc
-
 fi
-
-git config --global core.editor nvim
 
 if ! command -v cmake &>/dev/null; then
 	echo "Installing ckmake"

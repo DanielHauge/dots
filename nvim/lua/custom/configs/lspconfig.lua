@@ -27,6 +27,7 @@ local servers = {
     "fsautocomplete",
     "neocmake",
     "marksman",
+    "zls",
 }
 
 vim.api.nvim_create_autocmd("FileType", {
