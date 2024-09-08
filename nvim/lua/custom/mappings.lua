@@ -20,7 +20,8 @@ M.general = {
         -- ["<leader>p"] = { "\"+p", "Paste from system clip", opts = { nowait = true}},
         ["<C-v>"] = { '"+p', "Paste from system clip", opts = { nowait = true } },
         ["<C-p>"] = { '""p', "Paste from system clip", opts = { nowait = true } },
-
+        -- suspend vim
+        ["<C-z"] = { "<cmd>lua require('utils').suspend()<CR>", "Suspend", opts = { nowait = true, noremap = true } },
         ["<leader>h"] = {
             function()
                 require("hop").hint_words()
