@@ -1,13 +1,20 @@
 #!/bin/bash
 
+if not command -v locales; then
+	sudo apt install locales
+fi
 apt_packages=(
 	git
+	locales
 	neovim
 	alacritty
 	zoxide
 	gcc
 	tree-sitter-cli
+	software-properties-common
+	curl
 	nmap
+	xclip
 	neofetch
 )
 
@@ -29,6 +36,7 @@ snap_packages=(
 )
 
 sudo apt update
+sudo apt upgrade -y
 
 is_installed() {
 	dpkg -l | grep -q "^ii  $1\s"
@@ -70,5 +78,17 @@ for snap in "${snap_packages[@]}"; do
 		sudo snap install "$snap" --classic
 	fi
 done
+
+if is_installed "ros-jazzy-ros-desktop"; then
+	echo "ROS already installed."
+else
+	echo "Installing ROS..."
+	sudo add-apt-repository universe
+	sudo curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o /usr/share/keyrings/ros-archive-keyring.gpg
+	echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(. /etc/os-release && echo $UBUNTU_CODENAME) main" | sudo tee /etc/apt/sources.list.d/ros2.list >/dev/null
+	sudo apt update
+	sudo apt upgrade -y
+	sudo apt install -y ros-jazzy-desktop-full ros-dev-tools
+fi
 
 echo "All programs installed successfully!"

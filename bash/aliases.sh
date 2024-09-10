@@ -46,6 +46,10 @@ if command -v clip &>/dev/null; then
 	}
 fi
 
+if command -v xclip &>/dev/null; then
+	alias clip='xclip -selection clipboard'
+fi
+
 if command -v eza &>/dev/null; then
 	alias sl='eza -F --color=auto --icons'
 	alias ls='eza -F --color=auto --icons'

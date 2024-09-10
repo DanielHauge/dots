@@ -43,3 +43,8 @@ if [ -n "$POSIX" ]; then
 	# fi
 	set -o posix
 fi
+
+# if /opt/ros/jazzy/setup.bash is a file, source it
+if [ -f /opt/ros/jazzy/setup.bash ]; then
+	source /opt/ros/jazzy/setup.bash
+fi
