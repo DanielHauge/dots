@@ -21,7 +21,7 @@ if ! is_installed regolith-desktop; then
 		sudo tee /etc/apt/sources.list.d/regolith.list
 
 	sudo apt update
-	sudo apt install regolith-desktop regolith-session-flashback regolith-look-cahuella
+	sudo apt install regolith-desktop regolith-session-flashback regolith-look-lascaille
 	# regolith-look-lascaille
 	echo "Done installing regolith-desktop. Reboot!"
 
@@ -31,9 +31,12 @@ fi
 apt_packages=(
 	git
 	neovim
+	alacritty
 	zoxide
 	gcc
+	tree-sitter-cli
 	nmap
+	neofetch
 )
 # Install each package if it's not already installed
 for package in "${apt_packages[@]}"; do
@@ -71,6 +74,7 @@ snap_packages=(
 	ffmpeg
 	vlc
 	go
+
 	openjdk
 	glow
 	shellcheck
@@ -80,7 +84,7 @@ for snap in "${snap_packages[@]}"; do
 	if is_snap_installed "$snap"; then
 		echo "$snap is already installed."
 	else
-		sudo snap install "$snap"
+		sudo snap install "$snap" --classic
 	fi
 done
 

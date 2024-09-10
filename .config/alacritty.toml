@@ -1,0 +1,18 @@
+# https://alacritty.org/config-alacritty.html
+[keyboard]
+bindings = [
+    { key = "Up", mods = "Control|Shift", action = "ScrollLineUp"},
+    { key = "Down", mods = "Control|Shift", action = "ScrollLineDown"},
+    { key = "PageDown", mods = "Control|Shift", action = "ScrollPageDown"},
+    { key = "PageUp", mods = "Control|Shift", action = "ScrollPageUp"},
+    { key = "Insert", mods = "Shift", action = "Paste"},
+    { key = "Insert", mods = "Control", action = "Copy"}
+]
+
+[font]
+normal = { family= "JetBrainsMonoNerdFont"}
+
+# [terminal]
+# osc52 = "CopyPaste"
+
+
