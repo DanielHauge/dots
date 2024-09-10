@@ -28,7 +28,7 @@ source "$DOTS_LOC"/bash/easy-chatgpt.sh
 source "$DOTS_LOC"/bash/easy-plot.sh
 source "$DOTS_LOC"/bash/easy-jira.sh
 source "$DOTS_LOC"/bash/easy-open.sh
-source "$DOTS_LOC"/bash/easy-dotsauth.sh
+source "$DOTS_LOC"/bash/easy-dots.sh
 source "$DOTS_LOC"/bash/easy-complete.sh
 
 export PATH="$DOTS_LOC"/bash/pys:$PATH
