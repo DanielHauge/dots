@@ -4,104 +4,106 @@
 set -e
 
 apt_packages=(
-	git
-	thunderbird
-	locales
-	neovim
-	whois
-	alacritty
-	gimp
-	zoxide
-	gcc
-	tree-sitter-cli
-	software-properties-common
-	curl
-	nmap
-	xclip
-	neofetch
+    git
+    thunderbird
+    locales
+    neovim
+    whois
+    alacritty
+    gimp
+    zoxide
+    gcc
+    tree-sitter-cli
+    software-properties-common
+    curl
+    python3.12-venv
+    nmap
+    xclip
+    neofetch
+    rustup
 )
 
 snap_packages=(
-	dotnet-sdk
-	dotnet-runtime-80
-	ripgrep
-	zig
-	node
-	ruff
-	ffmpeg
-	vlc
-	go
-	discord
-	openjdk
-	glow
-	shellcheck
-	flutter
+    dotnet-sdk
+    dotnet-runtime-80
+    ripgrep
+    zig
+    node
+    ruff
+    ffmpeg
+    vlc
+    go
+    discord
+    openjdk
+    glow
+    shellcheck
+    flutter
 )
 
 sudo apt update
 sudo apt upgrade -y
 
 is_installed() {
-	dpkg -l | grep -q "^ii  $1\s"
+    dpkg -l | grep -q "^ii  $1\s"
 }
 
 if ! is_installed regolith-desktop; then
-	echo "Adding Regolith Linux public key to local apt..."
-	wget -qO - https://regolith-desktop.org/regolith.key |
-		gpg --dearmor | sudo tee /usr/share/keyrings/regolith-archive-keyring.gpg >/dev/null
+    echo "Adding Regolith Linux public key to local apt..."
+    wget -qO - https://regolith-desktop.org/regolith.key |
+        gpg --dearmor | sudo tee /usr/share/keyrings/regolith-archive-keyring.gpg >/dev/null
 
-	dist=$(lsb_release -a | awk '{print $2}' | head -n3 | tail -n1)
+    dist=$(lsb_release -a | awk '{print $2}' | head -n3 | tail -n1)
 
-	echo deb "[arch=amd64 signed-by=/usr/share/keyrings/regolith-archive-keyring.gpg] \
+    echo deb "[arch=amd64 signed-by=/usr/share/keyrings/regolith-archive-keyring.gpg] \
         https://regolith-desktop.org/release-3_2-ubuntu-noble-amd64 noble main" |
-		sudo tee /etc/apt/sources.list.d/regolith.list
+        sudo tee /etc/apt/sources.list.d/regolith.list
 
-	sudo apt update
-	sudo apt install regolith-desktop regolith-session-flashback regolith-compositor-picom-glx
-	# regolith-look-lascaille
-	echo "Done installing regolith-desktop. Reboot!"
+    sudo apt update
+    sudo apt install regolith-desktop regolith-session-flashback regolith-compositor-picom-glx
+    # regolith-look-lascaille
+    echo "Done installing regolith-desktop. Reboot!"
 
 fi
 
 for package in "${apt_packages[@]}"; do
-	if is_installed "$package"; then
-		echo "$package is already installed."
-	else
-		sudo apt install -y "$package"
-	fi
+    if is_installed "$package"; then
+        echo "$package is already installed."
+    else
+        sudo apt install -y "$package"
+    fi
 done
 
 is_snap_installed() {
-	snap list | grep -q "^$1\s"
+    snap list | grep -q "^$1\s"
 }
 for snap in "${snap_packages[@]}"; do
-	if is_snap_installed "$snap"; then
-		echo "$snap is already installed."
-	else
-		sudo snap install "$snap" --classic
-	fi
+    if is_snap_installed "$snap"; then
+        echo "$snap is already installed."
+    else
+        sudo snap install "$snap" --classic
+    fi
 done
 
 if is_installed "ros-jazzy-desktop"; then
-	echo "ROS already installed."
+    echo "ROS already installed."
 else
-	echo "Installing ROS..."
-	sudo add-apt-repository universe
-	sudo curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o /usr/share/keyrings/ros-archive-keyring.gpg
-	echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(. /etc/os-release && echo $UBUNTU_CODENAME) main" | sudo tee /etc/apt/sources.list.d/ros2.list >/dev/null
-	sudo apt update
-	sudo apt upgrade -y
-	sudo apt install -y ros-jazzy-desktop-full ros-dev-tools
+    echo "Installing ROS..."
+    sudo add-apt-repository universe
+    sudo curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o /usr/share/keyrings/ros-archive-keyring.gpg
+    echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(. /etc/os-release && echo $UBUNTU_CODENAME) main" | sudo tee /etc/apt/sources.list.d/ros2.list >/dev/null
+    sudo apt update
+    sudo apt upgrade -y
+    sudo apt install -y ros-jazzy-desktop-full ros-dev-tools
 fi
 
 if ! command -v zsh; then
-	sudo apt update
-	sudo apt install zsh -y
-	git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}"/plugins/zsh-syntax-highlighting
-	git clone https://github.com/zsh-users/zsh-autosuggestions "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}"/plugins/zsh-autosuggestions
-	sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-	rm ~/.zshrc
-	ln -sf "$DOTS_LOC"/.config/.zshrc ~/.zshrc
+    sudo apt update
+    sudo apt install zsh -y
+    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}"/plugins/zsh-syntax-highlighting
+    git clone https://github.com/zsh-users/zsh-autosuggestions "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}"/plugins/zsh-autosuggestions
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+    rm ~/.zshrc
+    ln -sf "$DOTS_LOC"/.config/.zshrc ~/.zshrc
 fi
 
 echo "All programs installed successfully!"
