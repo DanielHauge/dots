@@ -1,12 +1,14 @@
 #!/bin/bash
 
-if not command -v locales; then
-	sudo apt install locales
-fi
+# exit on failure
+set -e
+
 apt_packages=(
 	git
+	thunderbird
 	locales
 	neovim
+	whois
 	alacritty
 	zoxide
 	gcc
