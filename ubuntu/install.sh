@@ -57,7 +57,7 @@ if ! is_installed regolith-desktop; then
 		sudo tee /etc/apt/sources.list.d/regolith.list
 
 	sudo apt update
-	sudo apt install regolith-desktop regolith-session-flashback regolith-look-lascaille
+	sudo apt install regolith-desktop regolith-session-flashback regolith-compositor-picom-glx
 	# regolith-look-lascaille
 	echo "Done installing regolith-desktop. Reboot!"
 
