@@ -1,7 +1,10 @@
 export ZSH="$HOME/.oh-my-zsh"
 
 ZSH_THEME="bira"
-zstyle ':omz:update' mode auto      
+# zstyles gives error on startup, only run if running zsh
+if [ -n "$ZSH_VERSION" ]; then
+    zstyle ':omz:update' mode auto
+fi
 
 ENABLE_CORRECTION="true"
 
@@ -19,6 +22,11 @@ plugins=(
 )
 
 source $ZSH/oh-my-zsh.sh
+source $DOTS_LOC/bash/shared_source.sh
+
+if [ -f /opt/ros/jazzy/setup.zsh ]; then
+	source /opt/ros/jazzy/setup.zsh
+fi
 
 if [[ -n $SSH_CONNECTION ]]; then
    export EDITOR='vim'

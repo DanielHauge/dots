@@ -10,6 +10,7 @@ apt_packages=(
 	neovim
 	whois
 	alacritty
+	gimp
 	zoxide
 	gcc
 	tree-sitter-cli
@@ -81,7 +82,7 @@ for snap in "${snap_packages[@]}"; do
 	fi
 done
 
-if is_installed "ros-jazzy-ros-desktop"; then
+if is_installed "ros-jazzy-desktop"; then
 	echo "ROS already installed."
 else
 	echo "Installing ROS..."
@@ -94,15 +95,13 @@ else
 fi
 
 if ! command -v zsh; then
-	echo 'deb http://download.opensuse.org/repositories/shells:/zsh-users:/zsh-autosuggestions/xUbuntu_22.04/ /' | sudo tee /etc/apt/sources.list.d/shells:zsh-users:zsh-autosuggestions.list
-	curl -fsSL https://download.opensuse.org/repositories/shells:zsh-users:zsh-autosuggestions/xUbuntu_22.04/Release.key | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/shells_zsh-users_zsh-autosuggestions.gpg >/dev/null
-	echo 'deb http://download.opensuse.org/repositories/shells:/zsh-users:/zsh-syntax-highlighting/xUbuntu_22.04/ /' | sudo tee /etc/apt/sources.list.d/shells:zsh-users:zsh-syntax-highlighting.list
-	curl -fsSL https://download.opensuse.org/repositories/shells:zsh-users:zsh-syntax-highlighting/xUbuntu_22.04/Release.key | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/shells_zsh-users_zsh-syntax-highlighting.gpg >/dev/null
 	sudo apt update
-	sudo apt install zsh zsh-syntax-highlighting zsh-autosuggestions
-	chsh -s "$(which zsh)"
+	sudo apt install zsh -y
 	git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}"/plugins/zsh-syntax-highlighting
 	git clone https://github.com/zsh-users/zsh-autosuggestions "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}"/plugins/zsh-autosuggestions
+	sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+	rm ~/.zshrc
+	ln -sf "$DOTS_LOC"/.config/.zshrc ~/.zshrc
 fi
 
 echo "All programs installed successfully!"

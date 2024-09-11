@@ -61,25 +61,30 @@ else
 	alias sl='ls'
 	alias ll='ls -l -h --time-style=long-iso --color=auto'
 fi
-alias cya='shutdown.exe -s -t 0'
-alias bye='shutdown.exe -s -t 0'
-alias reboot='shutdown.exe -r -t 0'
-alias bc='python -c "from __future__ import division; from math import *; import sys; print(eval(sys.argv[1]))"'
-alias restart='shutdown.exe -r -t 0'
-alias off='shutdown.exe -s -t 0'
-alias bios='shutdown.exe -r -t 0 -fw'
-alias bootusb='shutdown.exe -r -t 0 -o'
+
+# if windows
+if [ -n "$WINDIR" ]; then
+	alias cya='shutdown.exe -s -t 0'
+	alias bye='shutdown.exe -s -t 0'
+	alias reboot='shutdown.exe -r -t 0'
+	alias bc='python -c "from __future__ import division; from math import *; import sys; print(eval(sys.argv[1]))"'
+	alias restart='shutdown.exe -r -t 0'
+	alias off='shutdown.exe -s -t 0'
+	alias bios='shutdown.exe -r -t 0 -fw'
+	alias bootusb='shutdown.exe -r -t 0 -o'
+	alias nas="wt.exe -p 'Git Bash' -d //nas/vault"
+	alias gwt="wt.exe -p 'Git Bash'"
+	export WINDOWS_TERMINAL_EXECUTE_COMMAND="'/c start wt.exe'"
+	alias wt='wt.exe --startingDirectory "$(pwd -W)"'
+	alias wta='powershell.exe "Start-Process -Verb RunAs cmd.exe $WINDOWS_TERMINAL_EXECUTE_COMMAND"'
+	# TODO: release this small tool
+	alias winstall="$DOTS_LOC/win/install.sh"
+fi
+
+alias letitsnow="$DOTS_LOC/bash/snowjob.sh"
 alias rmd='cat *.md | glow '
 alias todo='cat $REPO_DIR/*/TODO.md | glow'
 # Start wt with profile git bash, and use //nas/vault as directory
-alias nas="wt.exe -p 'Git Bash' -d //nas/vault"
-alias gwt="wt.exe -p 'Git Bash'"
-export WINDOWS_TERMINAL_EXECUTE_COMMAND="'/c start wt.exe'"
-alias wt='wt.exe --startingDirectory "$(pwd -W)"'
-alias wta='powershell.exe "Start-Process -Verb RunAs cmd.exe $WINDOWS_TERMINAL_EXECUTE_COMMAND"'
-# TODO: release this small tool
-alias winstall="$DOTS_LOC/win/install.sh"
-alias letitsnow="$DOTS_LOC/bash/snowjob.sh"
 alias awk1='awk "{print \$1}"'
 alias awk2='awk "{print \$2}"'
 alias awk3='awk "{print \$3}"'
