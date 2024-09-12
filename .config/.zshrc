@@ -21,6 +21,17 @@ plugins=(
     sudo
 )
 
+
+if [ -z "$DOTS_LOC" ]; then
+	export DOTS_LOC="$HOME/dots"
+fi
+
+if [ -z "$REPO_DIR" ]; then
+	export REPO_DIR="$HOME/repo"
+fi
+
+
+export GITLAB_PAT='glpat-zbYmLmbDKLbcbR9zYmLw'
 source $ZSH/oh-my-zsh.sh
 source $DOTS_LOC/bash/shared_source.sh
 

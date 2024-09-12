@@ -7,7 +7,9 @@ apt_packages=(
     git
     thunderbird
     locales
+    bat
     neovim
+    eza
     whois
     alacritty
     gimp
