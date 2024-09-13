@@ -10,7 +10,9 @@ apt_packages=(
     bat
     neovim
     eza
+    texlive-full
     whois
+    fzf
     alacritty
     gimp
     zoxide
@@ -35,6 +37,7 @@ snap_packages=(
     ffmpeg
     vlc
     go
+    code
     discord
     openjdk
     glow

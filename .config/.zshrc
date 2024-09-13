@@ -30,6 +30,7 @@ if [ -z "$REPO_DIR" ]; then
 	export REPO_DIR="$HOME/repo"
 fi
 
+export PATH="$HOME/.cargo/bin:$PATH"
 
 export GITLAB_PAT='glpat-zbYmLmbDKLbcbR9zYmLw'
 source $ZSH/oh-my-zsh.sh

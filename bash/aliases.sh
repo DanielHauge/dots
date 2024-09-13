@@ -31,6 +31,9 @@ fi
 
 if command -v bat &>/dev/null; then
     alias cat='bat'
+    alias catw='watch -n 1 bat -f'
+else
+    alias catw='watch -n 1 cat'
 fi
 
 alias repo="cd $REPO_DIR"
