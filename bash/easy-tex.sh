@@ -68,7 +68,7 @@ buildtex() {
 
     # pdflatex --shell-escape --interaction=nonstopmode "$1" && latexmk -c
     # xelatex --interaction=nonstopmode "$1" && latexmk -c
-    xelatex --interaction=nonstopmode "$1"
+    xelatex -shell-escape --interaction=nonstopmode "$1"
 
 }
 

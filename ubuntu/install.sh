@@ -9,6 +9,8 @@ apt_packages=(
     locales
     bat
     neovim
+    inkscape
+    ca-certificates
     eza
     texlive-full
     whois
@@ -38,6 +40,7 @@ snap_packages=(
     vlc
     go
     code
+    chromium
     discord
     openjdk
     glow
@@ -109,6 +112,18 @@ if ! command -v zsh; then
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
     rm ~/.zshrc
     ln -sf "$DOTS_LOC"/.config/.zshrc ~/.zshrc
+fi
+
+if ! command -v docker; then
+    sudo install -m 0755 -d /etc/apt/keyrings
+    sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+    sudo chmod a+r /etc/apt/keyrings/docker.asc
+    echo \
+        "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+            $(. /etc/os-release && echo "$VERSION_CODENAME") stable" |
+        sudo tee /etc/apt/sources.list.d/docker.list >/dev/null
+    sudo apt-get update -y
+    sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y
 fi
 
 echo "All programs installed successfully!"

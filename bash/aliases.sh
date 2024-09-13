@@ -99,6 +99,7 @@ fi
 alias letitsnow="$DOTS_LOC/bash/snowjob.sh"
 alias rmd='cat *.md | glow '
 alias todo='cat $REPO_DIR/*/TODO.md | glow'
+alias mmdcd='sudo docker run --rm -u `id -u`:`id -g` -v .:/data minlag/mermaid-cli -i'
 # Start wt with profile git bash, and use //nas/vault as directory
 alias awk1='awk "{print \$1}"'
 alias awk2='awk "{print \$2}"'
