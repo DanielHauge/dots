@@ -29,34 +29,34 @@ M.general = {
             "[H]op with word hints",
         },
 
-        ["<leader>qx"] = {
-            function()
-                require("trouble").toggle()
-            end,
-            "open trouble",
-            opts = { nowait = true, noremap = true },
-        },
-        ["<leader>qw"] = {
-            function()
-                require("trouble").open "workspace_diagnostics"
-            end,
-            "Open workspace diagnostics",
-            opts = { nowait = true, noremap = true },
-        },
-        ["<leader>qo"] = {
-            function()
-                require("trouble").open "document_diagnostics"
-            end,
-            "Open document diagnostics",
-            opts = { nowait = true, noremap = true },
-        },
-        ["<leader>qf"] = {
-            function()
-                require("trouble").open "quickfix"
-            end,
-            "Open quickfix",
-            opts = { nowait = true, noremap = true },
-        },
+        -- ["<leader>qx"] = {
+        --     function()
+        --         require("trouble").toggle()
+        --     end,
+        --     "open trouble",
+        --     opts = { nowait = true, noremap = true },
+        -- },
+        -- ["<leader>qw"] = {
+        --     function()
+        --         require("trouble").open "workspace_diagnostics"
+        --     end,
+        --     "Open workspace diagnostics",
+        --     opts = { nowait = true, noremap = true },
+        -- },
+        -- ["<leader>qo"] = {
+        --     function()
+        --         require("trouble").open "document_diagnostics"
+        --     end,
+        --     "Open document diagnostics",
+        --     opts = { nowait = true, noremap = true },
+        -- },
+        -- ["<leader>qf"] = {
+        --     function()
+        --         require("trouble").open "quickfix"
+        --     end,
+        --     "Open quickfix",
+        --     opts = { nowait = true, noremap = true },
+        -- },
         ["<leader>qd"] = {
             function()
                 -- :Trouble todo filter = {tag = {TODO,FIX,FIXME}}
@@ -66,41 +66,41 @@ M.general = {
             opts = { nowait = true, noremap = true },
         },
 
-        ["<leader>ql"] = {
-            function()
-                require("trouble").open "loclist"
-            end,
-            "Open loclist",
-            opts = { nowait = true, noremap = true },
-        },
-        ["gr"] = {
-            function()
-                require("trouble").open "lsp_references"
-            end,
-            "Open lsp references",
-            opts = { nowait = true, noremap = true },
-        },
-        ["gd"] = {
-            function()
-                require("trouble").open "lsp_definitions"
-            end,
-            "Open lsp definitions",
-            opts = { nowait = true, noremap = true },
-        },
-        ["<leader>qt"] = {
-            function()
-                require("trouble").open "lsp_type_definitions"
-            end,
-            "Open lsp type definitions",
-            opts = { nowait = true, noremap = true },
-        },
-        ["gI"] = {
-            function()
-                require("trouble").open "lsp_implementations"
-            end,
-            "Open lsp implementations",
-            opts = { nowait = true, noremap = true },
-        },
+        -- ["<leader>ql"] = {
+        --     function()
+        --         require("trouble").open "loclist"
+        --     end,
+        --     "Open loclist",
+        --     opts = { nowait = true, noremap = true },
+        -- },
+        -- ["gr"] = {
+        --     function()
+        --         require("trouble").open "lsp_references"
+        --     end,
+        --     "Open lsp references",
+        --     opts = { nowait = true, noremap = true },
+        -- },
+        -- ["gd"] = {
+        --     function()
+        --         require("trouble").open "lsp_definitions"
+        --     end,
+        --     "Open lsp definitions",
+        --     opts = { nowait = true, noremap = true },
+        -- },
+        -- ["<leader>qt"] = {
+        --     function()
+        --         require("trouble").open "lsp_type_definitions"
+        --     end,
+        --     "Open lsp type definitions",
+        --     opts = { nowait = true, noremap = true },
+        -- },
+        -- ["gI"] = {
+        --     function()
+        --         require("trouble").open "lsp_implementations"
+        --     end,
+        --     "Open lsp implementations",
+        --     opts = { nowait = true, noremap = true },
+        -- },
         -- Control + o to do new line above
         ["<A-o>"] = { "O<ESC>", "new line above", opts = { nowait = true, noremap = true } },
 

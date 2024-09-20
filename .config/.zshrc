@@ -31,8 +31,13 @@ if [ -z "$REPO_DIR" ]; then
 fi
 
 export PATH="$HOME/.cargo/bin:$PATH"
+export PATH="$HOME/p":$PATH
+export PATH="$HOME/bin":$PATH
 
-export GITLAB_PAT='glpat-zbYmLmbDKLbcbR9zYmLw'
+if [ -f ~/.zshrc.local ]; then
+    source ~/.zshrc.local
+fi
+
 source $ZSH/oh-my-zsh.sh
 source $DOTS_LOC/bash/shared_source.sh
 

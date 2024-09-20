@@ -9,7 +9,9 @@ apt_packages=(
     locales
     bat
     neovim
+    python3-pip
     inkscape
+    wine
     ca-certificates
     eza
     texlive-full
@@ -48,8 +50,8 @@ snap_packages=(
     flutter
 )
 
-sudo apt update
-sudo apt upgrade -y
+# sudo apt update
+# sudo apt upgrade -y
 
 is_installed() {
     dpkg -l | grep -q "^ii  $1\s"
@@ -124,6 +126,10 @@ if ! command -v docker; then
         sudo tee /etc/apt/sources.list.d/docker.list >/dev/null
     sudo apt-get update -y
     sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y
+fi
+
+if ! command -v tectonic; then
+    curl --proto '=https' --tlsv1.2 -fsSL https://drop-sh.fullyjustified.net | sh
 fi
 
 echo "All programs installed successfully!"

@@ -55,6 +55,7 @@ texw() {
     # Await loop with modify not using notifywait
     while true; do
         await-modify .
+        clear_console
         buildtex "$buildfile"
     done
 
@@ -68,7 +69,11 @@ buildtex() {
 
     # pdflatex --shell-escape --interaction=nonstopmode "$1" && latexmk -c
     # xelatex --interaction=nonstopmode "$1" && latexmk -c
-    xelatex -shell-escape --interaction=nonstopmode "$1"
+    if command -v tectonic &>/dev/null; then
+        tectonic -k --keep-logs --reruns 0 "$1"
+    else
+        xelatex -shell-escape --interaction=nonstopmode "$1"
+    fi
 
 }
 

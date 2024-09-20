@@ -17,6 +17,7 @@ local servers = {
     "dockerls",
     "html",
     "rust_analyzer",
+    "texlab",
     "ts_ls",
     "sqlls",
     "csharp_ls",

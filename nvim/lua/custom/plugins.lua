@@ -140,6 +140,51 @@ local plugins = {
     {
         "folke/trouble.nvim",
         dependencies = { "nvim-tree/nvim-web-devicons" },
+        opts = {},
+        cmd = "Trouble",
+        keys = {
+            {
+                "<leader>qx",
+                "<cmd>Trouble toggle<cr>",
+                desc = "Trouble toggle",
+            },
+            {
+                "<leader>qw",
+                "<cmd>Trouble diagnostics focus=true<cr>",
+                desc = "Diagnostics (Trouble)",
+            },
+            {
+                "<leader>qd",
+                "<cmd>Trouble todo focus=true<cr>",
+                desc = "Todos (Trouble)",
+            },
+            {
+                "<leader>qB",
+                "<cmd>Trouble diagnostics toggle filter.buf=0 focus=true<cr>",
+                desc = "Buffer Diagnostics (Trouble)",
+            },
+
+            {
+                "<leader>qs",
+                "<cmd>Trouble symbols toggle focus=true<cr>",
+                desc = "Symbols (Trouble)",
+            },
+            {
+                "<leader>qr",
+                "<cmd>Trouble lsp toggle focus=true win.position=right<cr>",
+                desc = "LSP Definitions / references / ... (Trouble)",
+            },
+            {
+                "<leader>qL",
+                "<cmd>Trouble loclist toggle focus=true<cr>",
+                desc = "Location List (Trouble)",
+            },
+            {
+                "<leader>qf",
+                "<cmd>Trouble qflist focus=true<cr>",
+                desc = "Quickfix List (Trouble)",
+            },
+        },
     },
     {
         "mfussenegger/nvim-dap",

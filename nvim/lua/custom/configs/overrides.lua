@@ -47,11 +47,11 @@ M.mason = {
     ensure_installed = {
         -- Docs
         "textlint",
-        -- "ltex-ls",
         "marksman",
         "latexindent",
         "markdownlint",
         "grammarly-languageserver",
+        "texlab",
 
         -- Misc
         "commitlint",
