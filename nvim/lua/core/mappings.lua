@@ -161,13 +161,6 @@ M.lspconfig = {
             "LSP hover",
         },
 
-        ["gi"] = {
-            function()
-                vim.lsp.buf.implementation()
-            end,
-            "LSP implementation",
-        },
-
         ["<leader>ls"] = {
             function()
                 vim.lsp.buf.signature_help()
@@ -200,12 +193,6 @@ M.lspconfig = {
                 vim.lsp.buf.code_action()
             end,
             "LSP code action",
-        },
-        ["gr"] = {
-            function()
-                vim.lsp.buf.references()
-            end,
-            "LSP references",
         },
 
         ["<leader>f"] = {

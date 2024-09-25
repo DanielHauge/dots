@@ -171,17 +171,34 @@ local plugins = {
             },
             {
                 "<leader>qr",
-                "<cmd>Trouble lsp toggle focus=true win.position=right<cr>",
+                "<cmd>Trouble lsp toggle focus=true<cr>",
                 desc = "LSP Definitions / references / ... (Trouble)",
+            },
+            {
+                "gr",
+                "<cmd>Trouble lsp toggle focus=true<cr>",
+                desc = "LSP Definitions / references / ... (Trouble)",
+            },
+
+            {
+                "gi",
+                "<cmd>Trouble lsp_implementations toggle focus=true<cr>",
+                desc = "LSP Implementations (Trouble)",
             },
             {
                 "<leader>qL",
                 "<cmd>Trouble loclist toggle focus=true<cr>",
                 desc = "Location List (Trouble)",
             },
+
             {
                 "<leader>qf",
                 "<cmd>Trouble qflist focus=true<cr>",
+                desc = "Quickfix List (Trouble)",
+            },
+            {
+                "<leader>qc",
+                "<cmd>Trouble lsp_command focus=true<cr>",
                 desc = "Quickfix List (Trouble)",
             },
         },

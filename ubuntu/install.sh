@@ -8,6 +8,8 @@ apt_packages=(
     thunderbird
     locales
     bat
+    evince
+    pandoc
     neovim
     python3-pip
     inkscape
