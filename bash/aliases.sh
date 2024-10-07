@@ -17,6 +17,7 @@ else
 fi
 
 function am() {
+    "$@"
     while true; do
         await-modify "."
         clear
