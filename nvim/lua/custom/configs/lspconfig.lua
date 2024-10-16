@@ -7,7 +7,7 @@ local lspconfig = require "lspconfig"
 --
 -- dotnet tool install --global fsautocomplete
 local servers = {
-    "clangd",
+    -- "clangd",
     "jqls",
     "jsonls",
     "bashls",
@@ -82,6 +82,20 @@ require("typescript-tools").setup {
         include_completions_with_insert_text = true,
         code_lens = "off",
         disable_member_code_lens = true,
+    },
+}
+
+lspconfig["clangd"].setup {
+    on_attach = on_attach,
+    capabilities = capabilities,
+    cmd = {
+        "clangd",
+        "--offset-encoding=utf-16",
+        -- "--background-index",
+        -- "--clang-tidy",
+        -- "--completion-style=bundled",
+        -- "--cross-file-rename",
+        -- "--header-insertion=iywu",
     },
 }
 

@@ -70,6 +70,16 @@ vim.api.nvim_set_hl(0, "yamlPlainScalar", { fg = "#cea168" })
 vim.api.nvim_set_hl(0, "@type.builtin.c", { fg = "#468cff", bold = true, italic = true })
 vim.api.nvim_set_hl(0, "@lsp.type.class.c", { link = "Type" })
 
+-- C++ overrides
+vim.api.nvim_set_hl(0, "@lsp.type.class.cpp", { link = "Type" })
+vim.api.nvim_set_hl(0, "@type.builtin.cpp", { fg = "#468cff", bold = true, italic = true })
+vim.api.nvim_set_hl(0, "@lsp.type.parameter.cpp", { link = "@variable" })
+vim.api.nvim_set_hl(0, "@lsp.type.enum.cpp", { fg = "#5ea960" })
+vim.api.nvim_set_hl(0, "@lsp.type.enumMember.cpp", { fg = "#46e666" })
+
+-- Ros2 overrides
+vim.api.nvim_set_hl(0, "@variable.member.ros2", { link = "@variable" })
+
 -- Java overrides
 vim.api.nvim_set_hl(0, "@lsp.type.class.java", { link = "Type" })
 vim.api.nvim_set_hl(0, "@lsp.type.interface.java", { link = "Interface" })
@@ -246,6 +256,11 @@ M.override["@variable.builtin"] = {
 
 -- Variables are red: 79, green: 193, blue: 255
 M.override["@variable"] = {
+    fg = "#7fd1ff",
+    bold = true,
+}
+
+M.override["@variable.parameter"] = {
     fg = "#7fd1ff",
     bold = true,
 }

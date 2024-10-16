@@ -15,8 +15,8 @@ plugins=(
 	zsh-syntax-highlighting	 
 	zsh-autosuggestions
 	web-search
-    dotnet
-    docker
+    # dotnet
+    # docker
     zsh-interactive-cd
     sudo
 )
@@ -41,9 +41,12 @@ fi
 source $ZSH/oh-my-zsh.sh
 source $DOTS_LOC/bash/shared_source.sh
 
-if [ -f /opt/ros/jazzy/setup.zsh ]; then
-	source /opt/ros/jazzy/setup.zsh
-fi
+function ros2-src() {
+    if [ -f /opt/ros/jazzy/setup.zsh ]; then
+        source /opt/ros/jazzy/setup.zsh
+    fi
+
+}
 
 if [[ -n $SSH_CONNECTION ]]; then
    export EDITOR='vim'

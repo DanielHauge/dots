@@ -16,6 +16,21 @@ local plugins = {
         },
     },
     {
+        "ErickKramer/nvim-ros2",
+        ft = { "cpp" },
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+            "nvim-telescope/telescope.nvim",
+            "nvim-treesitter/nvim-treesitter",
+        },
+        opts = {
+            -- Add any custom options here
+            autocmds = true,
+            telescope = true,
+            treesitter = true,
+        },
+    },
+    {
         "nvim-treesitter/playground",
         cmd = "TSPlaygroundToggle",
     },

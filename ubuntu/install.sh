@@ -6,8 +6,15 @@ set -e
 apt_packages=(
     git
     thunderbird
+    bear
+    clang-tools
+    nload
     locales
     bat
+    baobab
+    htop
+    python3-rocker
+    ghex
     evince
     pandoc
     neovim
