@@ -16,6 +16,7 @@ local servers = {
     "cucumber_language_server",
     "dockerls",
     "html",
+    "ltex",
     "rust_analyzer",
     "texlab",
     "ts_ls",
@@ -25,6 +26,7 @@ local servers = {
     "dockerls",
     "jdtls",
     "docker_compose_language_service",
+    "ltex-ls",
     "fsautocomplete",
     "neocmake",
     "marksman",
@@ -60,6 +62,27 @@ lspconfig["gopls"].setup {
     settings = {
         gopls = {
             gofumpt = true,
+        },
+    },
+}
+
+lspconfig["grammar_guard"].setup {
+    on_attach = on_attach,
+    capabilities = capabilities,
+    settings = {
+        ltex = {
+            enabled = { "latex", "tex", "bib", "markdown" },
+            language = "en",
+            diagnosticSeverity = "information",
+            setenceCacheSize = 2000,
+            additionalRules = {
+                enablePickyRules = true,
+                motherTongue = "en",
+            },
+            trace = { server = "verbose" },
+            dictionary = {},
+            disabledRules = {},
+            hiddenFalsePositives = {},
         },
     },
 }
@@ -132,16 +155,4 @@ lspconfig["yamlls"].setup {
             schemas = require("schemastore").yaml.schemas(),
         },
     },
-}
-
--- -- change cmd of ltex to ltex-ls
--- lspconfig["ltex"].setup {
---     on_attach = on_attach,
---     capabilities = capabilities,
--- }
-
-lspconfig["grammarly"].setup {
-    on_attach = on_attach,
-    capabilities = capabilities,
-    filetypes = { "markdown", "tex", "plaintex", "text" },
 }

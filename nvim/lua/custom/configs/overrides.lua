@@ -53,6 +53,7 @@ M.mason = {
         "markdownlint",
         "grammarly-languageserver",
         "texlab",
+        "ltex-ls",
 
         -- Misc
         "commitlint",
