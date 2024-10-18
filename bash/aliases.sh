@@ -44,6 +44,7 @@ alias vim='nvim'
 alias grep='rg -S'
 alias nvi='nvim'
 alias shadafix='rm -rf "$XDG_STATE_HOME"/nvim-data/shada'
+alias battery='upower -i /org/freedesktop/UPower/devices/battery_BAT0'
 
 if command -v clip &>/dev/null; then
     function cfp() {
