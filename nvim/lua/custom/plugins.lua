@@ -154,7 +154,7 @@ local plugins = {
     -- Override plugin definition options
     {
         "folke/trouble.nvim",
-        dependencies = { "nvim-tree/nvim-web-devicons" },
+        dependencies = { "nvim-tree/nvim-web-devicons", "folke/todo-comments.nvim" },
         opts = {},
         cmd = "Trouble",
         keys = {
