@@ -141,6 +141,10 @@ if ! command -v docker; then
     sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y
 fi
 
+if ! command -v lazygit; then
+    go install github.com/jesseduffield/lazygit@latest
+fi
+
 if ! command -v tectonic; then
     curl --proto '=https' --tlsv1.2 -fsSL https://drop-sh.fullyjustified.net | sh
 fi

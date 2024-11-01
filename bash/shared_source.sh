@@ -12,6 +12,7 @@ source "$DOTS_LOC"/bash/easy-open.sh
 source "$DOTS_LOC"/bash/easy-dots.sh
 
 export PATH="$DOTS_LOC"/bash/pys:$PATH
+export PATH=~/go/bin:$PATH
 
 if [ -n "$POSIX" ]; then
     source "$DOTS_LOC"/bash/easy-cal.sh
