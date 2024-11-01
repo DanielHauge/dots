@@ -2,10 +2,14 @@
 
 # exit on failure
 set -e
+sudo -v
 
 apt_packages=(
+    libgtk-3-dev
     git
+    gnuplot
     thunderbird
+    lftp
     bear
     clang-tools
     nload
@@ -14,6 +18,9 @@ apt_packages=(
     baobab
     htop
     python3-rocker
+    python3-pykml
+    python3-lxml
+    python3-h5py
     ghex
     evince
     pandoc
@@ -58,9 +65,6 @@ snap_packages=(
     shellcheck
     flutter
 )
-
-# sudo apt update
-# sudo apt upgrade -y
 
 is_installed() {
     dpkg -l | grep -q "^ii  $1\s"
