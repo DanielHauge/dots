@@ -92,7 +92,7 @@ fi
 
 if ! command -v lazhygit &>/dev/null; then
 	echo "Installing lazhygit"
-	go install github.com/jesseduffield/lazygit@latesti
+	go install github.com/jesseduffield/lazygit@latest
 fi
 
 if ! command -v cmake &>/dev/null; then
