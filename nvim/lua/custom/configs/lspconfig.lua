@@ -66,26 +66,26 @@ lspconfig["gopls"].setup {
     },
 }
 
-lspconfig["grammar_guard"].setup {
-    on_attach = on_attach,
-    capabilities = capabilities,
-    settings = {
-        ltex = {
-            enabled = { "latex", "tex", "bib", "markdown" },
-            language = "en",
-            diagnosticSeverity = "information",
-            setenceCacheSize = 2000,
-            additionalRules = {
-                enablePickyRules = true,
-                motherTongue = "en",
-            },
-            trace = { server = "verbose" },
-            dictionary = {},
-            disabledRules = {},
-            hiddenFalsePositives = {},
-        },
-    },
-}
+-- lspconfig["grammar_guard"].setup {
+--     on_attach = on_attach,
+--     capabilities = capabilities,
+--     settings = {
+--         ltex = {
+--             enabled = { "latex", "tex", "bib", "markdown" },
+--             language = "en",
+--             diagnosticSeverity = "information",
+--             setenceCacheSize = 2000,
+--             additionalRules = {
+--                 enablePickyRules = true,
+--                 motherTongue = "en",
+--             },
+--             trace = { server = "verbose" },
+--             dictionary = {},
+--             disabledRules = {},
+--             hiddenFalsePositives = {},
+--         },
+--     },
+-- }
 
 require("typescript-tools").setup {
     on_attach = on_attach,
