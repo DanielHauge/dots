@@ -1,0 +1,21 @@
+#!/usr/bin/env python
+
+import sys
+
+import matplotlib.pyplot as plt
+import numpy as np
+
+data = np.loadtxt(sys.stdin)
+# Iterate over each pair of columns
+for i in range(0, data.shape[1], 2):
+    x = data[:, i]
+    y = data[:, i + 1]
+    plt.plot(x, y, label=f'$({i},{i + 1})')
+
+# Customize the plot
+plt.title('Plotting (x, y) Pairs')
+plt.xlabel('X')
+plt.ylabel('Y')
+plt.legend()
+plt.grid()
+plt.show()

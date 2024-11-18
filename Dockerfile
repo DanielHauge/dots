@@ -6,7 +6,7 @@ RUN apt install -y gnuplot
 RUN apt install -y clang-tools
 RUN apt install -y wget
 RUN apt install -y nload
-RUN apt install -y locales
+RUN apt install -y RUN apt install -y locales
 RUN apt install -y bat
 RUN apt install -y htop
 RUN apt install -y neovim

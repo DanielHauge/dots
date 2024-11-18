@@ -46,6 +46,7 @@ alias grep='rg -S'
 alias nvi='nvim'
 alias shadafix='rm -rf "$XDG_STATE_HOME"/nvim-data/shada'
 alias battery='upower -i /org/freedesktop/UPower/devices/battery_BAT0'
+alias ssh-keys='curl https://github.com/danielhauge.keys'
 # alias fix-tsv=sed ':a;N;$!ba;s/"\([^"]*\)\n\([^"]*\)"/"\1;\2"/g'
 
 if command -v clip &>/dev/null; then

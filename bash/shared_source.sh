@@ -6,7 +6,7 @@ source "$DOTS_LOC"/bash/easy-tex.sh
 # source "$DOTS_LOC"/bash/easy-termlinq.sh
 # source "$DOTS_LOC"/bash/easy-pack.sh
 source "$DOTS_LOC"/bash/easy-chatgpt.sh
-source "$DOTS_LOC"/bash/easy-plot.sh
+# source "$DOTS_LOC"/bash/easy-plot.sh
 source "$DOTS_LOC"/bash/easy-jira.sh
 source "$DOTS_LOC"/bash/easy-open.sh
 source "$DOTS_LOC"/bash/easy-dots.sh

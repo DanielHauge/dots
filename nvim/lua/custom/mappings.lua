@@ -18,7 +18,7 @@ M.general = {
         ["<A-Up>"] = { "<cmd>m .-2<CR>==", "move line up" },
         ["<A-Down>"] = { "<cmd>m .+1<CR>==", "move line down" },
         -- ["<leader>p"] = { "\"+p", "Paste from system clip", opts = { nowait = true}},
-        ["<C-v>"] = { '"+p', "Paste from system clip", opts = { nowait = true } },
+        ["<C-S-v>"] = { '"+p', "Paste from system clip", opts = { nowait = true } },
         ["<C-p>"] = { '""p', "Paste from system clip", opts = { nowait = true } },
         -- suspend vim
         ["<C-z"] = { "<cmd>lua require('utils').suspend()<CR>", "Suspend", opts = { nowait = true, noremap = true } },
@@ -218,7 +218,9 @@ M.general = {
         ["<A-Down>"] = { "<cmd>m .+1<CR>", "move line down" },
         -- Control + o to do new line above, but stay in insert mode
         ["<A-o>"] = { "<Esc>O", "new line above", opts = { nowait = true, noremap = true } },
-        ["<C-v>"] = { "<C-r>+", "Paste from system clip", opts = { nowait = true } },
+        -- Control + v -> go to visual mode
+        ["<C-v>"] = { "<Esc>v", "go to visual mode", opts = { nowait = true, noremap = true } },
+        -- Control + shift + v to paste from system clipboard
         ["<C-p>"] = { '<C-r>"', "Paste from system clip", opts = { nowait = true } },
     },
 }
