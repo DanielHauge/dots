@@ -6,5 +6,6 @@ htop
 local
 nvim-data
 lesshst
+*.zwc
 scoop
 neofetch

@@ -39,4 +39,7 @@ function dots-install() {
 		$DOTS_LOC/ubuntu/install.sh
 		return
 	fi
+
+	echo "Unsupported OS detected"
+
 }
