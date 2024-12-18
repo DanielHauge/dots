@@ -7,9 +7,11 @@ sudo -v
 apt_packages=(
     libgtk-3-dev
     git
+    git-lfs
     gnuplot
     thunderbird
     lftp
+    pv
     bear
     clang-tools
     nload
@@ -51,6 +53,7 @@ snap_packages=(
     dotnet-sdk
     dotnet-runtime-80
     ripgrep
+    plotjuggler
     zig
     node
     ruff

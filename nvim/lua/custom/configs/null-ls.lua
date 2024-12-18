@@ -18,8 +18,6 @@ local sources = {
 
     -- Docs
     b.formatting.markdownlint,
-    b.formatting.latexindent,
-    b.formatting.textlint.with { filetypes = { "txt" } },
     b.diagnostics.textlint.with { filetypes = { "txt" } },
 
     -- Golang

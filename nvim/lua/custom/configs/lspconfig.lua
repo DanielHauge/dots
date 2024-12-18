@@ -18,7 +18,7 @@ local servers = {
     "html",
     "ltex",
     "rust_analyzer",
-    "texlab",
+    -- "texlab",
     "ts_ls",
     "sqlls",
     "csharp_ls",
@@ -26,11 +26,22 @@ local servers = {
     "dockerls",
     "jdtls",
     "docker_compose_language_service",
-    "ltex-ls",
+    -- "ltex-ls",
     "fsautocomplete",
     "neocmake",
     "marksman",
     "zls",
+}
+--
+
+lspconfig["texlab"].setup {
+    on_attach = on_attach,
+    capabilities = capabilities,
+    settings = {
+        texlab = {
+            latexFormatter = "texlab",
+        },
+    },
 }
 
 vim.api.nvim_create_autocmd("FileType", {

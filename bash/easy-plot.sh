@@ -97,7 +97,7 @@ plotf() {
     while read -r data; do
         echo "$data" >>"$plottingData"
     done
-    terminal="windows"
+    terminal="wxt"
     output=""
     if [ -n "$outputFile" ]; then
         terminal="pngcairo"

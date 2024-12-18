@@ -70,7 +70,11 @@ buildtex() {
     # pdflatex --shell-escape --interaction=nonstopmode "$1" && latexmk -c
     # xelatex --interaction=nonstopmode "$1" && latexmk -c
     if command -v tectonic &>/dev/null; then
-        tectonic -k --keep-logs --reruns 0 "$1"
+        tectonic --keep-intermediates -Z shell-escape --reruns 0 "$1"
+        # tectonic --keep-intermediates -Z shell-escape --reruns 0 "$1"
+        # xelatex -shell-escape --interaction=nonstopmode "$1"
+        # biber --version
+        # biber main
     else
         xelatex -shell-escape --interaction=nonstopmode "$1"
     fi
