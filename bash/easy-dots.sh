@@ -36,7 +36,13 @@ function dots-install() {
 	# if ubuntu
 	if command -v apt-get &>/dev/null; then
 		echo "Ubuntu detected"
-		$DOTS_LOC/ubuntu/install.sh
+		sudo $DOTS_LOC/ubuntu/install.sh
+		return
+	fi
+
+	if command -v pacman &>/dev/null; then
+		echo "Arch detected"
+		$DOTS_LOC/arch/install.sh
 		return
 	fi
 

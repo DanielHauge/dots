@@ -109,6 +109,7 @@ alias mmdcd='sudo docker run --rm -u `id -u`:`id -g` -v .:/data minlag/mermaid-c
 alias awk1='awk "{print \$1}"'
 alias awk2='awk "{print \$2}"'
 alias awk3='awk "{print \$3}"'
+alias pacman='sudo pacman'
 alias awk4='awk "{print \$4}"'
 alias awk5='awk "{print \$5}"'
 alias dotnetprojs='dotnet sln list | skip 2 | awk "{print \$1}" | sed "s/\.csproj//g" | xargs -I {} find . -name "{}.dll" | grep bin/Debug'

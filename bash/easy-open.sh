@@ -44,18 +44,18 @@ x() {
 				return 1
 			fi
 			echo "Opening: $p"
-			open_path "$p"
+			open_path "$p" &
 
 			return 0
 		fi
 		while read -r line; do
 			if echo "$line" | grep -q "http"; then
 				echo "Web opening: $line"
-				open_url "$line"
+				open_url "$line" &
 				continue
 			elif [ -e "$line" ]; then
 				echo "Opening: $line"
-				open_path "$line"
+				open_path "$line" &
 			else
 				# check if website with curl
 				echo "Path does not exist: $line, opening as website"
@@ -66,11 +66,11 @@ x() {
 	for i in "$@"; do
 		if echo "$i" | grep -q "http"; then
 			echo "Web opening: $i"
-			open_url "$i"
+			open_url "$i" &
 			continue
 		elif [ -e "$i" ]; then
 			echo "Opening: $i"
-			open_path "$i"
+			open_path "$i" &
 		else
 			# check if website with curl
 			echo "Path does not exist: $i"
