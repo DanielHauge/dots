@@ -20,8 +20,14 @@ fi
 
 # make array of packages
 packs=(
+    kde-cli-tools
 	vlc
+    pavucontrol
+    keysmith
     firefox
+    blueman
+    mpd
+    mpv
     glibc
     libxss
     libnotify
@@ -31,6 +37,10 @@ packs=(
     go
     fontconfig
 	tectonic
+    xorg-xrandr
+    viewnior
+    xdotool
+    maim
 	cargo
 	flatpak
 	wl-clipboard
@@ -39,9 +49,14 @@ packs=(
     ruff
 	org-xwayland
 	lazygit
+    waybar
 	exa
+    wlroots
 	neofetch
 	stow
+    ttf-font-awesome
+    ttf-roboto
+    ttf-fira-sans
 	git
 	nvim
 	man
