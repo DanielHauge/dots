@@ -20,38 +20,53 @@ fi
 
 # make array of packages
 packs=(
-    kde-cli-tools
+    kde-cli-tools # kde command line tools
+    socat # socket utility
 	vlc
-    pavucontrol
-    keysmith
+    tumbler # thumbnail generator for
+    ffmpegthumbnailer # thumbnail generator for videos
+    thunar
+    gvfs
+    gvfs-smb
+    gvfs-nfs
+    avahi # lib for DLNA (Digital living network aliance) - media sharing
+    lubupnp # detect upnp (Universal Plug n play) devices on the network - tv for player etc.
+    pavucontrol # audio controler for selecting audio output
+    keysmith # keyring manager
     firefox
-    blueman
+    python-pip
+    python-pipx
+    blueman # bluetooth manager
     mpd
+    yt-dlp
     mpv
-    glibc
-    libxss
-    libnotify
-    nss
-    alsa-lib
-    freetype2
-    go
-    fontconfig
-	tectonic
-    xorg-xrandr
-    viewnior
-    xdotool
-    maim
+    glibc # c library
+    libxss  # X11 screen saver extension library
+    libnotify # notification library (inotify)
+    meson
+    ninja
+    stylua
+    nss # Network Security Services
+    alsa-lib # Advanced Linux Sound Architecture
+    freetype2   # font rendering library
+    go  
+    fontconfig # font configuration library
+	tectonic 
+    xorg-xrandr # X11 resize and rotate -> Just used for getting screen info
+    viewnior # image viewer -> used for screenshots
+    xdotool # X11 automation tool for screenshots
+    maim # screenshot tool
 	cargo
 	flatpak
-	wl-clipboard
+	wl-clipboard 
     glow
     shellcheck
     ruff
-	org-xwayland
+	org-xwayland 
 	lazygit
     waybar
 	exa
-    wlroots
+    wlroots # wayland compositor library
 	neofetch
 	stow
     ttf-font-awesome
