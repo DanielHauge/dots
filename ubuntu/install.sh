@@ -6,14 +6,25 @@ sudo -v
 
 apt_packages=(
     libgtk-3-dev
+    pipx
     git
+    python3-gi
+    python3-gi-cairo
+    mpv
+    gobject-introspection
+    libgirepository1.0-dev
+    gir1.2-gtk-3.0
     git-lfs
     gnuplot
     thunderbird
     lftp
     pv
     bear
+    waybar
+    thunar
+    pavucontrol
     clang-tools
+    rofi
     nload
     locales
     bat

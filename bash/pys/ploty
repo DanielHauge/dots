@@ -6,6 +6,15 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 data = np.loadtxt(sys.stdin)
+if data.ndim == 1:
+    plt.plot(data)
+    plt.title('Single Column')
+    plt.xlabel('Index')
+    plt.ylabel('Values')
+    plt.grid()
+    plt.show()
+    sys.exit(0)
+
 for i in range(data.shape[1]):
     plt.plot(data[:, i], label=f'${i + 1}')
 

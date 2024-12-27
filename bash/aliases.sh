@@ -79,7 +79,8 @@ else
     alias watch-lt="watch -n 1 'ls -l -h --time-style=long-iso --color=always'"
 fi
 alias dots-src='source $DOTS_LOC/bash/shared_source.sh'
-alias dots-stow='stow -v --adopt -t ~/.config -d ~/dots .config'
+alias dots-stow='stow -v --adopt -t ~/.config -d ~/dots .config; stow -v --adopt -t ~ -d ~/dots home'
+
 
 # if windows
 if [ -n "$WINDIR" ]; then
