@@ -118,6 +118,7 @@ alias dotnetprojs='dotnet sln list | skip 2 | awk "{print \$1}" | sed "s/\.cspro
 alias dots='cd $DOTS_LOC'
 # Run nvim in the dots directory
 alias dots-vi='(cd $DOTS_LOC && nvim)'
+alias dots-pull='(cd $DOTS_LOC && git pull)'
 alias mp4tomp3='for i in *.mp4; do ffmpeg -i "$i" "${i%.*}.mp3"; done'
 alias xa='xargs -I ½'
 alias xcat='xa cat ½'

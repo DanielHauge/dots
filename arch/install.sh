@@ -21,6 +21,7 @@ fi
 # make array of packages
 packs=(
     kde-cli-tools # kde command line tools
+    docker  
     socat # socket utility
 	vlc
     tumbler # thumbnail generator for
@@ -30,7 +31,9 @@ packs=(
     gvfs-smb
     gvfs-nfs
     avahi # lib for DLNA (Digital living network aliance) - media sharing
-    lubupnp # detect upnp (Universal Plug n play) devices on the network - tv for player etc.
+    libupnp # detect upnp (Universal Plug n play) devices on the network - tv for player etc.
+    gupnp-tools 
+    miniupnpc
     pavucontrol # audio controler for selecting audio output
     keysmith # keyring manager
     firefox
