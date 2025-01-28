@@ -42,7 +42,7 @@ alias rpeo="cd $REPO_DIR" # typo
 alias vi='nvim'
 alias vim='nvim'
 alias lg='lazygit'
-alias grep='rg -S'
+# alias grep='rg -S'
 alias nvi='nvim'
 alias shadafix='rm -rf "$XDG_STATE_HOME"/nvim-data/shada'
 alias battery='upower -i /org/freedesktop/UPower/devices/battery_BAT0'
@@ -80,7 +80,6 @@ else
 fi
 alias dots-src='source $DOTS_LOC/bash/shared_source.sh'
 alias dots-stow='stow -v --adopt -t ~/.config -d ~/dots .config; stow -v --adopt -t ~ -d ~/dots home'
-
 
 # if windows
 if [ -n "$WINDIR" ]; then

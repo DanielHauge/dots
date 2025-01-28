@@ -16,7 +16,7 @@ local servers = {
     "cucumber_language_server",
     "dockerls",
     "html",
-    "ltex",
+    -- "ltex",
     "rust_analyzer",
     -- "texlab",
     "ts_ls",
@@ -34,15 +34,15 @@ local servers = {
 }
 --
 
-lspconfig["texlab"].setup {
-    on_attach = on_attach,
-    capabilities = capabilities,
-    settings = {
-        texlab = {
-            latexFormatter = "texlab",
-        },
-    },
-}
+-- lspconfig["texlab"].setup {
+--     on_attach = on_attach,
+--     capabilities = capabilities,
+--     settings = {
+--         texlab = {
+--             latexFormatter = "texlab",
+--         },
+--     },
+-- }
 
 vim.api.nvim_create_autocmd("FileType", {
     pattern = "ebnf",

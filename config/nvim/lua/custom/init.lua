@@ -7,6 +7,7 @@
 --
 require "custom.commands"
 require "custom.daf"
+require "custom.yank_hl"
 
 vim.opt.spelllang = "en_us"
 vim.opt.spell = false
