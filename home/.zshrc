@@ -9,6 +9,10 @@ fi
 ENABLE_CORRECTION="true"
 
 
+# if xdg_current_desktop isn't set, set it to Hyprland
+if [ -z "$XDG_CURRENT_DESKTOP" ]; then
+    export XDG_CURRENT_DESKTOP="Hyprland"
+fi
 
 
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#ff00ff,bg=cyan,bold,underline" 

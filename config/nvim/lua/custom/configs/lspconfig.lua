@@ -31,6 +31,7 @@ local servers = {
     "neocmake",
     "marksman",
     "zls",
+    "templ",
 }
 --
 
