@@ -97,7 +97,12 @@ packs=(
     clang
     git-lfs
     pandoc
+    cargo-nextest
 )
+
+yay_packs=(
+    albert
+    )
 
 # function to install packages with pacman
 
@@ -105,6 +110,11 @@ packs=(
 for pack in $packs; do
     echo "Installing $pack..."
     yes | sudo pacman -S $pack
+done
+
+for pack in $yay_packs; do
+    echo "Installing $pack..."
+    yay -S $pack --noconfirm
 done
 
 if ! command -v cargo; then

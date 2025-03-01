@@ -111,6 +111,8 @@ alias mmdcd='sudo docker run --rm -u `id -u`:`id -g` -v .:/data minlag/mermaid-c
 alias awk1='awk "{print \$1}"'
 alias awk2='awk "{print \$2}"'
 alias awk3='awk "{print \$3}"'
+alias cpptest="(cd build; make && ctest --output-on-failure)"
+alias amdo-cpptest='amdo "(cd build; make && ctest --output-on-failure)"'
 alias pacman='sudo pacman'
 alias awk4='awk "{print \$4}"'
 alias awk5='awk "{print \$5}"'
@@ -119,6 +121,16 @@ alias dots='cd $DOTS_LOC'
 # Run nvim in the dots directory
 alias dots-vi='(cd $DOTS_LOC && nvim)'
 alias dots-pull='(cd $DOTS_LOC && git pull)'
+function cmakeb() {
+    rm -rf build
+    rm -f compile_commands.json
+    mkdir build
+    cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=YES -B build "$@"
+    (cd build && make)
+    if [ -f build/compile_commands.json ]; then
+        ln -sf build/compile_commands.json compile_commands.json
+    fi
+}
 alias mp4tomp3='for i in *.mp4; do ffmpeg -i "$i" "${i%.*}.mp3"; done'
 alias xa='xargs -I ½'
 alias xcat='xa cat ½'
