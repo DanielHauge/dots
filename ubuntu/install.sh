@@ -10,6 +10,7 @@ apt_packages=(
     git
     python3-gi
     python3-gi-cairo
+    just
     mpv
     gobject-introspection
     libgirepository1.0-dev
