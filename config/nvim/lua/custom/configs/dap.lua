@@ -7,7 +7,7 @@ dap.adapters.netcoredbg = {
     type = "executable",
     name = "netcoredbg",
     -- Setup command to use netcoredbg from mason install
-    command = vim.fn.stdpath "data" .. "/mason/packages/netcoredbg/netcoredbg/netcoredbg.exe",
+    command = vim.fn.stdpath "data" .. "/mason/packages/netcoredbg/netcoredbg",
     -- command = "netcoredbg",
     args = { "--interpreter=vscode" },
 }
@@ -61,6 +61,11 @@ dap.configurations.cs = {
             return dll[1]
         end,
         cwd = "${workspaceFolder}",
+        args = function()
+            -- get string as make args array
+            local args = vim.fn.input "Arguments: "
+            return vim.split(args, " ")
+        end,
         stopOnEntry = false,
     },
 }

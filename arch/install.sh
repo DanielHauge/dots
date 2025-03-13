@@ -72,6 +72,7 @@ packs=(
     wlroots # wayland compositor library
 	neofetch
 	stow
+    ttf-fira-code
     ttf-font-awesome
     ttf-roboto
     ttf-fira-sans
