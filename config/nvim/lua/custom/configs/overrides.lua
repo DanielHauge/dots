@@ -66,6 +66,7 @@ M.mason = {
         "actionlint",
         "dockerfile-language-server",
         "docker-compose-language-service",
+        "terraform-ls",
 
         -- Lua
         "lua-language-server",

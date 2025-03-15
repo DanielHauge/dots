@@ -32,6 +32,7 @@ local servers = {
     "marksman",
     "zls",
     "templ",
+    "terraformls",
 }
 --
 
