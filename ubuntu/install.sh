@@ -52,6 +52,8 @@ apt_packages=(
     zoxide
     gcc
     tree-sitter-cli
+    ripgrep
+    fonts-firacode
     software-properties-common
     curl
     python3.12-venv
@@ -64,7 +66,6 @@ apt_packages=(
 snap_packages=(
     dotnet-sdk
     dotnet-runtime-80
-    ripgrep
     plotjuggler
     zig
     node
