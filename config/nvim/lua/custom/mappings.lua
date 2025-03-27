@@ -198,6 +198,7 @@ M.general = {
 
         [">"] = { "<gv", "shift right", opts = { nowait = true, noremap = true } },
         ["<"] = { ">gv", "shift left", opts = { nowait = true, noremap = true } },
+        ["y"] = { '"+y', "Yank to system clipboard", opts = { nowait = true, noremap = true } },
     },
 
     i = {

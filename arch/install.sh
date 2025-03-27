@@ -29,6 +29,7 @@ packs=(
     thunar
     gvfs
     gvfs-smb
+    gnuplot
     gvfs-nfs
     avahi # lib for DLNA (Digital living network aliance) - media sharing
     libupnp # detect upnp (Universal Plug n play) devices on the network - tv for player etc.
