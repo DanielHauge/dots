@@ -79,6 +79,16 @@ lspconfig["gopls"].setup {
     },
 }
 
+lspconfig["dartls"].setup {
+    on_attach = on_attach,
+    capabilities = capabilities,
+    cmd = {
+        "/home/daniel/snap/flutter/common/flutter/bin/dart",
+        "language-server",
+        "--protocol=lsp",
+    },
+}
+
 -- lspconfig["grammar_guard"].setup {
 --     on_attach = on_attach,
 --     capabilities = capabilities,
