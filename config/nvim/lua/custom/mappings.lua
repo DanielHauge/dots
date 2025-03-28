@@ -182,7 +182,6 @@ M.general = {
         ["<C-p>"] = { '<C-r>"', "Paste from system clip", opts = { nowait = true } },
         -- shift p to paste from system clipboard
         ["<S-Insert>"] = { '<C-r>"', "Paste from system clipboard", opts = { nowait = true } },
-        ["<S-p>"] = { '<C-r>"zp', "paste from d register", opts = { nowait = true, noremap = true } },
     },
 }
 -- more ds!
