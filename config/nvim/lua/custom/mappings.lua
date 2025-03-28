@@ -20,6 +20,7 @@ M.general = {
         -- ["<leader>p"] = { "\"+p", "Paste from system clip", opts = { nowait = true}},
         ["<C-S-v>"] = { '"+p', "Paste from system clip", opts = { nowait = true } },
         ["<C-p>"] = { '""p', "Paste from system clip", opts = { nowait = true } },
+        ["<S-Insert>"] = { '"+p', "Paste from system clipboard", opts = { nowait = true } },
         -- suspend vim
         ["<C-z"] = { "<cmd>lua require('utils').suspend()<CR>", "Suspend", opts = { nowait = true, noremap = true } },
         ["<leader>h"] = {
@@ -29,34 +30,6 @@ M.general = {
             "[H]op with word hints",
         },
 
-        -- ["<leader>qx"] = {
-        --     function()
-        --         require("trouble").toggle()
-        --     end,
-        --     "open trouble",
-        --     opts = { nowait = true, noremap = true },
-        -- },
-        -- ["<leader>qw"] = {
-        --     function()
-        --         require("trouble").open "workspace_diagnostics"
-        --     end,
-        --     "Open workspace diagnostics",
-        --     opts = { nowait = true, noremap = true },
-        -- },
-        -- ["<leader>qo"] = {
-        --     function()
-        --         require("trouble").open "document_diagnostics"
-        --     end,
-        --     "Open document diagnostics",
-        --     opts = { nowait = true, noremap = true },
-        -- },
-        -- ["<leader>qf"] = {
-        --     function()
-        --         require("trouble").open "quickfix"
-        --     end,
-        --     "Open quickfix",
-        --     opts = { nowait = true, noremap = true },
-        -- },
         ["<leader>qd"] = {
             function()
                 -- :Trouble todo filter = {tag = {TODO,FIX,FIXME}}
@@ -66,42 +39,6 @@ M.general = {
             opts = { nowait = true, noremap = true },
         },
 
-        -- ["<leader>ql"] = {
-        --     function()
-        --         require("trouble").open "loclist"
-        --     end,
-        --     "Open loclist",
-        --     opts = { nowait = true, noremap = true },
-        -- },
-        -- ["gr"] = {
-        --     function()
-        --         require("trouble").open "lsp_references"
-        --     end,
-        --     "Open lsp references",
-        --     opts = { nowait = true, noremap = true },
-        -- },
-        -- ["gd"] = {
-        --     function()
-        --         require("trouble").open "lsp_definitions"
-        --     end,
-        --     "Open lsp definitions",
-        --     opts = { nowait = true, noremap = true },
-        -- },
-        -- ["<leader>qt"] = {
-        --     function()
-        --         require("trouble").open "lsp_type_definitions"
-        --     end,
-        --     "Open lsp type definitions",
-        --     opts = { nowait = true, noremap = true },
-        -- },
-        -- ["gI"] = {
-        --     function()
-        --         require("trouble").open "lsp_implementations"
-        --     end,
-        --     "Open lsp implementations",
-        --     opts = { nowait = true, noremap = true },
-        -- },
-        -- Control + o to do new line above
         ["<A-o>"] = { "O<ESC>", "new line above", opts = { nowait = true, noremap = true } },
 
         -- Debugging
@@ -177,6 +114,19 @@ M.general = {
             "Toggle inlay hints",
             opts = { nowait = true, noremap = true },
         },
+
+        -- nnoremap d "zd
+        -- nnoremap D "zD
+        -- nnoremap c "zc
+        -- nnoremap C "zC
+        -- nnoremap x "zx
+        ["d"] = { '"zd', "delete to register", opts = { nowait = true, noremap = true } },
+        ["D"] = { '"zD', "delete to register", opts = { nowait = true, noremap = true } },
+        ["c"] = { '"zc', "change to register", opts = { nowait = true, noremap = true } },
+        ["C"] = { '"zC', "change to register", opts = { nowait = true, noremap = true } },
+        ["x"] = { '"zx', "delete to register", opts = { nowait = true, noremap = true } },
+        -- paste z on shift p
+        ["<S-p>"] = { '"zp', "paste from d register", opts = { nowait = true, noremap = true } },
     },
 
     v = {
@@ -199,8 +149,15 @@ M.general = {
         [">"] = { "<gv", "shift right", opts = { nowait = true, noremap = true } },
         ["<"] = { ">gv", "shift left", opts = { nowait = true, noremap = true } },
         ["y"] = { '"+y', "Yank to system clipboard", opts = { nowait = true, noremap = true } },
-    },
 
+        ["d"] = { '"zd', "delete to register", opts = { nowait = true, noremap = true } },
+        ["D"] = { '"zD', "delete to register", opts = { nowait = true, noremap = true } },
+        ["c"] = { '"zc', "change to register", opts = { nowait = true, noremap = true } },
+        ["C"] = { '"zC', "change to register", opts = { nowait = true, noremap = true } },
+        ["x"] = { '"zx', "delete to register", opts = { nowait = true, noremap = true } },
+        -- paste z on shift p
+        ["<S-p>"] = { '"zp', "paste from d register", opts = { nowait = true, noremap = true } },
+    },
     i = {
 
         -- Set CTRL+Backspace to delete previous word with noremap = true
@@ -223,6 +180,9 @@ M.general = {
         ["<C-v>"] = { "<Esc>v", "go to visual mode", opts = { nowait = true, noremap = true } },
         -- Control + shift + v to paste from system clipboard
         ["<C-p>"] = { '<C-r>"', "Paste from system clip", opts = { nowait = true } },
+        -- shift p to paste from system clipboard
+        ["<S-Insert>"] = { '<C-r>"', "Paste from system clipboard", opts = { nowait = true } },
+        ["<S-p>"] = { '<C-r>"zp', "paste from d register", opts = { nowait = true, noremap = true } },
     },
 }
 -- more ds!
