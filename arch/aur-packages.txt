@@ -1,0 +1,8 @@
+flutter
+hyprland-qtutils-git
+snapd
+ulauncher
+waypaper
+yay
+yay-debug
+
