@@ -1,6 +1,8 @@
 baobab
 base
 base-devel
+go
+dotnet-sdk
 bat
 bc
 blueman
