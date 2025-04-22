@@ -31,9 +31,13 @@ vim.fn.sign_define("DapBreakpointUnverified", { text = "🔍", texthl = "", line
 -- Override custom nvim-treesitter highlight group links
 -- TYPESCRIPT overrides
 vim.api.nvim_set_hl(0, "@type.qualifier.typescript", { link = "@keyword" })
+M.override["@type.qualifier.typescript"] = { link = "@keyword" }
 vim.api.nvim_set_hl(0, "@lsp.type.class.typescript", { link = "Type" })
+M.override["@lsp.type.class.typescript"] = { link = "Type" }
 vim.api.nvim_set_hl(0, "@lsp.type.interface.typescript", { link = "Interface" })
+M.override["@lsp.type.interface.typescript"] = { link = "Interface" }
 vim.api.nvim_set_hl(0, "@lsp.type.enum.typescript", { fg = "#d25505" })
+M.override["@lsp.type.enum.typescript"] = { fg = "#d25505" }
 
 M.override["@lsp.type.variable"] = {
 
@@ -157,6 +161,8 @@ M.override["Repeat"] = {
   fg = "#c586c0",
 }
 
+M.override["@keyword.conditional"] = M.override["Conditional"]
+
 M.override["@parameter"] = {
   fg = "#9cdcf0",
   bold = true,
@@ -201,6 +207,11 @@ M.override["@punctuation.special"] = {
   bold = true,
 }
 
+M.override["DiagnosticUnnecesary"] = {
+  -- Color = (86, 156, 214)
+  fg = "#569cd6",
+}
+
 M.override["@constant"] = {
   bold = true,
   italic = true,
@@ -213,6 +224,9 @@ M.override.Label = {
 }
 
 M.override.Number = {
+  fg = "#b5cea8",
+}
+M.override["@number"] = {
   fg = "#b5cea8",
 }
 
@@ -262,7 +276,7 @@ M.override["@field.key"] = {
   fg = "teal",
 }
 M.override["@namespace"] = {
-  fg = "green",
+  fg = "#ccdddd",
 }
 
 M.override["@lsp.type.property"] = {
@@ -298,6 +312,7 @@ M.override["@variable"] = {
   fg = "#7fd1ff",
   bold = true,
 }
+M.override["@variable.member"] = M.override["@variable"]
 
 M.override["@variable.parameter"] = {
   fg = "#7fd1ff",

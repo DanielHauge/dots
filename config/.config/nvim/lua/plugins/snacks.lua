@@ -61,9 +61,9 @@ return {
         timeout = 3000,
       },
       picker = {
-        enabled = true,
         sources = {
           explorer = {
+            include = { ".config", ".zshrc", ".bashrc", ".zprofile" },
             auto_close = true,
             layout = {
               preset = "select",

@@ -7,6 +7,12 @@ return {
       require("onedark").setup({
         style = "dark",
         highlights = highlights,
+        diagnostics = {
+          darker = true,
+          undercurl = true,
+          background = true,
+          strikethrough = true,
+        },
         term_colors = true,
         ending_tildes = true,
       })
