@@ -1,11 +1,9 @@
 #!/bin/bash
 
-
-
 install_zsh() {
     echo "Installing zsh..."
     sudo pacman -S zsh
-    chsh -s $(which zsh)
+    chsh -s "$(which zsh)"
 
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
     git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}"/plugins/zsh-syntax-highlighting
@@ -16,19 +14,12 @@ if ! command -v zsh; then
     install_zsh
 fi
 
-for pack in $(cat packages.txt); do
-    if ! command -v $pack; then
+while read -r pack; do
+    if ! command -v "$pack"; then
         echo "Installing $pack..."
-        sudo pacman -S $pack
+        sudo pacman -S "$pack"
     fi
-done
-
-
-
-# function to install packages with pacman
-
-
-
+done <packages.txt
 
 if ! command -v cargo; then
     echo "Installing rust..."
@@ -40,6 +31,3 @@ if ! command -v tree-sitter; then
     echo "Installing tree-sitter..."
     cargo install tree-sitter-cli
 fi
-
-
-

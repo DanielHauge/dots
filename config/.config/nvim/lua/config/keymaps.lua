@@ -3,6 +3,12 @@
 -- Add any additional keymaps here
 
 local map = vim.keymap.set
+local unset = vim.keymap.del
+
+unset("n", "<leader>q")
+unset("n", "<leader>qq")
+unset("n", "<leader>xl")
+unset("n", "<leader>xq")
 
 -- Navigate
 map("n", "<leader>/", "gcc", { desc = "Toggle comment", remap = true })
@@ -74,3 +80,17 @@ map("v", "<A-j>", "<cmd>m .+1<CR>==", { desc = "Move line down" })
 map("v", "<A-Up>", "<cmd>m .-2<CR>==", { desc = "Move line up" })
 map("v", "<A-Down>", "<cmd>m .+1<CR>==", { desc = "Move line down" })
 map("v", "<leader>cc", ":Calc<CR>", { desc = "Compute selection", remap = true })
+
+map("n", "<leader>qw", function()
+  require("trouble").open("diagnostics")
+end, { desc = "Open Trouble diagnostics", nowait = true, remap = true })
+map("n", "<leader>qq", function()
+  require("trouble").open("lsp_references")
+end, { desc = "Open Trouble LSP References", nowait = true, remap = true })
+map("n", "<leader>qd", function()
+  -- todo
+  require("trouble").open("todo")
+end, { desc = "Open Trouble LSP Definitions", nowait = true, remap = true })
+
+-- remove quit keymaps
+--

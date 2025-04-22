@@ -5,18 +5,16 @@ return {
     config = function()
       local highlights = require("config.highlights")
       require("onedark").setup({
-        style = "dark",
+        style = "darker",
         highlights = highlights,
-        diagnostics = {
-          darker = true,
-          undercurl = true,
-          background = true,
-          strikethrough = true,
-        },
+        -- transparent = true,
         term_colors = true,
-        ending_tildes = true,
+        ending_tildes = false,
       })
     end,
+    vim.api.nvim_set_hl(0, "DiagnosticUnnecessary", {
+      strikethrough = true,
+    }),
   },
   {
     "LazyVim/LazyVim",

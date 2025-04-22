@@ -1,11 +1,5 @@
 local M = {}
-M.override = {
-  Comment = {
-    italic = true,
-    bold = true,
-    fg = "#6a954c",
-  },
-}
+M.override = {}
 
 -- Debug highlight groups
 vim.api.nvim_set_hl(0, "DapBreakpoint", { ctermbg = 0, bg = "#31353f" })
@@ -87,6 +81,8 @@ M.override["@lsp.type.interface.rust"] = { link = "Interface" }
 -- F# Overrides
 vim.api.nvim_set_hl(0, "@lsp.type.namespace.fsharp", { fg = "#ccdddd" })
 M.override["@lsp.type.namespace"] = { fg = "#ccdddd" }
+vim.api.nvim_set_hl(0, "@keyword.function.fsharp", { link = "@keyword" })
+M.override["@keyword.function.fsharp"] = { link = "@keyword" }
 
 -- Yaml Overides
 vim.api.nvim_set_hl(0, "yamlBlockMappingKey", { link = "Label" })
@@ -151,6 +147,11 @@ M.override["@keyword"] = {
   bold = true,
 }
 
+M.override["@lsp.type.keyword"] = {
+  -- Color = (86, 156, 214)
+  fg = "#569cd6",
+}
+
 -- Set telescope git status line removals to red and additions to green
 M.override["TelescopeResultsDiffAdd"] = {
   fg = "#00ff00",
@@ -162,6 +163,10 @@ M.override["Repeat"] = {
 }
 
 M.override["@keyword.conditional"] = M.override["Conditional"]
+M.override["@keyword.function"] = {
+  -- Color = (86, 156, 214)
+  fg = "#569cd6",
+}
 
 M.override["@parameter"] = {
   fg = "#9cdcf0",
@@ -206,11 +211,10 @@ M.override["@punctuation.special"] = {
   fg = "#feab48",
   bold = true,
 }
-
-M.override["DiagnosticUnnecesary"] = {
-  -- Color = (86, 156, 214)
-  fg = "#569cd6",
-}
+vim.api.nvim_set_hl(0, "DiagnosticUnnecessary", {
+  strikethrough = true,
+  fg = "#6a954c",
+})
 
 M.override["@constant"] = {
   bold = true,
@@ -244,6 +248,9 @@ M.override.Include = {
   fg = "#c586c0",
   bold = true,
 }
+M.override["@lsp.typemod.function.defaultLibrary"] = F
+M.override["@lsp.typemod.method.defaultLibrary "] = F
+M.override["@lsp.typemod.function.defaultLibrary.rust"] = F
 M.override["@function"] = F
 M.override["@function.call"] = F
 M.override["@function.macro"] = F
@@ -256,9 +263,6 @@ M.override["@method.call"] = F
 M.override["@lsp.type.function.call"] = F
 M.override["@lsp.type.function.builtin"] = F
 M.override["@lsp.type.macro"] = FBuiltin
-M.override["@keyword.function"] = {
-  fg = "teal",
-}
 
 M.override["@module"] = {
   fg = "#ccdddd",
@@ -268,6 +272,21 @@ M.override["@keyword.operator"] = {
   -- Color = (86, 156, 214)
   fg = "#569cd6",
 }
+
+M.override["@keyword.return"] = {
+  -- Color = (86, 156, 214)
+  fg = "#569cd6",
+}
+
+M.override["@keyword.repeat"] = {
+  -- Color = (86, 156, 214)
+  fg = "#569cd6",
+}
+M.override["@keyword.conditional"] = {
+  -- Color = (86, 156, 214)
+  fg = "#569cd6",
+}
+
 M.override.Identifier = {
   fg = "#9cdcf0",
 }
@@ -312,7 +331,15 @@ M.override["@variable"] = {
   fg = "#7fd1ff",
   bold = true,
 }
-M.override["@variable.member"] = M.override["@variable"]
+M.override["@variable.member"] = {
+  fg = "#4fc1df",
+  bold = true,
+}
+-- @keyword.directive -> ORANGE
+M.override["@keyword.directive"] = {
+  fg = "#feab48",
+  bold = true,
+}
 
 M.override["@variable.parameter"] = {
   fg = "#7fd1ff",
