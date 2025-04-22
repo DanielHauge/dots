@@ -4,12 +4,17 @@
 
 local map = vim.keymap.set
 local unset = vim.keymap.del
-
-unset("n", "<leader>q")
 unset("n", "<leader>qq")
+unset("n", "<leader>qd")
 unset("n", "<leader>xl")
-unset("n", "<leader>xq")
+unset("n", "<leader>xt")
+unset("n", "<leader>xT")
 
+unset("v", "<")
+unset("v", ">")
+
+map("v", ">", "<gv", { desc = "Indent right", nowait = true, noremap = true })
+map("v", "<", ">gv", { desc = "Indent left", nowait = true, noremap = true })
 -- Navigate
 map("n", "<leader>/", "gcc", { desc = "Toggle comment", remap = true })
 map("n", "<leader>j", "<C-d>", { desc = "Scroll down" })
@@ -85,12 +90,5 @@ map("n", "<leader>qw", function()
   require("trouble").open("diagnostics")
 end, { desc = "Open Trouble diagnostics", nowait = true, remap = true })
 map("n", "<leader>qq", function()
-  require("trouble").open("lsp_references")
-end, { desc = "Open Trouble LSP References", nowait = true, remap = true })
-map("n", "<leader>qd", function()
-  -- todo
   require("trouble").open("todo")
-end, { desc = "Open Trouble LSP Definitions", nowait = true, remap = true })
-
--- remove quit keymaps
---
+end, { desc = "Open Trouble LSP References", nowait = true, remap = true })
