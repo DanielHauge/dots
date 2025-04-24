@@ -33,6 +33,15 @@ map("n", "<A-j>", "<cmd>m .+1<CR>==", { desc = "Move line down" })
 map("n", "<A-k>", "<cmd>m .-2<CR>==", { desc = "Move line up" })
 map("n", "<A-Up>", "<cmd>m .-2<CR>==", { desc = "Move line up" })
 map("n", "<A-Down>", "<cmd>m .+1<CR>==", { desc = "Move line down" })
+map("i", "<A-j>", "<cmd>m .+1<CR>", { desc = "Move line down" })
+map("i", "<A-k>", "<cmd>m .-2<CR>", { desc = "Move line up" })
+map("i", "<A-Up>", "<cmd>m .-2<CR>", { desc = "Move line up" })
+map("i", "<A-Down>", "<cmd>m .+1<CR>", { desc = "Move line down" })
+map("v", "<A-j>", ":m '>+1<CR>gv=gv", { desc = "Move line down" })
+map("v", "<A-k>", ":m '<-2<CR>gv=gv", { desc = "Move line up" })
+map("v", "<A-Up>", ":m '<-2<CR>gv=gv", { desc = "Move line up" })
+map("v", "<A-Down>", ":m '>+1<CR>gv=gv", { desc = "Move line down" })
+
 map("n", "<leader>x", function()
   Snacks.bufdelete()
 end, { desc = "Delete Buffer" })
@@ -51,6 +60,11 @@ map("n", "<S-Down>", "<C-w>j", { desc = "Move down" })
 map("n", "<S-Left>", "<C-w>h", { desc = "Move left" })
 map("n", "<S-Right>", "<C-w>l", { desc = "Move right" })
 
+-- LSP special km
+map("n", "<leader>rr", function()
+  vim.lsp.buf.rename()
+end, { desc = "Rename" })
+
 -- Test keymaps
 map("n", "<leader>tt", function()
   require("neotest").run.run()
@@ -66,24 +80,6 @@ map("n", "<leader>ts", function()
 end, { desc = "[T]est [S]top" })
 
 map("v", "<leader>/", "gc", { desc = "Toggle comment", remap = true })
--- ["<A-j>"] = { ":m '>+1<CR>gv=gv", "move line down" },
--- ["<A-k>"] = { ":m '<-2<CR>gv=gv", "move line up" },
--- ["<A-Up>"] = { ":m '<-2<CR>gv=gv", "move line up" },
--- ["<A-Down>"] = { ":m '>+1<CR>gv=gv", "move line down" },
--- ["<C-Left>"] = { "b", "move left", opts = { nowait = true, noremap = true } },
--- ["<C-Right>"] = { "w", "move right", opts = { nowait = true, noremap = true } },
--- -- remap PgDn to [
--- ["<PageDown>"] = { "[", "PageUp", opts = { nowait = true, noremap = true } },
--- -- remap PgUp to ]
--- ["<PageUp>"] = { "]", "PageDown", opts = { nowait = true, noremap = true } },
--- ["<leader>c"] = {
---   ":Calc<CR>",
---   "Compute selection",
--- },
-map("v", "<A-k>", "<cmd>m .-2<CR>==", { desc = "Move line up" })
-map("v", "<A-j>", "<cmd>m .+1<CR>==", { desc = "Move line down" })
-map("v", "<A-Up>", "<cmd>m .-2<CR>==", { desc = "Move line up" })
-map("v", "<A-Down>", "<cmd>m .+1<CR>==", { desc = "Move line down" })
 map("v", "<leader>cc", ":Calc<CR>", { desc = "Compute selection", remap = true })
 
 map("n", "<leader>qw", function()
