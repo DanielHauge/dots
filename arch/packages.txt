@@ -2,6 +2,8 @@ baobab
 deno
 poppler
 ripgrep
+ruby
+swaybg
 jq
 base
 imagemagick
