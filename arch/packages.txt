@@ -7,7 +7,15 @@ swaybg
 jq
 base
 imagemagick
+gvfs
+gvfs-smb 
+gvfs-afc 
+gvfs-mtp 
+thunar-volman 
+samba
 base-devel
+avahi 
+nss-mdns 
 go
 dotnet-sdk
 bat
@@ -28,6 +36,8 @@ eza
 fd
 ffmpegthumbnailer
 ffmpeg
+curlftpfs
+cifs-utils
 firefox
 7zip
 flatbuffers
