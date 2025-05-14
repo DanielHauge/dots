@@ -32,7 +32,7 @@ if ! command -v paru; then
     )
 fi
 
-paru -S --needed --noconfirm - <~/dots/arch/packages.txt
+paru -Syuu --needed --noconfirm - <~/dots/arch/packages.txt
 
 (
     cd ~/dots || exit
