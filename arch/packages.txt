@@ -133,4 +133,6 @@ yt-dlp
 zip
 zoxide
 zram-generator
-
+flutter
+hyprland-qtutils-git
+ulauncher
