@@ -1,3 +1,7 @@
+bluez
+bluez-utils
+bluetui
+yt-dlp
 baobab
 deno
 poppler
