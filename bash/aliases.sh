@@ -134,6 +134,10 @@ function cmakeb() {
 alias mp4tomp3='for i in *.mp4; do ffmpeg -i "$i" "${i%.*}.mp3"; done'
 alias xa='xargs -I ½'
 alias xcat='xa cat ½'
+
+function screenshot() {
+    grim -g "$(slurp)" - | wl-copy
+}
 function cpc() {
     # First argument is the history number
     # If no argument is provided, echo bad
