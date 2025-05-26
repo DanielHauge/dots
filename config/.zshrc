@@ -17,13 +17,12 @@ fi
 
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#ff00ff,bg=cyan,bold,underline" 
 plugins=(
-	git
 	zsh-syntax-highlighting	 
 	zsh-autosuggestions
     command-not-found
 	web-search
     # dotnet
-    # docker
+    docker
     zsh-interactive-cd
     sudo
 )

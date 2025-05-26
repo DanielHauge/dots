@@ -47,7 +47,7 @@ function gpr() {
     jira-to-review "$jira_code"
 }
 
-function gitb() {
+function gb() {
 
     localBranches=$(git branch -a | sed 's/*//g' | sed 's|remotes/origin/||g' | awk1 | sed 's/ //g' | sort -u | awk '$1 != "HEAD"{print}')
     chossenBranch=$(echo "$localBranches" | fzf --preview-window=right:80% --preview="git gbprev {}")
