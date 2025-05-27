@@ -60,3 +60,4 @@ if [[ -n $SSH_CONNECTION ]]; then
    export EDITOR='nvim'
  fi
 
+export PATH="$PATH:$HOME/.dotnet/tools"

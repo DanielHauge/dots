@@ -1,6 +1,7 @@
 bluez
 bluez-utils
 bluetui
+blueman
 yt-dlp
 baobab
 deno
