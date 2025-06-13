@@ -5,7 +5,9 @@ blueman
 yt-dlp
 baobab
 deno
+feh
 poppler
+rsync
 ripgrep
 jq
 base
