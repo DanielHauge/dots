@@ -53,6 +53,8 @@ grim
 grub
 gst-plugin-pipewire
 gupnp-tools
+gvfs
+swappy
 gvfs-nfs
 gvfs-smb
 hdf5

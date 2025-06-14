@@ -9,7 +9,8 @@ if ! command -v zsh &>/dev/null; then
     log "Installing zsh..."
     sudo pacman -Syuu zsh --noconfirm
 
-    chsh -s "$(command -v zsh)"
+    log "Changing shell.."
+    sudo chsh -s "$(command -v zsh)"
 
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended --keep-zshrc
     ZSH_CUSTOM="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}"
@@ -46,5 +47,12 @@ paru -Syuu --needed --noconfirm - <~/dots/arch/packages.txt
     cd "$HOME/dots" || exit
     stow -R config
 )
+
+if ! command -v sddm-greeter; then
+    sudo paru -Syuu --neded --noconfirm sddm sddm-theme-deepin-git
+    sudo systemctl enable sddm.service
+    sudo systemctl start sddm
+    sudo crudini --set /etc/sddm.conf Theme Current "deepin"
+fi
 
 log "Provisioning complete."
