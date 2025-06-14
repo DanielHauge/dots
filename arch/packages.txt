@@ -7,12 +7,14 @@ baobab
 deno
 feh
 poppler
+postgresql
 rsync
 ripgrep
 jq
 base
 imagemagick
 base-devel
+viu
 go
 dotnet-sdk
 bat
@@ -24,8 +26,11 @@ clang
 cmake
 dialog
 discord
+crudini
 docker
+xmlstarlet
 dpkg
+fselect
 dunst
 efibootmgr
 evince
@@ -101,6 +106,7 @@ smartmontools
 socat
 stow
 stylua
+snapd
 sysstat
 terraform
 thunar

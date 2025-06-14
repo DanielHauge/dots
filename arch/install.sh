@@ -25,6 +25,7 @@ if ! command -v cargo; then
     export PATH="$HOME/.cargo/bin:$PATH"
     log "Installing tree-sitter..."
     zsh -c "cargo install tree-sitter-cli"
+    zsh -c "cargo install --locked bacon"
 fi
 
 if ! command -v paru; then
