@@ -9,9 +9,6 @@ if ! command -v zsh &>/dev/null; then
     log "Installing zsh..."
     sudo pacman -Syuu zsh --noconfirm
 
-    log "Changing shell.."
-    sudo chsh -s "$(command -v zsh)"
-
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended --keep-zshrc
     ZSH_CUSTOM="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}"
     git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "$ZSH_CUSTOM/plugins/zsh-syntax-highlighting"
@@ -56,3 +53,5 @@ if ! command -v sddm-greeter; then
 fi
 
 log "Provisioning complete."
+echo "Switch to zsh with:"
+echo "chsh -s $(command -v zsh)"
