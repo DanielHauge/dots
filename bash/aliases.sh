@@ -82,6 +82,15 @@ fi
 alias dots-src='source $DOTS_LOC/bash/shared_source.sh'
 alias dots-stow='stow -v --adopt -t ~/.config -d ~/dots .config; stow -v --adopt -t ~ -d ~/dots home'
 
+function cp() {
+    if [ "$#" -lt 2 ]; then
+        echo "Usage: cp source... destination"
+        return 1
+    fi
+    local last="${@: -1}"
+    rsync -ah --info=progress2 "$@" "$last"
+}
+
 # if windows
 if [ -n "$WINDIR" ]; then
     alias cya='shutdown.exe -s -t 0'

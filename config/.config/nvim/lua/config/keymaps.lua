@@ -80,7 +80,7 @@ map("n", "<leader>ts", function()
 end, { desc = "[T]est [S]top" })
 
 map("v", "<leader>/", "gc", { desc = "Toggle comment", remap = true })
-map("v", "<leader>cc", ":Calc<CR>", { desc = "Compute selection", remap = true })
+map("v", "<leader>qq", ":Calc<CR>", { desc = "Compute selection", remap = true })
 
 map("n", "<leader>qw", function()
   require("trouble").open("diagnostics")

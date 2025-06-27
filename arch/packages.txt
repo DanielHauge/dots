@@ -2,6 +2,8 @@ bluez
 bluez-utils
 bluetui
 blueman
+pv
+rsync
 yt-dlp
 baobab
 deno
