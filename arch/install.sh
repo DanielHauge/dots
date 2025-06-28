@@ -37,7 +37,17 @@ if ! command -v paru; then
     )
 fi
 
+currently_installed=$(paru -Qq)
+
 while IFS= read -r line; do
+    if [[ -z "$line" || "$line" =~ ^# ]]; then
+        continue
+    fi
+    if echo "$currently_installed" | grep -q "^$line$"; then
+        log "Package $line is already installed, skipping."
+        continue
+    fi
+    log "Installing package: $line"
     paru -Sy --noconfirm "$line"
 done <~/dots/arch/packages.txt
 

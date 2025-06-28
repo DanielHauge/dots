@@ -79,12 +79,11 @@ maim
 mandoc
 meson
 miniupnpc
+gvim
 mpd
 mpv
 neofetch
 neovim
-xxd
-xxd
 net-tools
 kde-cli-tools
 kdeconnect
@@ -154,5 +153,4 @@ zip
 zoxide
 zram-generator
 flutter
-hyprland-qtutils-git
 ulauncher
