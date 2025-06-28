@@ -18,6 +18,10 @@ imagemagick
 base-devel
 viu
 go
+ruby
+ulauncher
+waypaper
+mpvpaper
 dotnet-sdk
 bat
 bc
@@ -79,7 +83,11 @@ mpd
 mpv
 neofetch
 neovim
+xxd
+xxd
 net-tools
+kde-cli-tools
+kdeconnect
 network-manager-applet
 networkmanager
 nfs-utils
@@ -103,7 +111,6 @@ qt5-wayland
 qt6-wayland
 rofi
 ruff
-rustup
 shellcheck
 slurp
 smartmontools

@@ -114,6 +114,7 @@ fi
 
 alias letitsnow="$DOTS_LOC/bash/snowjob.sh"
 alias rmd='cat *.md | glow '
+alias plex='nohup setsid snap run plex-desktop >/dev/null 2>&1 < /dev/null &'
 alias todo='cat $REPO_DIR/*/TODO.md | glow'
 alias mmdcd='sudo docker run --rm -u `id -u`:`id -g` -v .:/data minlag/mermaid-cli -i'
 # Start wt with profile git bash, and use //nas/vault as directory

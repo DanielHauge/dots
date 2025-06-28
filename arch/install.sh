@@ -22,8 +22,8 @@ if ! command -v cargo; then
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- --default-toolchain stable -y
     export PATH="$HOME/.cargo/bin:$PATH"
     log "Installing tree-sitter..."
-    zsh -c "cargo install tree-sitter-cli"
-    zsh -c "cargo install --locked bacon"
+    cargo install tree-sitter-cli
+    cargo install --features "sound clipboard" --locked bacon
 fi
 
 if ! command -v paru; then
@@ -37,7 +37,9 @@ if ! command -v paru; then
     )
 fi
 
-paru -Syuu --needed --noconfirm - <~/dots/arch/packages.txt
+while IFS= read -r line; do
+    paru -Sy --noconfirm "$line"
+done <~/dots/arch/packages.txt
 
 (
     log "Stowing configuration files..."
@@ -46,7 +48,7 @@ paru -Syuu --needed --noconfirm - <~/dots/arch/packages.txt
 )
 
 if ! command -v sddm-greeter; then
-    sudo paru -Syuu --neded --noconfirm sddm sddm-theme-deepin-git
+    paru -Syuu --needed --noconfirm sddm sddm-theme-deepin-git
     sudo systemctl enable sddm.service
     sudo systemctl start sddm
     sudo crudini --set /etc/sddm.conf Theme Current "deepin"
