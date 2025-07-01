@@ -1,4 +1,5 @@
 bluez
+mingw-w64-gcc
 bluez-utils
 bluetui
 blueman
