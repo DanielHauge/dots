@@ -35,7 +35,7 @@
     "custom/exit": {
         "format": "",
         "tooltip-format": "Powermenu",
-        "on-click": "wlogout -b 4",
+        "on-click": "shutdown -h now",
         "tooltip": false
     },
     "keyboard-state": {
