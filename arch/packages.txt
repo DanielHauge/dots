@@ -123,6 +123,16 @@ terraform
 thunar
 tk
 ttf-jetbrains-mono
+ttf-jetbrains-mono-nerd
+ttf-nerd-fonts-symbols
+ttf-nerd-fonts-symbols-mono
+noto-fonts-emoji
+ttf-font-awesome
+ttf-material-design-icons
+ttf-dejavu
+ttf-liberation
+noto-fonts-extra
+powerline-fonts
 tumbler
 udiskie
 ufw
