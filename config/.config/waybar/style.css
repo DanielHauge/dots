@@ -86,6 +86,7 @@ window#waybar.hidden {
   color: #181825;
 }
 #custom-notifications {
+    font-family: "NotoSansMono Nerd Font";
     margin-right: 6px;
     background-color: #89b4fa;
 }
