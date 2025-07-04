@@ -63,6 +63,7 @@ window#waybar.hidden {
 #battery,
 #backlight,
 #pulseaudio,
+#custom-notifications,
 #network,
 #custom-exit,
 #clock,
@@ -83,6 +84,10 @@ window#waybar.hidden {
   padding: 6px 12px;
   background-color: #1e1e2e;
   color: #181825;
+}
+#custom-notifications {
+    margin-right: 6px;
+    background-color: #89b4fa;
 }
 
 #custom-logo {

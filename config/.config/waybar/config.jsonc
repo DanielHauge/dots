@@ -15,6 +15,7 @@
     ],
     "modules-right": [
         "tray",
+        "custom/notifications",
         "pulseaudio",
         "memory",
         "cpu",
@@ -28,6 +29,13 @@
         "icon-theme": "WhiteSur",
         "icon-size": 25,
         "tooltip-format": "{title}"
+    },
+    "custom/notifications": {
+        "format": "{}",
+        "exec": "count=$(swaync-client --count 2>/dev/null); [ \"$count\" -eq 0 ] && echo 🔔 || echo 🔔 $count",
+        "on-click": "swaync-client -t -sw",
+        "interval": 1,
+        "tooltip": false
     },
     "hyprland/workspaces": {
         "on-click": "activate",

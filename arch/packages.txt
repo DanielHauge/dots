@@ -38,8 +38,8 @@ docker
 xmlstarlet
 dpkg
 fselect
-dunst
 efibootmgr
+swaync
 evince
 eza
 fd
