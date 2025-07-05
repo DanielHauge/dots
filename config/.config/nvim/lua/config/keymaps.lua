@@ -42,6 +42,10 @@ map("v", "<A-k>", ":m '<-2<CR>gv=gv", { desc = "Move line up" })
 map("v", "<A-Up>", ":m '<-2<CR>gv=gv", { desc = "Move line up" })
 map("v", "<A-Down>", ":m '>+1<CR>gv=gv", { desc = "Move line down" })
 
+map("n", "<leader>pi", function()
+  vim.cmd("PasteImageToDocs")
+end, { desc = "Paste image to docs and add markdown" })
+
 map("n", "<leader>x", function()
   Snacks.bufdelete()
 end, { desc = "Delete Buffer" })
