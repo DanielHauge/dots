@@ -71,5 +71,4 @@ fi
 # start nvim with the config directory
 echo "Starting Neovim with config home: $XDG_CONFIG_HOME and data home: $XDG_DATA_HOME"
 # export alias vid to the follow command so i can use it later
-export -f vid="NVIM_MINIMAL=1 XDG_CONFIG_HOME=$XDG_CONFIG_HOME XDG_DATA_HOME=$XDG_DATA_HOME nvim ."
 NVIM_MINIMAL=1 XDG_CONFIG_HOME=$XDG_CONFIG_HOME XDG_DATA_HOME=$XDG_DATA_HOME nvim .
