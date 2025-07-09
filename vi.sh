@@ -58,7 +58,7 @@ if ! command -v git &>/dev/null; then
     esac
 fi
 
-TEMP_LOC="$(mktemp -d "$TMPBASE/daniel-dots.XXXXXX")"
-git clone --depth 1 https://github.com/DanielHauge/dots.git "$TEMP_LOC"
-echo "Cloned dots repository to $TEMP_LOC"
-"$TEMP_LOC"/quick-init/vi.sh "$TEMP_LOC"
+TMPBASE="~/.daniels-vim-YOU-CAN-DELTE-ME"
+git clone --depth 1 https://github.com/DanielHauge/dots.git "$TMPBASE/dots"
+echo "Cloned dots repository to $TMPBASE"
+"$TMPBASE"/dots/quick-init/vi.sh "$TMPBASE"
