@@ -58,7 +58,14 @@ if ! command -v git &>/dev/null; then
     esac
 fi
 
-TMPBASE="~/.daniels-vim-YOU-CAN-DELTE-ME"
-git clone --depth 1 https://github.com/DanielHauge/dots.git "$TMPBASE/dots"
-echo "Cloned dots repository to $TMPBASE"
+TMPBASE="$HOME/.daniels-vim-YOU-CAN-DELTE-ME"
+# if the directory already exists, just pull else clone
+if [[ -d "$TMPBASE/dots" ]]; then
+    echo "Directory $TMPBASE/dots already exists. Pulling latest changes..."
+    (cd "$TMPBASE/dots" && git pull)
+else
+    mkdir -p "$TMPBASE"
+    git clone --depth 1 https://github.com/DanielHauge/dots.git "$TMPBASE/dots"
+    echo "Cloned dots repository to $TMPBASE"
+fi
 "$TMPBASE"/dots/quick-init/vi.sh "$TMPBASE"
