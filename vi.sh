@@ -25,7 +25,7 @@ if ! command -v git &>/dev/null; then
     case "$OS" in
     Linux)
         if command -v apt-get &>/dev/null; then
-            apt-get update && sudo apt-get install -y git
+            apt-get update && apt-get install -y git
         elif command -v yum &>/dev/null; then
             yum install -y git
         elif command -v dnf &>/dev/null; then
@@ -60,4 +60,5 @@ fi
 
 TEMP_LOC="$(mktemp -d "$TMPBASE/daniel-dots.XXXXXX")"
 git clone --depth 1 https://github.com/DanielHauge/dots.git "$TEMP_LOC"
+echo "Cloned dots repository to $TEMP_LOC"
 "$TEMP_LOC"/quick-init/vi.sh "$TEMP_LOC"
