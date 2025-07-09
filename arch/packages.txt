@@ -43,6 +43,7 @@ swaync
 evince
 eza
 fd
+dysk
 ffmpegthumbnailer
 ffmpeg
 firefox

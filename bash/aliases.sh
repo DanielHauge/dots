@@ -119,6 +119,14 @@ alias awk4='awk "{print \$4}"'
 alias awk5='awk "{print \$5}"'
 alias dotnetprojs='dotnet sln list | skip 2 | awk "{print \$1}" | sed "s/\.csproj//g" | xargs -I {} find . -name "{}.dll" | grep bin/Debug'
 alias dots='cd $DOTS_LOC'
+
+# if dysk then alias df=dysk
+if command -v dysk &>/dev/null; then
+    alias df='dysk'
+else
+    alias df='df -h'
+fi
+
 # Run nvim in the dots directory
 alias dots-vi='(cd $DOTS_LOC && nvim)'
 alias dots-pull='(cd $DOTS_LOC && git pull)'
