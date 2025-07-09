@@ -66,7 +66,6 @@ if ! command -v nvim &>/dev/null; then
     fi
 else
     echo "Neovim is already installed."
-    exit 0
 fi
 
 # start nvim with the config directory
