@@ -1,6 +1,8 @@
+local minimal = vim.env.NVIM_MINIMAL == "1"
 return {
   {
     "nvim-treesitter/nvim-treesitter",
+    enabled = not minimal,
     opts = {
       ensure_installed = {
         "bash",
