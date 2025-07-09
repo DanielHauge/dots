@@ -34,7 +34,7 @@ OS=$(uname -s)
 # if linux
 if [[ "$OS" == "Linux" ]]; then
     if command -v apt-get &>/dev/null; then
-        apt-get update && sudo apt-get install -y neovim
+        apt-get update && apt-get install -y neovim
     elif command -v yum &>/dev/null; then
         yum install -y neovim
     elif command -v dnf &>/dev/null; then
