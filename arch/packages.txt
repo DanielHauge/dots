@@ -46,6 +46,8 @@ fd
 dysk
 ffmpegthumbnailer
 ffmpeg
+elixir
+inotify-tools
 firefox
 7zip
 flatbuffers
