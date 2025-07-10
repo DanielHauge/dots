@@ -139,6 +139,9 @@ window#waybar.hidden {
 #clock {
   font-family: JetBrainsMono Nerd Font;
   background-color: #cba6f7;
+  /* font size big */
+    font-size: 18px;
+  
 }
 
 #custom-exit {
