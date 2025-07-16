@@ -35,6 +35,9 @@ dialog
 discord
 crudini
 docker
+docker-buildx
+docker-compose
+docker-machine
 xmlstarlet
 dpkg
 fselect
