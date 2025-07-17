@@ -81,9 +81,6 @@ return {
       statuscolumn = { enabled = false },
       words = { enabled = true },
     },
-    -- -- TODO: lol
-    -- TODO: lol
-    -- FIX: yo
     keys = {
       -- Top Pickers & Explorer
       {

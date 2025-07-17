@@ -22,6 +22,10 @@ vim.fn.sign_define("DapBreakpointConditional", { text = "🔍", texthl = "", lin
 vim.fn.sign_define("DapBreakpointDisabled", { text = "🔕", texthl = "", linehl = "", numhl = "" })
 vim.fn.sign_define("DapBreakpointUnverified", { text = "🔍", texthl = "", linehl = "", numhl = "" })
 
+-- Cool greenish bluish hacker color
+M.override.SnacksDashboardHeader = { fg = "#2ea990", bold = true }
+M.override.DashboardHeader = { fg = "#4ec9b0", bold = true }
+
 -- Override custom nvim-treesitter highlight group links
 -- TYPESCRIPT overrides
 vim.api.nvim_set_hl(0, "@type.qualifier.typescript", { link = "@keyword" })
