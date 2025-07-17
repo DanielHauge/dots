@@ -13,6 +13,9 @@ unset("n", "<leader>xT")
 unset("v", "<")
 unset("v", ">")
 
+-- vim.api.nvim_set_keymap('t', '<Esc>', [[<C-\><C-n>]], { noremap = true, silent = true })
+map("t", "<Esc>", [[<C-\><C-n>]], { desc = "Exit terminal mode", noremap = true, silent = true })
+
 map("v", ">", "<gv", { desc = "Indent right", nowait = true, noremap = true })
 map("v", "<", ">gv", { desc = "Indent left", nowait = true, noremap = true })
 -- Navigate
