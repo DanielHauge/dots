@@ -4,6 +4,10 @@ bluez-utils
 bluetui
 blueman
 pv
+erlang
+hyprshot
+uv
+dmidecode
 rsync
 yt-dlp
 baobab
