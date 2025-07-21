@@ -1,4 +1,5 @@
 bluez
+hyprshot
 mingw-w64-gcc
 bluez-utils
 bluetui
@@ -45,6 +46,7 @@ docker-machine
 xmlstarlet
 dpkg
 fselect
+reveal-md
 efibootmgr
 swaync
 evince
