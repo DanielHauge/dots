@@ -1,12 +1,12 @@
 bluez
 hyprshot
+avahi
 mingw-w64-gcc
 bluez-utils
 bluetui
 blueman
 pv
 erlang
-hyprshot
 uv
 dmidecode
 rsync
@@ -29,6 +29,7 @@ ulauncher
 waypaper
 mpvpaper
 dotnet-sdk
+cups
 bat
 bc
 blueman
