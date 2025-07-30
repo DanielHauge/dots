@@ -119,6 +119,29 @@ alias awk4='awk "{print \$4}"'
 alias awk5='awk "{print \$5}"'
 alias dotnetprojs='dotnet sln list | skip 2 | awk "{print \$1}" | sed "s/\.csproj//g" | xargs -I {} find . -name "{}.dll" | grep bin/Debug'
 alias dots='cd $DOTS_LOC'
+function flashusb() {
+    iso_file="$1"
+    device="$2"
+    if [ -z "$iso_file" ] || [ -z "$device" ]; then
+        echo "Usage: flashusb <iso_file> <device>"
+        return 1
+    fi
+    if [ ! -f "$iso_file" ]; then
+        echo "ISO file $iso_file does not exist."
+        return 1
+    fi
+    if [ ! -b "$device" ]; then
+        echo "Device $device is not a block device."
+        return 1
+    fi
+    echo "Flashing $iso_file to $device..."
+    sudo dd if="$iso_file" of="$device" bs=4M status=progress oflag=sync
+    echo "Flash complete. Please eject the device safely."
+    sync
+    sudo eject "$device"
+    echo "Device $device ejected."
+    return 0
+}
 
 # if dysk then alias df=dysk
 if command -v dysk &>/dev/null; then
