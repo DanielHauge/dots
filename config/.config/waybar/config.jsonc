@@ -92,7 +92,7 @@
     },
     "clock": {
         "tooltip-format": "{calendar}",
-        "format-alt": "  {:%a, Week %W , %d %b %Y}",
+        "format-alt": "  {:%a, Week %V , %d %b %Y}",
         "format": "  {:%H:%M , %d/%m/%Y}",
     },
     "network": {
