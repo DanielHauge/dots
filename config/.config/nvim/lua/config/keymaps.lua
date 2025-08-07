@@ -9,6 +9,8 @@ unset("n", "<leader>qd")
 unset("n", "<leader>xl")
 unset("n", "<leader>xt")
 unset("n", "<leader>xT")
+unset("n", "<C-Down>")
+unset("n", "<C-Up>")
 
 unset("v", "<")
 unset("v", ">")
@@ -24,6 +26,14 @@ map("n", "<leader>j", "<C-d>", { desc = "Scroll down" })
 map("n", "<leader>k", "<c-u>", { desc = "scroll up" })
 map("n", "<leader>l", "<C-f>", { desc = "Scroll right" })
 map("n", "<leader>h", "<C-b>", { desc = "Scroll left" })
+
+-- map ctrl up and down to scroll only one line at at time
+map("n", "<C-Up>", "<C-y>", { desc = "Scroll up one line" })
+map("n", "<C-Down>", "<C-e>", { desc = "Scroll down one line" })
+-- also ctrol + pgdn and pgup to do 10 lines like before, not cursor movement
+-- DO NOT do just C-d and C-u, as that will break the scroll
+map("n", "<C-PageDown>", "10<C-e>", { desc = "Scroll down 10 lines" })
+map("n", "<C-PageUp>", "10<C-y>", { desc = "Scroll up 10 lines" })
 
 -- Quick Nav w. ctl
 map("n", "<C-Left>", "b", { desc = "Move left" })
