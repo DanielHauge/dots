@@ -82,6 +82,28 @@ map("n", "<leader>rr", function()
   vim.lsp.buf.rename()
 end, { desc = "Rename" })
 
+-- Debuging keymaps
+map("n", "<A-C-Left>", function()
+  require("dap").step_back()
+end, { desc = "Debug: Step Over" })
+map("n", "<A-C-Right>", function()
+  require("dap").step_over()
+end, { desc = "Debug: Continue" })
+
+map("n", "<A-C-Up>", function()
+  require("dap").step_out()
+end, { desc = "Debug: Step Into" })
+map("n", "<A-C-Down>", function()
+  require("dap").step_into()
+end, { desc = "Debug: Step Out" })
+map("n", "<A-C-Esc>", function()
+  require("dap").terminate()
+end, { desc = "Debug: Terminate" })
+
+map("n", "<A-C-Enter>", function()
+  require("dap").continue()
+end, { desc = "Debug: Continue" })
+
 -- Test keymaps
 map("n", "<leader>tt", function()
   require("neotest").run.run()
