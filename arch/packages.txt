@@ -1,3 +1,5 @@
+debootstrap
+lxd
 bluez
 hyprshot
 avahi
