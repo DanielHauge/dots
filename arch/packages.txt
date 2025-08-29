@@ -1,4 +1,5 @@
 debootstrap
+bind
 lxd
 bluez
 hyprshot
