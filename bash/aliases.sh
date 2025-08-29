@@ -100,7 +100,7 @@ if [ -n "$WINDIR" ]; then
     # TODO: release this small tool
     alias winstall="$DOTS_LOC/win/install.sh"
 else
-    alias off='shutdown -h now'
+    alias off='systemctl poweroff'
 fi
 
 alias letitsnow="$DOTS_LOC/bash/snowjob.sh"

@@ -1,7 +1,9 @@
 debootstrap
 bind
 lxd
+nmap
 bluez
+psrecord
 hyprshot
 avahi
 mingw-w64-gcc
