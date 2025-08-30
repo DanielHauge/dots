@@ -4,6 +4,7 @@ lxd
 nmap
 bluez
 psrecord
+usbutils
 hyprshot
 avahi
 mingw-w64-gcc
