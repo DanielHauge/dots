@@ -104,7 +104,33 @@ map("n", "<A-C-Enter>", function()
   require("dap").continue()
 end, { desc = "Debug: Continue" })
 
--- Test keymaps
+-- Do some multi cursor studd
+local mc_N = require("multicursors.normal_mode")
+local mc_U = require("multicursors.utils")
+
+-- Shift + Alt + down arrow to add cursor below using     "smoka7/multicursors.nvim",
+map("n", "<A-S-Down>", function()
+  local current_selections = mc_U.get_all_selections()
+  if vim.tbl_isempty(current_selections) then
+    vim.cmd("MCstart")
+    mc_N.create_down()
+  else
+    mc_N.create_down()
+  end
+  -- if there are no selections, select the word under the cursor
+end, { desc = "Multi-cursor: Start and one down" })
+
+map("n", "<A-S-Up>", function()
+  local current_selections = mc_U.get_all_selections()
+  if vim.tbl_isempty(current_selections) then
+    vim.cmd("MCstart")
+    mc_N.create_up()
+  else
+    mc_N.create_up()
+  end
+end, { desc = "Multi-cursor: Start and one up" })
+
+--
 map("n", "<leader>tt", function()
   require("neotest").run.run()
 end, { desc = "[T]est [T]his" })
