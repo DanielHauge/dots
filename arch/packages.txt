@@ -1,6 +1,7 @@
 debootstrap
 lsof
 bind
+wscat
 lxd
 glslviewer
 nmap
