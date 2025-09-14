@@ -1,6 +1,8 @@
 debootstrap
+lsof
 bind
 lxd
+glslviewer
 nmap
 bluez
 psrecord
