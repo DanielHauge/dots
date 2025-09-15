@@ -19,12 +19,17 @@ function setup_systemdnspawn() {
     echo usermod -aG sudo myuser
 
     echo passwd myuser
-    echo "[Exec]\nBoot=yes\n\n[Network]\nVirtualEthernet=yes" | sudo tee /etc/systemd/nspawn/ubuntu.nspawn
-    sudo systemd-nspawn -D /var/lib/machines/ubuntu --boot --bind=/home/archie/repo:/home/archie/repo
+    sudo mkdir -p /etc/systemd/nspawn
+    sudo tee /etc/systemd/nspawn/ubuntu.nspawn <<EOF
+[Exec]
+Boot=yes
+
+[Network]
+Host=yes
+EOF
     echo sudo mount -o remount,rw /sys
 }
 
 function ubuntu() {
-    machinectl login ubuntu
-
+    sudo systemd-nspawn -D /var/lib/machines/ubuntu
 }
