@@ -25,6 +25,7 @@ baobab
 deno
 feh
 poppler
+python-ipykernel
 postgresql
 rsync
 ripgrep
