@@ -129,6 +129,7 @@ polkit-kde-agent
 protobuf
 pyenv
 python-h5py
+python-hdf5plugin
 python-pip
 python-pipx
 qt5-wayland
