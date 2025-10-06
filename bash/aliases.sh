@@ -170,6 +170,19 @@ alias xcat='xa cat ½'
 function screenshot() {
     grim -g "$(slurp)" - | wl-copy
 }
+
+function screenshot1() {
+    hyprshot -m region --clipboard-only,
+}
+
+function screenshot2() {
+    pkill slurp || hyprshot -m ${1:-region} --raw |
+        satty --filename - \
+            --early-exit \
+            --actions-on-enter save-to-clipboard \
+            --copy-command 'wl-copy'
+}
+
 function cpc() {
     # First argument is the history number
     # If no argument is provided, echo bad

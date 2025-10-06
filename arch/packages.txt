@@ -1,7 +1,10 @@
 debootstrap
+elephant
+walker
 lsof
 bind
 wscat
+satty
 lxd
 glslviewer
 nmap
