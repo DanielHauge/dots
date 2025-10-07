@@ -1,5 +1,11 @@
 debootstrap
 elephant
+elephant-symbols
+elephant-runner
+elephant-files
+elephant-desktopapplications
+elephant-bluetooth
+elephant-clipboard
 walker
 lsof
 bind
