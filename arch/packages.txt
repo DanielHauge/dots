@@ -45,7 +45,6 @@ base-devel
 viu
 go
 ruby
-ulauncher
 waypaper
 mpvpaper
 dotnet-sdk
@@ -198,4 +197,3 @@ zip
 zoxide
 zram-generator
 flutter
-ulauncher
