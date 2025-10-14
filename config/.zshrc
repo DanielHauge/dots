@@ -42,9 +42,6 @@ export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="$HOME/p":$PATH
 export PATH="$HOME/bin":$PATH
 
-if [ -f ~/.zshrc.local ]; then
-    source ~/.zshrc.local
-fi
 
 source $ZSH/oh-my-zsh.sh
 source $DOTS_LOC/bash/shared_source.sh
@@ -64,8 +61,8 @@ if [[ -n $SSH_CONNECTION ]]; then
 
 export PATH="$PATH:$HOME/.dotnet/tools"
 
-## [Completion]
-## Completion scripts setup. Remove the following line to uninstall
 [[ -f /home/archie/.dart-cli-completion/zsh-config.zsh ]] && . /home/archie/.dart-cli-completion/zsh-config.zsh || true
-## [/Completion]
 
+if [ -f ~/.zshrc.local ]; then
+    source ~/.zshrc.local
+fi
