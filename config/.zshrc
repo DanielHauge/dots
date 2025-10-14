@@ -63,3 +63,9 @@ if [[ -n $SSH_CONNECTION ]]; then
  fi
 
 export PATH="$PATH:$HOME/.dotnet/tools"
+
+## [Completion]
+## Completion scripts setup. Remove the following line to uninstall
+[[ -f /home/archie/.dart-cli-completion/zsh-config.zsh ]] && . /home/archie/.dart-cli-completion/zsh-config.zsh || true
+## [/Completion]
+
