@@ -1,6 +1,9 @@
 debootstrap
 elephant
 elephant-symbols
+gvfs-mtp 
+mtpfs 
+jmtpfs
 elephant-runner
 elephant-files
 elephant-desktopapplications

@@ -117,6 +117,7 @@ alias amdo-cpptest='amdo "(cd build; make && ctest --output-on-failure)"'
 alias pacman='sudo pacman'
 alias awk4='awk "{print \$4}"'
 alias awk5='awk "{print \$5}"'
+alias eject='sudo eject'
 alias dotnetprojs='dotnet sln list | skip 2 | awk "{print \$1}" | sed "s/\.csproj//g" | xargs -I {} find . -name "{}.dll" | grep bin/Debug'
 alias dots='cd $DOTS_LOC'
 function flashusb() {
