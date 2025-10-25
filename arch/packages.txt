@@ -9,6 +9,7 @@ elephant-runner
 elephant-files
 elephant-desktopapplications
 elephant-bluetooth
+elephant-unicode
 elephant-clipboard
 walker
 lsof
