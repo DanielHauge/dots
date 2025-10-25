@@ -67,6 +67,21 @@ function cmds {
     local selected
     selected=$(echo "$selected_line" | awk -F " - " '{print $1}' | awk '{print $2}')
 
+    # Now the command is selected, lets lookup the comment description starting with #>
+    # Find all following lines starting with #>
+    # Then print All of them to stdout
+    if [[ -n $selected ]]; then
+        local cmd_file=""
+        if [[ " ${functions_list[*]} " == *" $selected "* ]]; then
+            cmd_file="$DOTS_LOC/cmd/fn/$selected"
+        else
+            cmd_file="$DOTS_LOC/cmd/bin/$selected"
+        fi
+        if [[ -f $cmd_file ]]; then
+            grep '^#>' "$cmd_file" | sed 's/^#> //'
+            echo ""
+        fi
+    fi
     # If a command was selected, insert it into the next prompt
     if [[ -n $selected ]]; then
         # For Zsh: inject into the command buffer

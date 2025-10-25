@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 #> Opens paths with default programs
+#> x <path1> <path2>
+#> echo "path" | x
 if command -v explorer.exe &>/dev/null; then
     function open_path() {
         # if on windows
