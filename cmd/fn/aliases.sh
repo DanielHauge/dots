@@ -1,8 +1,3 @@
-#!/bin/bash
-# shellcheck disable=2142
-
-alias cal='calendar'
-
 if command -v zoxide &>/dev/null; then
     # if zsh then init zsh
     if [ -n "$ZSH_VERSION" ]; then
@@ -15,16 +10,6 @@ if command -v zoxide &>/dev/null; then
 else
     echo "z not found, defaulting to cd"
 fi
-
-function am() {
-    "$@"
-    while true; do
-        await-modify "."
-        clear
-        "$@"
-    done
-
-}
 
 if ! command -v firefox &>/dev/null; then
     alias firefox='firefox.exe'
@@ -50,20 +35,6 @@ alias battery='upower -i /org/freedesktop/UPower/devices/battery_BAT0'
 alias ssh-keys='curl https://github.com/danielhauge.keys'
 # alias fix-tsv=sed ':a;N;$!ba;s/"\([^"]*\)\n\([^"]*\)"/"\1;\2"/g'
 
-if command -v clip &>/dev/null; then
-    function cfp() {
-        if [ -f "$1" ]; then
-            echo "$(pwd -W)/$1" | clip
-            return
-        fi
-        echo "File $1 not found"
-    }
-fi
-
-if command -v xclip &>/dev/null; then
-    alias clip='xclip -selection clipboard'
-fi
-
 if command -v eza &>/dev/null; then
     alias sl='eza -F --color=auto --icons'
     alias ls='eza -F --color=auto --icons'
@@ -79,41 +50,13 @@ else
     alias watch-ls="watch -n 1 'ls -F --color=always'"
     alias watch-lt="watch -n 1 'ls -l -h --time-style=long-iso --color=always'"
 fi
-alias dots-src='source $DOTS_LOC/bash/shared_source.sh'
 alias dots-stow='stow -v --adopt -t ~/.config -d ~/dots .config; stow -v --adopt -t ~ -d ~/dots home'
 
-# if windows
-if [ -n "$WINDIR" ]; then
-    alias cya='shutdown.exe -s -t 0'
-    alias bye='shutdown.exe -s -t 0'
-    alias reboot='shutdown.exe -r -t 0'
-    alias bc='python -c "from __future__ import division; from math import *; import sys; print(eval(sys.argv[1]))"'
-    alias restart='shutdown.exe -r -t 0'
-    alias off='shutdown.exe -s -t 0'
-    alias bios='shutdown.exe -r -t 0 -fw'
-    alias bootusb='shutdown.exe -r -t 0 -o'
-    alias nas="wt.exe -p 'Git Bash' -d //nas/vault"
-    alias gwt="wt.exe -p 'Git Bash'"
-    export WINDOWS_TERMINAL_EXECUTE_COMMAND="'/c start wt.exe'"
-    alias wt='wt.exe --startingDirectory "$(pwd -W)"'
-    alias wta='powershell.exe "Start-Process -Verb RunAs cmd.exe $WINDOWS_TERMINAL_EXECUTE_COMMAND"'
-    # TODO: release this small tool
-    alias winstall="$DOTS_LOC/win/install.sh"
-else
-    alias off='systemctl poweroff'
-fi
-
-alias letitsnow="$DOTS_LOC/bash/snowjob.sh"
-alias rmd='cat *.md | glow '
 alias plex='nohup setsid snap run plex-desktop >/dev/null 2>&1 < /dev/null &'
-alias todo='cat $REPO_DIR/*/TODO.md | glow'
-alias mmdcd='sudo docker run --rm -u `id -u`:`id -g` -v .:/data minlag/mermaid-cli -i'
 # Start wt with profile git bash, and use //nas/vault as directory
 alias awk1='awk "{print \$1}"'
 alias awk2='awk "{print \$2}"'
 alias awk3='awk "{print \$3}"'
-alias cpptest="(cd build; make && ctest --output-on-failure)"
-alias amdo-cpptest='amdo "(cd build; make && ctest --output-on-failure)"'
 alias pacman='sudo pacman'
 alias awk4='awk "{print \$4}"'
 alias awk5='awk "{print \$5}"'
@@ -151,22 +94,7 @@ else
     alias df='df -h'
 fi
 
-# Run nvim in the dots directory
-alias dots-vi='(cd $DOTS_LOC && nvim)'
-alias dots-pull='(cd $DOTS_LOC && git pull)'
-function cmakeb() {
-    rm -rf build
-    rm -f compile_commands.json
-    mkdir build
-    cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=YES -B build "$@"
-    (cd build && make)
-    if [ -f build/compile_commands.json ]; then
-        ln -sf build/compile_commands.json compile_commands.json
-    fi
-}
 alias mp4tomp3='for i in *.mp4; do ffmpeg -i "$i" "${i%.*}.mp3"; done'
-alias xa='xargs -I ½'
-alias xcat='xa cat ½'
 
 function screenshot() {
     grim -g "$(slurp)" - | wl-copy
@@ -182,17 +110,4 @@ function screenshot2() {
             --early-exit \
             --actions-on-enter save-to-clipboard \
             --copy-command 'wl-copy'
-}
-
-function cpc() {
-    # First argument is the history number
-    # If no argument is provided, echo bad
-    if [ -z "$1" ]; then
-        history
-        echo "Usage: cpc <history_number>"
-        return 1
-    fi
-    local history_number=$1
-    local command=$(history | grep "^ *$history_number" | sed "s/^ *$history_number *//")
-    echo "$command" | clip
 }

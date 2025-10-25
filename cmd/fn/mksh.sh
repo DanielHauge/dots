@@ -1,0 +1,24 @@
+function mksh {
+    if [ $# -ne 1 ]; then
+        echo "Usage: mksh <script_name>"
+        return 1
+    fi
+    if [[ ! $1 =~ ^[a-zA-Z_][a-zA-Z0-9_]*$ ]]; then
+        echo "Error: Script name must start with a letter or underscore and contain only letters, numbers, and underscores."
+        return 1
+    fi
+    if command -v "$1" >/dev/null 2>&1; then
+        if [ -f "$DOTS_LOC/cmd/bin/$1" ]; then
+            :
+        else
+            echo "Error: Script name '$1' conflicts with an existing command."
+            return 1
+        fi
+    fi
+    fileloc=$DOTS_LOC/cmd/bin/$1
+    if [ ! -f "$fileloc" ]; then
+        echo -e "#!/usr/bin/env bash\n\n# $1 - Description of the script\n\nset -euo pipefail\nIFS=\$'\\n\\t'\n\nusage() {\n    echo \"Usage: $1 <arg1>\"\n}\n\nif [ \$# -ne 1 ]; then\n    usage\n    exit 1\nfi\n\n# TODO: Implement script logic here\n" >"$fileloc"
+        chmod +x "$fileloc"
+    fi
+    ${EDITOR:-nvim} "$fileloc"
+}

@@ -39,19 +39,10 @@ fi
 
 export PATH="$HOME/snap/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
-export PATH="$HOME/p":$PATH
 export PATH="$HOME/bin":$PATH
 
 
 source $ZSH/oh-my-zsh.sh
-source $DOTS_LOC/bash/shared_source.sh
-
-function ros2-src() {
-    if [ -f /opt/ros/jazzy/setup.zsh ]; then
-        source /opt/ros/jazzy/setup.zsh
-    fi
-
-}
 
 if [[ -n $SSH_CONNECTION ]]; then
    export EDITOR='vim'
@@ -66,3 +57,5 @@ export PATH="$PATH:$HOME/.dotnet/tools"
 if [ -f ~/.zshrc.local ]; then
     source ~/.zshrc.local
 fi
+
+source $DOTS_LOC/cmd/setup.sh
