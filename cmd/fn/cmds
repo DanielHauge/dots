@@ -1,0 +1,80 @@
+#!/usr/bin/env bash
+#> List all custom commands with fzf search and preview
+function cmds {
+    local functions_list=()
+    for fn_file in "$DOTS_LOC/cmd/fn/"*; do
+        [ -e "$fn_file" ] && functions_list+=("$(basename "$fn_file")")
+    done
+
+    local bin_list=()
+    for bin_file in "$DOTS_LOC/cmd/bin/"*; do
+        [ -e "$bin_file" ] && bin_list+=("$(basename "$bin_file")")
+    done
+
+    local all_cmds=()
+    for fn in "${functions_list[@]}"; do
+        local fn_file="$DOTS_LOC/cmd/fn/$fn"
+        local description=""
+        if [ -f "$fn_file" ]; then
+            description=$(grep -m 1 '^#>' "$fn_file" | sed 's/^#> //')
+        fi
+        all_cmds+=("󰡱 $fn - $description")
+    done
+
+    for bin in "${bin_list[@]}"; do
+        local bin_file="$DOTS_LOC/cmd/bin/$bin"
+        local description=""
+        local type="Binary"
+        if [ -f "$bin_file" ]; then
+            description=$(grep -m 1 '^#>' "$bin_file" | sed 's/^#> //')
+            if head -n 1 "$bin_file" | grep -q '^#!'; then
+                if head -n 1 "$bin_file" | grep -q 'python'; then
+                    type=""
+                else
+                    type=""
+                fi
+            fi
+        fi
+        all_cmds+=("$type $bin - $description")
+    done
+
+    export FUNCTIONS_LIST_STR="${functions_list[*]}"
+
+    local selected_line
+    selected_line=$(
+        printf '%s\n' "${all_cmds[@]}" | fzf \
+            --height 80% \
+            --layout=reverse \
+            --border \
+            --preview-window=right:60%:wrap \
+            --preview='
+            selected=$(echo {} | awk -F " - " "{print \$1}" | awk "{print \$2}")
+            if [[ " $FUNCTIONS_LIST_STR " == *" $selected "* ]]; then
+                file="$DOTS_LOC/cmd/fn/$selected"
+            else
+                file="$DOTS_LOC/cmd/bin/$selected"
+            fi
+            if [ -f "$file" ]; then
+                bat --color=always "$file"
+            else
+                echo "File not found."
+            fi
+        ' \
+            --header='Select a command to preview its source code' \
+            --prompt='Commands> '
+    )
+
+    local selected
+    selected=$(echo "$selected_line" | awk -F " - " '{print $1}' | awk '{print $2}')
+
+    # If a command was selected, insert it into the next prompt
+    if [[ -n $selected ]]; then
+        # For Zsh: inject into the command buffer
+        if [[ -n $ZSH_VERSION && -t 0 ]]; then
+            print -z -- "$selected "
+        else
+            # For Bash or non-interactive shells, just echo
+            echo "$selected"
+        fi
+    fi
+}

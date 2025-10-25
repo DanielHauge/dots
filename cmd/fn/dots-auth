@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+#> A curated function to setup ssh keys and add it to github - use on new machine.
 function dots-auth() {
     # if .ssh/*pub doesn't exist. create it.
     if [ ! -f ~/.ssh/id_rsa.pub ]; then

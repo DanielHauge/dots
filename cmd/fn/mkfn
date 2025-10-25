@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+#> Creates or modifes a custom dots terminal function.
 function mkfn {
     if [ $# -ne 1 ]; then
         echo "Usage: mkfn <function_name>"
@@ -8,7 +10,7 @@ function mkfn {
         return 1
     fi
     if command -v "$1" >/dev/null 2>&1 || declare -f "$1" >/dev/null 2>&1; then
-        if [ -f "$DOTS_LOC/cmd/fn/$1.sh" ]; then
+        if [ -f "$DOTS_LOC/cmd/fn/$1" ]; then
             :
         else
             echo "Error: Function name '$1' conflicts with an existing command or function."
@@ -16,9 +18,9 @@ function mkfn {
         fi
     fi
 
-    fileloc=$DOTS_LOC/cmd/fn/$1.sh
+    fileloc=$DOTS_LOC/cmd/fn/$1
     if [ ! -f "$fileloc" ]; then
-        echo -e "function $1 {\n    if [ \$# -ne 1 ]; then\n        echo \"Usage: $1 <arg1>\"\n        return 1\n    fi\n    # TODO: Implement function logic here\n}\n" >"$fileloc"
+        echo -e "#!/usr/bin/env bash\n#> Description of function\nfunction $1 {\n    if [ \$# -ne 1 ]; then\n        echo \"Usage: $1 <arg1>\"\n        return 1\n    fi\n    # TODO: Implement function logic here\n}\n" >"$fileloc"
         chmod +x "$fileloc"
     fi
     ${EDITOR:-nvim} "$fileloc"

@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+#> Plays a video file in terminal
+
+set -euo pipefail
+IFS=$'
+	'
+
+usage() {
+    echo "Usage: playvid <arg1>"
+}
+
+if [ $# -ne 1 ]; then
+    usage
+    exit 1
+fi
+
+# TODO: Implement script logic here
+
+exec mpv --quiet --vo=tct --vo-tct-256=yes --vo-tct-algo=plain --framedrop=vo "$@"

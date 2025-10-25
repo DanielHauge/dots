@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+#> Creates or modifies a custom shell script for custom dots cmds.
 function mksh {
     if [ $# -ne 1 ]; then
         echo "Usage: mksh <script_name>"
@@ -17,7 +19,7 @@ function mksh {
     fi
     fileloc=$DOTS_LOC/cmd/bin/$1
     if [ ! -f "$fileloc" ]; then
-        echo -e "#!/usr/bin/env bash\n\n# $1 - Description of the script\n\nset -euo pipefail\nIFS=\$'\\n\\t'\n\nusage() {\n    echo \"Usage: $1 <arg1>\"\n}\n\nif [ \$# -ne 1 ]; then\n    usage\n    exit 1\nfi\n\n# TODO: Implement script logic here\n" >"$fileloc"
+        echo -e "#!/usr/bin/env bash\n\n#> Description of the script\n\nset -euo pipefail\nIFS=\$'\\n\\t'\n\nusage() {\n    echo \"Usage: $1 <arg1>\"\n}\n\nif [ \$# -ne 1 ]; then\n    usage\n    exit 1\nfi\n\n# TODO: Implement script logic here\n" >"$fileloc"
         chmod +x "$fileloc"
     fi
     ${EDITOR:-nvim} "$fileloc"
