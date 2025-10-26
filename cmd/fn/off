@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+#> Shutdown the computer
+function off {
+    systemctl poweroff
+}
