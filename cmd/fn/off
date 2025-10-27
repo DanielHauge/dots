@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 #> Shutdown the computer
 function off {
+    play -q "$DOTS_LOC/sfx/off.ogg" &
     systemctl poweroff
 }

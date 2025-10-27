@@ -5,11 +5,11 @@ function mksh {
         echo "Usage: mksh <script_name>"
         return 1
     fi
-    if [[ ! $1 =~ ^[a-zA-Z_][a-zA-Z0-9_]*$ ]]; then
+    if [[ ! $1 =~ ^[a-zA-Z_][a-zA-Z0-9_-]*$ ]]; then
         echo "Error: Script name must start with a letter or underscore and contain only letters, numbers, and underscores."
         return 1
     fi
-    if command -v "$1" >/dev/null 2>&1; then
+    if command -v "$1" >/dev/null 2>&1 || declare -f "$1" >/dev/null 2>&1; then
         if [ -f "$DOTS_LOC/cmd/bin/$1" ]; then
             :
         else

@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+#> Description of the script
+
+set -euo pipefail
+IFS=$'
+	'
+
+usage() {
+    echo "Usage: sfx <arg1>"
+}
+
+if [ $# -ne 1 ]; then
+    echo "Provide the sound to play:"
+    # ls my sfx but strip extensions
+    ls "$DOTS_LOC/sfx" | sed 's/\.[^.]*$//' | xargs -n1 echo " -"
+    usage
+    exit 1
+fi
+
+SFX_NAME="$1"
+SFX_PATH="$DOTS_LOC/sfx/$SFX_NAME.ogg"
+if [ ! -f "$SFX_PATH" ]; then
+    echo "Sound file not found: $SFX_PATH"
+    exit 1
+fi
+nohup play -q "$SFX_PATH" >/dev/null 2>&1 &
