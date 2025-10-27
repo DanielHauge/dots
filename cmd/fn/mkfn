@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 #> Creates or modifes a custom dots terminal function.
+#> Usage: mkfn <function_name>
 function mkfn {
     if [ $# -ne 1 ]; then
         echo "Usage: mkfn <function_name>"

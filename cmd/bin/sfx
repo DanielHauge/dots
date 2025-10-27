@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
-
-#> Description of the script
+#> Play a sound effect from the sfx directory
+#> Usage: sfx <sound_name>
+#> Leave empty to list available sounds
 
 set -euo pipefail
 IFS=$'

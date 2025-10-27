@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 #> Creates or modifies a custom shell script for custom dots cmds.
+#> Usage: mksh <script_name>
 function mksh {
     if [ $# -ne 1 ]; then
         echo "Usage: mksh <script_name>"
