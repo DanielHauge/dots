@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+#> Flash a bootable ISO image to a USB device.
+#> Usage: flashusb <iso_file> <device>
+#> Example: flashusb ubuntu.iso /dev/sdb
+
+set -euo pipefail
+IFS=$'
+	'
+
+usage() {
+    echo "Usage: flashusb <iso_file> <device>"
+}
+
+if [ $# -ne 2 ]; then
+    usage
+    exit 1
+fi
+
+iso_file="$1"
+device="$2"
+if [ -z "$iso_file" ] || [ -z "$device" ]; then
+    usage
+    return 1
+fi
+
+if [ ! -f "$iso_file" ]; then
+    echo "ISO file $iso_file does not exist."
+    return 1
+fi
+
+if [ ! -b "$device" ]; then
+    echo "Device $device is not a block device."
+    return 1
+fi
+echo "Flashing $iso_file to $device..."
+sudo dd if="$iso_file" of="$device" bs=4M status=progress oflag=sync
+echo "Flash complete. Please eject the device safely."
+sync
+sudo eject "$device"
+echo "Device $device ejected."
+return 0
