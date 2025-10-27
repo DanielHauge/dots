@@ -1,6 +1,8 @@
 export ZSH="$HOME/.oh-my-zsh"
 
 ZSH_THEME="bira"
+export VIRTUAL_ENV_DISABLE_PROMPT=1
+
 # zstyles gives error on startup, only run if running zsh
 if [ -n "$ZSH_VERSION" ]; then
     zstyle ':omz:update' mode auto
@@ -43,6 +45,7 @@ export PATH="$HOME/bin":$PATH
 
 
 source $ZSH/oh-my-zsh.sh
+
 
 if [[ -n $SSH_CONNECTION ]]; then
    export EDITOR='vim'
