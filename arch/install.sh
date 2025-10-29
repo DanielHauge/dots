@@ -38,14 +38,22 @@ if ! command -v paru; then
 fi
 
 currently_installed=$(paru -Qq)
+echo "Installing packages from packages.txt..."
 
 while IFS= read -r line; do
     if [[ -z "$line" || "$line" =~ ^# ]]; then
         continue
     fi
-    if echo "$currently_installed" | grep -q "^$line$"; then
+    line=$(echo "$line" | xargs) # Trim whitespace
+
+    if echo "$currently_installed" | grep -q "$line"; then
         log "Package $line is already installed, skipping."
         continue
+    else
+        if paru -Qs "$line" &>/dev/null; then
+            log "Package $line is already installed (checked with paru -Qs), skipping."
+            continue
+        fi
     fi
     log "Installing package: $line"
     paru -Sy --noconfirm "$line"
