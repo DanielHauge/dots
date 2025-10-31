@@ -16,15 +16,30 @@ import matplotlib.pyplot as plt
 # --------------------------
 
 
-def load_file(file):
-    if not os.path.exists(file):
-        sys.exit(f"Error: file '{file}' not found")
+import io
 
-    # Read small sample for guessing
-    with open(file, "r", encoding="utf-8", errors="ignore") as f:
-        sample = f.read(4096)
-        f.seek(0)
-        lines = f.readlines()
+stdin_cache = None  # global cache for stdin content
+
+
+def load_file(file):
+    global stdin_cache
+
+    if file == "-":
+        if stdin_cache is None:
+            # Read stdin once and cache it
+            stdin_cache = sys.stdin.read()
+        content = stdin_cache
+        lines = content.splitlines()
+        sample = content[:4096]
+        fobj = io.StringIO(content)
+    else:
+        if not os.path.exists(file):
+            sys.exit(f"Error: file '{file}' not found")
+        with open(file, "r", encoding="utf-8", errors="ignore") as f:
+            content = f.read()
+        lines = content.splitlines()
+        sample = content[:4096]
+        fobj = io.StringIO(content)
 
     # Detect delimiter
     try:
@@ -38,11 +53,11 @@ def load_file(file):
     parts = re.split(rf"[{re.escape(sep)}\s]+", first_line)
     has_header = any(re.search(r"[A-Za-z]", p) for p in parts)
 
-    # Load CSV
+    # Load CSV with pandas
     if sep == " ":
-        df = pd.read_csv(file, sep=r"\s+", header=0 if has_header else None)
+        df = pd.read_csv(fobj, sep=r"\s+", header=0 if has_header else None)
     else:
-        df = pd.read_csv(file, sep=sep, header=0 if has_header else None)
+        df = pd.read_csv(fobj, sep=sep, header=0 if has_header else None)
 
     if not has_header:
         df.columns = [f"col{i}" for i in range(df.shape[1])]
