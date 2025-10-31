@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+#> Description of function
+function qp {
+    tmp_qpi=$(mktemp /tmp/qp.XXXXXX.png)
+    qpi "$@" -o "$tmp_qpi"
+    viu "$tmp_qpi"
+}
