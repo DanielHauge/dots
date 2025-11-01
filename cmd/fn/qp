@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-#> Description of function
+#> Quick plot straight to terminal
 function qp {
     tmp_qpi=$(mktemp /tmp/qp.XXXXXX.png)
     qpi "$@" -o "$tmp_qpi"

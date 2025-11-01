@@ -152,6 +152,8 @@ python-pipx
 python-matplotlib
 qt5-wayland
 qt6-wayland
+sniffnet
+wireshark-qt
 rofi
 ruff
 shellcheck

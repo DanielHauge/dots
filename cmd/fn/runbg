@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+#> Run a command in the background, detached from terminal
+function runbg {
+    # Tryly run something in the background never to hear from it again, even if i exit the terminal
+    nohup "$@" >/dev/null 2>&1 &
+}
