@@ -39,7 +39,6 @@ fi
 
 function x {
     if [ "$#" -eq 0 ]; then
-        # Try read from standard in, but if there is no standard in, do something else
         if [ -t 0 ]; then
             p=$(fd | fzf)
             if [ -z "$p" ]; then
@@ -59,7 +58,6 @@ function x {
                 echo "Opening: $line"
                 open_path "$line" &
             else
-                # check if website with curl
                 echo "Path does not exist: $line, opening as website"
             fi
         done
@@ -74,7 +72,6 @@ function x {
             echo "Opening: $i"
             open_path "$i" &
         else
-            # check if website with curl
             echo "Path does not exist: $i"
         fi
     done

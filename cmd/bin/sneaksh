@@ -15,13 +15,11 @@ if [ $# -ne 1 ]; then
 fi
 
 KEY="$1"
-# Check that key is alphanumeric
 if ! [[ "$KEY" =~ ^[a-zA-Z0-9_-]+$ ]]; then
     echo "Error: Key must be alphanumeric (letters, numbers, underscores, and hyphens only)."
     exit 1
 fi
 
-# Make a multi line inline script
 INLINE_SCRIPT=$(
     cat <<EOF
 #!/usr/bin/env bash
@@ -46,31 +44,25 @@ done
 EOF
 )
 
-# Check if active session already, then just attach to that.
 rsp_file=$(mktemp)
 curl -L -s --max-time 2 "https://rclip.feveile-hauge.dk/next/rsp-$KEY" >"$rsp_file" &
 rsp_pid=$!
-# Give it a short moment to ensure connection is established
 sleep 0.2
-# Now send the request
 req=$(curl -L -s -X POST -d "ls" "https://rclip.feveile-hauge.dk/cmd-$KEY?private=true&once=true")
 wait $rsp_pid 2>/dev/null
 rsp=$(<"$rsp_file")
 rm -f "$rsp_file"
 
-# If rsp is not empty, then active session exists
 if [ -n "$rsp" ]; then
     echo -e "🔗 \e[32mActive session found. Attaching to existing session.\e[0m"
     echo -e "🚀 \e[34m➤Sent command:\e[0m ls"
     echo "$rsp"
     echo -e "📩\e[32m Response received.\e[0m"
-    # Now continue to read commands
 else
     echo -e "🆕 \e[34mNo active session found. Creating new session...\e[0m"
     curl -L -s -X POST -d "$INLINE_SCRIPT" "https://rclip.feveile-hauge.dk/$KEY?once=true&private=true"
     echo ""
 
-    # echo "Waiting for handshake..."
     echo -e "⏳ \e[34mWaiting for handshake...\e[0m"
     hs_resp=$(curl -L -s "https://rclip.feveile-hauge.dk/next/hs-$KEY")
     if [ "$hs_resp" != "OK" ]; then

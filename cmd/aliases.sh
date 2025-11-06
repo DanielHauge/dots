@@ -54,7 +54,6 @@ fi
 alias dots-stow='stow -v --adopt -t ~/.config -d ~/dots .config; stow -v --adopt -t ~ -d ~/dots home'
 
 alias plex='nohup setsid snap run plex-desktop >/dev/null 2>&1 < /dev/null &'
-# Start wt with profile git bash, and use //nas/vault as directory
 alias awk1='awk "{print \$1}"'
 alias awk2='awk "{print \$2}"'
 alias awk3='awk "{print \$3}"'
@@ -64,7 +63,6 @@ alias awk5='awk "{print \$5}"'
 alias eject='sudo eject'
 alias dots='cd $DOTS_LOC'
 
-# if dysk then alias df=dysk
 if command -v dysk &>/dev/null; then
     alias df='dysk'
 else

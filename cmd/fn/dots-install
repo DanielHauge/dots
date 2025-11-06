@@ -1,13 +1,11 @@
 #!/usr/bin/env bash
 #> Idempotently installs packages based on OS
 function dots-install() {
-    # if windows run install in windows
     if [ -n "$WINDIR" ]; then
         echo "Windows detected"
         $DOTS_LOC/win/install.sh
         return
     fi
-    # if ubuntu
     if command -v apt-get &>/dev/null; then
         echo "Ubuntu detected"
         sudo $DOTS_LOC/ubuntu/install.sh
