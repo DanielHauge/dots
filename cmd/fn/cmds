@@ -16,7 +16,7 @@ function cmds {
         local fn_file="$DOTS_LOC/cmd/fn/$fn"
         local description=""
         if [ -f "$fn_file" ]; then
-            description=$(grep -m 1 '^#>' "$fn_file" | sed 's/^#> //')
+            description=$(grep -m 1 '^#>' "$fn_file" | sed 's/#> //')
         fi
         all_cmds+=("󰡱 $fn - $description")
     done
@@ -26,7 +26,7 @@ function cmds {
         local description=""
         local type="Binary"
         if [ -f "$bin_file" ]; then
-            description=$(grep -m 1 '^#>' "$bin_file" | sed 's/^#> //')
+            description=$(grep -m 1 '#>' "$bin_file" | sed 's/#> //')
             if head -n 1 "$bin_file" | grep -q '^#!'; then
                 if head -n 1 "$bin_file" | grep -q 'python'; then
                     type=""

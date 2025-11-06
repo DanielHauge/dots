@@ -1,6 +1,6 @@
 #!/usr/bin/env python
-# > Quick plot interactive
-# > Plots data from data files with minimal effort.
+##> Quick plot interactive
+##> Plots data from data files with minimal effort.
 import argparse
 import csv
 import os
