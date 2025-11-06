@@ -133,6 +133,8 @@ networkmanager
 nfs-utils
 nodejs
 npm
+rust-script
+yaegi
 os-prober
 otf-firamono-nerd
 pandoc-cli
