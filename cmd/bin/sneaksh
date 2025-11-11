@@ -82,7 +82,7 @@ while true; do
     fi
     echo -e "🚀 \e[34m➤Sent command:\e[0m $line"
     rsp_file=$(mktemp)
-    curl -L -s --max-time 1 "https://rclip.feveile-hauge.dk/next/rsp-$KEY" >"$rsp_file" &
+    curl -L -s --max-time 5 "https://rclip.feveile-hauge.dk/next/rsp-$KEY" >"$rsp_file" &
     rsp_pid=$!
     # Give it a short moment to ensure connection is established
     sleep 0.2

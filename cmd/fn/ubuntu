@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+#> Description of function
+function ubuntu {
+    if [ $# -ne 0 ]; then
+        echo "Usage: ubuntu"
+        return 1
+    fi
+    sudo systemd-nspawn -D /var/lib/machines/ubuntu
+}
