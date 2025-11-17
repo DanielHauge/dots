@@ -240,6 +240,14 @@ vim.api.nvim_set_hl(0, "DiagnosticUnnecessary", {
   fg = "#6a954c",
 })
 
+-- remove @spell
+M.override["@spell"] = {
+  fg = "none",
+  bg = "none",
+  undercurl = false,
+  underline = false,
+}
+
 M.override["@constant"] = {
   bold = true,
   italic = true,
