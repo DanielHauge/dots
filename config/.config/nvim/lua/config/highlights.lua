@@ -74,6 +74,8 @@ M.override["@lsp.type.struct.cs"] = { fg = "#b5cea8" }
 M.override["@lsp.type.enum"] = { fg = "#5ea960" }
 M.override["@lsp.type.enumMember.rust"] = { fg = "#46e666" }
 
+M.override["@lsp.type.enumMember.rust"] = { fg = "#46e666" }
+
 vim.api.nvim_set_hl(0, "@variable.parameter.rust", { link = "@field" })
 M.override["@variable.parameter.rust"] = { link = "@field" }
 vim.api.nvim_set_hl(0, "@lsp.type.struct.rust", { link = "Type" })
@@ -81,6 +83,9 @@ M.override["@lsp.type.struct.rust"] = { link = "Type" }
 M.override["@lsp.type.parameter"] = { fg = "#7fd1ff", bold = true }
 vim.api.nvim_set_hl(0, "@lsp.type.interface.rust", { link = "Interface" })
 M.override["@lsp.type.interface.rust"] = { link = "Interface" }
+-- - @keyword.type.rust links to @keyword.type   priority: 100   language: rust
+-- - @keyword.modifier.rust links to @keyword.modifier   priority: 100   language: rust
+-- - @keyword.import.rust links to @keyword.import   priority: 100   language: rust
 
 -- F# Overrides
 vim.api.nvim_set_hl(0, "@lsp.type.namespace.fsharp", { fg = "#ccdddd" })
@@ -149,6 +154,21 @@ M.override["@keyword"] = {
   -- Color = (86, 156, 214)
   fg = "#569cd6",
   bold = true,
+}
+
+M.override["@keyword.modifier"] = {
+  -- Color = (86, 156, 214)
+  fg = "#567ce9",
+}
+
+M.override["@keyword.type"] = {
+  -- Color = (86, 156, 214)
+  fg = "#567ce9",
+}
+
+M.override["@keyword.import"] = {
+  -- Color = (86, 156, 214)
+  fg = "#567ce9",
 }
 
 M.override["@lsp.type.keyword"] = {
