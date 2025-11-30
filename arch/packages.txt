@@ -1,4 +1,5 @@
 debootstrap
+brightnessctl
 sox
 uuid
 gvfs-mtp 
