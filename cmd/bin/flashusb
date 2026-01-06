@@ -38,4 +38,3 @@ echo "Flash complete. Please eject the device safely."
 sync
 sudo eject "$device"
 echo "Device $device ejected."
-return 0

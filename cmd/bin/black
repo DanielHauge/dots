@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+#> Description of the script
+
+set -euo pipefail
+IFS=$'
+	'
+
+MONS=("HDMI-A-1" "DP-1")
+
+for m in "${MONS[@]}"; do
+    state=$(hyprctl monitors -j | jq -r ".[] | select(.name==\"$m\") | .dpmsStatus")
+    if [ "$state" = "true" ]; then
+        hyprctl dispatch dpms off "$m"
+    else
+        hyprctl dispatch dpms on "$m"
+    fi
+done
