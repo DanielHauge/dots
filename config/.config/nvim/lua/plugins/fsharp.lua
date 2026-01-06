@@ -6,7 +6,7 @@ return {
 
   -- Ensure fsautocomplete is installed via mason
   {
-    "williamboman/mason.nvim",
+    "mason-org/mason.nvim",
     opts = function(_, opts)
       opts.ensure_installed = opts.ensure_installed or {}
       table.insert(opts.ensure_installed, "fsautocomplete")
