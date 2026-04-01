@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+#> Description of function
+#> Extract mp3 audio from a YouTube video URL and save it in the music directory with the video title as the filename, embedding the thumbnail in the mp3 file.
+# https://www.youtube.com/watch?v=60DxWftkq3M&list=RD60DxWftkq3M&start_radio=1
+# use yt-dlp to extract mp3 audio from url, put it in music directory and name it after the video title
+# use --embed-thumbnail to embed the thumbnail in the mp3 file
+# Use the first arg1 as the url to extract from
+function ytdlp {
+    if [ $# -ne 1 ]; then
+        echo "Usage: ytdlp <arg1>"
+        return 1
+    fi
+    local url="$1"
+    yt-dlp --no-playlist --extract-audio --audio-format mp3 --embed-thumbnail -o "$HOME/Music/%(title)s.%(ext)s" "$url"
+}
