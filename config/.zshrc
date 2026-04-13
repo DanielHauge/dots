@@ -53,8 +53,10 @@ source $ZSH/oh-my-zsh.sh
 
 if [[ -n $SSH_CONNECTION ]]; then
    export EDITOR='vim'
+   export SYSTEMD_EDITOR='vim'
  else
    export EDITOR='nvim'
+    export SYSTEMD_EDITOR='nvim'
  fi
 
 export PATH="$PATH:$HOME/.dotnet/tools"
