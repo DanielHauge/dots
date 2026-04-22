@@ -42,6 +42,9 @@ if [ -z "$REPO_DIR" ]; then
 	export REPO_DIR="$HOME/repo"
 fi
 
+if [ -d "$HOME/go/bin" ]; then
+    export PATH="$HOME/go/bin:$PATH"
+fi
 
 export PATH="$HOME/snap/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
