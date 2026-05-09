@@ -114,9 +114,11 @@ ttf-jetbrains-mono
 ttf-jetbrains-mono-nerd
 ttf-nerd-fonts-symbols
 ttf-nerd-fonts-symbols-mono
-noto-fonts-emoji
 ttf-all-the-icons
 ttf-dejavu
+noto-fonts
+noto-fonts-cjk
+noto-fonts-emoji
 noto-fonts-extra
 powerline-fonts
 otf-firamono-nerd
