@@ -9,12 +9,13 @@ reveal-md
 steam
 wine
 
-poppler              # Required by inkscape
-inkscape            # An engine mainly used for tex generation
-tectonic
 lib32-glibc     # Compat with old 32bit shit
 
 qt5-*
 
+poppler              # Required by inkscape
+inkscape            # An engine mainly used for tex generation
+tectonic
 texlive-*
+biber
 winetricks-git

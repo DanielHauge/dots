@@ -12,15 +12,25 @@ nodejs
 npm
 deno
 ruby
+markdownlint-cli2
 elixir
+luarocks
+lua51
+composer # php dependency manager
+php
+julia
 erlang
+prettier
 dotnet-sdk
 flutter-bin
+sqlfluff
+terraform
 protobuf
 flatbuffers
 yaegi              # Go interpreter for go scripts
 rust-script        # run Rust scripts directly
 zig
+ast-grep
 
 # Developer libs
 hdf5
@@ -31,9 +41,13 @@ mingw-w64-gcc           # Cross compilation compat
 # Dev tools and CLI utilities
 shellcheck
 uuid # generate random uuid
+mermaid-cli
+lynx    # better fetch of urls
 stylua
 wscat
+github-cli
 github-copilot-cli
+lua51-tiktoken-bin # for accurate token counting
 perf
 mdbook
 pv
@@ -53,6 +67,7 @@ lxd                 # system containers
 snapd               # snap package support
 
 # Python ecosystem
+python-pynvim
 python-pip
 python-pipx
 python-numpy
