@@ -1,0 +1,51 @@
+
+# Browsers and connectivity
+firefox
+discord
+kdeconnect        # phone integration
+kde-cli-tools     # KDE utilities
+
+# System monitoring and diagnostics
+htop                 # process viewer
+btop                 # modern system monitor
+sysstat              # CPU/disk performance stats
+psrecord             # psrecord --plot out.png ./run
+smartmontools        # disk health (SMART)
+lynis                # system security auditing tool: lynis audit (dockerfile|system)
+baobab               # disk usage analyzer (GUI)
+dysk                 # disk usage CLI tool (better df)
+sniffnet            # sniifs traffics (wireshark alternative)
+nmap                # network map - Scan server ports and routes etc.
+
+# Terminal
+zsh
+fzf
+ripgrep
+fd
+bat
+eza
+zoxide
+glow
+oh-my-zsh-git
+zsh-autosuggestions
+zsh-fast-syntax-highlighting
+zoxide
+gvim
+lazygit
+tree-sitter-cli
+jq
+just
+neovim
+less
+neofetch
+elephant-bin
+elephant-symbols-bin
+elephant-runner-bin
+elephant-files-bin
+elephant-desktopapplications-bin
+elephant-archlinuxpkgs-bin
+elephant-bluetooth-bin
+elephant-unicode-bin
+elephant-clipboard-bin
+walker-bin
+parui

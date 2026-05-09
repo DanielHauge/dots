@@ -1,0 +1,37 @@
+# Core development toolchain
+git
+git-lfs
+cmake
+meson
+clang
+rust
+cargo-dist
+cargo-binstall
+go
+nodejs
+npm
+deno
+ruby
+elixir
+erlang
+dotnet-sdk
+flutter-bin
+protobuf
+flatbuffers
+yaegi              # Go interpreter for go scripts
+rust-script        # run Rust scripts directly
+
+
+# Dev tools and CLI utilities
+shellcheck
+stylua
+pandoc-cli
+
+
+# Container and virtualization
+docker
+docker-compose
+docker-buildx
+docker-machine
+lxd                 # system containers
+snapd               # snap package support

@@ -1,0 +1,115 @@
+# Core system (required base system components)
+base                 # minimal Arch base system
+linux                # Linux kernel
+base-devel           # compilation tools (gcc, make, etc.)
+
+# Boot, system info, and hardware tools
+debootstrap          # create Debian-based rootfs environments
+efibootmgr           # UEFI boot entry manager
+os-prober            # detect other OS installations
+dmidecode            # hardware/BIOS info
+lsof                 # list open files
+net-tools            # legacy networking tools (ifconfig etc.)
+wireless_tools       # legacy WiFi tools
+
+# System management
+paru               # AUR helper (implicit)
+flatpak
+stow               # dotfile manager
+rsync              # (duplicate removed)
+wget
+dpkg              # Debian package tools
+gparted           # partition manager
+
+
+# Sound and audio
+pipewire
+pipewire-alsa
+pipewire-jack
+pipewire-pulse
+wireplumber
+pavucontrol        # audio control GUI
+gst-plugin-pipewire
+
+
+# Networking stack and tools
+networkmanager       # main network manager
+ufw                 # firewall
+network-manager-applet # tray GUI for NetworkManager
+avahi                # mDNS / local network discovery
+bind                 # DNS tools (dig, nslookup, etc.)
+iwd                  # modern WiFi daemon (alternative to wpa_supplicant)
+nfs-utils            # NFS support
+miniupnpc            # UPnP port forwarding tools for plug and play devices
+whois                # domain/IP lookup tool
+socat                # network pipe/relay tool
+
+# Bluetooth stack
+bluez                # Bluetooth protocol stack
+bluez-utils          # CLI Bluetooth tools (bluetoothctl)
+blueman              # GUI Bluetooth manager
+bluetui              # TUI Bluetooth manager
+
+# Wayland compositor & desktop environment
+hyprland             # Wayland compositor
+xdg-desktop-portal-hyprland  # portal integration for Hyprland
+qt5-wayland          # Qt5 Wayland support
+qt6-wayland          # Qt6 Wayland support
+polkit-kde-agent     # authentication popups
+swaync               # notification daemon
+waybar               # status bar
+kitty                # terminal emulator
+slurp             # Wayland region selector
+swappy            # screenshot editor
+wl-clipboard      # clipboard support
+
+# Compatibility layer
+xorg-server
+xorg-xinit
+xorg-xrandr
+xf86-video-amdgpu
+xf86-video-ati
+xf86-video-nouveau
+xf86-video-vmware
+wine
+mingw-w64-gcc
+
+# Files & management tools
+thunar               # GUI file manager
+tumbler              # thumbnail generator
+udiskie              # automount USB drives
+gvfs                 # virtual filesystem (GUI mounts)
+gvfs-nfs             # NFS support in GVfs
+gvfs-smb             # SMB/CIFS support in GVfs
+jmtpfs               # MTP mount (legacy Android access)
+zip                 # zipper
+unzip               # unzipper
+7zip                # 7zipper
+unrar               # unrarerer
+
+# Fonts and icons
+ttf-jetbrains-mono
+ttf-jetbrains-mono-nerd
+ttf-nerd-fonts-symbols
+ttf-nerd-fonts-symbols-mono
+noto-fonts-emoji
+ttf-font-awesome
+ttf-all-the-icons
+ttf-dejavu
+ttf-liberation
+noto-fonts-extra
+powerline-fonts
+otf-firamono-nerd
+
+# Media and graphics
+ffmpeg              # video stuff
+ffmpegthumbnailer   # Generate thumbnails for videos
+imagemagick         # convert image formats
+gimp                # Edit of images
+inkscape            # An engine mainly used for tex generation
+mpv                 # video player
+mpvpaper           # video wallpaper
+feh                # image viewer
+viu                # image in terminal
+sox                # audio processing
+yt-dlp            # video downloader
