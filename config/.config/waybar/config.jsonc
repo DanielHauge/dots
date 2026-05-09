@@ -11,14 +11,14 @@
         "hyprland/workspaces"
     ],
     "modules-center": [
-        "clock"
+        "custom/mem",
+        "clock",
+        "custom/cpu",
     ],
     "modules-right": [
         "tray",
         "custom/notifications",
         "pulseaudio",
-        "memory",
-        "cpu",
         "battery",
         "custom/exit"
     ],
@@ -30,13 +30,6 @@
         "icon-size": 25,
         "tooltip-format": "{title}"
     },
-    // "custom/notifications": {
-    //     "format": "{}",
-    //     "exec": "count=$(swaync-client --count 2>/dev/null); [ \"$count\" -eq 0 ] && echo 🔔 || echo 🔔 $count",
-    //     "on-click": "swaync-client -t -sw",
-    //     "interval": 1,
-    //     "tooltip": false
-    // },
     "custom/notifications": {
         "tooltip": false,
         "format": "{icon}",

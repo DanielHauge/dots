@@ -32,6 +32,22 @@
         "format": "{}",
         "tooltip": true
     },
+    "custom/cpu": {
+        "exec": "~/.config/waybar/spark.sh cpu",
+        "return-type": "json",
+        "interval": 2,
+        "on-click": "kitty htop",
+        "escape": false,
+        "tooltip": true
+    },
+    "custom/mem": {
+        "exec": "~/.config/waybar/spark.sh mem",
+        "return-type": "json",
+        "interval": 5,
+        "escape": false,
+        "on-click": "kitty htop",
+        "tooltip": true
+    },
     "custom/exit": {
         "format": "",
         "tooltip-format": "Powermenu",

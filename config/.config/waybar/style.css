@@ -15,6 +15,33 @@ window#waybar {
   transition-duration: 0.5s;
 }
 
+#custom-cpu,
+#custom-mem {
+  border-radius: 4px;
+  margin: 6px 3px;
+  padding: 4px 12px;
+  background-color: #1e1e2e;
+  color: #cdd6f4;
+  font-family: JetBrainsMono Nerd Font, monospace;
+  font-size: 12px;
+  min-width: 130px;
+}
+
+/* The spark bar string is rendered in a <span> with foreground color set
+   by the script — no extra CSS needed for the color logic.
+   These classes style the pill background for warning / critical states. */
+
+#custom-cpu.warning,
+#custom-mem.warning {
+  background-color: #2a2018;   /* subtle warm tint at 60–79% */
+}
+
+#custom-cpu.critical,
+#custom-mem.critical {
+  background-color: #2d1a1a;   /* subtle red tint at 80%+ */
+  color: #f38ba8;
+}
+
 window#waybar.empty #window {
     background-color: transparent;
 }
