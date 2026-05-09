@@ -16,8 +16,6 @@ fi
 
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#ff00ff,bg=cyan,bold,underline" 
 plugins=(
-	zsh-syntax-highlighting	 
-	zsh-autosuggestions
     command-not-found
 	web-search
     virtualenv
@@ -31,6 +29,8 @@ plugins=(
     zsh-interactive-cd
     sudo
     timer
+	zsh-syntax-highlighting	 
+	zsh-autosuggestions
 )
 
 
@@ -53,6 +53,8 @@ export PATH="$HOME/bin":$PATH
 
 source $ZSH/oh-my-zsh.sh
 
+setopt NO_CORRECT
+setopt NO_CORRECT_ALL
 
 if [[ -n $SSH_CONNECTION ]]; then
    export EDITOR='vim'
@@ -71,3 +73,5 @@ if [ -f ~/.zshrc.local ]; then
 fi
 
 source $DOTS_LOC/cmd/setup.sh
+
+. "$HOME/.cargo/env"

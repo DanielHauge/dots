@@ -1,0 +1,20 @@
+cura-bin
+lutris
+
+nvidia-open-dkms
+nvidia-settings
+nvidia-utils
+qbittorrent
+reveal-md
+steam
+wine
+
+poppler              # Required by inkscape
+inkscape            # An engine mainly used for tex generation
+tectonic
+lib32-glibc     # Compat with old 32bit shit
+
+qt5-*
+
+texlive-*
+winetricks-git

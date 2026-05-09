@@ -20,12 +20,28 @@ protobuf
 flatbuffers
 yaegi              # Go interpreter for go scripts
 rust-script        # run Rust scripts directly
+zig
 
+# Developer libs
+hdf5
+llvm
+aarch64-linux-gnu-gcc # Cross compilation compat
+mingw-w64-gcc           # Cross compilation compat
 
 # Dev tools and CLI utilities
 shellcheck
+uuid # generate random uuid
 stylua
+wscat
+github-copilot-cli
+perf
+mdbook
+pv
 pandoc-cli
+ethtool
+git-cliff
+gnuplot
+litecli
 
 
 # Container and virtualization
@@ -35,3 +51,16 @@ docker-buildx
 docker-machine
 lxd                 # system containers
 snapd               # snap package support
+
+# Python ecosystem
+python-pip
+python-pipx
+python-numpy
+python-pandas
+python-matplotlib
+python-hdf5plugin
+python-h5py
+python-ipykernel
+pyenv
+uv                 # modern Python package manager
+ruff               # Python linter/formatter

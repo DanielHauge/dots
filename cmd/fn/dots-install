@@ -3,18 +3,18 @@
 function dots-install() {
     if [ -n "$WINDIR" ]; then
         echo "Windows detected"
-        $DOTS_LOC/win/install.sh
+        "$DOTS_LOC"/win/install.sh
         return
     fi
     if command -v apt-get &>/dev/null; then
         echo "Ubuntu detected"
-        sudo $DOTS_LOC/ubuntu/install.sh
+        sudo "$DOTS_LOC"/ubuntu/install.sh
         return
     fi
 
     if command -v pacman &>/dev/null; then
         echo "Arch detected"
-        $DOTS_LOC/arch/install.sh
+        "$DOTS_LOC"/arch/sync.sh "$@"
         return
     fi
 

@@ -1,4 +1,3 @@
-
 # Browsers and connectivity
 firefox
 discord
@@ -20,7 +19,10 @@ nmap                # network map - Scan server ports and routes etc.
 # Terminal
 zsh
 fzf
+h5v-bin
+hxd
 ripgrep
+bc
 fd
 bat
 eza
@@ -37,6 +39,7 @@ jq
 just
 neovim
 less
+tmux
 neofetch
 elephant-bin
 elephant-symbols-bin

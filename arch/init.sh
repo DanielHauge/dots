@@ -1,6 +1,6 @@
 #!/bin/sh
 
-sudo pacman -Syuu --noconfirm --needed curl base-devel git
+sudo pacman -Syuu --noconfirm --needed curl base-devel git paru
 (
     cd "$HOME" || exit
     git clone https://github.com/DanielHauge/dots.git

@@ -2,6 +2,10 @@
 base                 # minimal Arch base system
 linux                # Linux kernel
 base-devel           # compilation tools (gcc, make, etc.)
+grub                 # linux bootloader
+linux-firmware
+linux-headers
+intel-ucode
 
 # Boot, system info, and hardware tools
 debootstrap          # create Debian-based rootfs environments
@@ -11,6 +15,9 @@ dmidecode            # hardware/BIOS info
 lsof                 # list open files
 net-tools            # legacy networking tools (ifconfig etc.)
 wireless_tools       # legacy WiFi tools
+sddm                # greeater
+sddm-theme-tokyo-night-git # theme for sddm
+zram-generator      # system memory compressor
 
 # System management
 paru               # AUR helper (implicit)
@@ -20,7 +27,8 @@ rsync              # (duplicate removed)
 wget
 dpkg              # Debian package tools
 gparted           # partition manager
-
+brightnessctl       # Change brightness
+inotify-tools
 
 # Sound and audio
 pipewire
@@ -30,6 +38,8 @@ pipewire-pulse
 wireplumber
 pavucontrol        # audio control GUI
 gst-plugin-pipewire
+libpulse
+speech-dispatcher
 
 
 # Networking stack and tools
@@ -41,8 +51,10 @@ bind                 # DNS tools (dig, nslookup, etc.)
 iwd                  # modern WiFi daemon (alternative to wpa_supplicant)
 nfs-utils            # NFS support
 miniupnpc            # UPnP port forwarding tools for plug and play devices
+gupnp-tools         # plug and play tools for discovery and testing
 whois                # domain/IP lookup tool
 socat                # network pipe/relay tool
+openbsd-netcat      # networking utility for TCP/UDP
 
 # Bluetooth stack
 bluez                # Bluetooth protocol stack
@@ -50,8 +62,9 @@ bluez-utils          # CLI Bluetooth tools (bluetoothctl)
 blueman              # GUI Bluetooth manager
 bluetui              # TUI Bluetooth manager
 
-# Wayland compositor & desktop environment
+# Desktop environment
 hyprland             # Wayland compositor
+localsend-bin       # Send files quickly locally
 xdg-desktop-portal-hyprland  # portal integration for Hyprland
 qt5-wayland          # Qt5 Wayland support
 qt6-wayland          # Qt6 Wayland support
@@ -62,6 +75,12 @@ kitty                # terminal emulator
 slurp             # Wayland region selector
 swappy            # screenshot editor
 wl-clipboard      # clipboard support
+hyprshot        # for screenshot related pipeline
+grim            # required for hyprshot
+satty           # for screenshot related pipeline
+uwsm            # Wayloand session manager tool
+xdg-utils       # Desktop integration utilities (makes other tools integrate well)
+gtk
 
 # Compatibility layer
 xorg-server
@@ -71,13 +90,16 @@ xf86-video-amdgpu
 xf86-video-ati
 xf86-video-nouveau
 xf86-video-vmware
-wine
-mingw-w64-gcc
+gvfs-mtp
+cups            # for printers
+cnijfilter2     # for bad printers
+ipp-usb
 
 # Files & management tools
 thunar               # GUI file manager
 tumbler              # thumbnail generator
 udiskie              # automount USB drives
+usbutils            # USDB device utilities
 gvfs                 # virtual filesystem (GUI mounts)
 gvfs-nfs             # NFS support in GVfs
 gvfs-smb             # SMB/CIFS support in GVfs
@@ -93,10 +115,8 @@ ttf-jetbrains-mono-nerd
 ttf-nerd-fonts-symbols
 ttf-nerd-fonts-symbols-mono
 noto-fonts-emoji
-ttf-font-awesome
 ttf-all-the-icons
 ttf-dejavu
-ttf-liberation
 noto-fonts-extra
 powerline-fonts
 otf-firamono-nerd
@@ -106,10 +126,10 @@ ffmpeg              # video stuff
 ffmpegthumbnailer   # Generate thumbnails for videos
 imagemagick         # convert image formats
 gimp                # Edit of images
-inkscape            # An engine mainly used for tex generation
 mpv                 # video player
 mpvpaper           # video wallpaper
 feh                # image viewer
 viu                # image in terminal
 sox                # audio processing
 yt-dlp            # video downloader
+waypaper
