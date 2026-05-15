@@ -1,0 +1,50 @@
+#!/usr/bin/env bash
+#> Description of function
+function sound {
+    sinks=$(
+        wpctl status |
+            awk '
+        /Sinks:/ { in_sinks=1; next }
+        /Sources:/ { exit }
+
+        in_sinks && /^[[:space:]]*│/ {
+            line=$0
+
+            # Remove leading decorations and optional "*"
+            sub(/^.*│[[:space:]]*\*?[[:space:]]*/, "", line)
+
+            # Match: ID. NAME [vol: ...]
+            if (match(line, /^([0-9]+)\.[[:space:]]+(.*)[[:space:]]+\[vol:/, arr)) {
+                id=arr[1]
+                name=arr[2]
+                print id "\t" name
+            }
+        }
+    '
+    )
+
+    # Ensure we found something
+    if [[ -z "$sinks" ]]; then
+        echo "No sinks found."
+        exit 1
+    fi
+
+    # Pick sink with fzf
+    selected=$(
+        echo "$sinks" |
+            fzf --prompt="Select audio output: " \
+                --delimiter=$'\t' \
+                --with-nth=2
+    )
+
+    # Exit if nothing selected
+    [[ -z "$selected" ]] && exit 0
+
+    # Extract ID
+    id=$(echo "$selected" | cut -f1)
+
+    # Set default sink
+    wpctl set-default "$id"
+
+    echo "Set default sink to ID $id"
+}
