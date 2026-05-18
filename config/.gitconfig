@@ -1,5 +1,6 @@
 [core]
     editor = nvim
+
 [push]
     default = upstream
     autoSetupRemote = true
@@ -12,6 +13,7 @@
 [core]
   autocrlf = input 
   ignorecase = false
+  pager = delta
 
 
 [merge]
@@ -37,3 +39,10 @@
 [user]
 	name = DanielHauge
 	email = animcuil@gmail.com
+[interactive]
+	diffFilter = delta --color-only
+
+[delta]
+    side-by-side = true
+    line-numbers = true
+    navigate = true

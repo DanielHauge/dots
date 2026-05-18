@@ -79,7 +79,8 @@ fi
 # --- current value color for the percentage readout ---
 VAL_COLOR=$(spark_color "$VALUE")
 
-printf '{"text": "%s <span foreground=\\\"%s\\\">%s</span> <span foreground=\\\"%s\\\">%d%%</span>", "tooltip": "%s", "class": "%s"}\n' \
+printf '{"text": "%s %s <span foreground=\\\"%s\\\">%s</span> <span foreground=\\\"%s\\\">%d%%</span>", "tooltip": "%s", "class": "%s"}\n' \
+    "$MODE" \
     "$ICON" \
     "$VAL_COLOR" "$SPARK" \
     "$VAL_COLOR" "$VALUE" \

@@ -40,6 +40,13 @@
         "escape": false,
         "tooltip": true
     },
+    "custom/gpu": {
+        "exec": "~/.config/waybar/gpu.sh",
+        "return-type": "json",
+        "interval": 2,
+        "escape": false,
+        "tooltip": true
+    },
     "custom/mem": {
         "exec": "~/.config/waybar/spark.sh mem",
         "return-type": "json",

@@ -12,8 +12,9 @@
     ],
     "modules-center": [
         "custom/mem",
-        "clock",
         "custom/cpu",
+        "clock",
+        "custom/gpu"
     ],
     "modules-right": [
         "tray",
