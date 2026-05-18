@@ -1,6 +1,8 @@
 cura-bin
 lutris
 
+
+cnijfilter2     # for bad printers
 nvidia-open-dkms
 nvidia-settings
 nvidia-utils
@@ -19,3 +21,33 @@ tectonic
 texlive-*
 biber
 winetricks-git
+
+
+vulkan-intel
+vulkan-nouveau
+vulkan-radeon
+
+remmina             # Remote desktop client
+
+linuxptp
+chrony
+chromium
+caddy
+
+lightdm-gtk-greeter
+lightdm
+intel-media-driver
+intel-speed-select
+hplib
+dosfstools
+dotnet-runtime-9.0
+
+cvb-foundation
+
+cups-pdf
+crudini
+cpupower
+
+bootconfig
+arm-none-eabi-gcc # For embedded development
+android-udev

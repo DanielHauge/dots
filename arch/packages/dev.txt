@@ -4,7 +4,6 @@ git-lfs
 cmake
 meson
 clang
-rust
 cargo-dist
 cargo-binstall
 go
@@ -23,6 +22,7 @@ erlang
 prettier
 dotnet-sdk
 flutter-bin
+rustup
 sqlfluff
 terraform
 protobuf
@@ -31,12 +31,14 @@ yaegi              # Go interpreter for go scripts
 rust-script        # run Rust scripts directly
 zig
 ast-grep
+sqlc
 
 # Developer libs
 hdf5
 llvm
 aarch64-linux-gnu-gcc # Cross compilation compat
 mingw-w64-gcc           # Cross compilation compat
+libmodbus
 
 # Dev tools and CLI utilities
 shellcheck
@@ -45,6 +47,7 @@ mermaid-cli
 lynx    # better fetch of urls
 stylua
 wscat
+opencode
 github-cli
 github-copilot-cli
 lua51-tiktoken-bin # for accurate token counting
@@ -56,6 +59,7 @@ ethtool
 git-cliff
 gnuplot
 litecli
+debtap               # Convert deb packages to Arch packages (for WSL)
 
 
 # Container and virtualization
@@ -75,6 +79,9 @@ python-pandas
 python-matplotlib
 python-hdf5plugin
 python-h5py
+python-scipy
+python-seaborn
+python-staticmap
 python-ipykernel
 pyenv
 uv                 # modern Python package manager

@@ -3,9 +3,9 @@ base                 # minimal Arch base system
 linux                # Linux kernel
 base-devel           # compilation tools (gcc, make, etc.)
 grub                 # linux bootloader
-linux-firmware
-linux-headers
-intel-ucode
+linux-firmware     # firmware for various hardware components
+linux-headers      # for building kernel modules (e.g. VirtualBox, Nvida drivers etc etc.)
+intel-ucode         # microcode updates for Intel CPUs
 
 # Boot, system info, and hardware tools
 debootstrap          # create Debian-based rootfs environments
@@ -28,7 +28,8 @@ wget
 dpkg              # Debian package tools
 gparted           # partition manager
 brightnessctl       # Change brightness
-inotify-tools
+inotify-tools   # Watch for file changes (used in various scripts)
+earlyoom           # for early boot configuration (e.g. zram, etc.)
 
 # Sound and audio
 pipewire
@@ -55,6 +56,11 @@ gupnp-tools         # plug and play tools for discovery and testing
 whois                # domain/IP lookup tool
 socat                # network pipe/relay tool
 openbsd-netcat      # networking utility for TCP/UDP
+nss-mdns             # mDNS support for hostname resolution
+dnsmasq              # lightweight DNS and DHCP server (for local network management)
+curlftpfs            # Mount FTP servers as filesystems
+bridge-utils             # network bridge management tools
+
 
 # Bluetooth stack
 bluez                # Bluetooth protocol stack
@@ -64,7 +70,7 @@ bluetui              # TUI Bluetooth manager
 
 # Desktop environment
 hyprland             # Wayland compositor
-localsend-bin       # Send files quickly locally
+localsend       # Send files quickly locally
 xdg-desktop-portal-hyprland  # portal integration for Hyprland
 qt5-wayland          # Qt5 Wayland support
 qt6-wayland          # Qt6 Wayland support
@@ -80,7 +86,9 @@ grim            # required for hyprshot
 satty           # for screenshot related pipeline
 uwsm            # Wayloand session manager tool
 xdg-utils       # Desktop integration utilities (makes other tools integrate well)
-gtk
+gtk             # GTK toolkit (for GTK apps)
+openvpn         # VPN support
+localsend       # Send files quickly locally
 
 # Compatibility layer
 xorg-server
@@ -92,8 +100,9 @@ xf86-video-nouveau
 xf86-video-vmware
 gvfs-mtp
 cups            # for printers
-cnijfilter2     # for bad printers
 ipp-usb
+ntfs-3g         # for NTFS support (external drives, etc.)
+
 
 # Files & management tools
 thunar               # GUI file manager
@@ -108,6 +117,12 @@ zip                 # zipper
 unzip               # unzipper
 7zip                # 7zipper
 unrar               # unrarerer
+samba               # SMB/CIFS file sharing
+mtpfs                # MTP mount (legacy Android access)
+gvfs-afc              # Apple File Conduit (legacy iOS access)
+gigolo                # remote file manager (SSH, FTP, etc.)
+exfatprogs             # exFAT filesystem support (external drives, etc.)
+btrfs-progs             # BTRFS filesystem support (external drives, etc.)
 
 # Fonts and icons
 ttf-jetbrains-mono

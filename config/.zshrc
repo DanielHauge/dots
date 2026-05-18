@@ -13,6 +13,7 @@ if [ -z "$XDG_CURRENT_DESKTOP" ]; then
     export XDG_CURRENT_DESKTOP="Hyprland"
 fi
 
+export PATH="$HOME/.local/bin:$PATH"
 
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#ff00ff,bg=cyan,bold,underline" 
 plugins=(
