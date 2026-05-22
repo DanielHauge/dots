@@ -28,6 +28,7 @@ vulkan-nouveau
 vulkan-radeon
 
 remmina             # Remote desktop client
+freerdp             # Remote desktop protocol client
 
 linuxptp
 chrony

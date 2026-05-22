@@ -5,9 +5,9 @@ cmake
 meson
 clang
 cargo-dist
+nodejs
 cargo-binstall
 go
-nodejs
 npm
 deno
 ruby
@@ -39,9 +39,11 @@ llvm
 aarch64-linux-gnu-gcc # Cross compilation compat
 mingw-w64-gcc           # Cross compilation compat
 libmodbus
+nasm
 
 # Dev tools and CLI utilities
 shellcheck
+caligula
 uuid # generate random uuid
 mermaid-cli
 lynx    # better fetch of urls
