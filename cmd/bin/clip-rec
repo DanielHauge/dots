@@ -1,0 +1,54 @@
+#!/usr/bin/env bash
+
+#> Description of the script
+
+set -euo pipefail
+IFS=$'
+	'
+
+usage() {
+    echo "Usage: clip-rec <arg1>"
+}
+
+if [ $# -ne 1 ]; then
+    usage
+    exit 1
+fi
+
+notify() {
+    command -v notify-send >/dev/null 2>&1 && notify-send "$@"
+}
+
+dir="$HOME/Videos/Clips"
+mkdir -p "$dir"
+
+# If region selection is open, pressing the bind again cancels it.
+if pkill -x slurp 2>/dev/null; then
+    exit 0
+fi
+
+# If already recording, pressing the bind again stops it.
+# The original script invocation will then continue and copy the file.
+if pgrep -x wf-recorder >/dev/null; then
+    pkill -INT -x wf-recorder
+    exit 0
+fi
+
+mode="${1:-region}"
+file="$dir/clip-$(date +%Y%m%d-%H%M%S).mp4"
+
+if [[ "$mode" == "full" ]]; then
+    notify "Recording started" "Press the same shortcut to stop"
+    wf-recorder -f "$file"
+else
+    geo="$(slurp)" || exit 0
+    notify "Recording started" "Press the same shortcut to stop"
+    wf-recorder -g "$geo" -f "$file"
+fi
+
+if [[ -s "$file" ]]; then
+    wl-copy --type video/mp4 <"$file"
+    notify "Clip copied to clipboard" "$file"
+else
+    notify "Recording failed" "No video file was created"
+fi
