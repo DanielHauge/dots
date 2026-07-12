@@ -2,6 +2,10 @@ export ZSH="$HOME/.oh-my-zsh"
 
 ZSH_THEME="bira"
 
+if [ -f "$HOME/export-esp.sh" ]; then
+    source $HOME/export-esp.sh
+fi
+
 if [ -n "$ZSH_VERSION" ]; then
     zstyle ':omz:update' mode auto
 fi
