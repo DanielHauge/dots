@@ -1,10 +1,12 @@
 #!/bin/sh
 
-sudo pacman -Syuu --noconfirm --needed curl base-devel git paru
+set -eu
+
+sudo pacman -Syu --noconfirm --needed git
 (
     cd "$HOME" || exit
-    git clone https://github.com/DanielHauge/dots.git
+    if [ ! -d dots/.git ]; then
+        git clone https://github.com/DanielHauge/dots.git
+    fi
     "$HOME/dots/arch/install.sh" || exit
-    echo "Success - To make dots pushable, run:"
-    echo "dots-auth"
 )

@@ -1,0 +1,4 @@
+# The driver family is selected for the maintained NVIDIA machines.
+nvidia-open-dkms
+nvidia-utils
+nvidia-settings

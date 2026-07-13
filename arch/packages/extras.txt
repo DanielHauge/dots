@@ -3,9 +3,6 @@ lutris
 
 
 cnijfilter2     # for bad printers
-nvidia-open-dkms
-nvidia-settings
-nvidia-utils
 qbittorrent
 reveal-md
 steam

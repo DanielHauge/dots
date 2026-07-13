@@ -51,7 +51,7 @@ else
     alias watch-ls="watch -n 1 'ls -F --color=always'"
     alias watch-lt="watch -n 1 'ls -l -h --time-style=long-iso --color=always'"
 fi
-alias dots-stow='stow -v --adopt -t ~/.config -d ~/dots .config; stow -v --adopt -t ~ -d ~/dots home'
+alias dots-stow='stow -v -t "$HOME" -d "$DOTS_LOC"/config .config'
 
 alias plex='nohup setsid snap run plex-desktop >/dev/null 2>&1 < /dev/null &'
 alias awk1='awk "{print \$1}"'

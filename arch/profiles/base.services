@@ -1,0 +1,4 @@
+NetworkManager.service
+sddm.service
+bluetooth.service
+docker.service

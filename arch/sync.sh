@@ -9,6 +9,7 @@ PACKAGE_DIR="$DOTS_LOC/arch/packages"
 LEGACY_PACKAGE_FILE="$DOTS_LOC/arch/packages.txt"
 EXTRAS_PACKAGE_FILE="$PACKAGE_DIR/extras.txt"
 ACTION=''
+DRY_RUN=false
 
 if [[ -t 1 && -z "${NO_COLOR:-}" ]]; then
     COLOR_RESET=$'\033[0m'
@@ -29,10 +30,11 @@ else
 fi
 
 usage() {
-    echo "Usage: $(basename "$0") [-a | -y | -r]"
+    echo "Usage: $(basename "$0") [-a | -y | -r] [--dry-run]"
     echo "  -a    install missing packages and remove dangling explicit packages"
     echo "  -y    install missing packages only"
     echo "  -r    remove dangling explicit packages only"
+    echo "  --dry-run  show package changes without applying them"
     echo "  -h    show this help"
 }
 
@@ -164,9 +166,13 @@ install_missing_packages() {
         return
     fi
 
-    require_paru
     print_header "Installing missing packages"
     printf '  - %s\n' "${missing_packages[@]}"
+    if [[ "$DRY_RUN" == true ]]; then
+        print_note "Dry run: packages were not installed." "$COLOR_YELLOW"
+        return
+    fi
+    require_paru
     paru -S --needed --noconfirm -- "${missing_packages[@]}"
 }
 
@@ -180,9 +186,13 @@ remove_extra_packages() {
         return
     fi
 
-    require_paru
     print_header "Removing non-listed packages"
     printf '  - %s\n' "${extra_packages[@]}"
+    if [[ "$DRY_RUN" == true ]]; then
+        print_note "Dry run: packages were not removed." "$COLOR_YELLOW"
+        return
+    fi
+    require_paru
     paru -Rns --noconfirm -- "${extra_packages[@]}"
 
     if pacman -Qdtq >/dev/null 2>&1; then
@@ -258,6 +268,9 @@ while (($# > 0)); do
     -h | --help)
         usage
         exit 0
+        ;;
+    --dry-run)
+        DRY_RUN=true
         ;;
     *)
         usage >&2
