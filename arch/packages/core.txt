@@ -2,10 +2,11 @@
 base                 # minimal Arch base system
 linux                # Linux kernel
 base-devel           # compilation tools (gcc, make, etc.)
-grub                 # linux bootloader
+refind               # UEFI boot manager
+plymouth             # graphical boot splash
+librsvg              # render shared boot identity assets
 linux-firmware     # firmware for various hardware components
 linux-headers      # for building kernel modules (e.g. VirtualBox, Nvida drivers etc etc.)
-intel-ucode         # microcode updates for Intel CPUs
 
 # Boot, system info, and hardware tools
 debootstrap          # create Debian-based rootfs environments
@@ -15,8 +16,8 @@ dmidecode            # hardware/BIOS info
 lsof                 # list open files
 net-tools            # legacy networking tools (ifconfig etc.)
 wireless_tools       # legacy WiFi tools
-sddm                # greeater
-sddm-theme-tokyo-night-git # theme for sddm
+greetd              # terminal login manager
+greetd-tuigreet     # terminal login UI
 zram-generator      # system memory compressor
 
 # System management

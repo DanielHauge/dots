@@ -18,7 +18,7 @@ source "$INSTALLER"
 SELECTED_PROFILES=()
 detect_profiles
 
-[[ "${SELECTED_PROFILES[*]}" == "nvidia" ]]
+[[ " ${SELECTED_PROFILES[*]} " == *" nvidia "* ]]
 validate_profiles
 
 source_file="$TMP_DIR/source"

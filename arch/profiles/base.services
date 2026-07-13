@@ -1,4 +1,4 @@
 NetworkManager.service
-sddm.service
+greetd.service
 bluetooth.service
 docker.service

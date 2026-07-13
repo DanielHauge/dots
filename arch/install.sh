@@ -6,17 +6,19 @@ DOTS_LOC=${DOTS_LOC:-$(cd -- "$SCRIPT_DIR/.." && pwd)}
 PROFILE_DIR="$SCRIPT_DIR/profiles"
 DRY_RUN=false
 PROFILE_OVERRIDDEN=false
+BOOT_STACK=''
 DOCKER_GROUP_CHANGED=false
 declare -a SELECTED_PROFILES=()
 
 usage() {
     cat <<EOF
-Usage: $(basename "$0") [--dry-run] [--profile NAME]
+Usage: $(basename "$0") [--dry-run] [--profile NAME] [--boot-stack refind-uki]
 
 Provision this Arch workstation after the base installation.
 
   --dry-run          Print changes without applying them.
   --profile NAME     Use a named hardware profile instead of auto-detection.
+  --boot-stack NAME  Provision a boot stack (refind-uki).
   -h, --help         Show this help.
 EOF
 }
@@ -52,12 +54,22 @@ require_arch_user() {
 detect_profiles() {
     local pci_devices=''
 
-    command -v lspci >/dev/null 2>&1 || return
-    pci_devices=$(lspci -Dn 2>/dev/null || true)
+    if command -v lspci >/dev/null 2>&1; then
+        pci_devices=$(lspci -Dn 2>/dev/null || true)
+    fi
 
     if grep -Eq '^[0-9a-f:.]+ 03[0-9a-f]{2}: 10de:' <<<"$pci_devices"; then
         SELECTED_PROFILES+=(nvidia)
     fi
+
+    case "$(awk -F ': ' '/^vendor_id/ {print $2; exit}' /proc/cpuinfo)" in
+    GenuineIntel)
+        SELECTED_PROFILES+=(intel)
+        ;;
+    AuthenticAMD)
+        SELECTED_PROFILES+=(amd)
+        ;;
+    esac
 }
 
 validate_profiles() {
@@ -193,6 +205,12 @@ main() {
             SELECTED_PROFILES+=("$2")
             shift
             ;;
+        --boot-stack)
+            (($# > 1)) || { echo "--boot-stack requires a name." >&2; exit 1; }
+            [[ "$2" == refind-uki ]] || { echo "Unsupported boot stack: $2" >&2; exit 1; }
+            BOOT_STACK=$2
+            shift
+            ;;
         -h | --help)
             usage
             exit 0
@@ -221,6 +239,13 @@ main() {
         "$SCRIPT_DIR/sync.sh" -y
     fi
     install_profile_packages
+    if [[ "$BOOT_STACK" == refind-uki ]]; then
+        if [[ "$DRY_RUN" == true ]]; then
+            echo "Would provision rEFInd, UKIs, Plymouth, and the Tokyo Night SDDM theme."
+        else
+            sudo "$SCRIPT_DIR/boot-refind-uki.sh"
+        fi
+    fi
     enable_service_file
     configure_docker_group
     deploy_dotfiles

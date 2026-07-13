@@ -1,0 +1,10 @@
+[Unit]
+Description=Refresh terminal login system snapshot
+Before=greetd.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/lib/workstation-identity/update-issue
+
+[Install]
+WantedBy=greetd.service

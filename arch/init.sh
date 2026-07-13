@@ -8,5 +8,5 @@ sudo pacman -Syu --noconfirm --needed git
     if [ ! -d dots/.git ]; then
         git clone https://github.com/DanielHauge/dots.git
     fi
-    "$HOME/dots/arch/install.sh" || exit
+    "$HOME/dots/arch/install.sh" --boot-stack refind-uki || exit
 )

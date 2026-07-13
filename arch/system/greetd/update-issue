@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+memory=$(free -h | awk '/Mem:/ {print $3 " / " $2}')
+network=$(networkctl is-online --quiet && echo ONLINE || echo OFFLINE)
+gpu=$(lspci | awk '/VGA|3D controller/ {print $0; exit}')
+
+issue=$(mktemp /etc/issue.XXXXXX)
+trap 'rm -f "$issue"' EXIT
+cat >"$issue" <<EOF
+
+                         /\\
+                        /__\\
+
+                    SYSTEM ACCESS
+
+  HOST     $(hostname)
+  KERNEL   $(uname -r)
+  MEMORY   $memory
+  NETWORK  $network
+  GPU      ${gpu:-UNAVAILABLE}
+
+EOF
+install -m 0644 "$issue" /etc/issue
