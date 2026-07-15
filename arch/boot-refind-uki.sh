@@ -11,6 +11,8 @@ fail() {
 
 [[ ${EUID:-} -eq 0 ]] || fail "must run as root"
 [[ -d /sys/firmware/efi ]] || fail "UEFI boot is required"
+grep -qw archiso /proc/cmdline &&
+    fail "must run after booting the installed system, not from the Arch ISO chroot"
 if [[ -z "$ESP" ]]; then
     for candidate in /efi /boot /boot/efi; do
         if [[ $(findmnt -n -o FSTYPE --target "$candidate" 2>/dev/null || true) == vfat ]]; then

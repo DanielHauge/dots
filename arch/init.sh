@@ -3,7 +3,7 @@ set -euo pipefail
 
 REPOSITORY=https://github.com/DanielHauge/dots.git
 TARGET_USER=${SUDO_USER:-}
-BOOT_STACK=refind-uki
+BOOT_STACK=''
 declare -a INSTALL_ARGS=()
 
 usage() {
@@ -15,7 +15,7 @@ root with --user USER. Root is used only for the initial pacman step; the
 target user owns the checkout and runs the installer.
 
   --user USER             Target desktop user (required when run as root).
-  --boot-stack NAME       Boot stack to provision (default: refind-uki).
+  --boot-stack NAME       Boot stack to provision (refind-uki).
   --dry-run, --check      Forward to the installer without provisioning.
   --profile NAME          Forward a hardware profile to the installer.
   -h, --help              Show this help.
@@ -111,13 +111,17 @@ main() {
     done
 
     validate_target_user "$TARGET_USER"
+    local -a installer_args=("${INSTALL_ARGS[@]}")
+    if [[ -n "$BOOT_STACK" ]]; then
+        installer_args+=(--boot-stack "$BOOT_STACK")
+    fi
 
     if [[ " ${INSTALL_ARGS[*]} " == *" --dry-run "* || " ${INSTALL_ARGS[*]} " == *" --check "* ]]; then
         local checkout=$TARGET_HOME/dots
         [[ -d "$checkout/.git" ]] ||
             fail "$checkout is required for --dry-run or --check; run the bootstrap without either option first."
         echo "Bootstrap: running installer checks as $TARGET_USER"
-        run_as_target "$checkout/arch/install.sh" --boot-stack "$BOOT_STACK" "${INSTALL_ARGS[@]}"
+        run_as_target "$checkout/arch/install.sh" "${installer_args[@]}"
         return
     fi
 
@@ -129,7 +133,7 @@ main() {
 
     update_checkout
     echo "Bootstrap: running installer as $TARGET_USER"
-    run_as_target "$TARGET_HOME/dots/arch/install.sh" --boot-stack "$BOOT_STACK" "${INSTALL_ARGS[@]}"
+    run_as_target "$TARGET_HOME/dots/arch/install.sh" "${installer_args[@]}"
 }
 
 if [[ "${BASH_SOURCE[0]}" == "$0" ]]; then

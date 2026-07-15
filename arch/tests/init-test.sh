@@ -40,7 +40,7 @@ export LOG
 HOME="$TMP_DIR/home" USER=desktop bash "$INIT" --profile intel
 grep -Fxq 'sudo pacman -Syu --noconfirm --needed git' "$LOG"
 grep -Fq 'git clone https://github.com/DanielHauge/dots.git' "$LOG"
-grep -Fxq 'installer --boot-stack refind-uki --profile intel' "$LOG"
+grep -Fxq 'installer --profile intel' "$LOG"
 
 : >"$LOG"
 HOME="$TMP_DIR/home" USER=desktop bash "$INIT" --profile intel
@@ -49,11 +49,15 @@ grep -Fq 'git -C '"$TMP_DIR"'/home/dots pull --ff-only --quiet' "$LOG"
 
 : >"$LOG"
 HOME="$TMP_DIR/home" USER=desktop bash "$INIT" --dry-run
-grep -Fxq 'installer --boot-stack refind-uki --dry-run' "$LOG"
+grep -Fxq 'installer --dry-run' "$LOG"
 if grep -Fq 'pacman ' "$LOG" || grep -Fq 'git ' "$LOG"; then
     echo "Dry run must not bootstrap packages or update the checkout." >&2
     exit 1
 fi
+
+: >"$LOG"
+HOME="$TMP_DIR/home" USER=desktop bash "$INIT" --boot-stack refind-uki --dry-run
+grep -Fxq 'installer --dry-run --boot-stack refind-uki' "$LOG"
 
 # shellcheck disable=SC1090
 source "$INIT"
