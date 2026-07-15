@@ -151,8 +151,8 @@ load_explicit_packages() {
 }
 
 require_paru() {
-    if ! command -v paru >/dev/null 2>&1; then
-        echo "paru is required to apply package changes." >&2
+    if ! command -v paru >/dev/null 2>&1 || ! paru --version >/dev/null 2>&1; then
+        echo "paru is missing or cannot run; rerun arch/install.sh to bootstrap it." >&2
         exit 1
     fi
 }

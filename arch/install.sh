@@ -82,12 +82,29 @@ phase() {
 
 detect_profiles() {
     local pci_devices=''
+    local device=''
+    local vendor=''
+    local class=''
+    local nvidia_detected=false
 
-    if command -v lspci >/dev/null 2>&1; then
+    for device in /sys/bus/pci/devices/*; do
+        [[ -r "$device/vendor" && -r "$device/class" ]] || continue
+        read -r vendor <"$device/vendor"
+        read -r class <"$device/class"
+        if [[ "$vendor" == 0x10de && "$class" == 0x03* ]]; then
+            nvidia_detected=true
+            break
+        fi
+    done
+
+    if [[ "$nvidia_detected" == false ]] && command -v lspci >/dev/null 2>&1; then
         pci_devices=$(lspci -Dn 2>/dev/null || true)
+        if grep -Eq '^[0-9a-f:.]+ 03[0-9a-f]{2}: 10de:' <<<"$pci_devices"; then
+            nvidia_detected=true
+        fi
     fi
 
-    if grep -Eq '^[0-9a-f:.]+ 03[0-9a-f]{2}: 10de:' <<<"$pci_devices"; then
+    if [[ "$nvidia_detected" == true ]]; then
         SELECTED_PROFILES+=(nvidia)
     fi
 
@@ -120,24 +137,33 @@ normalize_package_file() {
 }
 
 ensure_paru() {
-    if command -v paru >/dev/null 2>&1; then
+    local package=''
+    local build_dir=''
+
+    if command -v paru >/dev/null 2>&1 && paru --version >/dev/null 2>&1; then
         return
     fi
 
     run sudo pacman -Syu --needed --noconfirm base-devel git
-    local build_dir
-    build_dir=$(mktemp -d)
-    trap 'rm -rf "$build_dir"' EXIT
-    run git clone https://aur.archlinux.org/paru-bin.git "$build_dir/paru-bin"
 
-    if [[ "$DRY_RUN" == false ]]; then
-        (
-            cd "$build_dir/paru-bin"
-            makepkg -si --needed --noconfirm
-        )
-    else
-        printf 'Would run: (cd %q && makepkg -si --needed --noconfirm)\n' "$build_dir/paru-bin"
-    fi
+    # A stale package can block makepkg from replacing a helper linked to an old libalpm ABI.
+    for package in paru paru-bin; do
+        if pacman -Q "$package" >/dev/null 2>&1; then
+            run sudo pacman -Rns --noconfirm "$package"
+        fi
+    done
+
+    build_dir=$(mktemp -d)
+    (
+        trap 'rm -rf -- "$build_dir"' EXIT
+        run git clone https://aur.archlinux.org/paru.git "$build_dir/paru"
+        if [[ "$DRY_RUN" == false ]]; then
+            cd "$build_dir/paru"
+            makepkg -si --noconfirm
+        else
+            printf 'Would run: (cd %q && makepkg -si --noconfirm)\n' "$build_dir/paru"
+        fi
+    )
 }
 
 install_profile_packages() {

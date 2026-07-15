@@ -12,12 +12,12 @@ curl -fsSLo /tmp/dots-init https://dots.feveile-hauge.dk/arch/init.sh && bash /t
 ```
 
 Replace `daniel` with the user created by Archinstall. The user shell keeps a
-real terminal, so the installer can prompt for sudo and build AUR packages
-safely. If `curl` was missed during installation, install it as root in the
-chroot first:
+real terminal, so the installer can prompt for sudo and build `paru` from AUR
+after the initial full system upgrade. If `curl` was missed during installation,
+install it as root in the chroot first:
 
 ```bash
-pacman -S --needed curl
+pacman -Syu --needed curl
 ```
 
 Reboot into the installed system using the bootloader configured by Archinstall,

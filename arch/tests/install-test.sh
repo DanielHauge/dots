@@ -5,6 +5,7 @@ SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)
 INSTALLER="$SCRIPT_DIR/../install.sh"
 TMP_DIR=$(mktemp -d)
 trap 'rm -rf "$TMP_DIR"' EXIT
+LOG="$TMP_DIR/log"
 
 mkdir "$TMP_DIR/bin"
 cat >"$TMP_DIR/bin/lspci" <<'EOF'
@@ -54,3 +55,48 @@ if (
 fi
 
 main --check --profile intel >/dev/null
+
+ORIGINAL_PATH=$PATH
+: >"$LOG"
+sudo() {
+    printf 'sudo %s\n' "$*" >>"$LOG"
+}
+pacman() {
+    if [[ "$1" == -Q ]]; then
+        return 1
+    fi
+    printf 'pacman %s\n' "$*" >>"$LOG"
+}
+git() {
+    printf 'git %s\n' "$*" >>"$LOG"
+    if [[ "$1" == clone ]]; then
+        /usr/bin/mkdir -p "$3"
+    fi
+}
+makepkg() {
+    printf 'makepkg %s\n' "$*" >>"$LOG"
+}
+mktemp() {
+    /usr/bin/mktemp "$@"
+}
+rm() {
+    /usr/bin/rm "$@"
+}
+
+PATH="$TMP_DIR/bin"
+ensure_paru
+/usr/bin/grep -Fxq 'sudo pacman -Syu --needed --noconfirm base-devel git' "$LOG"
+/usr/bin/grep -Fq 'git clone https://aur.archlinux.org/paru.git ' "$LOG"
+/usr/bin/grep -Fxq 'makepkg -si --noconfirm' "$LOG"
+
+: >"$LOG"
+/usr/bin/cat >"$TMP_DIR/bin/paru" <<'EOF'
+#!/bin/bash
+exit 127
+EOF
+/usr/bin/chmod +x "$TMP_DIR/bin/paru"
+ensure_paru
+/usr/bin/grep -Fxq 'sudo pacman -Syu --needed --noconfirm base-devel git' "$LOG"
+/usr/bin/grep -Fq 'git clone https://aur.archlinux.org/paru.git ' "$LOG"
+/usr/bin/grep -Fxq 'makepkg -si --noconfirm' "$LOG"
+PATH=$ORIGINAL_PATH
