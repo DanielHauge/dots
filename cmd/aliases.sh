@@ -26,6 +26,7 @@ alias repo="cd $REPO_DIR"
 alias rpeo="cd $REPO_DIR" # typo
 alias suvi='sudo -E nvim'
 alias vi='nvim'
+alias oc='opencode'
 alias cp='cpv --progress'
 alias vim='nvim'
 alias lg='lazygit'

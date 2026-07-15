@@ -1,0 +1,14 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "plugin": ["@dietrichgebert/ponytail", "oh-my-opencode-slim"],
+  "lsp": true,
+  "mcp": {
+    "dbx": {
+      "type": "local",
+      "command": ["npx", "-y", "@dbx-app/mcp-server"],
+      "environment": {
+        "DBX_MCP_ALLOW_WRITES": "0"
+      }
+    }
+  }
+}
