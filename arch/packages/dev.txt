@@ -22,7 +22,7 @@ erlang
 prettier
 dotnet-sdk
 flutter-bin
-rust
+rustup
 sqlfluff
 terraform
 protobuf

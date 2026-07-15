@@ -159,9 +159,10 @@ ensure_paru() {
         run git clone https://aur.archlinux.org/paru.git "$build_dir/paru"
         if [[ "$DRY_RUN" == false ]]; then
             cd "$build_dir/paru"
-            makepkg -si --noconfirm
+            # Remove Rust build dependencies after paru is installed; rustup is the workstation toolchain.
+            makepkg -si --rmdeps --noconfirm
         else
-            printf 'Would run: (cd %q && makepkg -si --noconfirm)\n' "$build_dir/paru"
+            printf 'Would run: (cd %q && makepkg -si --rmdeps --noconfirm)\n' "$build_dir/paru"
         fi
     )
 }

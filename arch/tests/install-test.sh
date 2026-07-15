@@ -56,6 +56,12 @@ fi
 
 main --check --profile intel >/dev/null
 
+/usr/bin/grep -Fxq 'rustup' "$(dirname "$INSTALLER")/packages/dev.txt"
+if /usr/bin/grep -Fxq 'rust' "$(dirname "$INSTALLER")/packages/dev.txt"; then
+    echo "The package manifest must use rustup as the workstation Rust toolchain." >&2
+    exit 1
+fi
+
 ORIGINAL_PATH=$PATH
 : >"$LOG"
 sudo() {
@@ -87,7 +93,7 @@ PATH="$TMP_DIR/bin"
 ensure_paru
 /usr/bin/grep -Fxq 'sudo pacman -Syu --needed --noconfirm base-devel git' "$LOG"
 /usr/bin/grep -Fq 'git clone https://aur.archlinux.org/paru.git ' "$LOG"
-/usr/bin/grep -Fxq 'makepkg -si --noconfirm' "$LOG"
+/usr/bin/grep -Fxq 'makepkg -si --rmdeps --noconfirm' "$LOG"
 
 : >"$LOG"
 /usr/bin/cat >"$TMP_DIR/bin/paru" <<'EOF'
@@ -98,5 +104,5 @@ EOF
 ensure_paru
 /usr/bin/grep -Fxq 'sudo pacman -Syu --needed --noconfirm base-devel git' "$LOG"
 /usr/bin/grep -Fq 'git clone https://aur.archlinux.org/paru.git ' "$LOG"
-/usr/bin/grep -Fxq 'makepkg -si --noconfirm' "$LOG"
+/usr/bin/grep -Fxq 'makepkg -si --rmdeps --noconfirm' "$LOG"
 PATH=$ORIGINAL_PATH
