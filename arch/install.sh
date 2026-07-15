@@ -9,6 +9,7 @@ CHECK_ONLY=false
 PROFILE_OVERRIDDEN=false
 BOOT_STACK=''
 DOCKER_GROUP_CHANGED=false
+SUDO_KEEPALIVE_PID=''
 declare -a SELECTED_PROFILES=()
 
 usage() {
@@ -68,6 +69,18 @@ preflight() {
     fi
 
     validate_profiles
+}
+
+start_sudo_keepalive() {
+    sudo -v
+    (
+        while true; do
+            sleep 45
+            sudo -n true || exit
+        done
+    ) &
+    SUDO_KEEPALIVE_PID=$!
+    trap '[[ -z "$SUDO_KEEPALIVE_PID" ]] || kill "$SUDO_KEEPALIVE_PID" 2>/dev/null || true' EXIT
 }
 
 phase() {
@@ -292,7 +305,7 @@ main() {
     fi
 
     if [[ "$DRY_RUN" == false ]]; then
-        sudo -v
+        start_sudo_keepalive
     fi
     phase "AUR helper" ensure_paru
     if [[ "$DRY_RUN" == true ]]; then

@@ -106,3 +106,18 @@ ensure_paru
 /usr/bin/grep -Fq 'git clone https://aur.archlinux.org/paru.git ' "$LOG"
 /usr/bin/grep -Fxq 'makepkg -si --rmdeps --noconfirm' "$LOG"
 PATH=$ORIGINAL_PATH
+
+: >"$LOG"
+(
+    # shellcheck disable=SC2329 # Invoked by start_sudo_keepalive from the sourced installer.
+    sudo() {
+        printf 'sudo %s\n' "$*" >>"$LOG"
+        [[ "$1" == -v ]]
+    }
+    # shellcheck disable=SC2329 # Invoked by start_sudo_keepalive from the sourced installer.
+    sleep() { :; }
+    start_sudo_keepalive
+    wait "$SUDO_KEEPALIVE_PID"
+)
+/usr/bin/grep -Fxq 'sudo -v' "$LOG"
+/usr/bin/grep -Fxq 'sudo -n true' "$LOG"
