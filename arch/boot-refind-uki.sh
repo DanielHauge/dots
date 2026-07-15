@@ -105,9 +105,12 @@ mkinitcpio -P
 refind_id=$(efibootmgr | sed -n 's/^Boot\([0-9A-Fa-f]\{4\}\)\*.*rEFInd.*/\1/p' | head -n1)
 [[ -n "$refind_id" ]] || fail "rEFInd EFI entry was not created"
 current_order=$(efibootmgr | sed -n 's/^BootOrder: //p')
-remaining_order=$(tr ',' '\n' <<<"$current_order" | grep -Fvx "$refind_id" | paste -sd, -)
-efibootmgr -o "$refind_id${remaining_order:+,$remaining_order}"
-systemctl disable sddm.service 2>/dev/null || true
+remaining_order=$(tr ',' '\n' <<<"$current_order" | { grep -Fvx "$refind_id" || true; } | paste -sd, -)
+desired_order="$refind_id${remaining_order:+,$remaining_order}"
+[[ "$current_order" == "$desired_order" ]] || efibootmgr -o "$desired_order"
+if systemctl is-enabled --quiet sddm.service; then
+    systemctl disable sddm.service
+fi
 systemctl enable workstation-identity-issue.service greetd.service
 
 echo "rEFInd, UKIs, Plymouth, and tuigreet are ready. Reboot to test the new boot entry; GRUB remains available as fallback."

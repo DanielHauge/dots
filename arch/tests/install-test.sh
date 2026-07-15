@@ -12,8 +12,14 @@ cat >"$TMP_DIR/bin/lspci" <<'EOF'
 printf '%s\n' '01:00.0 0300: 10de:2684 (rev a1)'
 EOF
 chmod +x "$TMP_DIR/bin/lspci"
+cat >"$TMP_DIR/bin/sudo" <<'EOF'
+#!/usr/bin/env bash
+[[ "$1" == -v ]]
+EOF
+chmod +x "$TMP_DIR/bin/sudo"
 
 PATH="$TMP_DIR/bin:$PATH"
+# shellcheck disable=SC1090
 source "$INSTALLER"
 SELECTED_PROFILES=()
 detect_profiles
@@ -46,3 +52,5 @@ if (
     echo "Unknown profiles must fail validation." >&2
     exit 1
 fi
+
+main --check --profile intel >/dev/null

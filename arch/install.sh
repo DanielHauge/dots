@@ -5,6 +5,7 @@ SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)
 DOTS_LOC=${DOTS_LOC:-$(cd -- "$SCRIPT_DIR/.." && pwd)}
 PROFILE_DIR="$SCRIPT_DIR/profiles"
 DRY_RUN=false
+CHECK_ONLY=false
 PROFILE_OVERRIDDEN=false
 BOOT_STACK=''
 DOCKER_GROUP_CHANGED=false
@@ -12,11 +13,12 @@ declare -a SELECTED_PROFILES=()
 
 usage() {
     cat <<EOF
-Usage: $(basename "$0") [--dry-run] [--profile NAME] [--boot-stack refind-uki]
+Usage: $(basename "$0") [--dry-run] [--check] [--profile NAME] [--boot-stack refind-uki]
 
 Provision this Arch workstation after the base installation.
 
   --dry-run          Print changes without applying them.
+  --check            Validate prerequisites without provisioning.
   --profile NAME     Use a named hardware profile instead of auto-detection.
   --boot-stack NAME  Provision a boot stack (refind-uki).
   -h, --help         Show this help.
@@ -47,6 +49,33 @@ require_arch_user() {
 
     if ! command -v sudo >/dev/null 2>&1; then
         echo "sudo is required to provision system packages and services." >&2
+        exit 1
+    fi
+}
+
+preflight() {
+    require_arch_user
+    [[ -d "$DOTS_LOC/config/.config" ]] || { echo "Missing dotfiles in $DOTS_LOC/config." >&2; exit 1; }
+    [[ -f "$PROFILE_DIR/base.services" ]] || { echo "Missing service manifest: $PROFILE_DIR/base.services" >&2; exit 1; }
+    command -v git >/dev/null 2>&1 || { echo "git is required." >&2; exit 1; }
+    if [[ "$CHECK_ONLY" == true ]]; then
+        sudo -v
+    fi
+
+    if [[ "$BOOT_STACK" == refind-uki ]]; then
+        [[ -d /sys/firmware/efi ]] || { echo "rEFInd/UKI provisioning requires UEFI boot." >&2; exit 1; }
+        command -v findmnt >/dev/null 2>&1 || { echo "findmnt is required for EFI validation." >&2; exit 1; }
+    fi
+
+    validate_profiles
+}
+
+phase() {
+    local name=$1
+    shift
+    printf '\n== %s ==\n' "$name"
+    if ! "$@"; then
+        echo "Provisioning stopped during \"$name\". Fix the reported error, then rerun this command." >&2
         exit 1
     fi
 }
@@ -196,6 +225,9 @@ main() {
         --dry-run)
             DRY_RUN=true
             ;;
+        --check)
+            CHECK_ONLY=true
+            ;;
         --profile)
             if (($# == 1)); then
                 echo "--profile requires a name." >&2
@@ -223,32 +255,35 @@ main() {
         shift
     done
 
-    require_arch_user
     if [[ "$PROFILE_OVERRIDDEN" == false ]]; then
         detect_profiles
     fi
-    validate_profiles
+    preflight
+    if [[ "$CHECK_ONLY" == true ]]; then
+        echo "Preflight passed. Run without --check to provision this system."
+        return
+    fi
 
     if [[ "$DRY_RUN" == false ]]; then
         sudo -v
     fi
-    ensure_paru
+    phase "AUR helper" ensure_paru
     if [[ "$DRY_RUN" == true ]]; then
-        "$SCRIPT_DIR/sync.sh" -y --dry-run
+        phase "Package synchronization" "$SCRIPT_DIR/sync.sh" -y --dry-run
     else
-        "$SCRIPT_DIR/sync.sh" -y
+        phase "Package synchronization" "$SCRIPT_DIR/sync.sh" -y
     fi
-    install_profile_packages
+    phase "Hardware profile packages" install_profile_packages
     if [[ "$BOOT_STACK" == refind-uki ]]; then
         if [[ "$DRY_RUN" == true ]]; then
             echo "Would provision rEFInd, UKIs, Plymouth, and the Tokyo Night SDDM theme."
         else
-            sudo "$SCRIPT_DIR/boot-refind-uki.sh"
+            phase "rEFInd and UKI boot stack" sudo "$SCRIPT_DIR/boot-refind-uki.sh"
         fi
     fi
-    enable_service_file
-    configure_docker_group
-    deploy_dotfiles
+    phase "System services" enable_service_file
+    phase "Docker group" configure_docker_group
+    phase "Dotfiles" deploy_dotfiles
     print_summary
 }
 
