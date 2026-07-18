@@ -28,9 +28,6 @@ bat
 eza
 zoxide
 glow
-oh-my-zsh-git
-zsh-autosuggestions
-zsh-fast-syntax-highlighting
 zoxide
 gvim
 lazygit

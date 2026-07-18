@@ -76,7 +76,7 @@ pacman() {
 git() {
     printf 'git %s\n' "$*" >>"$LOG"
     if [[ "$1" == clone ]]; then
-        /usr/bin/mkdir -p "$3"
+        /usr/bin/mkdir -p "${!#}"
     fi
 }
 makepkg() {
@@ -106,6 +106,13 @@ ensure_paru
 /usr/bin/grep -Fq 'git clone https://aur.archlinux.org/paru.git ' "$LOG"
 /usr/bin/grep -Fxq 'makepkg -si --rmdeps --noconfirm' "$LOG"
 PATH=$ORIGINAL_PATH
+
+: >"$LOG"
+HOME="$TMP_DIR/home"
+ensure_oh_my_zsh
+/usr/bin/grep -Fq 'git clone --depth=1 https://github.com/ohmyzsh/ohmyzsh.git '"$HOME"'/.oh-my-zsh' "$LOG"
+/usr/bin/grep -Fq 'git clone --depth=1 https://github.com/zsh-users/zsh-syntax-highlighting.git '"$HOME"'/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting' "$LOG"
+/usr/bin/grep -Fq 'git clone --depth=1 https://github.com/zsh-users/zsh-autosuggestions.git '"$HOME"'/.oh-my-zsh/custom/plugins/zsh-autosuggestions' "$LOG"
 
 : >"$LOG"
 (

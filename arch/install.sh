@@ -180,6 +180,23 @@ ensure_paru() {
     )
 }
 
+ensure_oh_my_zsh() {
+    local zsh_dir="$HOME/.oh-my-zsh"
+    local plugin=''
+    local repo=''
+
+    if [[ ! -f "$zsh_dir/oh-my-zsh.sh" ]]; then
+        [[ ! -e "$zsh_dir" ]] || { echo "Oh My Zsh directory is incomplete: $zsh_dir" >&2; return 1; }
+        run git clone --depth=1 https://github.com/ohmyzsh/ohmyzsh.git "$zsh_dir"
+    fi
+
+    for plugin in zsh-syntax-highlighting zsh-autosuggestions; do
+        repo="https://github.com/zsh-users/$plugin.git"
+        [[ -d "$zsh_dir/custom/plugins/$plugin" ]] ||
+            run git clone --depth=1 "$repo" "$zsh_dir/custom/plugins/$plugin"
+    done
+}
+
 install_profile_packages() {
     local profile=''
     local -a packages=()
@@ -313,6 +330,7 @@ main() {
     else
         phase "Package synchronization" "$SCRIPT_DIR/sync.sh" -y
     fi
+    phase "Oh My Zsh" ensure_oh_my_zsh
     phase "Hardware profile packages" install_profile_packages
     if [[ "$BOOT_STACK" == refind-uki ]]; then
         if [[ "$DRY_RUN" == true ]]; then
