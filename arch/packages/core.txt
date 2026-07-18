@@ -33,16 +33,7 @@ inotify-tools   # Watch for file changes (used in various scripts)
 earlyoom           # for early boot configuration (e.g. zram, etc.)
 
 # Sound and audio
-pipewire
-pipewire-alsa
-pipewire-jack
-pipewire-pulse
-wireplumber
 pavucontrol        # audio control GUI
-gst-plugin-pipewire
-libpulse
-speech-dispatcher
-
 
 # Networking stack and tools
 networkmanager       # main network manager
