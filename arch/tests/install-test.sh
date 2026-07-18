@@ -8,11 +8,6 @@ trap 'rm -rf "$TMP_DIR"' EXIT
 LOG="$TMP_DIR/log"
 
 mkdir "$TMP_DIR/bin"
-cat >"$TMP_DIR/bin/lspci" <<'EOF'
-#!/usr/bin/env bash
-printf '%s\n' '01:00.0 0300: 10de:2684 (rev a1)'
-EOF
-chmod +x "$TMP_DIR/bin/lspci"
 cat >"$TMP_DIR/bin/sudo" <<'EOF'
 #!/usr/bin/env bash
 [[ "$1" == -v ]]
@@ -22,12 +17,6 @@ chmod +x "$TMP_DIR/bin/sudo"
 PATH="$TMP_DIR/bin:$PATH"
 # shellcheck disable=SC1090
 source "$INSTALLER"
-SELECTED_PROFILES=()
-detect_profiles
-
-[[ " ${SELECTED_PROFILES[*]} " == *" nvidia "* ]]
-validate_profiles
-
 source_file="$TMP_DIR/source"
 target_file="$TMP_DIR/target"
 conflict_file="$TMP_DIR/conflict"
@@ -46,15 +35,7 @@ deploy_dotfiles
 [[ -L "$HOME/.gitconfig" ]]
 [[ -L "$HOME/.zshrc" ]]
 
-if (
-    SELECTED_PROFILES=(invalid)
-    validate_profiles
-) >/dev/null 2>&1; then
-    echo "Unknown profiles must fail validation." >&2
-    exit 1
-fi
-
-main --check --profile intel >/dev/null
+main --check >/dev/null
 
 /usr/bin/grep -Fxq 'rustup' "$(dirname "$INSTALLER")/packages/dev.txt"
 if /usr/bin/grep -Fxq 'rust' "$(dirname "$INSTALLER")/packages/dev.txt"; then

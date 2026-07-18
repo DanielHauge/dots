@@ -10,6 +10,7 @@ LEGACY_PACKAGE_FILE="$DOTS_LOC/arch/packages.txt"
 EXTRAS_PACKAGE_FILE="$PACKAGE_DIR/extras.txt"
 ACTION=''
 DRY_RUN=false
+SUDO_KEEPALIVE_PID=''
 
 if [[ -t 1 && -z "${NO_COLOR:-}" ]]; then
     COLOR_RESET=$'\033[0m'
@@ -30,10 +31,8 @@ else
 fi
 
 usage() {
-    echo "Usage: $(basename "$0") [-a | -y | -r] [--dry-run]"
-    echo "  -a    install missing packages and remove dangling explicit packages"
+    echo "Usage: $(basename "$0") [-y] [--dry-run]"
     echo "  -y    install missing packages only"
-    echo "  -r    remove dangling explicit packages only"
     echo "  --dry-run  show package changes without applying them"
     echo "  -h    show this help"
 }
@@ -104,50 +103,8 @@ load_desired_packages() {
     fi | normalize_package_stream
 }
 
-load_whitelisted_packages() {
-    if [[ -f "$EXTRAS_PACKAGE_FILE" ]]; then
-        cat -- "$EXTRAS_PACKAGE_FILE" | normalize_package_stream
-    fi
-}
-
-build_extra_package_list() {
-    local package=''
-    local rule=''
-    local is_whitelisted=false
-    local -a whitelist_rules=()
-
-    if [[ -s "$TMP_WHITELIST" ]]; then
-        mapfile -t whitelist_rules <"$TMP_WHITELIST"
-    fi
-
-    while IFS= read -r package; do
-        if grep -Fxq -- "$package" "$TMP_DESIRED"; then
-            continue
-        fi
-
-        is_whitelisted=false
-        for rule in "${whitelist_rules[@]}"; do
-            # shellcheck disable=SC2254 # extras.txt intentionally supports glob patterns like texlive-*
-            case "$package" in
-            $rule)
-                is_whitelisted=true
-                break
-                ;;
-            esac
-        done
-
-        if [[ "$is_whitelisted" == false ]]; then
-            printf '%s\n' "$package"
-        fi
-    done <"$TMP_INSTALLED_EXPLICIT"
-}
-
 load_all_installed_packages() {
     pacman -Qq | LC_ALL=C sort -u
-}
-
-load_explicit_packages() {
-    pacman -Qqe | LC_ALL=C sort -u
 }
 
 require_paru() {
@@ -155,6 +112,17 @@ require_paru() {
         echo "paru is missing or cannot run; rerun arch/install.sh to bootstrap it." >&2
         exit 1
     fi
+}
+
+start_sudo_keepalive() {
+    sudo -v
+    (
+        while true; do
+            sleep 45
+            sudo -n true || exit
+        done
+    ) &
+    SUDO_KEEPALIVE_PID=$!
 }
 
 install_missing_packages() {
@@ -176,52 +144,12 @@ install_missing_packages() {
     paru -S --needed --noconfirm -- "${missing_packages[@]}"
 }
 
-remove_extra_packages() {
-    local -a extra_packages=()
-    local -a orphan_packages=()
-
-    mapfile -t extra_packages <"$TMP_EXTRA"
-    if ((${#extra_packages[@]} == 0)); then
-        print_note "Nothing to remove." "$COLOR_GREEN"
-        return
-    fi
-
-    print_header "Removing non-listed packages"
-    printf '  - %s\n' "${extra_packages[@]}"
-    if [[ "$DRY_RUN" == true ]]; then
-        print_note "Dry run: packages were not removed." "$COLOR_YELLOW"
-        return
-    fi
-    require_paru
-    paru -Rns --noconfirm -- "${extra_packages[@]}"
-
-    if pacman -Qdtq >/dev/null 2>&1; then
-        mapfile -t orphan_packages < <(pacman -Qdtq)
-        if ((${#orphan_packages[@]} > 0)); then
-            print_header "Removing orphaned dependencies"
-            printf '  - %s\n' "${orphan_packages[@]}"
-            paru -Rns --noconfirm -- "${orphan_packages[@]}"
-        fi
-    fi
-
-    print_header "Cleaning package caches"
-    paru -c --noconfirm
-    paru -Scc --noconfirm
-}
-
 run_action() {
     local action=$1
 
     case "$action" in
-    [Aa] | sync-all)
-        install_missing_packages
-        remove_extra_packages
-        ;;
     [Yy] | install-missing)
         install_missing_packages
-        ;;
-    [Rr] | remove-extra)
-        remove_extra_packages
         ;;
     [Nn] | '')
         print_note "No changes applied." "$COLOR_YELLOW"
@@ -235,35 +163,24 @@ run_action() {
 prompt_for_action() {
     local action=''
 
-    printf '\n%s%sChoose action%s [A] install missing + remove dangling, [Y] install missing, [R] remove dangling, [N] do nothing: ' \
+    printf '\n%s%sChoose action%s [Y] install missing, [N] do nothing: ' \
         "$COLOR_BOLD" "$COLOR_BLUE" "$COLOR_RESET"
     read -r action || action=''
 
+    if [[ "$DRY_RUN" == false && "$action" =~ ^[Yy]$ ]]; then
+        start_sudo_keepalive
+    fi
     run_action "$action"
 }
 
 while (($# > 0)); do
     case "$1" in
-    -a)
-        if [[ -n "$ACTION" ]]; then
-            echo "Only one of -a, -y, or -r can be used at a time." >&2
-            exit 1
-        fi
-        ACTION='sync-all'
-        ;;
     -y)
         if [[ -n "$ACTION" ]]; then
-            echo "Only one of -a, -y, or -r can be used at a time." >&2
+            echo "Only one -y option can be used at a time." >&2
             exit 1
         fi
         ACTION='install-missing'
-        ;;
-    -r)
-        if [[ -n "$ACTION" ]]; then
-            echo "Only one of -a, -y, or -r can be used at a time." >&2
-            exit 1
-        fi
-        ACTION='remove-extra'
         ;;
     -h | --help)
         usage
@@ -281,40 +198,36 @@ while (($# > 0)); do
 done
 
 TMP_DESIRED=$(mktemp)
-TMP_WHITELIST=$(mktemp)
 TMP_INSTALLED_ALL=$(mktemp)
-TMP_INSTALLED_EXPLICIT=$(mktemp)
-TMP_EXTRA=$(mktemp)
 TMP_MISSING=$(mktemp)
 
 cleanup() {
-    rm -f "$TMP_DESIRED" "$TMP_WHITELIST" "$TMP_INSTALLED_ALL" "$TMP_INSTALLED_EXPLICIT" "$TMP_EXTRA" "$TMP_MISSING"
+    if [[ -n "$SUDO_KEEPALIVE_PID" ]]; then
+        kill "$SUDO_KEEPALIVE_PID" 2>/dev/null || true
+        wait "$SUDO_KEEPALIVE_PID" 2>/dev/null || true
+    fi
+    rm -f "$TMP_DESIRED" "$TMP_INSTALLED_ALL" "$TMP_MISSING"
 }
 trap cleanup EXIT
 
 load_desired_packages >"$TMP_DESIRED"
-load_whitelisted_packages >"$TMP_WHITELIST"
 load_all_installed_packages >"$TMP_INSTALLED_ALL"
-load_explicit_packages >"$TMP_INSTALLED_EXPLICIT"
-build_extra_package_list >"$TMP_EXTRA"
 comm -13 "$TMP_INSTALLED_ALL" "$TMP_DESIRED" >"$TMP_MISSING"
 
 print_header "Package sync overview"
 print_note "Missing packages are enforced from your main lists." "$COLOR_BLUE"
-print_note "Removal candidates are based on explicitly installed packages only." "$COLOR_BLUE"
-if [[ -s "$TMP_WHITELIST" ]]; then
-    print_note "extras.txt is treated as a whitelist: exact names and glob patterns are ignored for removal and not enforced." "$COLOR_BLUE"
-fi
 
 print_list "Missing packages" "$TMP_MISSING" "Nothing missing." "$COLOR_YELLOW"
-print_list "Non-listed explicitly installed packages" "$TMP_EXTRA" "Nothing dangling." "$COLOR_RED"
 
-if [[ ! -s "$TMP_MISSING" && ! -s "$TMP_EXTRA" ]]; then
+if [[ ! -s "$TMP_MISSING" ]]; then
     print_note "System already matches your package sync rules." "$COLOR_GREEN"
     exit 0
 fi
 
 if [[ -n "$ACTION" ]]; then
+    if [[ "$DRY_RUN" == false ]]; then
+        start_sudo_keepalive
+    fi
     run_action "$ACTION"
 else
     prompt_for_action

@@ -21,7 +21,11 @@ cat >"$TMP_DIR/bin/paru" <<'EOF'
 #!/usr/bin/env bash
 exit 127
 EOF
-chmod +x "$TMP_DIR/bin/pacman" "$TMP_DIR/bin/paru"
+cat >"$TMP_DIR/bin/sudo" <<'EOF'
+#!/usr/bin/env bash
+[[ "$1" == -v ]]
+EOF
+chmod +x "$TMP_DIR/bin/pacman" "$TMP_DIR/bin/paru" "$TMP_DIR/bin/sudo"
 
 if PATH="$TMP_DIR/bin:$PATH" DOTS_LOC="$TMP_DIR/dots" bash "$SYNC" -y >"$TMP_DIR/output" 2>&1; then
     echo "sync must fail when paru cannot execute." >&2

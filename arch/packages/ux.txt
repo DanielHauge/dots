@@ -29,7 +29,6 @@ eza
 zoxide
 glow
 zoxide
-gvim
 lazygit
 tree-sitter-cli
 jq

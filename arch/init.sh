@@ -17,7 +17,6 @@ target user owns the checkout and runs the installer.
   --user USER             Target desktop user (required when run as root).
   --boot-stack NAME       Boot stack to provision (refind-uki).
   --dry-run, --check      Forward to the installer without provisioning.
-  --profile NAME          Forward a hardware profile to the installer.
   -h, --help              Show this help.
 EOF
 }
@@ -93,11 +92,6 @@ main() {
             ;;
         --dry-run | --check)
             INSTALL_ARGS+=("$1")
-            ;;
-        --profile)
-            (($# > 1)) || fail "--profile requires a name."
-            INSTALL_ARGS+=("$1" "$2")
-            shift
             ;;
         -h | --help)
             usage

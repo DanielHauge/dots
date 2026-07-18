@@ -37,13 +37,13 @@ chmod +x "$TMP_DIR/bin/sudo" "$TMP_DIR/bin/pacman" "$TMP_DIR/bin/git"
 
 export PATH="$TMP_DIR/bin:$PATH"
 export LOG
-HOME="$TMP_DIR/home" USER=desktop bash "$INIT" --profile intel
+HOME="$TMP_DIR/home" USER=desktop bash "$INIT"
 grep -Fxq 'sudo pacman -Syu --noconfirm --needed git' "$LOG"
 grep -Fq 'git clone https://github.com/DanielHauge/dots.git' "$LOG"
-grep -Fxq 'installer --profile intel' "$LOG"
+grep -Fxq 'installer ' "$LOG"
 
 : >"$LOG"
-HOME="$TMP_DIR/home" USER=desktop bash "$INIT" --profile intel
+HOME="$TMP_DIR/home" USER=desktop bash "$INIT"
 grep -Fq 'git -C '"$TMP_DIR"'/home/dots fetch --quiet origin' "$LOG"
 grep -Fq 'git -C '"$TMP_DIR"'/home/dots pull --ff-only --quiet' "$LOG"
 

@@ -33,3 +33,11 @@ For an existing installed system:
 ~/dots/arch/install.sh --check --boot-stack refind-uki
 ~/dots/arch/install.sh --dry-run --boot-stack refind-uki
 ```
+
+`sync.sh` installs packages listed in the manifests. To review and optionally
+remove explicitly installed packages outside those manifests, run:
+
+```bash
+~/dots/arch/cleanup.sh --dry-run
+~/dots/arch/cleanup.sh
+```

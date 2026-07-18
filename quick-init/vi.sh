@@ -15,7 +15,7 @@ if command -v sudo &>/dev/null; then
     if [[ "$EUID" -ne 0 ]]; then
         echo "Running with sudo..."
         # use just sudo to quickly elevate privileges
-        sudo -E "$0" "$@"
+        exec sudo -E "$0" "$@"
     fi
 else
     echo "Warning: 'sudo' command not found. Running without elevated privileges."
@@ -71,4 +71,7 @@ fi
 # start nvim with the config directory
 echo "Starting Neovim with config home: $XDG_CONFIG_HOME and data home: $XDG_DATA_HOME"
 # export alias vid to the follow command so i can use it later
+if [[ -n "${SUDO_USER:-}" ]]; then
+    exec sudo -u "$SUDO_USER" env NVIM_MINIMAL=1 XDG_CONFIG_HOME="$XDG_CONFIG_HOME" XDG_DATA_HOME="$XDG_DATA_HOME" nvim .
+fi
 NVIM_MINIMAL=1 XDG_CONFIG_HOME=$XDG_CONFIG_HOME XDG_DATA_HOME=$XDG_DATA_HOME nvim .
