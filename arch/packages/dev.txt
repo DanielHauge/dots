@@ -2,6 +2,7 @@
 git
 git-lfs
 cmake
+git-delta
 meson
 clang
 cargo-dist
