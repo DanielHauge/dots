@@ -1,114 +1,70 @@
 #!/usr/bin/env bash
-# ~/.config/waybar/scripts/gpu.sh
 
-GPU_HISTORY="/tmp/waybar_gpu"
-VRAM_HISTORY="/tmp/waybar_gpu_mem"
-
+GPU_HISTORY="${TMPDIR:-/tmp}/waybar_gpu"
 SPARK_CHARS=("▁" "▂" "▃" "▄" "▅" "▆" "▇" "█")
 MAX_HISTORY=12
 
-COLOR_GREEN="#a6e3a1"
-COLOR_YELLOW="#f9e2af"
-COLOR_RED="#f38ba8"
-
 spark_color() {
-    local v=$1
-
-    if [[ $v -ge 80 ]]; then
-        echo "$COLOR_RED"
-    elif [[ $v -ge 60 ]]; then
-        echo "$COLOR_YELLOW"
+    if [[ $1 -ge 80 ]]; then
+        printf '%s' '#f38ba8'
+    elif [[ $1 -ge 60 ]]; then
+        printf '%s' '#f9e2af'
     else
-        echo "$COLOR_GREEN"
+        printf '%s' '#a6e3a1'
     fi
 }
 
-# ----------------------------------------
-# query nvidia
-# ----------------------------------------
+if command -v nvidia-smi >/dev/null 2>&1; then
+    IFS=',' read -r VALUE MEM_USED MEM_TOTAL TEMP < <(
+        nvidia-smi --id=0 --query-gpu=utilization.gpu,memory.used,memory.total,temperature.gpu \
+            --format=csv,noheader,nounits 2>/dev/null
+    )
+    VALUE=${VALUE//[[:space:]]/}
+    MEM_USED=${MEM_USED//[[:space:]]/}
+    MEM_TOTAL=${MEM_TOTAL//[[:space:]]/}
+    TEMP=${TEMP//[[:space:]]/}
+    TOOLTIP="NVIDIA GPU: ${VALUE}% | VRAM: ${MEM_USED}/${MEM_TOTAL} MiB | ${TEMP} C"
+elif command -v intel_gpu_top >/dev/null 2>&1; then
+    SAMPLE=$(timeout -s INT -k 1 1.2 intel_gpu_top -J -s 500 2>/dev/null)
+    # ponytail: use the busiest engine; summing parallel Intel engines can exceed 100%.
+    VALUE=$(jq -r 'last | [.engines[]?.busy] | max // empty' <<<"$SAMPLE" 2>/dev/null)
+    VALUE=${VALUE%.*}
+    TOOLTIP="Intel GPU: ${VALUE:-unavailable}%"
+else
+    VALUE=''
+    TOOLTIP='GPU telemetry unavailable'
+fi
 
-IFS=',' read -r GPU_UTIL MEM_USED MEM_TOTAL TEMP <<< \
-    $(nvidia-smi \
-        --query-gpu=utilization.gpu,memory.used,memory.total,temperature.gpu \
-        --format=csv,noheader,nounits)
+if [[ ! $VALUE =~ ^[0-9]+$ ]]; then
+    printf '{"text":"GPU 󰢮 unavailable", "tooltip":"%s", "class":"unavailable"}\n' "$TOOLTIP"
+    exit 0
+fi
 
-GPU_UTIL=$(echo "$GPU_UTIL" | xargs)
-MEM_USED=$(echo "$MEM_USED" | xargs)
-MEM_TOTAL=$(echo "$MEM_TOTAL" | xargs)
-TEMP=$(echo "$TEMP" | xargs)
+if [[ -f "$GPU_HISTORY" ]]; then
+    mapfile -t HISTORY <"$GPU_HISTORY"
+else
+    HISTORY=()
+fi
+HISTORY+=("$VALUE")
+[[ ${#HISTORY[@]} -gt $MAX_HISTORY ]] && HISTORY=("${HISTORY[@]: -$MAX_HISTORY}")
+printf '%s\n' "${HISTORY[@]}" >"$GPU_HISTORY"
 
-VRAM_UTIL=$((MEM_USED * 100 / MEM_TOTAL))
-VRAM_USED_GB=$(awk "BEGIN {printf \"%.1f\", $MEM_USED/1024}")
-VRAM_TOTAL_GB=$(awk "BEGIN {printf \"%.1f\", $MEM_TOTAL/1024}")
+SPARK=''
+for value in "${HISTORY[@]}"; do
+    index=$((value * 7 / 100))
+    ((index > 7)) && index=7
+    color=$(spark_color "$value")
+    SPARK+="<span foreground=\\\"${color}\\\">${SPARK_CHARS[$index]}</span>"
+done
 
-# ----------------------------------------
-# history helper
-# ----------------------------------------
+color=$(spark_color "$VALUE")
+if ((VALUE >= 80)); then
+    CLASS='critical'
+elif ((VALUE >= 60)); then
+    CLASS='warning'
+else
+    CLASS='normal'
+fi
 
-update_history() {
-    local file="$1"
-    local value="$2"
-
-    if [[ -f "$file" ]]; then
-        mapfile -t HISTORY <"$file"
-    else
-        HISTORY=()
-    fi
-
-    HISTORY+=("$value")
-
-    [[ ${#HISTORY[@]} -gt $MAX_HISTORY ]] &&
-        HISTORY=("${HISTORY[@]: -$MAX_HISTORY}")
-
-    printf '%s\n' "${HISTORY[@]}" >"$file"
-}
-
-build_spark() {
-    local result=""
-
-    for v in "${HISTORY[@]}"; do
-        idx=$((v * 7 / 100))
-
-        [[ $idx -lt 0 ]] && idx=0
-        [[ $idx -gt 7 ]] && idx=7
-
-        col=$(spark_color "$v")
-
-        result+="<span foreground=\\\"${col}\\\">${SPARK_CHARS[$idx]}</span>"
-    done
-
-    echo "$result"
-}
-
-# ----------------------------------------
-# gpu spark
-# ----------------------------------------
-
-update_history "$GPU_HISTORY" "$GPU_UTIL"
-GPU_SPARK=$(build_spark)
-
-# ----------------------------------------
-# vram spark
-# ----------------------------------------
-
-update_history "$VRAM_HISTORY" "$VRAM_UTIL"
-VRAM_SPARK=$(build_spark)
-
-GPU_COLOR=$(spark_color "$GPU_UTIL")
-VRAM_COLOR=$(spark_color "$VRAM_UTIL")
-
-# ----------------------------------------
-# output
-# ----------------------------------------
-
-printf '{"text":"gpu 󰢮 <span foreground=\\\"%s\\\">%s</span> <span foreground=\\\"%s\\\">%s%%</span> 󰍛 <span foreground=\\\"%s\\\">(%sG/%sG)</span> <span foreground=\\\"%s\\\">%s%%</span>","tooltip":"%s°C","class":"normal"}\n' \
-    "$GPU_COLOR" \
-    "$GPU_SPARK" \
-    "$GPU_COLOR" \
-    "$GPU_UTIL" \
-    "$VRAM_COLOR" \
-    "$VRAM_USED_GB" \
-    "$VRAM_TOTAL_GB" \
-    "$VRAM_COLOR" \
-    "$VRAM_UTIL" \
-    "$TEMP"
+printf '{"text":"GPU 󰢮 <span foreground=\\\"%s\\\">%s</span> <span foreground=\\\"%s\\\">%s%%</span>", "tooltip":"%s", "class":"%s"}\n' \
+    "$color" "$SPARK" "$color" "$VALUE" "$TOOLTIP" "$CLASS"

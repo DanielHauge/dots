@@ -36,7 +36,7 @@
         "exec": "~/.config/waybar/spark.sh cpu",
         "return-type": "json",
         "interval": 2,
-        "on-click": "kitty htop",
+        "on-click": "kitty btop",
         "escape": false,
         "tooltip": true
     },
@@ -44,6 +44,7 @@
         "exec": "~/.config/waybar/gpu.sh",
         "return-type": "json",
         "interval": 2,
+        "on-click": "kitty btop",
         "escape": false,
         "tooltip": true
     },
@@ -52,14 +53,14 @@
         "return-type": "json",
         "interval": 5,
         "escape": false,
-        "on-click": "kitty htop",
+        "on-click": "kitty btop",
         "tooltip": true
     },
     "custom/exit": {
         "format": "",
-        "tooltip-format": "Powermenu",
-        "on-click": "shutdown -h now",
-        "tooltip": false
+        "tooltip-format": "Power off",
+        "on-click": "loginctl poweroff",
+        "tooltip": true
     },
     "keyboard-state": {
         "numlock": true,
@@ -146,7 +147,7 @@
         "format": "{icon}  {volume}%",
         "format-bluetooth": "{volume}% {icon} {format_source}",
         "format-bluetooth-muted": " {icon} {format_source}",
-        "format-muted": " {format_source}",
+        "format-muted": "󰝟 muted",
         "format-source": "{volume}% ",
         "format-source-muted": "",
         "format-icons": {
@@ -162,7 +163,8 @@
                 " "
             ]
         },
-        "on-click": "pavucontrol"
+        "on-click": "pavucontrol",
+        "scroll-step": 2
     },
     "bluetooth": {
         "format-disabled": "",

@@ -1,191 +1,188 @@
+@define-color base rgba(17, 17, 27, 0.78);
+@define-color crust #11111b;
+@define-color surface #1e1e2e;
+@define-color overlay #313244;
+@define-color text #cdd6f4;
+@define-color muted #6c7086;
+@define-color blue #89b4fa;
+@define-color mauve #cba6f7;
+@define-color green #a6e3a1;
+@define-color yellow #f9e2af;
+@define-color red #f38ba8;
+
 * {
   border: none;
-  border-radius: 0;
   min-height: 0;
   font-family: JetBrainsMono Nerd Font;
   font-size: 13px;
 }
 
 window#waybar {
-
-  background-color: #181825;
-  /* transparent background */
-  transition-property: background-color;
-  transition-timing-function: ease-in-out;
-  transition-duration: 0.5s;
-}
-
-
-#custom-gpu,
-#custom-cpu,
-#custom-mem {
-  border-radius: 4px;
-  margin: 6px 3px;
-  padding: 4px 12px;
-  background-color: #1e1e2e;
-  color: #cdd6f4;
-  font-family: JetBrainsMono Nerd Font, monospace;
-  font-size: 12px;
-  min-width: 130px;
-}
-
-/* The spark bar string is rendered in a <span> with foreground color set
-   by the script — no extra CSS needed for the color logic.
-   These classes style the pill background for warning / critical states. */
-
-#custom-cpu.warning,
-#custom-mem.warning {
-  background-color: #2a2018;   /* subtle warm tint at 60–79% */
-}
-
-#custom-cpu.critical,
-#custom-mem.critical {
-  background-color: #2d1a1a;   /* subtle red tint at 80%+ */
-  color: #f38ba8;
-}
-
-window#waybar.empty #window {
-    background-color: transparent;
+  background: @base;
+  border-bottom: 1px solid rgba(205, 214, 244, 0.08);
+  color: @text;
+  transition: background-color 0.25s ease;
 }
 
 window#waybar.hidden {
-  opacity: 0.5;
+  opacity: 0.45;
 }
 
-#workspaces {
-  background-color: transparent;
-}
-
-#workspaces button {
-  all: initial;
-  /* Remove GTK theme values (waybar #1351) */
-  min-width: 0;
-  /* Fix weird spacing in materia (waybar #450) */
-  box-shadow: inset 0 -3px transparent;
-  /* Use box-shadow instead of border so the text isn't offset */
-  padding: 6px 18px;
-  margin: 6px 3px;
-  border-radius: 4px;
-  background-color: #1e1e2e;
-  color: #cdd6f4;
-}
-
-#workspaces button.active {
-  color: #1e1e2e;
-  background-color: #cdd6f4;
-}
-
-#workspaces button:hover {
-  box-shadow: inherit;
-  text-shadow: inherit;
-  color: #1e1e2e;
-  background-color: #cdd6f4;
-}
-
-#workspaces button.urgent {
-  background-color: #f38ba8;
-}
-
-#memory,
-#custom-power,
-#cpu,
-#battery,
-#backlight,
-#pulseaudio,
-#custom-notifications,
-#network,
-#custom-exit,
+#custom-cpu,
+#custom-mem,
+#custom-gpu,
 #clock,
-#tray {
-  border-radius: 4px;
-  margin: 6px 3px;
-  padding: 6px 12px;
-  background-color: #1e1e2e;
-  color: #181825;
+#pulseaudio,
+#battery,
+#custom-notifications,
+#tray,
+#custom-exit,
+#taskbar {
+  margin: 6px 0;
+  padding: 0 11px;
+  border: 1px solid rgba(205, 214, 244, 0.08);
+  border-radius: 10px;
+  background: @surface;
+  color: @text;
 }
 
-#custom-power {
-  margin-right: 6px;
+#custom-cpu,
+#custom-mem,
+#custom-gpu {
+  min-width: 132px;
+  font-size: 12px;
 }
 
-#custom-exit {
-  margin-right: 6px;
-  padding: 6px 12px;
-  background-color: #1e1e2e;
-  color: #181825;
+#custom-cpu.warning,
+#custom-mem.warning,
+#custom-gpu.warning {
+  border-color: alpha(@yellow, 0.6);
 }
-#custom-notifications {
-    font-family: "NotoSansMono Nerd Font";
-    margin-right: 6px;
-    background-color: #89b4fa;
+
+#custom-cpu.critical,
+#custom-mem.critical,
+#custom-gpu.critical {
+  border-color: alpha(@red, 0.7);
+  background: rgba(243, 139, 168, 0.12);
+}
+
+#custom-gpu.unavailable {
+  color: @muted;
 }
 
 #custom-logo {
-  padding-right: 7px;
-  padding-left: 7px;
-  margin-left: 5px;
-  font-size: 15px;
-  border-radius: 8px 0px 0px 8px;
-  color: #1793d1;
+  margin: 6px 4px 6px 8px;
+  padding: 0 10px;
+  border-radius: 10px;
+  color: @crust;
+  background: @blue;
+  font-size: 16px;
 }
 
-#memory {
-  background-color: #fab387;
+#workspaces {
+  margin: 6px 4px 6px 0;
 }
 
-#cpu {
-  background-color: #aa8327;
-}
-#battery {
-  background-color: #f38ba8;
-}
-
-#battery.warning,
-#battery.critical,
-#battery.urgent {
-  background-color: #ff0000;
-  color: #FFFF00;
+#workspaces button {
+  min-width: 26px;
+  margin: 0 2px;
+  padding: 0 7px;
+  border-radius: 9px;
+  color: @muted;
+  background: transparent;
+  transition: all 0.2s ease;
 }
 
-#battery.charging {
-  background-color: #a6e3a1;
-  color: #181825;
+#workspaces button.active {
+  color: @crust;
+  background: @mauve;
 }
 
-#backlight {
-  background-color: #fab387;
+#workspaces button.urgent {
+  color: @crust;
+  background: @red;
 }
 
-#pulseaudio {
-  background-color: #f9e2af;
+#workspaces button:hover {
+  color: @text;
+  background: @overlay;
 }
 
-#network {
-  background-color: #94e2d5;
-  padding-right: 17px;
+#taskbar {
+  padding: 0 4px;
+}
+
+#taskbar button {
+  margin: 3px 1px;
+  padding: 0 6px;
+  border-radius: 7px;
+  transition: all 0.2s ease;
+}
+
+#taskbar button.active {
+  background: rgba(137, 180, 250, 0.18);
+}
+
+#taskbar button.minimized {
+  opacity: 0.42;
+}
+
+#taskbar button:hover {
+  background: @overlay;
 }
 
 #clock {
-  font-family: JetBrainsMono Nerd Font;
-  background-color: #cba6f7;
-  /* font size big */
-    font-size: 18px;
-  
+  color: @mauve;
+  font-weight: 700;
+}
+
+#pulseaudio {
+  color: @yellow;
+}
+
+#pulseaudio.muted,
+#pulseaudio.sink-muted {
+  color: @muted;
+}
+
+#battery {
+  color: @green;
+}
+
+#battery.warning {
+  color: @yellow;
+}
+
+#battery.critical {
+  color: @red;
+  background: rgba(243, 139, 168, 0.12);
+}
+
+#custom-notifications {
+  color: @blue;
+}
+
+#tray {
+  padding: 0 8px;
 }
 
 #custom-exit {
-  background-color: #f2cdcd;
+  margin-right: 8px;
+  color: @red;
 }
 
+#custom-exit:hover {
+  color: @crust;
+  background: @red;
+}
 
 tooltip {
-  border-radius: 8px;
-  padding: 15px;
-  background-color: #131822;
+  border: 1px solid rgba(205, 214, 244, 0.12);
+  border-radius: 10px;
+  background: #181825;
 }
 
 tooltip label {
-  padding: 5px;
-  background-color: #131822;
+  padding: 6px;
+  color: @text;
 }
-

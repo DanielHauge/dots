@@ -62,6 +62,7 @@ bluetui              # TUI Bluetooth manager
 
 # Desktop environment
 hyprland             # Wayland compositor
+intel-gpu-tools      # Intel GPU telemetry for Waybar
 localsend       # Send files quickly locally
 xdg-desktop-portal-hyprland  # portal integration for Hyprland
 qt5-wayland          # Qt5 Wayland support
