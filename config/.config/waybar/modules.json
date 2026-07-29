@@ -59,7 +59,7 @@
     "custom/exit": {
         "format": "",
         "tooltip-format": "Power off",
-        "on-click": "loginctl poweroff",
+        "on-click": "systemctl poweroff",
         "tooltip": true
     },
     "keyboard-state": {
