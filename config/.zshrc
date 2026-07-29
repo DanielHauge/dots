@@ -79,7 +79,9 @@ fi
 
 source $DOTS_LOC/cmd/setup.sh
 
-. "$HOME/.cargo/env"
+if [ -f "$HOME/.cargo/env" ]; then
+    source "$HOME/.cargo/env"
+fi
 
 # Added by LM Studio CLI (lms)
 export PATH="$PATH:/home/archie/.lmstudio/bin"
