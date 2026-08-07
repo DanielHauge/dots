@@ -170,15 +170,38 @@ link_path() {
     run ln -s "$source" "$target"
 }
 
+deploy_opencode_skills() {
+    local source=''
+    local target=''
+
+    run mkdir -p "$HOME/.config/opencode/skills"
+    shopt -s nullglob
+    for source in "$DOTS_LOC"/config/.config/opencode/skills/*/; do
+        [[ -d "$source" ]] || continue
+        target="$HOME/.config/opencode/skills/$(basename "$source")"
+        if [[ -L "$target" && "$(readlink -f -- "$target")" == "$(readlink -f -- "$source")" ]]; then
+            continue
+        fi
+        if [[ -e "$target" || -L "$target" ]]; then
+            printf 'Warning: %s exists and does not point to %s; leaving it untouched.\n' "$target" "$source" >&2
+            continue
+        fi
+        run ln -s "$source" "$target"
+    done
+    shopt -u nullglob
+}
+
 deploy_dotfiles() {
     local dotfile=''
     local source=''
     local target=''
 
     run mkdir -p "$HOME/.config"
+    deploy_opencode_skills
     shopt -s nullglob dotglob
     for source in "$DOTS_LOC"/config/.config/*; do
         dotfile=$(basename "$source")
+        [[ "$dotfile" == opencode ]] && continue
         link_path "$source" "$HOME/.config/$dotfile"
     done
     shopt -u nullglob dotglob
