@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+#> Select the default microphone/input
+function mic {
+    sources=$(
+        wpctl status |
+            awk '
+        /Sources:/ { in_sources=1; next }
+        /Filters:/ { exit }
+
+        in_sources && /^[[:space:]]*│/ {
+            line=$0
+
+            # Remove leading decorations and optional "*"
+            sub(/^.*│[[:space:]]*\*?[[:space:]]*/, "", line)
+
+            # Match: ID. NAME [vol: ...]
+            if (match(line, /^([0-9]+)\.[[:space:]]+(.*)[[:space:]]+\[vol:/, arr)) {
+                id=arr[1]
+                name=arr[2]
+                print id "\t" name
+            }
+        }
+    '
+    )
+
+    if [[ -z "$sources" ]]; then
+        echo "No sources found."
+        exit 1
+    fi
+
+    selected=$(echo "$sources" | fzf --prompt="Select audio input: " --delimiter=$'\t' --with-nth=2)
+    [[ -z "$selected" ]] && exit 0
+
+    id=$(echo "$selected" | cut -f1)
+    wpctl set-default "$id"
+
+    echo "Set default source to ID $id"
+}
