@@ -30,10 +30,15 @@ link_path "$source_file" "$conflict_file"
 
 HOME="$TMP_DIR/home"
 deploy_dotfiles
-deploy_dotfiles
 [[ -L "$HOME/.config/nvim" ]]
 [[ -L "$HOME/.gitconfig" ]]
 [[ -L "$HOME/.zshrc" ]]
+opencode_config="$HOME/.config/opencode/opencode.jsonc"
+[[ -L "$opencode_config" ]]
+[[ "$(readlink -f -- "$opencode_config")" == "$(readlink -f -- "$DOTS_LOC/config/.config/opencode/opencode.jsonc")" ]]
+config_link=$(readlink -- "$opencode_config")
+deploy_dotfiles
+[[ "$(readlink -- "$opencode_config")" == "$config_link" ]]
 
 main --check >/dev/null
 
