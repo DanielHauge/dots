@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+#> Select a file with fzf and copy its path to the clipboard.
+function yf {
+    local file
+    file=$(fd --type f --color=never | fzf \
+        --height=80% \
+        --layout=reverse \
+        --border \
+        --preview='bat --color=always --style=numbers -- {}') || return
+    file=$(realpath "$file") || return
+
+    if command -v wl-copy &>/dev/null; then
+        printf '%s' "$file" | wl-copy
+    else
+        printf '%s' "$file" | xclip -selection clipboard
+    fi
+    printf 'Copied: %s\n' "$file"
+}
