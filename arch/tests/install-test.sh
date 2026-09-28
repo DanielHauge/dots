@@ -36,6 +36,15 @@ deploy_dotfiles
 opencode_config="$HOME/.config/opencode/opencode.jsonc"
 [[ -L "$opencode_config" ]]
 [[ "$(readlink -f -- "$opencode_config")" == "$(readlink -f -- "$DOTS_LOC/config/.config/opencode/opencode.jsonc")" ]]
+shopt -s nullglob
+for skill_dir in "$DOTS_LOC/config/.config/opencode/skills/"*/; do
+    skill_name=${skill_dir%/}
+    skill_name=${skill_name##*/}
+    skill_link="$HOME/.config/opencode/skills/$skill_name"
+    [[ -L "$skill_link" ]]
+    [[ "$(readlink -f -- "$skill_link")" == "$(readlink -f -- "$skill_dir")" ]]
+done
+shopt -u nullglob
 config_link=$(readlink -- "$opencode_config")
 deploy_dotfiles
 [[ "$(readlink -- "$opencode_config")" == "$config_link" ]]
@@ -110,7 +119,7 @@ ensure_oh_my_zsh
     # shellcheck disable=SC2329 # Invoked by start_sudo_keepalive from the sourced installer.
     sleep() { :; }
     start_sudo_keepalive
-    wait "$SUDO_KEEPALIVE_PID"
+    wait "$SUDO_KEEPALIVE_PID" || true
 )
 /usr/bin/grep -Fxq 'sudo -v' "$LOG"
 /usr/bin/grep -Fxq 'sudo -n true' "$LOG"

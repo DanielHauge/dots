@@ -209,26 +209,25 @@ Known constraints and unresolved questions must be distinguishable.
 
 ## Atlassian MCP workflow
 
-The connected tools' current schemas are authoritative. Names below may have a
-client prefix; use the exposed tool and argument names rather than assuming them.
+The connected tools' currently exposed schemas are authoritative. Inspect them
+before selecting tools or constructing arguments; never assume legacy names,
+client prefixes, or argument shapes.
 
-1. When resolving a site, call `getAccessibleAtlassianResources` once per session
-   and cache the selected `cloudId`. Clarify multiple candidate sites; never pick
-   the first arbitrarily. Pass `cloudId` explicitly at the top level of execute
-   calls and primary calls that require it.
-2. Use `getJiraIssue` for a known key. Use `atlassian_search` (Rovo search) for
-   semantic Jira/Confluence searches unless the user supplies JQL/CQL; in that case
-   use a tool supporting that query language, discovering it if necessary.
-   Before creating a new issue, search likely duplicates with a narrow,
-   project-aware query. Raise a likely match instead of silently duplicating it.
-   A search outage is not evidence that no duplicates exist; report the limitation
-   and do not block drafting.
-3. Use primary tools such as `createJiraIssue`, `editJiraIssue`, and
-   `addOrEditJiraIssueComment` directly when available and authorized. For unavailable
-   operations, use discovery with verb + object + product, for example
-   “list project issue types Jira” or “lookup account id Jira”. Use only returned
-   operation names with the matching `executeRead`, `executeWrite`, or
-   `executeDestructive` route. Never guess operation names or IDs.
+1. Resolve the site through an exposed schema-supported discovery or read operation
+   when a selected operation requires a site ID. Cache the resolved ID for the
+   session, clarify multiple candidate sites, and never pick the first arbitrarily.
+   Supply it only in the field and shape required by the selected schema.
+2. For a known key, use an exposed direct issue-read operation when available.
+   Use the schema-supported search route appropriate to the supplied query; discover
+   the route when necessary. Before creating a new issue, search likely duplicates
+   with a narrow, project-aware query. Raise a likely match instead of silently
+   duplicating it. A search outage is not evidence that no duplicates exist; report
+   the limitation and do not block drafting.
+3. Use exposed direct issue create, edit, and comment operations when available and
+   authorized. Otherwise, use schema-driven discovery with verb + object + product,
+   for example “list project issue types Jira” or “lookup account id Jira”, followed
+   only by the matching schema-supported read or write route. Never guess operation
+   names, routes, IDs, or argument shapes.
 4. Avoid exhaustive schema or metadata fetches. Where supported, `additional_fields`
    resolves human-readable field names. A rejected create lists allowed/required
    values: repair input once from that error, not speculation. Ask about mandatory
@@ -265,9 +264,9 @@ findings without authorizing their creation.
 
 - Use Markdown for ordinary new descriptions and headings/checklists.
 - Edit bodies containing inline media or rich HTML losslessly using `html`.
-  Before authoring HTML, call `getContentFormatGuide` via `executeRead` with
-  `toolName: editJiraIssue` or `toolName: createJiraIssue`, as applicable, and the
-  top-level `cloudId`. Follow the current schema and returned guide.
+  Before authoring content in a format that needs guidance, obtain the current
+  guidance only through an exposed schema-supported read or discovery operation,
+  then follow the returned schema and guidance.
 - Preserve unrelated description sections, media, and fields. Never overwrite
   fetched HTML with Markdown. If a lossless edit is not possible with the available
   content/tools, explain the limitation and provide a proposed edit without writing.
