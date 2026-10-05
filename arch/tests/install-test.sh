@@ -45,6 +45,15 @@ for skill_dir in "$DOTS_LOC/config/.config/opencode/skills/"*/; do
     [[ "$(readlink -f -- "$skill_link")" == "$(readlink -f -- "$skill_dir")" ]]
 done
 shopt -u nullglob
+shopt -s nullglob
+for plugin_dir in "$DOTS_LOC/config/.config/opencode/plugins/"*/; do
+    plugin_name=${plugin_dir%/}
+    plugin_name=${plugin_name##*/}
+    plugin_link="$HOME/.config/opencode/plugins/$plugin_name"
+    [[ -L "$plugin_link" ]]
+    [[ "$(readlink -f -- "$plugin_link")" == "$(readlink -f -- "$plugin_dir")" ]]
+done
+shopt -u nullglob
 config_link=$(readlink -- "$opencode_config")
 deploy_dotfiles
 [[ "$(readlink -- "$opencode_config")" == "$config_link" ]]

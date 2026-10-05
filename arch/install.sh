@@ -191,6 +191,27 @@ deploy_opencode_skills() {
     shopt -u nullglob
 }
 
+deploy_opencode_plugins() {
+    local source=''
+    local target=''
+
+    run mkdir -p "$HOME/.config/opencode/plugins"
+    shopt -s nullglob
+    for source in "$DOTS_LOC"/config/.config/opencode/plugins/*/; do
+        [[ -d "$source" ]] || continue
+        target="$HOME/.config/opencode/plugins/$(basename "$source")"
+        if [[ -L "$target" && "$(readlink -f -- "$target")" == "$(readlink -f -- "$source")" ]]; then
+            continue
+        fi
+        if [[ -e "$target" || -L "$target" ]]; then
+            printf 'Warning: %s exists and does not point to %s; leaving it untouched.\n' "$target" "$source" >&2
+            continue
+        fi
+        run ln -s "$source" "$target"
+    done
+    shopt -u nullglob
+}
+
 deploy_opencode_config() {
     local source="$DOTS_LOC/config/.config/opencode/opencode.jsonc"
     local target="$HOME/.config/opencode/opencode.jsonc"
@@ -214,6 +235,7 @@ deploy_dotfiles() {
     run mkdir -p "$HOME/.config"
     deploy_opencode_config
     deploy_opencode_skills
+    deploy_opencode_plugins
     shopt -s nullglob dotglob
     for source in "$DOTS_LOC"/config/.config/*; do
         dotfile=$(basename "$source")
