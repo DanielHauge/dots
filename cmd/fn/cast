@@ -1,0 +1,48 @@
+#!/usr/bin/env bash
+#> Cast a video file to a TV using go2tv
+function cast() {
+    if (($# != 1)); then
+        echo "Usage: cast <video>"
+        return 1
+    fi
+
+    [[ -z "$TV" ]] && {
+        echo "Error: TV variable is not set"
+        return 1
+    }
+
+    local video="$1"
+    [[ ! -f "$video" ]] && {
+        echo "Error: file not found: $video"
+        return 1
+    }
+
+    # Does it contain subtitles?
+    if ffprobe -v error \
+        -select_streams s:0 \
+        -show_entries stream=index \
+        -of csv=p=0 \
+        "$video" | grep -q .; then
+
+        local subs="/tmp/cast-${$}.srt"
+
+        echo "Extracting subtitles..."
+
+        ffmpeg -hide_banner -loglevel error \
+            -i "$video" \
+            -map 0:s:0 \
+            -c:s srt \
+            -y "$subs" || return 1
+
+        # Strip any ASS override tags that survived conversion
+        sed -Ei 's/\{\\[^}]*\}//g' "$subs"
+
+        echo "Casting with subtitles..."
+        go2tv -t "$TV" -v "$video" -s "$subs"
+
+        rm -f "$subs"
+    else
+        echo "Casting..."
+        go2tv -t "$TV" -v "$video"
+    fi
+}
