@@ -1,0 +1,126 @@
+#!/usr/bin/env bash
+#> Play audio through one or more sinks together using a virtual output.
+#> Usage: sound-merge [<sink name, index, or quoted exact description> ...]
+#> Without arguments, select outputs with Tab in fzf, then Enter to merge.
+#> Example: sound-merge "Jabra Elite 10" "Tronsmart Sounfii NC 2"
+function sound-merge {
+    if ! command -v pactl >/dev/null 2>&1 || ! command -v jq >/dev/null 2>&1; then
+        printf '%s\n' 'sound-merge: pactl and jq are required.' >&2
+        return 1
+    fi
+
+    local sinks target matches count name names='[]' slaves
+    if ! sinks=$(pactl --format=json list sinks); then
+        printf '%s\n' 'sound-merge: could not list sinks.' >&2
+        return 1
+    fi
+    if [ "$#" -eq 0 ]; then
+        if ! command -v fzf >/dev/null 2>&1; then
+            printf '%s\n' 'sound-merge: fzf is required for interactive selection.' >&2
+            return 1
+        fi
+        local choices selected
+        if ! choices=$(printf '%s\n' "$sinks" | jq -r '
+            .[] | select(.name != "sound_merge") | [.name, .description] | join("\t")
+        '); then
+            printf '%s\n' 'sound-merge: could not read sink information.' >&2
+            return 1
+        fi
+        [ -n "$choices" ] || return 0
+        selected=$(printf '%s\n' "$choices" | fzf --multi \
+            --prompt="Select audio outputs: " --delimiter=$'\t' --with-nth=2 \
+            --header="Tab: select outputs · Enter: merge · Esc: cancel") || return 0
+        [ -n "$selected" ] || return 0
+        while IFS=$'\t' read -r name target; do
+            names=$(printf '%s\n' "$names" | jq -c --arg name "$name" '. + [$name] | unique')
+        done <<< "$selected"
+    fi
+    for target in "$@"; do
+        if ! matches=$(printf '%s\n' "$sinks" | jq -c --arg target "$target" '
+            [.[] | select(.name == $target or (.index | tostring) == $target
+                or .description == $target)]
+        '); then
+            printf '%s\n' 'sound-merge: could not read sink information.' >&2
+            return 1
+        fi
+        count=$(printf '%s\n' "$matches" | jq 'length')
+        if [ "$count" -ne 1 ]; then
+            printf 'sound-merge: sink %s matched %s outputs; use an exact, unique name or index.\n' "$target" "$count" >&2
+            return 1
+        fi
+        name=$(printf '%s\n' "$matches" | jq -r '.[0].name')
+        if [ "$name" = sound_merge ]; then
+            printf '%s\n' 'sound-merge: the merged sink cannot be one of its own targets.' >&2
+            return 1
+        fi
+        names=$(printf '%s\n' "$names" | jq -c --arg name "$name" '. + [$name] | unique')
+    done
+    slaves=$(printf '%s\n' "$names" | jq -r 'join(",")')
+
+    local owner modules module='' existing_slaves='' inputs input_ids input failed=0 created=0
+    owner=$(printf '%s\n' "$sinks" | jq -r '.[] | select(.name == "sound_merge") | .owner_module')
+    if [ -n "$owner" ]; then
+        if ! modules=$(pactl --format=json list modules); then
+            printf '%s\n' 'sound-merge: could not list modules.' >&2
+            return 1
+        fi
+        # Only the module explicitly owning our fixed sink name may be unloaded.
+        if ! module=$(printf '%s\n' "$modules" | jq -r --arg owner "$owner" '
+            .[] | select((.index | tostring) == $owner and .name == "module-combine-sink")
+            | select((.argument // "") | test("(^|[[:space:]])sink_name=sound_merge([[:space:]]|$)"))
+            | .index
+        '); then
+            printf '%s\n' 'sound-merge: could not read module information.' >&2
+            return 1
+        fi
+        if [ -z "$module" ]; then
+            printf '%s\n' 'sound-merge: sound_merge already exists and is not owned by this helper; leaving it untouched.' >&2
+            return 1
+        fi
+        existing_slaves=$(printf '%s\n' "$modules" | jq -r --arg module "$module" '
+            .[] | select((.index | tostring) == $module)
+            | (try ((.argument // "") | capture("(^|[[:space:]])slaves=(?<slaves>[^[:space:]]+)").slaves) catch "")
+            | split(",") | unique | join(",")
+        ')
+    fi
+
+    # Gather stream IDs before changing anything, so query failures leave audio alone.
+    if ! inputs=$(pactl --format=json list sink-inputs) ||
+        ! input_ids=$(printf '%s\n' "$inputs" | jq -r '.[].index'); then
+        printf '%s\n' 'sound-merge: could not list playing streams.' >&2
+        return 1
+    fi
+    if [ -n "$module" ] && [ "$existing_slaves" != "$slaves" ]; then
+        if ! pactl unload-module "$module"; then
+            printf '%s\n' 'sound-merge: could not replace the previous merged sink.' >&2
+            return 1
+        fi
+        module=''
+    fi
+    if [ -z "$module" ]; then
+        if ! module=$(pactl load-module module-combine-sink sink_name=sound_merge \
+            "slaves=$slaves" "sink_properties=\"device.description='Merged audio outputs'\""); then
+            printf '%s\n' 'sound-merge: could not create the merged sink.' >&2
+            return 1
+        fi
+        created=1
+    fi
+    if ! pactl set-default-sink sound_merge; then
+        printf '%s\n' 'sound-merge: could not select the merged sink.' >&2
+        if [ "$created" -eq 1 ]; then
+            if ! pactl unload-module "$module"; then
+                printf 'sound-merge: cleanup failed; module %s remains loaded.\n' "$module" >&2
+            fi
+        fi
+        return 1
+    fi
+    while IFS= read -r input; do
+        [ -n "$input" ] || continue
+        if ! pactl move-sink-input "$input" sound_merge; then
+            printf 'sound-merge: could not move stream %s to the merged sink.\n' "$input" >&2
+            failed=1
+        fi
+    done <<< "$input_ids"
+    [ "$failed" -eq 0 ] || return 1
+    printf 'Audio output: Merged audio outputs (%s)\n' "$slaves"
+}
