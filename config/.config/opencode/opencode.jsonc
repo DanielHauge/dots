@@ -345,6 +345,16 @@
             },
             {
                 "action": "permission",
+                "resource": "shell:git commit *",
+                "effect": "deny"
+            },
+            {
+                "action": "permission",
+                "resource": "shell:git commit",
+                "effect": "deny"
+            },
+            {
+                "action": "permission",
                 "resource": "shell:git show",
                 "effect": "allow"
             },

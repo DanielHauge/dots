@@ -1,3 +1,4 @@
+# zmodload zsh/zprof
 export ZSH="$HOME/.oh-my-zsh"
 
 ZSH_THEME="bira"
@@ -28,7 +29,7 @@ plugins=(
     cp
     dirhistory
     rust
-    flutter
+    # flutter
     ssh
     ssh-agent
     zsh-interactive-cd
@@ -86,4 +87,4 @@ fi
 # Added by LM Studio CLI (lms)
 export PATH="$PATH:/home/archie/.lmstudio/bin"
 # End of LM Studio CLI section
-
+# zprof
