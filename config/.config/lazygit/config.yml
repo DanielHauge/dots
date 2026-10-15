@@ -3,38 +3,6 @@ gui:
   border: rounded
   showIcons: true
 
-  theme:
-    activeBorderColor:
-      - "#7AA2F7"
-      - bold
-
-    inactiveBorderColor:
-      - "#565F89"
-
-    searchingActiveBorderColor:
-      - "#BB9AF7"
-      - bold
-
-    optionsTextColor:
-      - "#7DCFFF"
-
-    selectedLineBgColor:
-      - "#343A46"
-
-    inactiveViewSelectedLineBgColor:
-      - "#292E38"
-
-    cherryPickedCommitFgColor:
-      - "#7AA2F7"
-
-    cherryPickedCommitBgColor:
-      - "#343A46"
-
-    unstagedChangesColor:
-      - "#F7768E"
-
-    defaultFgColor:
-      - "#C0CAF5"
 git:
   diffRenderers:
     - name: Delta
