@@ -1,0 +1,86 @@
+#!/usr/bin/env bash
+#> Select and save the TV used by cast
+function cast-select() {
+    if (($# != 0)); then
+        echo "Usage: cast-select" >&2
+        return 1
+    fi
+    _cast_target select >/dev/null
+}
+
+# Print a discovered target URL, or nothing if selection was cancelled.
+function _cast_target() {
+    local dependency scan_output scan_code devices selected target _label saved
+    local selection_file="$HOME/.cast-selection"
+    for dependency in go2tv script timeout; do
+        if ! command -v "$dependency" >/dev/null 2>&1; then
+            printf 'cast: %s is required.\n' "$dependency" >&2
+            return 1
+        fi
+    done
+
+    printf '%s\n' 'Scanning for TVs...' >&2
+    # go2tv has only an interactive discovery UI. Give it a wide PTY so URLs
+    # remain complete, and stop it after several discovery refreshes.
+    if scan_output=$(script -q -e -c \
+        'stty cols 4096 rows 200 && timeout -s TERM -k 1s 12s go2tv -l' \
+        /dev/null </dev/null 2>&1); then
+        scan_code=0
+    else
+        scan_code=$?
+    fi
+    if [ "$scan_code" -ne 0 ] && [ "$scan_code" -ne 124 ]; then
+        printf 'cast: TV discovery failed (exit %s).\n' "$scan_code" >&2
+        return 1
+    fi
+
+    # Strip OSC/CSI sequences and accept only complete device rows, not UI
+    # messages. The final brackets delimit the URL; model names can have brackets.
+    if ! devices=$(printf '%s\n' "$scan_output" | tr '\r' '\n' | awk '
+        {
+            gsub(/\033\][^\007\033]*(\007|\033\\)/, "")
+            gsub(/\033\[[0-?]*[ -\/]*[@-~]/, "")
+        }
+        /^[[:space:]]*• .+ (DLNA|Chromecast) \[https?:\/\/[^[:space:]]+\][[:space:]]*$/ {
+            url = $0
+            sub(/^.* (DLNA|Chromecast) \[/, "", url)
+            sub(/\][[:space:]]*$/, "", url)
+            if (url ~ /…|\.\.\./) next
+            label = $0
+            sub(/^[[:space:]]*• /, "", label)
+            sub(/ \[https?:\/\/[^[:space:]]+\][[:space:]]*$/, "", label)
+            if (!seen[url]++) printf "%s\t%s\n", url, label
+        }
+    '); then
+        printf '%s\n' 'cast: could not read TV discovery output.' >&2
+        return 1
+    fi
+    if [ -z "$devices" ]; then
+        printf '%s\n' 'cast: no TVs found.' >&2
+        return 1
+    fi
+
+    if [ "${1:-}" != select ] && [ -r "$selection_file" ]; then
+        IFS= read -r saved <"$selection_file" || :
+        while IFS=$'\t' read -r target _label; do
+            if [ "$target" = "$saved" ]; then
+                printf '%s\n' "$target"
+                return 0
+            fi
+        done <<<"$devices"
+    fi
+
+    if ! command -v fzf >/dev/null 2>&1; then
+        printf '%s\n' 'cast: fzf is required to select a TV.' >&2
+        return 1
+    fi
+    selected=$(printf '%s\n' "$devices" | fzf \
+        --delimiter=$'\t' --with-nth=2 --prompt='Select TV: ') || return 0
+    [ -n "$selected" ] || return 0
+    target=${selected%%$'\t'*}
+    if ! printf '%s\n' "$target" >"$selection_file"; then
+        printf 'cast: could not save TV selection to %s.\n' "$selection_file" >&2
+        return 1
+    fi
+    printf '%s\n' "$target"
+}

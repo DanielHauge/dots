@@ -6,16 +6,20 @@ function cast() {
         return 1
     fi
 
-    [[ -z "$TV" ]] && {
-        echo "Error: TV variable is not set"
-        return 1
-    }
-
     local video="$1"
     [[ ! -f "$video" ]] && {
         echo "Error: file not found: $video"
         return 1
     }
+
+    local target
+    target=$(_cast_target) || return $?
+    [ -n "$target" ] || return 0
+
+    if ! command -v ffprobe >/dev/null 2>&1; then
+        printf '%s\n' 'cast: ffprobe is required.' >&2
+        return 1
+    fi
 
     # Does it contain subtitles?
     if ffprobe -v error \
@@ -24,6 +28,10 @@ function cast() {
         -of csv=p=0 \
         "$video" | grep -q .; then
 
+        if ! command -v ffmpeg >/dev/null 2>&1; then
+            printf '%s\n' 'cast: ffmpeg is required to extract subtitles.' >&2
+            return 1
+        fi
         local subs="/tmp/cast-${$}.srt"
 
         echo "Extracting subtitles..."
@@ -38,11 +46,11 @@ function cast() {
         sed -Ei 's/\{\\[^}]*\}//g' "$subs"
 
         echo "Casting with subtitles..."
-        go2tv -t "$TV" -v "$video" -s "$subs"
+        go2tv -t "$target" -v "$video" -s "$subs"
 
         rm -f "$subs"
     else
         echo "Casting..."
-        go2tv -t "$TV" -v "$video"
+        go2tv -t "$target" -v "$video"
     fi
 }
