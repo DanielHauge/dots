@@ -46,6 +46,7 @@
         "interval": 2,
         "on-click": "kitty btop",
         "escape": false,
+        "hide-empty-text": true,
         "tooltip": true
     },
     "custom/mem": {
@@ -54,6 +55,24 @@
         "interval": 5,
         "escape": false,
         "on-click": "kitty btop",
+        "tooltip": true
+    },
+    "custom/network": {
+        "exec": "python3 ~/.config/waybar/throughput.py network",
+        "return-type": "json",
+        "restart-interval": 2,
+        "on-click": "kitty btop",
+        "escape": false,
+        "hide-empty-text": true,
+        "tooltip": true
+    },
+    "custom/disks": {
+        "exec": "python3 ~/.config/waybar/throughput.py disks",
+        "return-type": "json",
+        "restart-interval": 2,
+        "on-click": "kitty btop",
+        "escape": false,
+        "hide-empty-text": true,
         "tooltip": true
     },
     "custom/exit": {

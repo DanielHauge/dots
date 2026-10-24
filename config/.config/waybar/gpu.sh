@@ -14,29 +14,28 @@ spark_color() {
     fi
 }
 
+VALUE=''
+TOOLTIP='GPU telemetry unavailable'
 if command -v nvidia-smi >/dev/null 2>&1; then
-    IFS=',' read -r VALUE MEM_USED MEM_TOTAL TEMP < <(
-        nvidia-smi --id=0 --query-gpu=utilization.gpu,memory.used,memory.total,temperature.gpu \
-            --format=csv,noheader,nounits 2>/dev/null
-    )
-    VALUE=${VALUE//[[:space:]]/}
-    MEM_USED=${MEM_USED//[[:space:]]/}
-    MEM_TOTAL=${MEM_TOTAL//[[:space:]]/}
-    TEMP=${TEMP//[[:space:]]/}
-    TOOLTIP="NVIDIA GPU: ${VALUE}% | VRAM: ${MEM_USED}/${MEM_TOTAL} MiB | ${TEMP} C"
+    if SAMPLE=$(nvidia-smi --id=0 --query-gpu=utilization.gpu,memory.used,memory.total,temperature.gpu \
+        --format=csv,noheader,nounits 2>/dev/null); then
+        IFS=',' read -r VALUE MEM_USED MEM_TOTAL TEMP <<<"$SAMPLE"
+        VALUE=${VALUE//[[:space:]]/}
+        MEM_USED=${MEM_USED//[[:space:]]/}
+        MEM_TOTAL=${MEM_TOTAL//[[:space:]]/}
+        TEMP=${TEMP//[[:space:]]/}
+        TOOLTIP="NVIDIA GPU: ${VALUE}% | VRAM: ${MEM_USED}/${MEM_TOTAL} MiB | ${TEMP} C"
+    fi
 elif command -v intel_gpu_top >/dev/null 2>&1; then
     SAMPLE=$(timeout -s INT -k 1 1.2 intel_gpu_top -J -s 500 2>/dev/null)
     # ponytail: use the busiest engine; summing parallel Intel engines can exceed 100%.
     VALUE=$(jq -r 'last | [.engines[]?.busy] | max // empty' <<<"$SAMPLE" 2>/dev/null)
     VALUE=${VALUE%.*}
     TOOLTIP="Intel GPU: ${VALUE:-unavailable}%"
-else
-    VALUE=''
-    TOOLTIP='GPU telemetry unavailable'
 fi
 
 if [[ ! $VALUE =~ ^[0-9]+$ ]]; then
-    printf '{"text":"GPU 󰢮 unavailable", "tooltip":"%s", "class":"unavailable"}\n' "$TOOLTIP"
+    printf '{"text":"", "tooltip":"GPU telemetry unavailable", "class":"unavailable"}\n'
     exit 0
 fi
 

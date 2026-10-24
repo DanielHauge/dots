@@ -12,9 +12,11 @@
         "wlr/taskbar"
     ],
     "modules-center": [
+        "custom/network",
         "custom/mem",
         "custom/cpu",
         "clock",
+        "custom/disks",
         "custom/gpu"
     ],
     "modules-right": [
