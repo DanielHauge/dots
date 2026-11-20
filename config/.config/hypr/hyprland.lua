@@ -29,6 +29,11 @@ hl.env("XCURSOR_SIZE", "24")
 hl.env("HYPRCURSOR_SIZE", "24")
 
 hl.config({
+	group = {
+		groupbar = {
+			enabled = false,
+		},
+	},
 	general = {
 		gaps_in = 5,
 		gaps_out = 20,

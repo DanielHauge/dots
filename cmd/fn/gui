@@ -1,0 +1,62 @@
+#!/usr/bin/env bash
+#> Description of function
+gui() {
+    emulate -L zsh
+
+    if (($# == 0)); then
+        print -u2 "Usage: gui <command> [args...]"
+        return 2
+    fi
+
+    local address members gui_pid exit_code
+
+    # Identify Kitty
+    address=$(hyprctl activewindow -j | jq -r '.address')
+
+    if [[ "$address" != 0x* ]]; then
+        print -u2 "gui: could not identify terminal"
+        return 1
+    fi
+
+    # Refuse to interfere with an existing group
+    members=$(hyprctl activewindow -j |
+        jq -r '(.grouped // []) | length')
+
+    if ((members > 0)); then
+        print -u2 "gui: terminal is already grouped"
+        return 1
+    fi
+
+    # Create group
+    if ! hyprctl dispatch \
+        "hl.dsp.group.toggle({ window = 'address:$address' })" \
+        >/dev/null; then
+        return 1
+    fi
+
+    # Launch GUI
+    "$@" >/dev/null 2>&1 &
+    gui_pid=$!
+
+    # Wait for application
+    wait "$gui_pid"
+    exit_code=$?
+
+    # Give Hyprland time to process window closure
+    sleep 0.15
+
+    # Check Kitty's group membership
+    members=$(hyprctl clients -j | jq -r \
+        --arg addr "$address" \
+        '.[] | select(.address == $addr) |
+         ((.grouped // []) | length)')
+
+    # Dissolve group if Kitty is the only remaining member
+    if [[ "$members" == "1" ]]; then
+        hyprctl dispatch \
+            "hl.dsp.group.toggle({ window = 'address:$address' })" \
+            >/dev/null
+    fi
+
+    return "$exit_code"
+}
