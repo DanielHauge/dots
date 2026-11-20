@@ -12,45 +12,169 @@ function cast() {
         return 1
     }
 
-    local target
-    target=$(_cast_target) || return $?
-    [ -n "$target" ] || return 0
+    if ! command -v go2tv >/dev/null 2>&1; then
+        printf '%s\n' 'cast: go2tv is required.' >&2
+        return 1
+    fi
+
+    local target='' saved=0
+    if [ -f "$HOME/.cast-selection" ] && [ -r "$HOME/.cast-selection" ]; then
+        IFS= read -r target <"$HOME/.cast-selection" || :
+    fi
+    if [ -n "$target" ]; then
+        saved=1
+    else
+        target=$(cast-select) || return $?
+        [ -n "$target" ] || return 0
+    fi
 
     if ! command -v ffprobe >/dev/null 2>&1; then
         printf '%s\n' 'cast: ffprobe is required.' >&2
         return 1
     fi
 
-    # Does it contain subtitles?
-    if ffprobe -v error \
-        -select_streams s:0 \
-        -show_entries stream=index \
-        -of csv=p=0 \
-        "$video" | grep -q .; then
+    local probe tracks kind choices selected count prompt audio_index='' subtitle_index=''
+    local codec subs='' subs_dir='' subtitle_codec=srt cast_code audio_count=0
+    local -a media_args
+    media_args=(-v "$video")
+    # Probe/prep once, before playback. Local failures must not trigger discovery.
+    # Quote the separator for ffprobe's option parser; metadata is C-escaped.
+    probe=$(ffprobe -v error \
+        -show_entries stream=index,codec_type,codec_name:stream_tags=language,title \
+        -of "compact=p=0:nk=0:escape=c:s='$(printf '\t')'" \
+        "$video") || return $?
+    tracks=$(printf '%s\n' "$probe" | awk -F '\t' '
+        {
+            # ffprobe escapes a metadata tab as backslash + literal tab, not \\t.
+            # Normalize escaped tabs before splitting, preserving escaped backslashes.
+            record = ""
+            for (i = 1; i <= length($0); i++) {
+                character = substr($0, i, 1)
+                if (character == "\\" && i < length($0)) {
+                    character = substr($0, ++i, 1)
+                    if (character == "\t") character = "t"
+                    record = record "\\" character
+                } else record = record character
+            }
+            $0 = record
+            index_number = codec = type = language = title = ""
+            for (i = 1; i <= NF; i++) {
+                key = value = $i
+                sub(/=.*/, "", key)
+                sub(/^[^=]*=/, "", value)
+                if (key == "index") index_number = value
+                else if (key == "codec_name") codec = value
+                else if (key == "codec_type") type = value
+                else if (key == "tag:language") language = value
+                else if (key == "tag:title") title = value
+            }
+            if ((type != "audio" && type != "subtitle") || index_number !~ /^[0-9]+$/) next
+            label = index_number ": " codec
+            if (language != "") label = label " [" language "]"
+            if (title != "") label = label " " title
+            printf "%s\t%s\t%s\t%s\n", type, index_number, codec, label
+        }
+    ') || return $?
+    for kind in audio subtitle; do
+        choices=$(printf '%s\n' "$tracks" | awk -F '\t' -v kind="$kind" '
+            $1 == kind { printf "%s\t%s\n", $2, $4 }
+        ') || return $?
+        [ -n "$choices" ] || continue
+        count=$(printf '%s\n' "$choices" | awk 'END { print NR }')
+        if [ "$kind" = audio ]; then audio_count=$count; fi
+        if [ "$count" -eq 1 ]; then
+            selected=$choices
+        else
+            prompt='Select audio: '
+            if [ "$kind" = subtitle ]; then prompt='Select subtitles: '; fi
+            if ! command -v fzf >/dev/null 2>&1; then
+                printf 'cast: fzf is required to select a %s track.\n' "$kind" >&2
+                return 1
+            fi
+            selected=$(printf '%s\n' "$choices" | fzf \
+                --delimiter=$'\t' --with-nth=2 --prompt="$prompt") || return 0
+            [ -n "$selected" ] || return 0
+        fi
+        if [ "$kind" = audio ]; then
+            audio_index=${selected%%$'\t'*}
+        else
+            subtitle_index=${selected%%$'\t'*}
+        fi
+    done
 
+    if [ "$audio_count" -gt 1 ] || [ -n "$subtitle_index" ]; then
         if ! command -v ffmpeg >/dev/null 2>&1; then
-            printf '%s\n' 'cast: ffmpeg is required to extract subtitles.' >&2
+            printf '%s\n' 'cast: ffmpeg is required to prepare selected tracks.' >&2
             return 1
         fi
-        local subs="/tmp/cast-${$}.srt"
+        subs_dir=$(mktemp -d "${TMPDIR:-/tmp}/cast.XXXXXX") || return 1
+    fi
+    if [ "$audio_count" -gt 1 ]; then
+        echo "Preparing selected audio..."
+        ffmpeg -hide_banner -loglevel error \
+            -i "$video" -map 0:v:0 -map "0:$audio_index" \
+            -c:v copy -c:a copy -sn -dn -y "$subs_dir/video.mkv" || {
+                rm -rf -- "$subs_dir"
+                return 1
+            }
+        media_args=(-v "$subs_dir/video.mkv")
+    fi
+    if [ -n "$subtitle_index" ]; then
+        codec=$(printf '%s\n' "$tracks" | awk -F '\t' -v index_number="$subtitle_index" '
+            $1 == "subtitle" && $2 == index_number { print $3 }
+        ')
+        if [ "$codec" = ass ] || [ "$codec" = ssa ]; then
+            subtitle_codec=ass
+        fi
+        subs="$subs_dir/subtitles.$subtitle_codec"
 
         echo "Extracting subtitles..."
 
         ffmpeg -hide_banner -loglevel error \
             -i "$video" \
-            -map 0:s:0 \
-            -c:s srt \
-            -y "$subs" || return 1
+            -map "0:$subtitle_index" \
+            -c:s "$subtitle_codec" \
+            -y "$subs" || {
+                rm -rf -- "$subs_dir"
+                return 1
+            }
 
-        # Strip any ASS override tags that survived conversion
-        sed -Ei 's/\{\\[^}]*\}//g' "$subs"
-
-        echo "Casting with subtitles..."
-        go2tv -t "$target" -v "$video" -s "$subs"
-
-        rm -f "$subs"
+        media_args+=(-s "$subs")
+        if [ "$subtitle_codec" = ass ]; then
+            echo "Casting with rendered subtitles (live transcoding)..."
+            media_args+=(-tc -burn-subtitles)
+        else
+            # Strip ASS overrides and font tags that survived conversion
+            sed -Ei 's/\{\\[^}]*\}//g; s/<\/?font([[:space:]][^>]*)?>//gI' "$subs" || {
+                rm -rf -- "$subs_dir"
+                return 1
+            }
+            echo "Casting with subtitles..."
+        fi
     else
         echo "Casting..."
-        go2tv -t "$target" -v "$video"
     fi
+
+    if go2tv -t "$target" "${media_args[@]}"; then
+        cast_code=0
+    else
+        cast_code=$?
+    fi
+    if [ "$cast_code" -ne 0 ] && [ "$saved" -eq 1 ]; then
+        printf 'cast: saved TV attempt failed (exit %s); select a TV to retry.\n' "$cast_code" >&2
+        if target=$(cast-select); then
+            cast_code=0
+            if [ -n "$target" ]; then
+                if go2tv -t "$target" "${media_args[@]}"; then
+                    cast_code=0
+                else
+                    cast_code=$?
+                fi
+            fi
+        else
+            cast_code=$?
+        fi
+    fi
+    [ -z "$subs_dir" ] || rm -rf -- "$subs_dir"
+    return "$cast_code"
 }

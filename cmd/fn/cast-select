@@ -5,12 +5,13 @@ function cast-select() {
         echo "Usage: cast-select" >&2
         return 1
     fi
-    _cast_target select >/dev/null
+    # Return the saved URL on stdout, or nothing on cancellation.
+    _cast_target
 }
 
 # Print a discovered target URL, or nothing if selection was cancelled.
 function _cast_target() {
-    local dependency scan_output scan_code devices selected target _label saved
+    local dependency scan_output scan_code devices selected target selection_tmp
     local selection_file="$HOME/.cast-selection"
     for dependency in go2tv script timeout; do
         if ! command -v "$dependency" >/dev/null 2>&1; then
@@ -60,16 +61,6 @@ function _cast_target() {
         return 1
     fi
 
-    if [ "${1:-}" != select ] && [ -r "$selection_file" ]; then
-        IFS= read -r saved <"$selection_file" || :
-        while IFS=$'\t' read -r target _label; do
-            if [ "$target" = "$saved" ]; then
-                printf '%s\n' "$target"
-                return 0
-            fi
-        done <<<"$devices"
-    fi
-
     if ! command -v fzf >/dev/null 2>&1; then
         printf '%s\n' 'cast: fzf is required to select a TV.' >&2
         return 1
@@ -78,7 +69,13 @@ function _cast_target() {
         --delimiter=$'\t' --with-nth=2 --prompt='Select TV: ') || return 0
     [ -n "$selected" ] || return 0
     target=${selected%%$'\t'*}
-    if ! printf '%s\n' "$target" >"$selection_file"; then
+    if ! selection_tmp=$(mktemp "$selection_file.XXXXXX"); then
+        printf 'cast: could not save TV selection to %s.\n' "$selection_file" >&2
+        return 1
+    fi
+    if ! printf '%s\n' "$target" >"$selection_tmp" ||
+        ! mv -fT -- "$selection_tmp" "$selection_file"; then
+        rm -f -- "$selection_tmp"
         printf 'cast: could not save TV selection to %s.\n' "$selection_file" >&2
         return 1
     fi
